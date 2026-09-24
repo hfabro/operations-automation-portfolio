@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#edf2ed">
+  <title>Interactive Compliance Workflow Demo | David H. Fabro</title>
+  <meta name="description" content="A synthetic interactive demonstration of a governed recurring compliance workflow, including requirement masters, scheduled occurrences, ownership, evidence, exceptions, and audit history.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Interactive Compliance Workflow Demo | David H. Fabro">
+  <meta property="og:description" content="Operate a synthetic recurring-requirement workflow and see how ownership, due dates, evidence, exceptions, and audit history fit together.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Interactive Compliance Workflow Demo | David H. Fabro">
+  <meta name="twitter:description" content="A safe proof of concept for a governed recurring compliance workflow.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#demo">Skip to interactive demo</a>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../#compliance">← Back to case study</a></div></header>
+
+  <main>
+    <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Interactive proof of concept / synthetic data</p><h1 id="demo-title">Compliance Workflow System</h1><p class="lede">Generate and execute a recurring obligation while preserving the difference between the stable requirement, the scheduled occurrence, its evidence, and its exception history.</p></div><ul class="demo-guardrails" aria-label="Demo guardrails"><li>No backend</li><li>No data retained</li><li>No real requirement records</li><li>Explicit lifecycle rules</li></ul></div></section>
+
+    <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
+      <div class="shell">
+        <div class="workspace-heading"><div><p class="eyebrow">Scenario 02</p><h2 id="workspace-title">Operate one recurring requirement.</h2></div><p>The demonstration uses a fictional annual fire-system inspection and two synthetic historical occurrences.</p></div>
+        <div class="workspace-grid">
+          <section class="app-frame" aria-labelledby="app-title">
+            <div class="app-toolbar"><span>Compliance operations workspace</span><span class="demo-label">DEMO</span></div>
+            <div class="app-content">
+              <div class="step-indicator" aria-label="Workflow progress"><span class="active" data-step-indicator="master">1. Requirement</span><span data-step-indicator="occurrence">2. Occurrence</span><span data-step-indicator="result">3. Result</span></div>
+
+              <section class="demo-screen" data-screen="master">
+                <p class="screen-kicker">STEP 1 / SOURCE OF TRUTH</p><h3 id="app-title">Start from the requirement master.</h3><p>The master defines the obligation and generation rules. It is not the task that an owner completes.</p>
+                <article class="master-card"><div class="record-type">REQUIREMENT MASTER</div><div class="master-title"><strong>Annual fire system inspection</strong><span class="active-pill">Active</span></div><dl><div><dt>Requirement ID</dt><dd>REQ-DEMO-0143</dd></div><div><dt>Category</dt><dd>Life safety</dd></div><div><dt>Frequency</dt><dd>Annual</dd></div><div><dt>Default owner</dt><dd>Facilities</dd></div><div><dt>Evidence</dt><dd>Required</dd></div></dl></article>
+                <button class="primary-action" type="button" data-generate>Generate scheduled occurrence</button>
+              </section>
+
+              <section class="demo-screen" data-screen="occurrence" hidden>
+                <p class="screen-kicker">STEP 2 / CONTROLLED EXECUTION</p><div class="occurrence-banner"><span>Generated from REQ-DEMO-0143</span><strong>OCC-DEMO-0912</strong><small>Due Sep 12, 2026</small></div>
+                <div class="scenario-controls" aria-label="Demo scenario shortcuts"><span>Try a scenario:</span><button type="button" data-scenario="complete">On-time completion</button><button type="button" data-scenario="exception">Exception path</button></div>
+                <div class="error-summary" role="alert" tabindex="-1" data-error-summary hidden><strong>The occurrence cannot be closed yet.</strong><ul data-error-list></ul></div>
+                <form data-occurrence-form novalidate>
+                  <div class="field-grid"><label>Owner<select data-owner><option value="">Select an owner</option></select></label><label>Status<select data-status><option value="Scheduled">Scheduled</option><option value="In progress">In progress</option><option value="Complete">Complete</option><option value="Exception">Exception</option></select></label></div>
+                  <div class="field-grid"><label>Completion date<input type="text" value="Sep 10, 2026" data-completion-date></label><label>Evidence requirement<input type="text" value="Inspection report required" readonly></label></div>
+                  <div class="evidence-row"><div><strong>Completion evidence</strong><span>Simulated document reference—nothing is uploaded.</span></div><button type="button" data-evidence>Add demo report</button><span class="evidence-chip" data-evidence-chip hidden>fire-inspection-demo.pdf <button type="button" aria-label="Remove synthetic evidence" data-remove-evidence>×</button></span></div>
+                  <label class="notes-field" for="occurrence-notes">Execution or exception notes <span data-notes-requirement>Required for an exception</span><textarea id="occurrence-notes" rows="4" data-notes placeholder="Record completion context or explain the exception."></textarea></label>
+                  <div class="form-actions"><button class="secondary-action" type="button" data-back>← Requirement master</button><button class="primary-action" type="submit">Validate lifecycle update</button></div>
+                </form>
+              </section>
+
+              <section class="demo-screen" data-screen="result" hidden>
+                <p class="screen-kicker">STEP 3 / GOVERNED RESULT</p><div class="result-banner" data-result-banner><span>Occurrence processed</span><strong data-result-status>Complete</strong><p data-result-explanation></p></div>
+                <div class="result-grid"><div><span>Occurrence</span><strong>OCC-DEMO-0912</strong></div><div><span>Owner</span><strong data-result-owner>Facilities</strong></div><div><span>Evidence</span><strong data-result-evidence>Retained</strong></div><div><span>Exception action</span><strong data-result-action>Not required</strong></div></div>
+                <div class="history-panel"><div class="history-heading"><h3>Occurrence history</h3><span>Changing the master later will not rewrite these completed records.</span></div><div class="history-table" role="table" aria-label="Synthetic occurrence history"><div class="history-row history-head" role="row"><span role="columnheader">Occurrence</span><span role="columnheader">Due</span><span role="columnheader">Status</span><span role="columnheader">Evidence / exception</span></div><div data-current-history></div><div data-previous-history></div></div></div>
+                <div class="form-actions"><button class="secondary-action" type="button" data-edit>← Review occurrence</button><button class="primary-action" type="button" data-reset>Run another scenario</button></div>
+              </section>
+            </div>
+          </section>
+
+          <aside class="system-panel" aria-labelledby="system-title">
+            <div class="panel-heading"><p class="eyebrow">Live governance state</p><h2 id="system-title">Master, occurrence, evidence</h2></div>
+            <div class="state-grid" aria-live="polite"><div><span>Requirement</span><strong>REQ-DEMO-0143</strong></div><div><span>Occurrence</span><strong data-state-occurrence>Not generated</strong></div><div><span>Lifecycle</span><strong data-state-lifecycle>Master active</strong></div><div><span>Audit history</span><strong data-state-history>2 prior records</strong></div></div>
+            <div class="queue-view"><div class="queue-heading"><strong>Demo work queue</strong><span>Synthetic management view</span></div><div class="queue-row queue-head"><span>Record</span><span>Owner</span><span>Due</span><span>Status</span></div><div class="queue-row" data-queue-row><span>OCC-DEMO-0912</span><span data-queue-owner>Unassigned</span><span>Sep 12</span><b data-queue-status>Pending</b></div></div>
+            <div class="event-panel"><div><strong>Audit event stream</strong><span>Each state change is explicit</span></div><ol data-event-stream><li class="pending"><span>Waiting</span><p>Generate an occurrence from the master.</p></li></ol></div>
+            <details class="record-panel" open><summary>Synthetic occurrence record</summary><pre data-record-json>{
+  "occurrenceId": null,
+  "status": "Not generated"
+}</pre></details>
+            <details class="rules-panel"><summary>Lifecycle controls</summary><ul><li>The requirement master and each occurrence have separate identities.</li><li>Completion requires an owner and evidence.</li><li>An exception requires an owner and explanatory notes.</li><li>Exceptions create a synthetic follow-up action and reminder event.</li><li>Historical occurrence records remain unchanged if the master changes later.</li></ul></details>
+          </aside>
+        </div>
+        <noscript><p class="no-script">JavaScript is required to operate this synthetic demo. The portfolio case study and architecture remain available without it.</p></noscript>
+      </div>
+    </section>
+
+    <section class="architecture-proof" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">Architecture behind recurring governance</p><h2 id="architecture-title">One requirement can generate many historically true records.</h2></div><p>The system separates stable rules from scheduled execution so ownership, due dates, evidence, and exceptions can change without destroying history.</p></div><div class="architecture-flow" data-architecture-flow></div><div class="design-proof-grid"><article><span>01 / master</span><h3>Stable requirement</h3><p>Defines cadence, evidence expectations, category, and default ownership.</p></article><article><span>02 / occurrence</span><h3>Unique execution</h3><p>Each generated task has its own due date, owner, status, and completion record.</p></article><article><span>03 / evidence</span><h3>Audit-ready record</h3><p>Completion and exceptions preserve the evidence and explanation valid at that moment.</p></article><article><span>04 / visibility</span><h3>Management control</h3><p>Queue and reporting views derive from governed records rather than disconnected reminders.</p></article></div></div></section>
+  </main>
+
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to a production system.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>

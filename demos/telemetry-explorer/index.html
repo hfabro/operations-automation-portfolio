@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#edf2ed">
+  <title>Interactive Telemetry &amp; Energy Explorer | David H. Fabro</title>
+  <meta name="description" content="A synthetic interactive telemetry and energy explorer demonstrating equipment filtering, 30-minute state modeling, charging behavior, peak-demand context, and decision support.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Interactive Telemetry &amp; Energy Explorer | David H. Fabro">
+  <meta property="og:description" content="Explore synthetic forklift telemetry and utility context across equipment utilization, state of charge, charging demand, and off-peak opportunity.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Interactive Telemetry &amp; Energy Explorer | David H. Fabro">
+  <meta name="twitter:description" content="A safe synthetic demonstration of telemetry modeling and operational energy analytics.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#explorer">Skip to analytics explorer</a>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../#telemetry">← Back to case study</a></div></header>
+
+  <main>
+    <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Interactive analytics proof / synthetic data</p><h1 id="demo-title">Fleet Telemetry &amp; Energy Explorer</h1><p class="lede">Filter a five-equipment synthetic fleet, compare 30-minute operating states, and evaluate where charging behavior overlaps a modeled peak-demand window.</p></div><ul class="demo-guardrails" aria-label="Demo guardrails"><li>42,000+ scale represented conceptually</li><li>Charts use synthetic records</li><li>No live API connection</li><li>No savings attribution</li></ul></div></section>
+
+    <section class="explorer-section" id="explorer" aria-labelledby="explorer-title">
+      <div class="shell">
+        <div class="section-heading"><div><p class="eyebrow">Scenario 03 / decision support</p><h2 id="explorer-title">Interrogate the operating pattern.</h2></div><p>The interface behaves like an analytical product, while the data and conclusions remain visibly synthetic.</p></div>
+
+        <div class="control-bar">
+          <div class="select-field"><label for="equipment-select">Equipment</label><select id="equipment-select" data-equipment></select></div>
+          <div class="metric-control" role="group" aria-label="Chart metric"><span>Metric</span><button type="button" class="active" data-metric="soc" aria-pressed="true">State of charge</button><button type="button" data-metric="activity" aria-pressed="false">Active use</button><button type="button" data-metric="demand" aria-pressed="false">Charging demand</button></div>
+          <label class="peak-toggle"><input type="checkbox" data-peak checked><span>Show modeled peak window</span></label>
+        </div>
+
+        <div class="kpi-grid" aria-live="polite"><article><span>Ending state of charge</span><strong data-kpi-soc>—</strong><small>At 17:30 synthetic interval</small></article><article><span>Modeled utilization</span><strong data-kpi-utilization>—</strong><small>Active intervals / available intervals</small></article><article><span>Charging energy</span><strong data-kpi-energy>—</strong><small>Synthetic operating-day estimate</small></article><article><span>Peak demand exposure</span><strong data-kpi-demand>—</strong><small>Charging load in modeled peak window</small></article></div>
+
+        <div class="analytics-grid">
+          <section class="chart-card" aria-labelledby="chart-title"><div class="chart-heading"><div><span>30-minute telemetry model</span><h3 id="chart-title" data-chart-title>Forklift 01 · State of charge</h3></div><div class="chart-legend"><span><b class="metric-dot"></b><i data-legend-metric>State of charge</i></span><span><b class="peak-dot"></b>Modeled peak window</span></div></div><div class="canvas-wrap"><canvas data-chart role="img" aria-label="Synthetic forklift telemetry chart"></canvas></div><p class="chart-description" data-chart-description></p><details class="data-table-panel"><summary>View accessible interval data</summary><div class="table-scroll"><table><caption data-table-caption>Synthetic interval data for Forklift 01</caption><thead><tr><th>Time</th><th>State</th><th>State of charge</th><th>Charging demand</th><th>Peak window</th></tr></thead><tbody data-table-body></tbody></table></div></details></section>
+
+          <aside class="insight-panel" aria-labelledby="insight-title"><p class="eyebrow">Modeled interpretation</p><h2 id="insight-title">From telemetry to an operating question.</h2><div class="insight-block"><span>Observed pattern</span><strong data-pattern-title>—</strong><p data-pattern-text></p></div><div class="insight-block decision"><span>Decision-support question</span><strong data-decision-title>—</strong><p data-decision-text></p></div><div class="boundary-note"><strong>What this chart does not prove</strong><p>It does not claim causation, production savings, or an optimal charging schedule. Those decisions require validated source data, operating constraints, tariff logic, and stakeholder review.</p></div></aside>
+        </div>
+
+        <section class="fleet-comparison" aria-labelledby="fleet-title"><div class="comparison-heading"><div><p class="eyebrow">Fleet comparison</p><h2 id="fleet-title">Five equipment profiles, one governed model.</h2></div><p>Select any equipment profile to update the explorer.</p></div><div class="comparison-table" aria-label="Synthetic fleet comparison"><div class="comparison-row comparison-head" aria-hidden="true"><span>Equipment</span><span>Utilization</span><span>Charging energy</span><span>Peak exposure</span><span>Opportunity</span></div><div data-comparison-rows></div></div></section>
+      </div>
+      <noscript><div class="shell"><p class="no-script">JavaScript is required to operate this synthetic analytics explorer. The portfolio case study remains available without it.</p></div></noscript>
+    </section>
+
+    <section class="architecture-proof" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">Analytics architecture</p><h2 id="architecture-title">Source alignment comes before the dashboard.</h2></div><p>The model joins equipment telemetry and utility context at a deliberate time grain so operating states and demand exposure can be compared without overstating precision.</p></div><div class="architecture-flow" data-architecture-flow></div><div class="design-proof-grid"><article><span>01 / ingestion</span><h3>API and JSON</h3><p>Telemetry must be ingested consistently before utilization or charging logic is credible.</p></article><article><span>02 / time grain</span><h3>Interval alignment</h3><p>Equipment events and utility intervals need compatible timestamps and clearly defined boundaries.</p></article><article><span>03 / semantics</span><h3>Governed measures</h3><p>State of charge, active use, sessions, energy, and cost require documented definitions.</p></article><article><span>04 / judgment</span><h3>Decision support</h3><p>Analytics should surface questions and exceptions—not imply certainty the data cannot support.</p></article></div></div></section>
+  </main>
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to a production system.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>

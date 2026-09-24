@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#101916">
+  <title>Smart Factory Roadmap Studio | David H. Fabro</title>
+  <meta name="description" content="A synthetic Smart Factory assessment and roadmap demonstration covering digital maturity, use-case prioritization, IT/OT governance, delivery sequencing, and benefits realization.">
+  <meta property="og:title" content="Smart Factory Roadmap Studio | David H. Fabro">
+  <meta property="og:description" content="An interactive proof of transformation strategy: assess readiness, prioritize use cases, and build a governed roadmap.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../../assets/og.png">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#studio">Skip to roadmap studio</a>
+  <header class="demo-header">
+    <a class="brand" href="../../"><span>DF</span><strong>David H. Fabro<small>Operations Automation &amp; Digital Transformation</small></strong></a>
+    <a class="back-link" href="../../#smart-factory">← Back to Smart Factory strategy</a>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="demo-title">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">Strategic transformation proof / synthetic organization</p>
+          <h1 id="demo-title">Smart Factory Roadmap Studio</h1>
+          <p class="lede">Assess plant readiness, expose foundational gaps, prioritize a use-case portfolio, and sequence a governed transformation roadmap.</p>
+        </div>
+        <ul class="guardrails" aria-label="Demonstration boundaries">
+          <li>Concept / interactive prototype</li>
+          <li>All plants, scores, costs, and benefits are synthetic</li>
+          <li>No production systems or employer data</li>
+          <li>Illustrative prioritization—not an investment recommendation</li>
+        </ul>
+      </div>
+    </section>
+
+    <nav class="studio-nav" aria-label="Studio sections">
+      <div class="shell">
+        <a href="#assessment">01 Assessment</a>
+        <a href="#portfolio">02 Use-case portfolio</a>
+        <a href="#roadmap">03 Roadmap</a>
+        <a href="#architecture">04 IT/OT architecture</a>
+        <a href="#governance">05 Governance</a>
+      </div>
+    </nav>
+
+    <section class="studio shell" id="studio" aria-labelledby="studio-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Decision context</p><h2 id="studio-title">Start with readiness—not technology.</h2></div>
+        <p>A useful roadmap connects business priorities to plant capability, operating ownership, technical dependencies, and measurable outcomes.</p>
+      </div>
+      <div class="control-panel">
+        <label>Plant profile
+          <select id="plant-select" data-plant-select></select>
+        </label>
+        <fieldset>
+          <legend>Strategic priority</legend>
+          <label><input type="radio" name="priority" value="reliability" checked> Reliability</label>
+          <label><input type="radio" name="priority" value="quality"> Quality</label>
+          <label><input type="radio" name="priority" value="capacity"> Capacity</label>
+          <label><input type="radio" name="priority" value="sustainability"> Sustainability</label>
+        </fieldset>
+        <div class="context-readout" aria-live="polite"><span>Current decision lens</span><strong data-context-title>—</strong><small data-context-note>—</small></div>
+      </div>
+    </section>
+
+    <section class="panel-section shell" id="assessment" aria-labelledby="assessment-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">01 / Digital maturity assessment</p><h2 id="assessment-title">Find the constraint before funding the use case.</h2></div>
+        <p>Scores are synthetic. In a real assessment, evidence would come from plant interviews, process observation, architecture review, data sampling, controls review, and frontline validation.</p>
+      </div>
+      <div class="assessment-grid">
+        <article class="radar-card">
+          <div class="card-heading"><div><span>MATURITY PROFILE</span><h3 data-plant-name>—</h3></div><strong data-maturity-score>—</strong></div>
+          <svg class="radar" viewBox="0 0 420 360" role="img" aria-labelledby="radar-title radar-desc">
+            <title id="radar-title">Synthetic digital maturity profile</title>
+            <desc id="radar-desc">A radar chart comparing eight Smart Factory readiness domains on a five-point scale.</desc>
+            <g data-radar-grid></g>
+            <polygon data-radar-shape points="" />
+            <g data-radar-points></g>
+            <g data-radar-labels></g>
+          </svg>
+          <ol class="maturity-scale" aria-label="Maturity scale"><li>1 Ad hoc</li><li>2 Repeatable</li><li>3 Defined</li><li>4 Integrated</li><li>5 Adaptive</li></ol>
+        </article>
+        <article class="gap-card">
+          <div class="card-heading"><div><span>FOUNDATIONAL GAPS</span><h3>What must be strengthened first</h3></div><strong data-gap-count>—</strong></div>
+          <ol class="gap-list" data-gap-list></ol>
+          <div class="assessment-note"><strong>Assessment principle</strong><p>A weak identity model, unstable process, unreliable signal, unclear owner, or unmanaged access path can invalidate a technically impressive pilot.</p></div>
+        </article>
+      </div>
+      <details class="domain-table-wrap">
+        <summary>View accessible assessment data</summary>
+        <table>
+          <caption>Synthetic maturity scores by domain</caption>
+          <thead><tr><th>Domain</th><th>Score</th><th>Evidence question</th></tr></thead>
+          <tbody data-domain-table></tbody>
+        </table>
+      </details>
+    </section>
+
+    <section class="panel-section portfolio-section" id="portfolio" aria-labelledby="portfolio-title">
+      <div class="shell">
+        <div class="section-heading compact light">
+          <div><p class="eyebrow">02 / Use-case portfolio</p><h2 id="portfolio-title">Prioritize value that the plant can actually absorb.</h2></div>
+          <p>The model reorders a synthetic backlog using business alignment, readiness, value, effort, and risk. It intentionally penalizes attractive use cases when prerequisites are weak.</p>
+        </div>
+        <div class="score-key" aria-label="Prioritization model"><span>Alignment <b>30%</b></span><span>Value <b>25%</b></span><span>Readiness <b>25%</b></span><span>Effort <b>10%</b></span><span>Risk <b>10%</b></span></div>
+        <div class="backlog" data-backlog></div>
+        <p class="method-note">Scores are directional and synthetic. A real investment decision requires validated baselines, lifecycle cost, cybersecurity review, resource capacity, vendor due diligence, and accountable business ownership.</p>
+      </div>
+    </section>
+
+    <section class="panel-section shell" id="roadmap" aria-labelledby="roadmap-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">03 / Transformation roadmap</p><h2 id="roadmap-title">Sequence foundations, proof, scale, and sustainment.</h2></div>
+        <p>This is an illustrative decision sequence—not a promised timeline. Each phase ends with a gate that can stop, reshape, or advance the work.</p>
+      </div>
+      <div class="roadmap" data-roadmap></div>
+      <div class="benefit-loop" aria-label="Benefits realization loop">
+        <span>Baseline the loss</span><b>→</b><span>Define the operating change</span><b>→</b><span>Validate the pilot</span><b>→</b><span>Confirm benefit</span><b>→</b><span>Assign sustainment ownership</span>
+      </div>
+    </section>
+
+    <section class="panel-section architecture-section" id="architecture" aria-labelledby="architecture-title">
+      <div class="shell">
+        <div class="section-heading compact light">
+          <div><p class="eyebrow">04 / IT–OT reference architecture</p><h2 id="architecture-title">Connectivity becomes useful through governed context.</h2></div>
+          <p>The architecture is intentionally platform-neutral. Specific products should follow requirements, enterprise standards, security review, and support ownership.</p>
+        </div>
+        <div class="architecture-flow" aria-label="Conceptual IT and OT information flow">
+          <article><span>01 / OT</span><h3>Equipment &amp; controls</h3><p>Sensors, machines, PLCs, local control</p></article><b>→</b>
+          <article><span>02 / collection</span><h3>SCADA, edge &amp; historian</h3><p>Reliable acquisition, time, buffering</p></article><b>→</b>
+          <article><span>03 / operations</span><h3>MES / MOM context</h3><p>Product, order, state, reason, quality</p></article><b>→</b>
+          <article><span>04 / integration</span><h3>Governed data services</h3><p>Identity, interfaces, quality, lineage</p></article><b>→</b>
+          <article><span>05 / enterprise</span><h3>ERP, planning &amp; analytics</h3><p>Business context, workflow, decisions</p></article>
+        </div>
+        <div class="control-overlay"><span>Asset and tag identity</span><span>Approved data paths</span><span>Access and vendor controls</span><span>Time and event integrity</span><span>Monitoring and recovery</span><span>Lifecycle ownership</span></div>
+      </div>
+    </section>
+
+    <section class="panel-section shell" id="governance" aria-labelledby="governance-title">
+      <div class="section-heading compact">
+        <div><p class="eyebrow">05 / Operating model</p><h2 id="governance-title">A Smart Factory is a shared operating system.</h2></div>
+        <p>IT/OT convergence requires explicit decision rights and handoffs. Technology cannot compensate for unclear ownership or an operation that cannot sustain the change.</p>
+      </div>
+      <div class="governance-grid">
+        <article><span>Operations</span><h3>Value and adoption</h3><p>Problem ownership, standard work, frontline validation, benefits, sustainment.</p></article>
+        <article><span>Engineering / OT</span><h3>Controls integrity</h3><p>Equipment context, safe interfaces, change control, technical response.</p></article>
+        <article><span>Information Technology</span><h3>Enterprise integration</h3><p>Platforms, architecture, identity, data services, reliability, support.</p></article>
+        <article><span>Quality / SHE</span><h3>Risk and compliance</h3><p>Controlled requirements, evidence, validation, exceptions, auditability.</p></article>
+        <article><span>Cybersecurity</span><h3>Approved connectivity</h3><p>Segmentation, access, monitoring, vendor pathways, incident readiness.</p></article>
+        <article><span>Program leadership</span><h3>Roadmap and governance</h3><p>Portfolio priorities, resources, milestones, dependencies, value realization.</p></article>
+      </div>
+      <div class="closing-callout"><div><span>What this demonstrates</span><strong>Transformation judgment—not a claim of enterprise deployment.</strong><p>The artifact shows how I would structure discovery, assessment, prioritization, architecture, governance, and benefits realization with the appropriate plant, IT, OT, engineering, quality, security, and vendor specialists.</p></div><a href="../../#contact">Discuss the operating problem →</a></div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><p>Synthetic strategy demonstration. No information is submitted, retained, or connected to an external service.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>

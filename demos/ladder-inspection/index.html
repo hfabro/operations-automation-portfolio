@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#edf2ed">
+  <title>Interactive Ladder Inspection Demo | David H. Fabro</title>
+  <meta name="description" content="A synthetic interactive demonstration of a governed QR-based ladder inspection workflow, including asset identity, validation, exception handling, history, and reporting behavior.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Interactive Ladder Inspection Demo | David H. Fabro">
+  <meta property="og:description" content="Operate a synthetic QR-based inspection workflow and see how identity, validation, exceptions, corrective action, history, and reporting fit together.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Interactive Ladder Inspection Demo | David H. Fabro">
+  <meta name="twitter:description" content="A safe, synthetic proof of concept for a governed digital inspection workflow.">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#demo">Skip to interactive demo</a>
+  <header class="demo-header">
+    <div class="shell header-inner">
+      <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a>
+      <a class="back-link" href="../../#ladder-inspection">← Back to case study</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="demo-intro" aria-labelledby="demo-title">
+      <div class="shell intro-grid">
+        <div>
+          <p class="eyebrow">Interactive proof of concept / synthetic data</p>
+          <h1 id="demo-title">Digital Ladder Inspection System</h1>
+          <p class="lede">Operate a safe demonstration of the workflow—from asset identification through structured inspection, deterministic exception handling, history, and reporting readiness.</p>
+        </div>
+        <ul class="demo-guardrails" aria-label="Demo guardrails"><li>No backend</li><li>No data retained</li><li>No real company records</li><li>Deterministic rules</li></ul>
+      </div>
+    </section>
+
+    <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
+      <div class="shell">
+        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>The demo uses asset <strong>LAD-017</strong>, a fictional ladder assigned to Shipping Operations.</p></div>
+        <div class="workspace-grid">
+          <section class="app-frame" aria-labelledby="app-title">
+            <div class="app-toolbar"><span>Inspection application</span><span class="demo-label">DEMO</span></div>
+            <div class="app-content">
+              <div class="step-indicator" aria-label="Workflow progress"><span class="active" data-step-indicator="identify">1. Identify</span><span data-step-indicator="inspect">2. Inspect</span><span data-step-indicator="result">3. Result</span></div>
+
+              <section class="demo-screen" data-screen="identify">
+                <p class="screen-kicker">STEP 1 / ASSET IDENTITY</p>
+                <h3 id="app-title">Scan the asset QR code.</h3>
+                <p>In a working solution, the code routes the inspector to the correct governed asset record. This demonstration simulates that scan.</p>
+                <div class="qr-card" aria-hidden="true"><div class="qr-pattern"></div><div><strong>LAD-017</strong><span>Shipping · Operations</span></div></div>
+                <button class="primary-action" type="button" data-scan>Simulate QR scan</button>
+              </section>
+
+              <section class="demo-screen" data-screen="inspect" hidden>
+                <p class="screen-kicker">STEP 2 / STRUCTURED INSPECTION</p>
+                <div class="asset-banner"><div><span>ASSET</span><strong data-asset-id>LAD-017</strong></div><dl><div><dt>Location</dt><dd data-asset-location>Shipping</dd></div><div><dt>Department</dt><dd data-asset-department>Operations</dd></div><div><dt>Frequency</dt><dd data-asset-frequency>Monthly</dd></div></dl></div>
+                <div class="inspection-heading"><div><h3>Complete six required checks.</h3><p data-progress-text>0 of 6 responses captured</p></div><div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div></div>
+                <div class="scenario-controls" aria-label="Demo scenario shortcuts"><span>Try a scenario:</span><button type="button" data-scenario="safe">All checks pass</button><button type="button" data-scenario="exception">Safety exception</button></div>
+                <div class="error-summary" role="alert" tabindex="-1" data-error-summary hidden><strong>Inspection cannot be submitted yet.</strong><ul data-error-list></ul></div>
+                <form data-inspection-form novalidate>
+                  <div class="checklist" data-checklist></div>
+                  <div class="notes-field"><label for="inspection-notes">Inspection notes <span data-notes-requirement>Optional unless an exception is identified</span></label><textarea id="inspection-notes" rows="3" data-notes placeholder="Describe damage, review needs, or follow-up context."></textarea></div>
+                  <div class="evidence-row"><div><strong>Evidence</strong><span>Simulated attachment only—no file leaves this page.</span></div><button type="button" data-evidence>Add demo evidence</button><span class="evidence-chip" data-evidence-chip hidden>photo-lad-017-demo.jpg <button type="button" aria-label="Remove synthetic evidence" data-remove-evidence>×</button></span></div>
+                  <div class="form-actions"><button class="secondary-action" type="button" data-back>← Back to asset</button><button class="primary-action" type="submit">Validate and submit</button></div>
+                </form>
+              </section>
+
+              <section class="demo-screen" data-screen="result" hidden>
+                <p class="screen-kicker">STEP 3 / SYSTEM RESULT</p>
+                <div class="result-banner" data-result-banner><span data-result-label>Inspection processed</span><strong data-result-status>Passed</strong><p data-result-explanation></p></div>
+                <div class="result-grid"><div><span>Inspection ID</span><strong data-result-id>INS-DEMO-0048</strong></div><div><span>Asset</span><strong>LAD-017</strong></div><div><span>Corrective action</span><strong data-result-action>Not required</strong></div><div><span>Notification</span><strong data-result-notification>Not required</strong></div></div>
+                <div class="history-panel"><div class="history-heading"><h3>Inspection history</h3><span>Occurrence records remain separate from the asset master.</span></div><div class="history-table" role="table" aria-label="Synthetic inspection history"><div class="history-row history-head" role="row"><span role="columnheader">Record</span><span role="columnheader">Date</span><span role="columnheader">Status</span><span role="columnheader">Evidence</span></div><div data-current-history></div><div data-previous-history></div></div></div>
+                <div class="form-actions"><button class="secondary-action" type="button" data-edit>← Review responses</button><button class="primary-action" type="button" data-reset>Run another scenario</button></div>
+              </section>
+            </div>
+          </section>
+
+          <aside class="system-panel" aria-labelledby="system-title">
+            <div class="panel-heading"><p class="eyebrow">Live system response</p><h2 id="system-title">Controls and state</h2></div>
+            <div class="state-grid" aria-live="polite"><div><span>Asset identity</span><strong data-state-asset>Pending scan</strong></div><div><span>Required responses</span><strong data-state-responses>0 / 6</strong></div><div><span>Exception state</span><strong data-state-exception>Not evaluated</strong></div><div><span>Occurrence history</span><strong data-state-history>Pending</strong></div></div>
+            <div class="event-panel"><div><strong>Workflow event stream</strong><span>Synthetic execution trace</span></div><ol data-event-stream><li class="pending"><span>Waiting</span><p>Simulate the QR scan to begin.</p></li></ol></div>
+            <details class="record-panel" open><summary>Synthetic record preview</summary><pre data-record-json>{
+  "assetId": null,
+  "status": "Not started"
+}</pre></details>
+            <details class="rules-panel"><summary>Deterministic decision rules</summary><ul><li>All six responses are required.</li><li>Fail or Review requires notes.</li><li>A critical Fail or “Remove from service: Yes” creates a corrective action.</li><li>Exceptions create a simulated notification event.</li><li>The inspection occurrence is preserved separately from the asset master.</li></ul></details>
+          </aside>
+        </div>
+        <noscript><p class="no-script">JavaScript is required to operate this synthetic demo. The portfolio case study and architecture remain available without it.</p></noscript>
+      </div>
+    </section>
+
+    <section class="architecture-proof" aria-labelledby="architecture-title">
+      <div class="shell">
+        <div class="architecture-heading"><div><p class="eyebrow">Architecture behind the interaction</p><h2 id="architecture-title">The interface is one layer of the system.</h2></div><p>The proof of concept separates identity, execution, workflow, and history so the operating process can remain supportable as requirements change.</p></div>
+        <div class="architecture-flow" data-architecture-flow></div>
+        <div class="design-proof-grid"><article><span>01 / identity</span><h3>Asset master</h3><p>LAD-017 owns stable information such as location, department, class, and inspection frequency.</p></article><article><span>02 / occurrence</span><h3>Inspection record</h3><p>Each execution gets a unique ID and captures the responses that were valid at that moment.</p></article><article><span>03 / exception</span><h3>Corrective action</h3><p>Rules create follow-up work when unsafe conditions are reported; AI is not needed for predictable safety logic.</p></article><article><span>04 / sustainment</span><h3>History and reporting</h3><p>Completed occurrences remain historically true and become the reporting-ready record of execution.</p></article></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to a production system.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>
