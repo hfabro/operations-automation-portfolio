@@ -79,8 +79,10 @@ Synthetic proof-of-concept demos are available at:
 
 - `/demos/ladder-inspection/`
 - `/demos/compliance-workflow/`
+- `/demos/digital-kanban/`
 - `/demos/telemetry-explorer/`
 - `/demos/connected-operations/`
+- `/demos/building-operations/`
 - `/demos/smart-factory-roadmap/`
 
 The ladder inspection demo demonstrates:
@@ -105,9 +107,13 @@ The demonstration has no backend and does not submit, transmit, or retain visito
 
 The compliance workflow demo adds a second system pattern: a stable requirement master generating unique scheduled occurrences. It validates completion evidence, exception notes, ownership, lifecycle changes, simulated reminders, and audit-history preservation using fully synthetic records.
 
+The digital Kanban demo is a synthetic recreation of an implemented canvas-app pattern. It demonstrates QR route resolution, direct-item and multi-item stock points, a composite open-request key for duplicate prevention, snapshotted request context, a controlled restocker queue, refill completion, and session history. It does not expose source-system data or connect to SharePoint.
+
 The telemetry explorer adds an analytical pattern. It provides five synthetic equipment profiles, 30-minute state modeling, accessible interval data, metric switching, a modeled peak-demand overlay, fleet comparison, and explicitly bounded decision-support interpretations. It does not connect to a live API or attribute production savings.
 
 The connected-operations console adds a Manufacturing 4.0 pattern. It provides two synthetic assets and four operating scenarios: stable operation, repeated microstops, quality drift, and material starvation. The interface decomposes OEE, visualizes machine states and modeled rate, classifies loss, preserves a contextualized event stream, applies inspectable deterministic escalation rules, and keeps the final decision with accountable people. It does not connect to PLC, SCADA, MES, historian, edge, CMMS, or production-control systems and does not claim deployed predictive maintenance.
+
+The Building Operations Command Center generalizes a map-based reporting pattern into building-wide and machine-level visualization. Visitors can filter synthetic report types, select spatial markers, move reports through acknowledgement, work-request, and verified-resolution states, and create a browser-only observation. It is explicitly SCADA-inspired visualization—not a BMS, SCADA, PLC, alarm-management, or equipment-control implementation.
 
 The Smart Factory Roadmap Studio adds the transformation-management layer. Visitors can compare three synthetic plant profiles, select a strategic priority, review an eight-domain maturity assessment, see a synthetic use-case backlog reorder using an inspectable scoring model, and examine a gated foundation-to-sustainment roadmap. It also includes a platform-neutral IT/OT reference architecture and cross-functional governance model. It is an architecture and prioritization prototype—not a claim of enterprise MES, SCADA, PLC, digital-twin, OT-cybersecurity, or multi-site deployment experience.
 

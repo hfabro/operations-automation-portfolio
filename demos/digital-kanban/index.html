@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#101d18">
+  <title>Digital Kanban Demo | David H. Fabro</title>
+  <meta name="description" content="A synthetic interactive QR-driven replenishment demo with stock-point routing, duplicate request prevention, fulfillment visibility, and audit history.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Digital Kanban Demo | David H. Fabro">
+  <meta property="og:description" content="Operate a synthetic physical-signal replenishment workflow from QR scan through refill completion.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#kanban-console">Skip to Kanban console</a>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../#kanban">← Back to case study</a></div></header>
+  <main>
+    <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Implemented pattern / synthetic recreation</p><h1 id="demo-title">QR Digital Kanban</h1><p class="lede">Use the physical reorder point as the signal. Scan the stock point, prevent duplicate work, give the restocker an owned queue, and retain the closeout history.</p></div><ul class="demo-guardrails" aria-label="Demo boundaries"><li>Based on a working canvas-app pattern</li><li>All names, IDs, quantities, and records are synthetic</li><li>No SharePoint or production connection</li><li>No inventory forecasting claim</li></ul></div></section>
+
+    <section class="kanban-section" id="kanban-console" aria-labelledby="console-title"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">Scan → request → fulfill → close</p><h2 id="console-title">Make the next action unmistakable.</h2></div><p>The demonstration mirrors the implemented control pattern: QR routes can open one direct item or a small storefront, while a composite open-request key prevents duplicate replenishment signals.</p></div>
+      <div class="route-deck"><label>Synthetic QR route<select data-route></select></label><button type="button" class="scan-button" data-scan>Simulate QR scan</button><div class="route-readout"><span>Route mode</span><strong data-route-mode>—</strong><small data-route-key>—</small></div><button type="button" class="reset-button" data-reset>Reset scenario</button></div>
+      <div class="kpi-grid"><article><span>Open requests</span><strong data-kpi-open>—</strong><small>Visible to the restocker queue</small></article><article><span>Duplicate blocks</span><strong data-kpi-blocked>0</strong><small>Repeated signals suppressed</small></article><article><span>Completed this session</span><strong data-kpi-complete>0</strong><small>Refill closeouts retained below</small></article><article class="context-card"><span>Current stock point</span><strong data-kpi-location>—</strong><small data-kpi-practical>—</small></article></div>
+
+      <div class="workspace-grid">
+        <section class="request-panel" aria-labelledby="request-title"><div class="panel-heading"><div><span>REQUESTER VIEW</span><h3 id="request-title" data-stockpoint-name>Scan a QR route</h3><p data-stockpoint-location>Select a synthetic route above to begin.</p></div><b data-route-badge>WAITING</b></div><div class="item-grid" data-items></div><div class="request-footer"><p data-selection-summary>No items selected.</p><button type="button" data-submit>Submit replenishment</button></div><div class="notice" data-notice aria-live="polite"></div></section>
+        <aside class="restocker-panel" aria-labelledby="restocker-title"><div class="restocker-heading"><div><p class="eyebrow">Controlled fulfillment view</p><h2 id="restocker-title">Restocker queue</h2></div><span data-open-count>—</span></div><div class="request-list" data-open-requests></div><p class="authorization-note"><strong>Access boundary:</strong> a production version should restrict this view to configured restockers and validate permissions server-side.</p></aside>
+      </div>
+
+      <div class="history-panel"><div class="history-heading"><div><p class="eyebrow">Inspectable lifecycle</p><h2>Session audit trail</h2></div><span>Browser memory only</span></div><ol data-history></ol></div>
+      <noscript><p class="no-script">JavaScript is required to operate this synthetic Kanban. The portfolio case study remains available without it.</p></noscript>
+    </div></section>
+
+    <section class="architecture-section" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">System architecture</p><h2 id="architecture-title">A small workflow with deliberate controls.</h2></div><p>The implementation pattern separates stock-point configuration, item definitions, stock-point/item relationships, requests, and restocker access so the experience stays simple without hiding the operating rules.</p></div><div class="architecture-flow" data-architecture></div><div class="design-grid"><article><span>01 / route</span><h3>Direct or storefront</h3><p>A QR can identify one item for immediate action or a small set of items at a shared stock point.</p></article><article><span>02 / duplicate</span><h3>One open signal</h3><p>The item and request type form a controlled key; a second scan shows status instead of creating duplicate work.</p></article><article><span>03 / snapshot</span><h3>History stays readable</h3><p>Item, stock-point, and location labels are snapshotted on the request so later configuration changes do not erase context.</p></article><article><span>04 / close</span><h3>Refill is explicit</h3><p>The restocker completes the request, clears the open key, and leaves a traceable closeout event.</p></article></div></div></section>
+  </main>
+  <footer><div class="shell"><p>Synthetic recreation. No information is submitted, stored, or connected to employer systems.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>

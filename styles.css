@@ -617,6 +617,20 @@ h1 span { display: block; color: var(--green); }
 .roadmap-visual > span { display: flex; justify-content: space-between; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.44); font-size: .5rem; }
 .roadmap-visual > span b { color: rgba(255,255,255,.82); }
 .roadmap-visual small { color: rgba(255,255,255,.35); font-size: .5rem; }
+.kanban-visual { display: grid; align-content: start; gap: 9px; }
+.kanban-visual > div { display: grid; grid-template-columns: 42px 1fr; gap: 11px; align-items: center; padding: 10px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.035); }
+.kanban-visual > div > i { width: 36px; height: 36px; background: repeating-linear-gradient(45deg,#fff 0 3px,#17211e 3px 6px); border: 5px solid #fff; }
+.kanban-visual > div span { display: grid; color: rgba(255,255,255,.78); font-size: .55rem; text-transform: none; letter-spacing: 0; }
+.kanban-visual > div small { color: rgba(255,255,255,.4); font-size: .5rem; }
+.kanban-visual > strong { color: #76d7a9; font-size: .58rem; letter-spacing: .08em; }
+.kanban-visual > small { color: rgba(255,255,255,.35); font-size: .5rem; }
+.building-visual { display: grid; align-content: start; gap: 8px; }
+.building-visual > div { position: relative; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4px; height: 94px; }
+.building-visual > div > i { border: 1px solid rgba(255,255,255,.15); background: rgba(255,255,255,.035); }
+.building-visual .pin { position: absolute; width: 11px; height: 11px; border: 2px solid #fff; border-radius: 50%; background: #ef7b51; box-shadow: 0 0 0 3px rgba(239,123,81,.15); }
+.building-visual .p1 { left: 20%; top: 22%; }.building-visual .p2 { left: 64%; top: 36%; background: #d8a446; }.building-visual .p3 { left: 78%; top: 72%; background: #c94f2c; }
+.building-visual > span { color: rgba(255,255,255,.74); font-size: .55rem; font-weight: 800; }
+.building-visual > small { color: rgba(255,255,255,.35); font-size: .5rem; }
 
 .project-directory { display: grid; grid-template-columns: 1.35fr repeat(3, 1fr); margin: 0 0 28px; border-top: 1px solid var(--line); border-left: 1px solid var(--line); background: var(--surface); }
 .project-directory > div, .project-directory a { min-height: 64px; display: grid; align-content: center; padding: 12px 15px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }

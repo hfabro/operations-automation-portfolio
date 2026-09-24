@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#101d18">
+  <title>Building Operations Command Center | David H. Fabro</title>
+  <meta name="description" content="A synthetic SCADA-inspired building and machine visualization for structured operational reporting, spatial triage, work routing, and retained history.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Building Operations Command Center | David H. Fabro">
+  <meta property="og:description" content="Explore a synthetic spatial operating view for facilities reports and machine-level conditions.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#command-center">Skip to command center</a>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../#building-operations">← Back to case study</a></div></header>
+
+  <main>
+    <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Spatial operations proof / synthetic data</p><h1 id="demo-title">Building Operations Command Center</h1><p class="lede">A SCADA-inspired visualization that extends a map-based reporting pattern into building-wide and machine-level awareness, triage, corrective work, and history.</p></div><ul class="demo-guardrails" aria-label="Demo boundaries"><li>Concept / interactive prototype</li><li>Not a BMS, SCADA, PLC, or control interface</li><li>No live sensors, commands, or employer data</li><li>Human validation before operational action</li></ul></div></section>
+
+    <section class="command-section" id="command-center" aria-labelledby="command-title"><div class="shell">
+      <div class="section-heading"><div><p class="eyebrow">Observe → locate → triage → verify</p><h2 id="command-title">Put every report in operating context.</h2></div><p>The map is not the system of record by itself. Value comes from stable location and asset identity, structured lifecycle state, ownership, evidence, and an accountable closeout path.</p></div>
+      <div class="control-deck"><div class="view-control" role="group" aria-label="Visualization level" data-view-controls></div><label>Report type<select data-type-filter><option value="all">All report types</option></select></label><label>Lifecycle<select data-status-filter><option value="open">Active work</option><option value="all">All records</option></select></label><button type="button" class="reset-button" data-reset>Reset scenario</button></div>
+      <div class="kpi-grid" aria-live="polite"><article><span>Active reports</span><strong data-kpi-active>—</strong><small>Open, acknowledged, or work requested</small></article><article><span>Immediate / high</span><strong data-kpi-priority>—</strong><small>Requires prompt human review</small></article><article><span>Work requested</span><strong data-kpi-work>—</strong><small>Linked corrective workflow</small></article><article class="context-card"><span>Current view</span><strong data-kpi-view>—</strong><small>All records are synthetic</small></article></div>
+
+      <div class="operations-grid">
+        <section class="map-card" aria-labelledby="map-title"><div class="card-heading"><div><span data-map-kicker>SYNTHETIC OPERATING VIEW</span><h3 id="map-title" data-map-title>—</h3><p data-map-subtitle></p></div><div class="map-legend"><span><i class="critical"></i>Immediate</span><span><i class="high"></i>High</span><span><i class="medium"></i>Medium</span><span><i class="low"></i>Low</span></div></div><div class="facility-map" data-map><div class="zone-grid" data-zones aria-hidden="true"></div><div class="marker-layer" data-markers></div><div class="map-axis x">01 · 02 · 03 · 04</div><div class="map-axis y">A<br>B<br>C<br>D</div></div><p class="map-note">Select a marker or queue item to review its spatial, asset, and lifecycle context.</p></section>
+        <aside class="queue-card" aria-labelledby="queue-title"><div class="queue-heading"><div><p class="eyebrow">Owned response</p><h2 id="queue-title">Active report queue</h2></div><span data-queue-count>—</span></div><div class="queue-list" data-queue></div></aside>
+      </div>
+
+      <div class="response-grid">
+        <section class="detail-card" aria-labelledby="detail-title"><div class="detail-top"><div><span data-detail-id>SELECTED REPORT</span><h2 id="detail-title" data-detail-summary>—</h2></div><b data-detail-severity>—</b></div><dl><div><dt>Location / asset</dt><dd data-detail-location>—</dd></div><div><dt>Type</dt><dd data-detail-type>—</dd></div><div><dt>Status</dt><dd data-detail-status>—</dd></div><div><dt>Owner</dt><dd data-detail-owner>—</dd></div></dl><p data-detail-text></p><div class="action-row"><button type="button" data-action="acknowledge">Acknowledge</button><button type="button" data-action="work">Create work request</button><button type="button" data-action="resolve">Verify &amp; resolve</button></div><p class="action-message" data-action-message aria-live="polite"></p></section>
+        <section class="report-card" aria-labelledby="report-title"><p class="eyebrow">Synthetic reporter</p><h2 id="report-title">Add a modeled observation.</h2><div class="report-fields"><label>Type<select data-new-type></select></label><label>Zone<select data-new-zone></select></label><label>Priority<select data-new-severity><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="critical">Immediate hazard</option></select></label><label class="wide">Description<input type="text" maxlength="90" value="Unusual condition requires review" data-new-summary></label></div><button type="button" class="submit-report" data-submit-report>Create synthetic report</button><small>No information leaves this browser session. Refreshing clears the scenario.</small></section>
+      </div>
+      <noscript><p class="no-script">JavaScript is required to operate this synthetic command center. The portfolio case study remains available without it.</p></noscript>
+    </div></section>
+
+    <section class="architecture-section" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">Architecture boundary</p><h2 id="architecture-title">Visualization follows the operating model.</h2></div><p>This concept can accept human reports and approved signals, but it intentionally separates awareness from equipment control. Commands, interlocks, and safety functions remain in qualified control systems.</p></div><div class="architecture-flow" data-architecture></div><div class="design-grid"><article><span>01 / identity</span><h3>Location and asset first</h3><p>A report is anchored to a controlled building zone, map revision, or equipment record.</p></article><article><span>02 / severity</span><h3>Explicit escalation</h3><p>Immediate hazards direct people to secure the area and notify the accountable function.</p></article><article><span>03 / lifecycle</span><h3>One owned response</h3><p>Open, acknowledged, work requested, and resolved states make responsibility visible.</p></article><article><span>04 / history</span><h3>Evidence survives the map</h3><p>Closeout, corrective action, and trend records remain available after markers disappear.</p></article></div></div></section>
+  </main>
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to production or building systems.</p><a href="../../">Return to portfolio</a></div></footer>
+</body>
+</html>
