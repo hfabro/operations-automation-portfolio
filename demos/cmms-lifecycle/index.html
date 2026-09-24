@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A synthetic interactive prototype demonstrating preventive-maintenance planning, controlled execution, exception review, and historically accurate records.">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="CMMS Lifecycle Control — David H. Fabro">
+  <meta property="og:description" content="Operate a synthetic preventive-maintenance lifecycle from plan through controlled history.">
+  <meta property="og:type" content="website">
+  <title>CMMS Lifecycle Control | David H. Fabro</title>
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to demo</a>
+  <header class="topbar">
+    <a class="back-link" href="../../#cmms"><span aria-hidden="true">←</span> Portfolio</a>
+    <div class="demo-title"><span>Interactive proof / 04</span><strong>CMMS Lifecycle Control</strong></div>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle><span aria-hidden="true">◐</span></button>
+  </header>
+
+  <main id="main">
+    <section class="hero shell" aria-labelledby="demo-heading">
+      <div class="hero-copy">
+        <p class="eyebrow">Synthetic maintenance system prototype</p>
+        <h1 id="demo-heading">Preserve the instruction. Control the work. Keep history true.</h1>
+        <p>Generate a PM occurrence from a versioned job plan, execute it as a technician, route deterministic exceptions, and review the resulting history. The prototype demonstrates lifecycle architecture—not a deployed CMMS.</p>
+        <div class="hero-actions">
+          <button class="primary" type="button" data-generate>Generate due PM <span aria-hidden="true">→</span></button>
+          <button class="secondary" type="button" data-scenario="exception">Load exception scenario</button>
+        </div>
+      </div>
+      <aside class="boundary-card" aria-label="Prototype boundary">
+        <span>Prototype boundary</span>
+        <strong>Browser-only · synthetic · no writeback</strong>
+        <p>No live CMMS, ERP, asset, employee, plant, or maintenance data. No autonomous work decisions. Session state is discarded when the page is refreshed.</p>
+      </aside>
+    </section>
+
+    <section class="architecture shell" aria-labelledby="architecture-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Lifecycle architecture</p><h2 id="architecture-title">A completed PM is a historical record—not a live template.</h2></div>
+        <p>When an occurrence is generated, the applicable template revision is snapshotted. Future improvements change future work without rewriting past instructions.</p>
+      </div>
+      <ol class="architecture-flow" aria-label="Preventive maintenance lifecycle">
+        <li><span>01</span><b>Asset</b><small>Stable identity</small></li>
+        <li><span>02</span><b>PM Plan</b><small>Schedule + ownership</small></li>
+        <li><span>03</span><b>Versioned Template</b><small>Ordered job steps</small></li>
+        <li><span>04</span><b>PM Occurrence</b><small>Revision snapshot</small></li>
+        <li><span>05</span><b>Responses + Evidence</b><small>Field execution</small></li>
+        <li><span>06</span><b>Actions + History</b><small>Review + traceability</small></li>
+      </ol>
+    </section>
+
+    <section class="control-shell shell" aria-label="CMMS prototype workspace">
+      <nav class="workspace-tabs" aria-label="Prototype views">
+        <button class="active" type="button" data-tab="plan" aria-selected="true">01 Plan</button>
+        <button type="button" data-tab="execute" aria-selected="false">02 Execute</button>
+        <button type="button" data-tab="review" aria-selected="false">03 Review</button>
+        <button type="button" data-tab="reliability" aria-selected="false">04 Reliability</button>
+      </nav>
+
+      <div class="workspace-panel active" data-panel="plan">
+        <div class="panel-heading">
+          <div><span>Planning control</span><h2>Due work and available capacity</h2></div>
+          <p>Choose a synthetic asset. Generation creates a distinct occurrence with its own ID, task snapshot, ownership, and due date.</p>
+        </div>
+        <div class="plan-grid">
+          <div class="asset-list" data-asset-list aria-label="Synthetic asset plans"></div>
+          <aside class="selection-panel">
+            <div class="selection-label"><span>Selected plan</span><b data-plan-state>Ready to generate</b></div>
+            <h3 data-selected-name>Air Handler 14</h3>
+            <dl>
+              <div><dt>Asset ID</dt><dd data-selected-id>FAC-AHU-014</dd></div>
+              <div><dt>Template</dt><dd data-selected-template>AHU-M-04 · Rev 3</dd></div>
+              <div><dt>Next due</dt><dd data-selected-due>Oct 02</dd></div>
+              <div><dt>Estimated work</dt><dd data-selected-hours>1.5 hours</dd></div>
+            </dl>
+            <button class="primary full" type="button" data-generate>Generate occurrence <span aria-hidden="true">→</span></button>
+            <p class="microcopy">Generating does not modify the template. It creates a controlled work record from the selected revision.</p>
+          </aside>
+        </div>
+        <div class="capacity-card">
+          <div><span>Three-week planning view</span><strong>Illustrative maintenance capacity</strong></div>
+          <div class="capacity-weeks" data-capacity></div>
+        </div>
+      </div>
+
+      <div class="workspace-panel" data-panel="execute" hidden>
+        <div class="panel-heading">
+          <div><span>Technician packet</span><h2 data-packet-title>No occurrence generated</h2></div>
+          <div class="packet-status" data-packet-status>Awaiting plan</div>
+        </div>
+        <div class="empty-state" data-empty-packet>
+          <span>PM</span>
+          <h3>Generate a due PM to begin.</h3>
+          <p>The packet will snapshot the template revision and expose only the controls needed to execute, validate, sign, and submit the work.</p>
+          <button class="secondary" type="button" data-jump="plan">Open planning view</button>
+        </div>
+        <div class="packet" data-packet hidden>
+          <div class="packet-meta">
+            <dl><div><dt>Occurrence</dt><dd data-occurrence-id></dd></div><div><dt>Asset</dt><dd data-occurrence-asset></dd></div><div><dt>Snapshot</dt><dd data-occurrence-revision></dd></div><div><dt>Due</dt><dd data-occurrence-due></dd></div></dl>
+            <p><b>Historical control:</b> this task set is now independent of future template edits.</p>
+          </div>
+          <div class="task-list" data-task-list></div>
+          <div class="packet-closeout">
+            <label for="closeout-note">Closeout note <span>Required when an issue or blocked step is recorded</span></label>
+            <textarea id="closeout-note" rows="3" placeholder="Describe the finding, immediate control, or follow-up needed…" data-closeout-note></textarea>
+            <div class="signoff-row">
+              <button class="secondary" type="button" data-sign>Apply demo technician sign-off</button>
+              <span data-sign-state>Not signed</span>
+              <button class="primary" type="button" data-submit>Validate and submit <span aria-hidden="true">→</span></button>
+            </div>
+            <div class="validation-message" role="status" aria-live="polite" data-validation></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workspace-panel" data-panel="review" hidden>
+        <div class="panel-heading">
+          <div><span>Controlled review</span><h2>Exceptions and corrective action</h2></div>
+          <p>Business rules determine whether work can close directly or requires supervisor review. The reviewer—not the prototype—owns the disposition.</p>
+        </div>
+        <div class="review-layout">
+          <div class="review-queue" data-review-queue></div>
+          <aside class="history-card">
+            <div><span>Session history</span><button type="button" data-reset>Reset demo</button></div>
+            <ol data-history></ol>
+          </aside>
+        </div>
+      </div>
+
+      <div class="workspace-panel" data-panel="reliability" hidden>
+        <div class="panel-heading">
+          <div><span>Prioritization support</span><h2>Condition and reliability watchlist</h2></div>
+          <p>Transparent, deterministic scoring highlights where a planner should look first. It is decision support—not a predictive-maintenance claim.</p>
+        </div>
+        <div class="reliability-grid">
+          <div class="watchlist" data-watchlist></div>
+          <aside class="score-card">
+            <span>Illustrative score</span>
+            <strong>Criticality × condition × recurrence</strong>
+            <p>Each factor is visible and reviewable. Sensor history, maintenance history, data quality, and engineering validation would be required before operational use.</p>
+            <div class="score-legend"><i></i><span>Monitor</span><i></i><span>Plan</span><i></i><span>Review now</span></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="principles shell" aria-labelledby="principles-title">
+      <div class="section-heading"><div><p class="eyebrow">Design decisions</p><h2 id="principles-title">The interface is downstream of the operating model.</h2></div></div>
+      <div class="principle-grid">
+        <article><span>01</span><h3>Separate definition from execution</h3><p>Assets, plans, templates, and scheduled occurrences have different lifecycles and should not collapse into one record.</p></article>
+        <article><span>02</span><h3>Make exceptions explicit</h3><p>Out-of-range readings, issues, blocked steps, missing evidence, and rework each need controlled paths.</p></article>
+        <article><span>03</span><h3>Preserve accountable judgment</h3><p>Rules can route work and detect threshold breaches. People still validate findings and authorize the disposition.</p></article>
+        <article><span>04</span><h3>Design for the system of record</h3><p>A production build would require validated ownership, integration, permissions, cybersecurity, document control, and support.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer shell"><p>CMMS Lifecycle Control · synthetic interactive prototype</p><a href="../../#cmms">Return to the CMMS case study</a></footer>
+
+  <script src="demo-data.js" defer></script>
+  <script src="demo.js" defer></script>
+</body>
+</html>

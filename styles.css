@@ -512,6 +512,12 @@ h1 span { display: block; color: var(--green); }
 .connected-visual > span { display: flex; justify-content: space-between; gap: 8px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,.08); color: rgba(255,255,255,.44); font-size: .5rem; }
 .connected-visual > span b { color: rgba(255,255,255,.8); }
 .connected-visual small { color: rgba(255,255,255,.35); font-size: .5rem; }
+.cmms-visual { display: grid; align-content: start; gap: 10px; }
+.cmms-visual > div { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.cmms-visual > div span { display: grid; min-height: 56px; align-content: center; gap: 3px; padding: 8px; border: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.56); font-size: .48rem; }
+.cmms-visual > div b { color: #f08a64; font-size: .62rem; }
+.cmms-visual > strong { color: #76d7a9; font-size: .62rem; letter-spacing: .06em; }
+.cmms-visual small { color: rgba(255,255,255,.35); font-size: .5rem; }
 
 .feature-card { position: relative; border: 1px solid rgba(255,255,255,.08); background: radial-gradient(circle at 82% 28%, rgba(74,138,113,.3), transparent 34%), linear-gradient(135deg, #0d1814, #172b24); box-shadow: 0 34px 90px rgba(23,33,30,.22); }
 .feature-card::before { content: "01"; position: absolute; left: 34px; bottom: -76px; color: rgba(255,255,255,.035); font-size: 17rem; font-weight: 900; line-height: 1; letter-spacing: -.1em; }

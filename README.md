@@ -80,6 +80,7 @@ Synthetic proof-of-concept demos are available at:
 - `/demos/ladder-inspection/`
 - `/demos/compliance-workflow/`
 - `/demos/digital-kanban/`
+- `/demos/cmms-lifecycle/`
 - `/demos/telemetry-explorer/`
 - `/demos/connected-operations/`
 - `/demos/building-operations/`
@@ -112,6 +113,8 @@ The digital Kanban demo is a synthetic recreation of an implemented canvas-app p
 The telemetry explorer adds an analytical pattern. It provides five synthetic equipment profiles, 30-minute state modeling, accessible interval data, metric switching, a modeled peak-demand overlay, fleet comparison, and explicitly bounded decision-support interpretations. It does not connect to a live API or attribute production savings.
 
 The connected-operations console adds a Manufacturing 4.0 pattern. It provides two synthetic assets and four operating scenarios: stable operation, repeated microstops, quality drift, and material starvation. The interface decomposes OEE, visualizes machine states and modeled rate, classifies loss, preserves a contextualized event stream, applies inspectable deterministic escalation rules, and keeps the final decision with accountable people. It does not connect to PLC, SCADA, MES, historian, edge, CMMS, or production-control systems and does not claim deployed predictive maintenance.
+
+The CMMS lifecycle demo is a clean-room synthetic recreation of a broader local front-end prototype. It demonstrates asset and PM-plan selection, versioned template snapshots, unique occurrences, technician execution, threshold validation, evidence state, sign-off, supervisor disposition, capacity context, and transparent reliability prioritization. It has no live CMMS or ERP connection, does not persist records, and does not claim an enterprise deployment or predictive-maintenance capability.
 
 The Building Operations Command Center generalizes a map-based reporting pattern into building-wide and machine-level visualization. Visitors can filter synthetic report types, select spatial markers, move reports through acknowledgement, work-request, and verified-resolution states, and create a browser-only observation. It is explicitly SCADA-inspired visualization—not a BMS, SCADA, PLC, alarm-management, or equipment-control implementation.
 
