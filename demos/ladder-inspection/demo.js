@@ -24,6 +24,11 @@
   var errorList = document.querySelector("[data-error-list]");
   var eventStream = document.querySelector("[data-event-stream]");
   var recordJson = document.querySelector("[data-record-json]");
+  var canvasRoot = document.querySelector("[data-canvas-app]");
+
+  function canvasNotify(message, tone) {
+    if (window.CanvasSim) window.CanvasSim.notify(canvasRoot, message, tone);
+  }
 
   function escapeHtml(value) {
     return String(value).replace(/[&<>"]/g, function (character) {
@@ -83,6 +88,7 @@
       indicator.classList.toggle("active", indicatorIndex === activeIndex);
       indicator.classList.toggle("complete", indicatorIndex < activeIndex);
     });
+    if (window.CanvasSim) window.CanvasSim.setActive(canvasRoot, step === "result" ? "history" : step);
     if (shouldFocus) focusScreen(step);
   }
 
@@ -287,19 +293,52 @@
   renderEvidence();
   updateLiveState();
 
-  document.querySelector("[data-scan]").addEventListener("click", resolveAsset);
+  document.querySelector("[data-scan]").addEventListener("click", function () {
+    if (!window.CanvasSim) { resolveAsset(); return; }
+    window.CanvasSim.busy(canvasRoot, "Resolving synthetic asset record…", resolveAsset, 460).then(function () {
+      canvasNotify("Asset LAD-017 loaded from the synthetic asset register.", "success");
+    });
+  });
   document.querySelectorAll("[data-scenario]").forEach(function (button) {
-    button.addEventListener("click", function () { applyScenario(button.getAttribute("data-scenario")); });
+    button.addEventListener("click", function () {
+      var mode = button.getAttribute("data-scenario");
+      applyScenario(mode);
+      canvasNotify(mode === "safe" ? "Pass scenario loaded for review." : "Safety-exception scenario loaded for review.", mode === "safe" ? "success" : "warning");
+    });
   });
   notesField.addEventListener("input", function () { state.notes = notesField.value; updateRecordPreview(); });
-  document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateRecordPreview(); });
-  document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateRecordPreview(); });
+  document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference attached.", "success"); });
+  document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference removed.", "info"); });
   document.querySelector("[data-back]").addEventListener("click", function () { state.assetResolved = false; updateLiveState(); setStep("identify", true); });
   document.querySelector("[data-edit]").addEventListener("click", function () { state.submitted = false; updateLiveState(); setStep("inspect", true); });
   document.querySelector("[data-reset]").addEventListener("click", resetDemo);
+  canvasRoot.addEventListener("canvas:navigate", function (event) {
+    var action = event.detail.action;
+    if (action === "home" || action === "refresh" || action === "identify") {
+      resetDemo();
+      canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to asset identification.", "info");
+    } else if (action === "inspect") {
+      if (state.assetResolved) setStep("inspect", true);
+      else canvasNotify("Scan the synthetic asset before opening the inspection.", "warning");
+    } else if (action === "history") {
+      if (state.submitted) setStep("result", true);
+      else canvasNotify("Inspection history is available after a validated submission.", "info");
+    }
+  });
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     var evaluation = validateInspection();
-    if (evaluation) renderResult(evaluation);
+    if (!evaluation) { canvasNotify("Review the highlighted required fields.", "error"); return; }
+    if (!window.CanvasSim) { renderResult(evaluation); return; }
+    window.CanvasSim.confirm(canvasRoot, {
+      title: evaluation.hasException ? "Submit inspection with exception?" : "Submit completed inspection?",
+      message: evaluation.hasException ? "The synthetic record will create the demonstrated exception and follow-up path." : "The synthetic record will be validated and added to inspection history.",
+      confirmLabel: "Submit inspection"
+    }).then(function (confirmed) {
+      if (!confirmed) return;
+      window.CanvasSim.busy(canvasRoot, "Validating inspection controls…", function () { renderResult(evaluation); }, 520).then(function () {
+        canvasNotify(evaluation.hasException ? "Inspection saved with a governed exception." : "Inspection passed and history was updated.", evaluation.hasException ? "warning" : "success");
+      });
+    });
   });
 })();

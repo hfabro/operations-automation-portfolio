@@ -15,6 +15,9 @@
   var errorList = document.querySelector("[data-error-list]");
   var eventStream = document.querySelector("[data-event-stream]");
   var recordJson = document.querySelector("[data-record-json]");
+  var canvasRoot = document.querySelector("[data-canvas-app]");
+
+  function canvasNotify(message, tone) { if (window.CanvasSim) window.CanvasSim.notify(canvasRoot, message, tone); }
 
   function escapeHtml(value) { return String(value).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -44,6 +47,7 @@
       indicator.classList.toggle("active", index === activeIndex);
       indicator.classList.toggle("complete", index < activeIndex);
     });
+    if (window.CanvasSim) window.CanvasSim.setActive(canvasRoot, step === "master" ? "requirement" : step === "result" ? "history" : "occurrence");
     if (focus) {
       var heading = document.querySelector('[data-screen="' + step + '"] h3');
       if (heading) { heading.setAttribute("tabindex", "-1"); heading.focus({ preventScroll: true }); }
@@ -168,13 +172,35 @@
   }
 
   renderOwners(); renderPreviousHistory(); renderArchitecture(); renderEvents(); renderEvidence(); updateLiveState();
-  document.querySelector("[data-generate]").addEventListener("click", generateOccurrence);
-  document.querySelectorAll("[data-scenario]").forEach(function (button) { button.addEventListener("click", function () { applyScenario(button.getAttribute("data-scenario")); }); });
+  document.querySelector("[data-generate]").addEventListener("click", function () {
+    if (!window.CanvasSim) { generateOccurrence(); return; }
+    window.CanvasSim.busy(canvasRoot, "Generating scheduled occurrence…", generateOccurrence, 470).then(function () { canvasNotify("OCC-DEMO-0912 generated from the requirement master.", "success"); });
+  });
+  document.querySelectorAll("[data-scenario]").forEach(function (button) { button.addEventListener("click", function () { var mode = button.getAttribute("data-scenario"); applyScenario(mode); canvasNotify(mode === "complete" ? "Completion scenario loaded." : "Exception scenario loaded.", mode === "complete" ? "success" : "warning"); }); });
   [ownerField, statusField, dateField, notesField].forEach(function (field) { field.addEventListener("input", function () { state.submitted = false; updateLiveState(); }); });
-  document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateLiveState(); });
-  document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateLiveState(); });
+  document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateLiveState(); canvasNotify("Synthetic completion evidence attached.", "success"); });
+  document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateLiveState(); canvasNotify("Synthetic evidence removed.", "info"); });
   document.querySelector("[data-back]").addEventListener("click", function () { state.generated = false; updateLiveState(); setStep("master", true); });
   document.querySelector("[data-edit]").addEventListener("click", function () { state.submitted = false; updateLiveState(); setStep("occurrence", true); });
   document.querySelector("[data-reset]").addEventListener("click", resetDemo);
-  form.addEventListener("submit", function (event) { event.preventDefault(); if (validateOccurrence()) renderResult(); });
+  canvasRoot.addEventListener("canvas:navigate", function (event) {
+    var action = event.detail.action;
+    if (action === "home" || action === "refresh" || action === "requirement") { resetDemo(); canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to the requirement master.", "info"); }
+    else if (action === "occurrence") { if (state.generated) setStep("occurrence", true); else canvasNotify("Generate an occurrence from the requirement master first.", "warning"); }
+    else if (action === "history") { if (state.submitted) setStep("result", true); else canvasNotify("Current history appears after lifecycle validation.", "info"); }
+  });
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (!validateOccurrence()) { canvasNotify("Review the highlighted lifecycle requirements.", "error"); return; }
+    if (!window.CanvasSim) { renderResult(); return; }
+    var isException = state.status === "Exception";
+    window.CanvasSim.confirm(canvasRoot, {
+      title: isException ? "Open this compliance exception?" : "Close this occurrence?",
+      message: isException ? "The synthetic workflow will retain the unresolved obligation and create a follow-up action." : "The occurrence will close with its owner, completion date, and evidence snapshot.",
+      confirmLabel: isException ? "Open exception" : "Complete occurrence"
+    }).then(function (confirmed) {
+      if (!confirmed) return;
+      window.CanvasSim.busy(canvasRoot, "Applying lifecycle controls…", renderResult, 520).then(function () { canvasNotify(isException ? "Exception opened with owner and follow-up." : "Occurrence completed and retained in history.", isException ? "warning" : "success"); });
+    });
+  });
 })();
