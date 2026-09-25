@@ -86,6 +86,8 @@ Synthetic proof-of-concept demos are available at:
 - `/demos/building-operations/`
 - `/demos/smart-factory-roadmap/`
 
+Every demo includes an optional guided run. The shared `scripts/demo-guide.js` configuration defines a short business scenario, points to the real interactive controls, and advances only after the visitor performs the required action. `assets/demo-guide.css` supplies the responsive, keyboard-visible presentation. The guide does not auto-play, simulate user actions, add persistence, or change the synthetic-data boundaries of the demonstrations.
+
 The ladder inspection demo demonstrates:
 
 - QR-style asset identification without requesting camera access
