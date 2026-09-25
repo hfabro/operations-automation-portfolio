@@ -51,11 +51,11 @@ h1 { max-width: 780px; margin: 0; font-size: clamp(3.4rem, 7vw, 7rem); line-heig
 .control-panel > label, .control-panel fieldset, .context-readout { min-width: 0; margin: 0; padding: 22px; border: 0; border-right: 1px solid var(--line); }
 .control-panel > :last-child { border-right: 0; }
 .control-panel > label, .control-panel legend { color: var(--muted); font-size: .61rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
-.control-panel select { width: 100%; margin-top: 10px; padding: 11px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
+.control-panel select { width: 100%; min-height: 44px; margin-top: 10px; padding: 11px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); }
 .control-panel fieldset { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .control-panel legend { float: left; width: 100%; margin-bottom: 10px; }
-.control-panel fieldset label { color: var(--ink); font-size: .7rem; font-weight: 700; }
-.control-panel input { accent-color: var(--accent); }
+.control-panel fieldset label { min-height: 44px; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font-size: .7rem; font-weight: 700; cursor: pointer; }
+.control-panel input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); }
 .context-readout { display: grid; align-content: center; gap: 4px; }
 .context-readout span, .card-heading span { color: var(--accent); font-size: .56rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
 .context-readout strong { font-size: 1rem; }

@@ -124,9 +124,11 @@ The Smart Factory Roadmap Studio adds the transformation-management layer. Visit
 
 The homepage provides three complementary navigation surfaces:
 
-- the persistent primary navigation for major portfolio sections
+- a concise primary navigation for major portfolio sections
 - an audience-oriented portfolio map immediately after the hero
 - a compact project directory that deep-links to and opens individual case studies
+
+On smaller screens, a persistent four-destination quick rail keeps demos, projects, Smart Factory strategy, and contact within one tap. Demo cards become a touch-friendly horizontal rail and can be filtered by workflow, analytics, or strategy. Portfolio-guide and project-directory cards also use compact horizontal browsing on phones to reduce excessive page stacking.
 
 Hash links to project cards are handled by `scripts/app.js`, so direct links and project-directory links expose the selected case study automatically. A keyboard-accessible back-to-top control appears after the visitor has moved beyond the opening content.
 

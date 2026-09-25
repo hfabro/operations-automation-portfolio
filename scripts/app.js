@@ -6,7 +6,9 @@
   var header = document.querySelector("[data-header]");
   var nav = document.querySelector("[data-nav]");
   var navToggle = document.querySelector("[data-nav-toggle]");
+  var navLabel = document.querySelector("[data-nav-label]");
   var backToTop = document.querySelector("[data-back-to-top]");
+  var quickNav = document.querySelector("[data-quick-nav]");
   var themeColor = document.querySelector('meta[name="theme-color"]');
   var storedTheme = null;
 
@@ -35,6 +37,7 @@
   function syncHeader() {
     if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
     if (backToTop) backToTop.classList.toggle("is-visible", window.scrollY > 680);
+    if (quickNav) quickNav.classList.toggle("is-visible", window.scrollY > 520);
   }
   syncHeader();
   window.addEventListener("scroll", syncHeader, { passive: true });
@@ -43,6 +46,8 @@
     if (!nav || !navToggle) return;
     nav.classList.remove("is-open");
     navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open navigation");
+    if (navLabel) navLabel.textContent = "Menu";
     document.body.classList.remove("nav-open");
   }
 
@@ -51,12 +56,46 @@
       var willOpen = !nav.classList.contains("is-open");
       nav.classList.toggle("is-open", willOpen);
       navToggle.setAttribute("aria-expanded", String(willOpen));
+      navToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
+      if (navLabel) navLabel.textContent = willOpen ? "Close" : "Menu";
       document.body.classList.toggle("nav-open", willOpen);
     });
     nav.querySelectorAll("a").forEach(function (link) { link.addEventListener("click", closeNavigation); });
-    document.addEventListener("keydown", function (event) { if (event.key === "Escape") closeNavigation(); });
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape" || !nav.classList.contains("is-open")) return;
+      closeNavigation();
+      navToggle.focus();
+    });
     window.addEventListener("resize", function () { if (window.innerWidth > 900) closeNavigation(); });
   }
+
+  var demoFilterButtons = Array.from(document.querySelectorAll("[data-demo-filter]"));
+  var demoCards = Array.from(document.querySelectorAll("[data-demo-category]"));
+  var demoCount = document.querySelector("[data-demo-count]");
+
+  function filterDemos(filter) {
+    var visibleCount = 0;
+    demoFilterButtons.forEach(function (button) {
+      var isActive = button.dataset.demoFilter === filter;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-pressed", String(isActive));
+    });
+    demoCards.forEach(function (card) {
+      var categories = (card.dataset.demoCategory || "").split(/\s+/);
+      var isVisible = filter === "all" || categories.indexOf(filter) !== -1;
+      card.hidden = !isVisible;
+      if (isVisible) visibleCount += 1;
+    });
+    if (demoCount) {
+      demoCount.textContent = filter === "all"
+        ? "Showing all " + visibleCount + " demonstrations"
+        : "Showing " + visibleCount + " " + filter + " demonstrations";
+    }
+  }
+
+  demoFilterButtons.forEach(function (button) {
+    button.addEventListener("click", function () { filterDemos(button.dataset.demoFilter); });
+  });
 
   document.querySelectorAll("details.project-card").forEach(function (card) {
     card.addEventListener("toggle", function () {
@@ -149,19 +188,25 @@
     revealTargets.forEach(function (target) { revealObserver.observe(target); });
   }
 
-  var navSectionLinks = nav ? Array.from(nav.querySelectorAll('a[href^="#"]')).map(function (link) {
+  var navSectionLinks = Array.from(document.querySelectorAll('[data-section-nav] a[href^="#"]')).map(function (link) {
     return { link: link, section: document.querySelector(link.getAttribute("href")) };
-  }).filter(function (item) { return item.section; }) : [];
+  }).filter(function (item) { return item.section; });
   var activeNavFrame = null;
   function syncActiveNavigation() {
     activeNavFrame = null;
     if (!navSectionLinks.length) return;
-    var current = null;
+    var currentSection = null;
+    var currentTop = -Infinity;
+    var activationLine = Math.min(240, window.innerHeight * .3);
     navSectionLinks.forEach(function (item) {
-      if (item.section.getBoundingClientRect().top <= 150) current = item;
+      var sectionTop = item.section.getBoundingClientRect().top;
+      if (sectionTop <= activationLine && sectionTop > currentTop) {
+        currentSection = item.section;
+        currentTop = sectionTop;
+      }
     });
     navSectionLinks.forEach(function (item) {
-      if (item === current) item.link.setAttribute("aria-current", "true");
+      if (item.section === currentSection) item.link.setAttribute("aria-current", "true");
       else item.link.removeAttribute("aria-current");
     });
   }
