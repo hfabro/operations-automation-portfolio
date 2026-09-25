@@ -74,12 +74,12 @@ Update `scripts/site-config.js` for:
 
 - primary name and descriptor
 - exploratory future-business name
-- email
+- email (optional; intentionally blank in the public build)
 - LinkedIn URL
 - location
 - resume URL
 
-Confirmed email and LinkedIn values have been populated from supplied information. The public location is intentionally generalized to the Chicago Metropolitan Area. A GitHub account exists, but its public link is intentionally omitted until the profile is professionally aligned with the portfolio.
+The confirmed LinkedIn value has been populated from supplied information. The email value is intentionally blank so the public page directs contact through LinkedIn without exposing an email address. The public location is intentionally generalized to the Chicago Metropolitan Area. A GitHub account exists, but its public link is intentionally omitted until the profile is professionally aligned with the portfolio.
 
 Core portfolio copy lives in `index.html`. Presentation and responsive behavior live in `styles.css`. Interaction behavior lives in `scripts/app.js`.
 
@@ -178,7 +178,7 @@ The current GitHub Pages response provides HTTPS and HSTS, while the project-con
 
 ## Pre-publication checklist
 
-- Confirm that the public email address is intended for internet-wide distribution and monitor it for spam or phishing.
+- If an email address is added later, confirm that it is intended for internet-wide distribution and monitor it for spam or phishing.
 - Re-scan the résumé PDF after every replacement to confirm that no phone number or precise home location has returned.
 - Verify the scope, timeframe, and attribution of every result metric.
 - Confirm project maturity labels.

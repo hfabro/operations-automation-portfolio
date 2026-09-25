@@ -17,7 +17,7 @@ The synthetic demonstrations are not production control systems. Reports about f
 
 ## Reporting
 
-Email `hfabro85@gmail.com` with the subject `Portfolio security report`. Include the affected URL, the observed behavior, reproduction steps, and potential impact. Do not include employer information, real credentials, or confidential production data.
+Send a private message through the [LinkedIn profile](https://www.linkedin.com/in/hussain-f-20b2121b3) and identify it as a portfolio security report. Include the affected URL, the observed behavior, reproduction steps, and potential impact. Do not include employer information, real credentials, or confidential production data.
 
 Please avoid destructive testing, denial-of-service activity, automated traffic that could disrupt GitHub Pages, or attempts to access accounts or systems outside this repository.
 
