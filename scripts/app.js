@@ -69,6 +69,19 @@
     window.addEventListener("resize", function () { if (window.innerWidth > 900) closeNavigation(); });
   }
 
+  var pageTocs = Array.from(document.querySelectorAll("details.page-toc"));
+  var compactNavigation = window.matchMedia && window.matchMedia("(max-width: 900px)");
+  if (compactNavigation && compactNavigation.matches) {
+    pageTocs.forEach(function (toc) { toc.open = false; });
+  }
+  pageTocs.forEach(function (toc) {
+    toc.querySelectorAll('a[href^="#"]').forEach(function (link) {
+      link.addEventListener("click", function () {
+        if (compactNavigation && compactNavigation.matches) toc.open = false;
+      });
+    });
+  });
+
   var demoFilterButtons = Array.from(document.querySelectorAll("[data-demo-filter]"));
   var demoCards = Array.from(document.querySelectorAll("[data-demo-category]"));
   var demoCount = document.querySelector("[data-demo-count]");

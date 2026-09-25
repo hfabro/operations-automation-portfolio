@@ -36,7 +36,7 @@
 </head>
 <body>
   <a class="skip-link" href="#explorer">Skip to analytics explorer</a>
-  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../#telemetry">← Back to case study</a></div></header>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../work/telemetry-energy/">← Back to case study</a></div></header>
 
   <main>
     <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Interactive analytics proof / synthetic data</p><h1 id="demo-title">Fleet Telemetry &amp; Energy Explorer</h1><p class="lede">Filter a five-equipment synthetic fleet, compare 30-minute operating states, and evaluate where charging behavior overlaps a modeled peak-demand window.</p></div><ul class="demo-guardrails" aria-label="Demo guardrails"><li>42,000+ scale represented conceptually</li><li>Charts use synthetic records</li><li>No live API connection</li><li>No savings attribution</li></ul></div></section>
@@ -68,6 +68,6 @@
 
     <section class="architecture-proof" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">Analytics architecture</p><h2 id="architecture-title">Source alignment comes before the dashboard.</h2></div><p>The model joins equipment telemetry and utility context at a deliberate time grain so operating states and demand exposure can be compared without overstating precision.</p></div><div class="architecture-flow" data-architecture-flow></div><div class="design-proof-grid"><article><span>01 / ingestion</span><h3>API and JSON</h3><p>Telemetry must be ingested consistently before utilization or charging logic is credible.</p></article><article><span>02 / time grain</span><h3>Interval alignment</h3><p>Equipment events and utility intervals need compatible timestamps and clearly defined boundaries.</p></article><article><span>03 / semantics</span><h3>Governed measures</h3><p>State of charge, active use, sessions, energy, and cost require documented definitions.</p></article><article><span>04 / judgment</span><h3>Decision support</h3><p>Analytics should surface questions and exceptions—not imply certainty the data cannot support.</p></article></div></div></section>
   </main>
-  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to a production system.</p><a href="../../">Return to portfolio</a></div></footer>
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to a production system.</p><a href="../">View all demos</a></div></footer>
 </body>
 </html>

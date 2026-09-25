@@ -48,6 +48,23 @@ for (const file of htmlFiles) {
   for (const id of new Set(duplicates)) report(file, `duplicate id "${id}"`);
   idCache.set(file, new Set(ids));
 
+  const semanticRequirements = [
+    [/<html\s+lang="[^"]+"/i, "document language"],
+    [/<meta\s+name="viewport"/i, "viewport metadata"],
+    [/<title>[^<]+<\/title>/i, "page title"],
+    [/<meta\s+name="description"/i, "description metadata"],
+    [/<main\b/i, "main landmark"],
+    [/<h1\b/i, "level-one heading"],
+    [/class="skip-link"/i, "skip link"]
+  ];
+  for (const [pattern, label] of semanticRequirements) {
+    if (!pattern.test(html)) report(file, `missing ${label}`);
+  }
+
+  for (const match of html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/gi)) {
+    if (!/rel="[^"]*noreferrer[^"]*"/i.test(match[0])) report(file, "target=_blank link is missing rel=noreferrer");
+  }
+
   for (const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     const reference = match[1];
     if (/^(?:https?:|mailto:|tel:|data:|javascript:)/i.test(reference)) continue;
@@ -64,7 +81,10 @@ for (const file of htmlFiles) {
   }
 }
 
-const demoFiles = htmlFiles.filter((file) => relative(root, file).replaceAll("\\", "/").startsWith("demos/"));
+const demoFiles = htmlFiles.filter((file) => {
+  const path = relative(root, file).replaceAll("\\", "/");
+  return path.startsWith("demos/") && path !== "demos/index.html";
+});
 const demoRequirements = [
   ["Content-Security-Policy", "content security policy"],
   ['name="referrer"', "referrer policy"],
@@ -82,7 +102,13 @@ for (const file of demoFiles) {
   }
 }
 
-for (const requiredFile of ["COPYRIGHT.md", "SECURITY.md", ".well-known/security.txt", ".github/workflows/validate.yml", "robots.txt", "sitemap.xml", "assets/og.png"]) {
+for (const requiredFile of [
+  "COPYRIGHT.md", "SECURITY.md", ".well-known/security.txt", ".github/workflows/validate.yml",
+  "robots.txt", "sitemap.xml", "assets/og.png", "assets/hubs.css",
+  "work/index.html", "demos/index.html", "approach/index.html", "smart-factory/index.html", "about/index.html",
+  "work/ladder-inspection/index.html", "work/compliance-automation/index.html",
+  "work/telemetry-energy/index.html", "work/digital-kanban/index.html"
+]) {
   const target = join(root, requiredFile);
   if (!existsSync(target)) report(target, "required launch artifact is missing");
 }

@@ -33,7 +33,7 @@
     '<a class="series-previous" href="' + demoUrl(previous) + '" aria-label="Previous demo: ' + previous.title + '">' +
       '<span class="demo-series-direction" aria-hidden="true">←</span><span class="demo-series-link-copy"><span>Previous demo</span><strong>' + previous.short + '</strong></span>' +
     '</a>' +
-    '<div class="demo-series-center"><span>Interactive proof lab</span><strong>' + String(index + 1).padStart(2, "0") + ' / ' + String(demos.length).padStart(2, "0") + ' · ' + current.short + '</strong><a href="../../#proof-lab">View all demos</a></div>' +
+    '<div class="demo-series-center"><span>Interactive proof lab</span><strong>' + String(index + 1).padStart(2, "0") + ' / ' + String(demos.length).padStart(2, "0") + ' · ' + current.short + '</strong><a href="../">View all demos</a></div>' +
     '<a class="series-next" href="' + demoUrl(next) + '" aria-label="Next demo: ' + next.title + '">' +
       '<span class="demo-series-link-copy"><span>Next demo</span><strong>' + next.short + '</strong></span><span class="demo-series-direction" aria-hidden="true">→</span>' +
     '</a>';

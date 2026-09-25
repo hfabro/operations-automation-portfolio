@@ -23,7 +23,7 @@ This dependency-free static architecture avoids an unnecessary package and build
 
 ## Run locally
 
-The site works when `index.html` is opened directly. For a more production-like local URL, run the included PowerShell server from this project folder:
+Because the site uses clean directory routes, run it through the included local static server from this project folder:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\serve.ps1
@@ -81,7 +81,15 @@ Update `scripts/site-config.js` for:
 
 The confirmed LinkedIn value has been populated from supplied information. The email value is intentionally blank so the public page directs contact through LinkedIn without exposing an email address. The public location is intentionally generalized to the Chicago Metropolitan Area. A GitHub account exists, but its public link is intentionally omitted until the profile is professionally aligned with the portfolio.
 
-Core portfolio copy lives in `index.html`. Presentation and responsive behavior live in `styles.css`. Interaction behavior lives in `scripts/app.js`.
+The concise homepage lives in `index.html`. Major content is organized into task-focused hubs:
+
+- `work/` — selected systems, maturity labels, evidence map, and detailed case studies
+- `demos/` — the complete interactive proof lab
+- `approach/` — delivery method, independent-build model, AI controls, and security
+- `smart-factory/` — maturity, roadmap, IT/OT, governance, and value-realization approach
+- `about/` — results, experience progression, capabilities, credentials, and contact
+
+Shared presentation lives in `styles.css`, while hub and case-study layouts live in `assets/hubs.css`. Shared interaction behavior lives in `scripts/app.js`.
 
 ## Interactive demonstrations
 
@@ -138,25 +146,27 @@ The inspection, compliance, Kanban, CMMS, and telemetry demonstrations include r
 
 ## Navigation model
 
-The homepage provides three complementary navigation surfaces:
+The site uses a hub-and-spoke information architecture:
 
-- a concise primary navigation for major portfolio sections
-- an audience-oriented portfolio map immediately after the hero
-- a compact project directory that deep-links to and opens individual case studies
+- the homepage provides a concise orientation and five task routes
+- global navigation stays consistent across all portfolio hubs and case studies
+- Work, Demos, Approach, Smart Factory, and About each have a dedicated URL
+- long hub and case-study pages include a contextual “On this page” navigation
+- individual case studies use breadcrumbs and previous/next paths
+- every demo includes a return path to its related case or work context and shared previous/next demo navigation
 
-On smaller screens, a persistent four-destination quick rail keeps demos, projects, Smart Factory strategy, and contact within one tap. Demo cards become a touch-friendly horizontal rail and can be filtered by workflow, analytics, or strategy. Portfolio-guide and project-directory cards also use compact horizontal browsing on phones to reduce excessive page stacking.
-
-Hash links to project cards are handled by `scripts/app.js`, so direct links and project-directory links expose the selected case study automatically. A keyboard-accessible back-to-top control appears after the visitor has moved beyond the opening content.
+On desktop, the contextual navigation remains sticky beside the content. On smaller screens it becomes a native expandable disclosure instead of a persistent bottom bar, leaving more viewport space for the work itself. A keyboard-accessible back-to-top control appears after the visitor moves beyond the opening content.
 
 ## Add another case study
 
-1. Copy one existing `<details class="project-card">` block in `index.html`.
-2. Give it a unique `id` and new case-study number.
-3. Choose an accurate maturity label: `Implemented`, `Operational analytics`, `Architecture`, or `Concept / prototype`.
-4. Include the same evidence pattern: Problem, Approach, Key Features, Engineering / Design Considerations, Outcome, Technologies.
-5. Add a sanitized HTML/CSS architecture flow if it materially clarifies the system.
-6. Use only synthetic data and verify every measurable claim before publishing.
-7. Test the new card with keyboard and pointer input at mobile, tablet, and desktop widths.
+1. Copy an existing folder under `work/` and give the new case a short, descriptive URL slug.
+2. Update the canonical and Open Graph URLs, title, description, breadcrumbs, case navigation, and maturity label.
+3. Preserve the evidence pattern: operational problem, constraints, approach, architecture, controls/failure modes, outcome, and lessons.
+4. Add the summary card to `work/index.html`; add it to the homepage only if it is one of the few strongest proofs.
+5. Link a synthetic demo only when there is a meaningful workflow or decision to operate.
+6. Add the new route to `sitemap.xml` and the required-artifact list in `tools/validate-site.mjs` if it is launch-critical.
+7. Use only sanitized descriptions and synthetic data; verify every maturity and measurable claim before publishing.
+8. Test the page with keyboard and pointer input at 375px, 768px, and 1440px widths.
 
 ## Resume
 
