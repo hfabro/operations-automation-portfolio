@@ -6,6 +6,8 @@ This is the public-facing proof-of-work portfolio for David H. Fabro. Its primar
 
 The portfolio also connects demonstrated work to repeatable operational problem patterns. That structure is intended to validate whether the same capabilities could support future independent operational-systems services without presenting an established consulting company or hard sales funnel.
 
+The repository is published for professional evaluation. Copyright and reuse boundaries are documented in `COPYRIGHT.md`; publication does not grant a production-deployment or redistribution license.
+
 The primary brand is intentionally personal. `Fabro Operational Systems` is stored only as an exploratory future-business value in `scripts/site-config.js`; it is not presented as an established firm.
 
 ## Technology stack
@@ -17,7 +19,7 @@ The primary brand is intentionally personal. `Fabro Operational Systems` is stor
 - Restrictive browser content policy and no-referrer policy on every page
 - No backend, tracking, analytics, package manager, or external runtime dependency
 
-This stack was selected because Node.js/npm were not available in the inspected environment and a dependency-free static site is the simplest stable architecture for portfolio v1.
+This dependency-free static architecture avoids an unnecessary package and build lifecycle while remaining easy to maintain and portable across common static hosts.
 
 ## Run locally
 
@@ -38,6 +40,14 @@ Stop the server with `Ctrl+C`.
 ## Build instructions
 
 There is no compilation or bundling step. The source files are the production files. A production check consists of serving the folder and verifying that all local routes and assets return successfully.
+
+When Node.js is available, run the included no-dependency validation command before publishing:
+
+```powershell
+node .\tools\validate-site.mjs
+```
+
+It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, and JavaScript syntax.
 
 ## Deployment options
 
@@ -87,6 +97,8 @@ Synthetic proof-of-concept demos are available at:
 - `/demos/smart-factory-roadmap/`
 
 Every demo includes an optional guided run. The shared `scripts/demo-guide.js` configuration defines a short business scenario, points to the real interactive controls, and advances only after the visitor performs the required action. `assets/demo-guide.css` supplies the responsive, keyboard-visible presentation. The guide does not auto-play, simulate user actions, add persistence, or change the synthetic-data boundaries of the demonstrations.
+
+Every demo also loads the shared `scripts/demo-series.js` and `assets/demo-series.css` assets. This adds consistent previous/next navigation and a return path to the complete proof lab without duplicating navigation markup across eight demos.
 
 The ladder inspection demo demonstrates:
 

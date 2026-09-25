@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://hfabro.github.io/operations-automation-portfolio/sitemap.xml

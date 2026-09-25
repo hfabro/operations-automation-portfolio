@@ -817,3 +817,42 @@ h1 span { display: block; color: var(--green); }
 .cad-thumb-flow { fill: none; stroke: #e08b67; stroke-width: 1; stroke-dasharray: 4 3; }
 .cad-thumb text { fill: #699b9e; font-size: 6px; font-weight: 800; letter-spacing: .04em; }
 .cad-thumb .pin { z-index: 2; width: 12px; height: 12px; }
+
+/* Recruiter-readable evidence matrix */
+.theme-toggle, .nav-toggle { min-width: 44px; min-height: 44px; }
+.proof-matrix-section { background: var(--surface); }
+.proof-matrix-scroll { overflow-x: auto; border: 1px solid var(--line); background: var(--surface-strong); scrollbar-color: var(--accent) var(--surface); }
+.proof-matrix-scroll:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent) 42%, transparent); outline-offset: 3px; }
+.proof-matrix { width: 100%; min-width: 980px; border-collapse: collapse; }
+.proof-matrix th, .proof-matrix td { padding: 16px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+.proof-matrix tr:last-child th, .proof-matrix tr:last-child td { border-bottom: 0; }
+.proof-matrix th:last-child, .proof-matrix td:last-child { border-right: 0; }
+.proof-matrix thead th { padding-block: 12px; color: var(--muted); background: color-mix(in srgb, var(--surface) 76%, var(--green-soft)); font-size: .56rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.proof-matrix tbody th { width: 19%; color: var(--ink); font-size: .72rem; }
+.proof-matrix tbody td { color: var(--muted); font-size: .64rem; line-height: 1.5; }
+.proof-matrix tbody tr:hover { background: color-mix(in srgb, var(--green-soft) 46%, transparent); }
+.proof-matrix td:last-child a { color: var(--accent-dark); font-weight: 900; text-decoration: none; white-space: nowrap; }
+.proof-matrix td:last-child a:hover, .proof-matrix td:last-child a:focus-visible { color: var(--green); text-decoration: underline; }
+.matrix-status { display: inline-flex; padding: 6px 8px; border: 1px solid var(--line); color: var(--green); background: var(--green-soft); font-size: .53rem; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.matrix-status.analytics { color: #315f7b; background: #edf5fa; }
+.matrix-status.architecture { color: #815724; background: #fbf4e7; }
+.matrix-status.concept { color: #6d596f; background: #f5eff6; }
+.proof-matrix-note { display: grid; grid-template-columns: .25fr 1fr auto; gap: 22px; align-items: center; padding: 20px 22px; color: #fff; background: var(--ink); }
+.proof-matrix-note strong { color: var(--accent); font-size: .66rem; letter-spacing: .07em; text-transform: uppercase; }
+.proof-matrix-note p { margin: 0; color: rgba(255,255,255,.64); font-size: .65rem; }
+.proof-matrix-note a { color: #fff; font-size: .62rem; font-weight: 900; text-decoration: none; white-space: nowrap; }
+.proof-matrix-note a:hover, .proof-matrix-note a:focus-visible { color: var(--accent); text-decoration: underline; }
+
+@media screen and (max-width: 900px) {
+  .proof-matrix-note { grid-template-columns: 1fr; gap: 8px; }
+  .proof-matrix-scroll::after { content: "Scroll table horizontally  →"; display: block; padding: 9px 14px; color: var(--accent-dark); font-size: .53rem; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+}
+
+@media print {
+  .proof-matrix-section { break-before: page; }
+  .proof-matrix-scroll { overflow: visible; }
+  .proof-matrix { min-width: 0; font-size: 8pt; }
+  .proof-matrix th, .proof-matrix td { padding: 6px; }
+  .proof-matrix-note { color: #111; background: #fff; border: 1px solid #bbb; }
+  .proof-matrix-note p, .proof-matrix-note a { color: #111; }
+}
