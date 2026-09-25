@@ -22,10 +22,12 @@
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/smart-factory-roadmap/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="demo.css?v=20260925.3">
+  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.2">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.8">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js" defer></script>
+  <script src="../../scripts/canvas-sim.js?v=20260925.2" defer></script>
+  <script src="demo.js?v=20260925.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260924.5" defer></script>
   <script src="../../scripts/demo-series.js?v=20260924.6" defer></script>
 </head>
@@ -54,7 +56,7 @@
       </div>
     </section>
 
-    <nav class="studio-nav" aria-label="Studio sections">
+    <nav class="studio-nav canvas-fallback-nav" aria-label="Studio sections">
       <div class="shell">
         <a href="#assessment">01 Assessment</a>
         <a href="#portfolio">02 Use-case portfolio</a>
@@ -64,6 +66,7 @@
       </div>
     </nav>
 
+    <div class="roadmap-canvas-suite" data-canvas-app data-canvas-title="Smart Factory Roadmap" data-canvas-subtitle="Assessment · Portfolio · Governance" data-canvas-initials="SF" data-canvas-user="DT" data-canvas-commands="Home,Refresh" data-canvas-nav="Assess,Portfolio,Roadmap,Architecture,Governance" data-canvas-nav-position="top" data-canvas-actions="home=#studio;assess=#assessment;portfolio=#portfolio;roadmap=#roadmap;architecture=#architecture;governance=#governance">
     <section class="studio shell" id="studio" aria-labelledby="studio-title">
       <div class="section-heading">
         <div><p class="eyebrow">Decision context</p><h2 id="studio-title">Start with readiness—not technology.</h2></div>
@@ -173,6 +176,7 @@
       </div>
       <div class="closing-callout"><div><span>What this demonstrates</span><strong>Transformation judgment—not a claim of enterprise deployment.</strong><p>The artifact shows how I would structure discovery, assessment, prioritization, architecture, governance, and benefits realization with the appropriate plant, IT, OT, engineering, quality, security, and vendor specialists.</p></div><a href="../../about/#contact">Discuss the operating problem →</a></div>
     </section>
+    </div>
   </main>
 
   <footer><div class="shell"><p>Synthetic strategy demonstration. No information is submitted, retained, or connected to an external service.</p><a href="../">View all demos</a></div></footer>

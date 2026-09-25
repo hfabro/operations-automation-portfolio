@@ -103,6 +103,12 @@
     var user = root.getAttribute("data-canvas-user") || "OP";
     var commands = root.getAttribute("data-canvas-commands") || "Home,Refresh";
     var nav = root.getAttribute("data-canvas-nav") || "";
+    var navPosition = root.getAttribute("data-canvas-nav-position") || "bottom";
+    var actionMap = {};
+    (root.getAttribute("data-canvas-actions") || "").split(";").forEach(function (pair) {
+      var splitAt = pair.indexOf("=");
+      if (splitAt > 0) actionMap[pair.slice(0, splitAt).trim()] = pair.slice(splitAt + 1).trim();
+    });
 
     var bar = document.createElement("header");
     bar.className = "canvas-app-bar";
@@ -134,10 +140,9 @@
 
     if (nav) {
       var navBar = document.createElement("nav");
-      navBar.className = "canvas-bottom-nav";
+      navBar.className = "canvas-bottom-nav" + (navPosition === "top" ? " canvas-top-nav" : "");
       navBar.setAttribute("aria-label", title + " navigation");
       var items = nav.split(",").map(function (item) { return item.trim(); }).filter(Boolean);
-      navBar.style.setProperty("--canvas-nav-count", items.length);
       items.forEach(function (item, index) {
         var action = item.toLowerCase().replace(/\s+/g, "-");
         var symbol = index === 0 ? "⌂" : index === items.length - 1 ? "≡" : "✓";
@@ -145,7 +150,8 @@
         if (index === 0) button.setAttribute("aria-current", "page");
         navBar.appendChild(button);
       });
-      root.appendChild(navBar);
+      if (navPosition === "top") commandBar.after(navBar);
+      else root.appendChild(navBar);
     }
 
     var toastRegion = document.createElement("div");
@@ -176,6 +182,16 @@
       if (!actionButton || !root.contains(actionButton)) return;
       var action = actionButton.getAttribute("data-canvas-action");
       root.dispatchEvent(new CustomEvent("canvas:navigate", { detail: { action: action } }));
+      if (actionMap[action]) {
+        var target = document.querySelector(actionMap[action]);
+        if (target) {
+          if (target.matches("button, [role='button']")) target.click();
+          else target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+          setActive(root, action);
+        }
+      } else if (action === "refresh") {
+        notify(root, "View refreshed from the current synthetic session state.", "success");
+      }
     });
     bar.querySelector("[data-canvas-help]").addEventListener("click", function () {
       notify(root, "Canvas-style interaction simulation. All records are synthetic and nothing is saved.", "info");
@@ -183,6 +199,7 @@
   }
 
   document.querySelectorAll("[data-canvas-app]").forEach(buildShell);
+  document.documentElement.classList.add("canvas-enhanced");
 
   window.CanvasSim = {
     busy: busy,

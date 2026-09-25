@@ -25,10 +25,12 @@
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/connected-operations/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.2">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.8">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js" defer></script>
+  <script src="../../scripts/canvas-sim.js?v=20260925.2" defer></script>
+  <script src="demo.js?v=20260925.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260924.5" defer></script>
   <script src="../../scripts/demo-series.js?v=20260924.6" defer></script>
 </head>
@@ -50,7 +52,7 @@
     </section>
 
     <section class="console-section" id="console" aria-labelledby="console-title">
-      <div class="shell">
+      <div class="shell" data-canvas-app data-canvas-title="Connected Operations" data-canvas-subtitle="Production intelligence workspace" data-canvas-initials="CO" data-canvas-user="OP" data-canvas-commands="Home,Refresh" data-canvas-nav="Overview,Production,Losses,Events" data-canvas-nav-position="top" data-canvas-actions="home=.control-deck;overview=.control-deck;production=.production-card;losses=.loss-card;events=.event-card">
         <div class="section-heading"><div><p class="eyebrow">Scenario 04 / connected production</p><h2 id="console-title">See the loss—not just the signal.</h2></div><p>A signal has limited operational value until it is tied to an asset, product, shift, state, reason, threshold, and accountable response.</p></div>
 
         <div class="control-deck">

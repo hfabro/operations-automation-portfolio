@@ -21,11 +21,13 @@
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/building-operations/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="demo.css?v=20260925.4">
+  <link rel="stylesheet" href="demo.css?v=20260925.4">
+  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.2">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
 <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.8">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js?v=20260924.3" defer></script>
+  <script src="../../scripts/canvas-sim.js?v=20260925.2" defer></script>
+  <script src="demo.js?v=20260925.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260924.5" defer></script>
   <script src="../../scripts/demo-series.js?v=20260924.6" defer></script>
 </head>
@@ -36,7 +38,7 @@
   <main>
     <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Spatial operations proof / synthetic data</p><h1 id="demo-title">Building Operations Command Center</h1><p class="lede">A SCADA-inspired visualization that extends a map-based reporting pattern into building-wide and machine-level awareness, triage, corrective work, and history.</p><a class="demo-jump-link" href="#command-center">Jump to interactive demo ↓</a></div><ul class="demo-guardrails" aria-label="Demo boundaries"><li>Concept / interactive prototype</li><li>Not a BMS, SCADA, PLC, or control interface</li><li>No live sensors, commands, or employer data</li><li>Human validation before operational action</li></ul></div></section>
 
-    <section class="command-section" id="command-center" aria-labelledby="command-title"><div class="shell">
+    <section class="command-section" id="command-center" aria-labelledby="command-title"><div class="shell" data-canvas-app data-canvas-title="Building Operations" data-canvas-subtitle="Facilities · Spatial response workspace" data-canvas-initials="BO" data-canvas-user="FM" data-canvas-commands="Home,Refresh" data-canvas-nav="Map,Queue,Detail,Report" data-canvas-nav-position="top" data-canvas-actions="home=.control-deck;map=.map-card;queue=.queue-card;detail=.detail-card;report=.report-card">
       <div class="section-heading"><div><p class="eyebrow">Observe → locate → triage → verify</p><h2 id="command-title">Put every report in operating context.</h2></div><p>The map is not the system of record by itself. Value comes from stable location and asset identity, structured lifecycle state, ownership, evidence, and an accountable closeout path.</p></div>
       <div class="control-deck"><div class="view-control" role="group" aria-label="Visualization level" data-view-controls></div><label>Report type<select data-type-filter><option value="all">All report types</option></select></label><label>Lifecycle<select data-status-filter><option value="open">Active work</option><option value="all">All records</option></select></label><button type="button" class="reset-button" data-reset>Reset scenario</button></div>
       <div class="kpi-grid" aria-live="polite"><article><span>Active reports</span><strong data-kpi-active>—</strong><small>Open, acknowledged, or work requested</small></article><article><span>Immediate / high</span><strong data-kpi-priority>—</strong><small>Requires prompt human review</small></article><article><span>Work requested</span><strong data-kpi-work>—</strong><small>Linked corrective workflow</small></article><article class="context-card"><span>Current view</span><strong data-kpi-view>—</strong><small>All records are synthetic</small></article></div>

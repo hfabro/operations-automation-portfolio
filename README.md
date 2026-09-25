@@ -106,7 +106,7 @@ Synthetic proof-of-concept demos are available at:
 
 Every demo includes an optional guided run. The shared `scripts/demo-guide.js` configuration defines a short business scenario, points to the real interactive controls, and advances only after the visitor performs the required action. `assets/demo-guide.css` supplies the responsive, keyboard-visible presentation. The guide does not auto-play, simulate user actions, add persistence, or change the synthetic-data boundaries of the demonstrations.
 
-Every demo also loads the shared `scripts/demo-series.js` and `assets/demo-series.css` assets. This adds consistent previous/next navigation and a return path to the complete proof lab without duplicating navigation markup across eight demos.
+Every demo also loads the shared `scripts/demo-series.js` and `assets/demo-series.css` assets. This adds consistent previous/next navigation and a return path to the complete proof lab without duplicating navigation markup across eight demos. The shared `scripts/canvas-sim.js` and `assets/canvas-sim.css` layer gives the complete suite a consistent Canvas-style application shell, role context, command surface, responsive navigation, notifications, loading states, and review dialogs without copying Microsoft branding or connecting to a Power Platform environment.
 
 The ladder inspection demo demonstrates:
 
@@ -142,7 +142,7 @@ The Building Operations Command Center generalizes a map-based reporting pattern
 
 The Smart Factory Roadmap Studio adds the transformation-management layer. Visitors can compare three synthetic plant profiles, select a strategic priority, review an eight-domain maturity assessment, see a synthetic use-case backlog reorder using an inspectable scoring model, and examine a gated foundation-to-sustainment roadmap. It also includes a platform-neutral IT/OT reference architecture and cross-functional governance model. It is an architecture and prioritization prototype—not a claim of enterprise MES, SCADA, PLC, digital-twin, OT-cybersecurity, or multi-site deployment experience.
 
-The inspection, compliance, Kanban, CMMS, and telemetry demonstrations include role-appropriate phone, tablet, and full-system experience modes. These modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, or analyst would encounter the same operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
+All eight demonstrations now use a Canvas-style app presentation. Transactional workflows use phone-oriented navigation, while analytics, maintenance, connected-operations, spatial-response, and roadmap experiences use tablet or workspace-oriented screens. Role-appropriate phone, tablet, and full-system experience modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, analyst, facilities leader, or transformation manager would encounter the operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
 
 ## Navigation model
 

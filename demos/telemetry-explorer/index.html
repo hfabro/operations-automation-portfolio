@@ -26,10 +26,12 @@
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="demo.css?v=20260924.4">
   <link rel="stylesheet" href="../../assets/device-preview.css?v=20260925.5">
+  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.2">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.8">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js?v=20260924.4" defer></script>
+  <script src="../../scripts/canvas-sim.js?v=20260925.2" defer></script>
+  <script src="demo.js?v=20260925.2" defer></script>
   <script src="../../scripts/device-preview.js?v=20260924.4" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260924.5" defer></script>
   <script src="../../scripts/demo-series.js?v=20260924.6" defer></script>
@@ -46,7 +48,7 @@
         <div class="section-heading"><div><p class="eyebrow">Scenario 03 / decision support</p><h2 id="explorer-title">Interrogate the operating pattern.</h2></div><p>The interface behaves like an analytical product, while the data and conclusions remain visibly synthetic.</p></div>
 
         <div class="device-preview-bar" data-device-preview data-target="telemetry-device" data-device-default="tablet" data-label-phone="Supervisor phone" data-note-phone="Review the current signal, interval detail, and decision question." data-label-tablet="Operations tablet" data-note-tablet="Filter equipment, interrogate the chart, and compare governed measures." data-label-system="Analytics workspace" data-note-system="Use the complete decision-support layout and fleet comparison."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Operations tablet</strong><small data-device-note>Filter equipment, interrogate the chart, and compare governed measures.</small></div><div class="device-preview-actions" role="group" aria-label="Telemetry experience size"><button type="button" data-preview-mode="phone" aria-pressed="false">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="true">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
-        <div class="telemetry-device device-preview-stage device-surface" id="telemetry-device" data-device-mode="tablet"><div class="device-status" aria-hidden="true"><span>9:41</span><span>FLEET ANALYTICS · SYNCED</span></div>
+        <div class="telemetry-device device-preview-stage device-surface" id="telemetry-device" data-device-mode="tablet" data-canvas-app data-canvas-title="Fleet Operations" data-canvas-subtitle="Analytics · Decision support" data-canvas-initials="FO" data-canvas-user="AN" data-canvas-commands="Home,Refresh" data-canvas-nav="Overview,Trend,Fleet" data-canvas-nav-position="top" data-canvas-actions="home=.control-bar;overview=.control-bar;trend=.chart-card;fleet=.fleet-comparison"><div class="device-status" aria-hidden="true"><span>9:41</span><span>FLEET ANALYTICS · SYNCED</span></div>
         <div class="control-bar">
           <div class="select-field"><label for="equipment-select">Equipment</label><select id="equipment-select" data-equipment></select></div>
           <div class="metric-control" role="group" aria-label="Chart metric"><span>Metric</span><button type="button" class="active" data-metric="soc" aria-pressed="true">State of charge</button><button type="button" data-metric="activity" aria-pressed="false">Active use</button><button type="button" data-metric="demand" aria-pressed="false">Charging demand</button></div>
