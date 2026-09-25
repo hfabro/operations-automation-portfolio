@@ -18,9 +18,11 @@
   <meta name="twitter:title" content="Interactive Compliance Workflow Demo | David H. Fabro">
   <meta name="twitter:description" content="A safe proof of concept for a governed recurring compliance workflow.">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="demo.css">
+  <link rel="stylesheet" href="demo.css?v=20260924.4">
+  <link rel="stylesheet" href="../../assets/device-preview.css?v=20260924.4">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js" defer></script>
+  <script src="demo.js?v=20260924.4" defer></script>
+  <script src="../../scripts/device-preview.js?v=20260924.4" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#demo">Skip to interactive demo</a>
@@ -32,8 +34,9 @@
     <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
       <div class="shell">
         <div class="workspace-heading"><div><p class="eyebrow">Scenario 02</p><h2 id="workspace-title">Operate one recurring requirement.</h2></div><p>The demonstration uses a fictional annual fire-system inspection and two synthetic historical occurrences.</p></div>
-        <div class="workspace-grid">
-          <section class="app-frame" aria-labelledby="app-title">
+        <div class="device-preview-bar" data-device-preview data-target="compliance-device" data-device-default="tablet" data-label-phone="Owner phone" data-note-phone="Complete or escalate a single obligation from the field." data-label-tablet="Compliance tablet" data-note-tablet="Generate, execute, validate, and retain the occurrence context." data-label-system="Application + governance" data-note-system="See the operating interface, queue, rules, and event history together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Compliance tablet</strong><small data-device-note>Generate, execute, validate, and retain the occurrence context.</small></div><div class="device-preview-actions" role="group" aria-label="Compliance experience size"><button type="button" data-preview-mode="phone" aria-pressed="false">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="true">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
+        <div class="workspace-grid device-preview-stage" id="compliance-device" data-device-mode="tablet">
+          <div class="device-surface"><div class="device-status" aria-hidden="true"><span>9:41</span><span>COMPLIANCE · ●●●</span></div><section class="app-frame" aria-labelledby="app-title">
             <div class="app-toolbar"><span>Compliance operations workspace</span><span class="demo-label">DEMO</span></div>
             <div class="app-content">
               <div class="step-indicator" aria-label="Workflow progress"><span class="active" data-step-indicator="master">1. Requirement</span><span data-step-indicator="occurrence">2. Occurrence</span><span data-step-indicator="result">3. Result</span></div>
@@ -64,7 +67,7 @@
                 <div class="form-actions"><button class="secondary-action" type="button" data-edit>← Review occurrence</button><button class="primary-action" type="button" data-reset>Run another scenario</button></div>
               </section>
             </div>
-          </section>
+          </section></div>
 
           <aside class="system-panel" aria-labelledby="system-title">
             <div class="panel-heading"><p class="eyebrow">Live governance state</p><h2 id="system-title">Master, occurrence, evidence</h2></div>

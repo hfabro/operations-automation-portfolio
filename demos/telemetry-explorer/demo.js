@@ -3,12 +3,13 @@
   var source = window.TELEMETRY_DEMO_DATA;
   if (!source) return;
 
-  var state = { equipmentId: source.equipment[0].id, metric: "soc", showPeak: true };
+  var state = { equipmentId: source.equipment[0].id, metric: "soc", showPeak: true, activeIndex: 12 };
   var select = document.querySelector("[data-equipment]");
   var canvas = document.querySelector("[data-chart]");
   var context = canvas.getContext("2d");
   var peakToggle = document.querySelector("[data-peak]");
   var resizeFrame = null;
+  var currentSeries = [];
 
   function escapeHtml(value) { return String(value).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -52,6 +53,26 @@
     });
     select.addEventListener("change", function () { state.equipmentId = select.value; render(); });
     peakToggle.addEventListener("change", function () { state.showPeak = peakToggle.checked; render(); });
+    canvas.addEventListener("pointermove", function (event) { selectInterval(event.clientX); });
+    canvas.addEventListener("pointerdown", function (event) { selectInterval(event.clientX); });
+    canvas.addEventListener("keydown", function (event) {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      state.activeIndex = Math.max(0, Math.min(source.intervals.length - 1, state.activeIndex + (event.key === "ArrowRight" ? 1 : -1)));
+      drawChart(currentSeries);
+      renderInspector(currentSeries);
+    });
+  }
+
+  function selectInterval(clientX) {
+    var rect = canvas.getBoundingClientRect();
+    var usable = Math.max(1, rect.width - 66);
+    var relative = Math.max(0, Math.min(usable, clientX - rect.left - 48));
+    var next = Math.max(0, Math.min(source.intervals.length - 1, Math.floor(relative / usable * source.intervals.length)));
+    if (next === state.activeIndex) return;
+    state.activeIndex = next;
+    drawChart(currentSeries);
+    renderInspector(currentSeries);
   }
 
   function drawChart(series) {
@@ -121,6 +142,23 @@
         context.fillRect(margin.left + index * step + 2, margin.top + plotHeight - barHeight, Math.max(3, step - 4), barHeight);
       });
     }
+    var activePoint = series[state.activeIndex];
+    if (activePoint) {
+      var activeX = margin.left + state.activeIndex * step + step / 2;
+      var activeY = margin.top + plotHeight - (activePoint[config.key] / config.max) * plotHeight;
+      context.strokeStyle = "#d75e38"; context.lineWidth = 1.5; context.setLineDash([4, 4]);
+      context.beginPath(); context.moveTo(activeX, margin.top); context.lineTo(activeX, margin.top + plotHeight); context.stroke(); context.setLineDash([]);
+      context.fillStyle = "#fff"; context.strokeStyle = "#d75e38"; context.lineWidth = 3; context.beginPath(); context.arc(activeX, activeY, 6, 0, Math.PI * 2); context.fill(); context.stroke();
+    }
+  }
+
+  function renderInspector(series) {
+    var point = series[state.activeIndex];
+    var config = metricConfig();
+    if (!point) return;
+    document.querySelector("[data-inspector-time]").textContent = point.time + (point.peak ? " · modeled peak" : " · interval");
+    document.querySelector("[data-inspector-value]").textContent = point[config.key].toFixed(config.key === "activity" ? 0 : 1) + (config.key === "demand" ? " kW" : "%");
+    document.querySelector("[data-inspector-state]").textContent = point.state + " · SOC " + point.soc.toFixed(1) + "% · demand " + point.demand.toFixed(1) + " kW";
   }
 
   function renderKpis(profile, series) {
@@ -172,6 +210,7 @@
   function render() {
     var profile = currentProfile();
     var series = buildSeries(profile);
+    currentSeries = series;
     var config = metricConfig();
     document.querySelector("[data-chart-title]").textContent = profile.label + " · " + config.label;
     document.querySelector("[data-legend-metric]").textContent = config.label;
@@ -184,6 +223,7 @@
     renderTable(profile, series);
     renderComparison();
     drawChart(series);
+    renderInspector(series);
   }
 
   setupControls();

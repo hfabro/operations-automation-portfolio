@@ -120,6 +120,8 @@ The Building Operations Command Center generalizes a map-based reporting pattern
 
 The Smart Factory Roadmap Studio adds the transformation-management layer. Visitors can compare three synthetic plant profiles, select a strategic priority, review an eight-domain maturity assessment, see a synthetic use-case backlog reorder using an inspectable scoring model, and examine a gated foundation-to-sustainment roadmap. It also includes a platform-neutral IT/OT reference architecture and cross-functional governance model. It is an architecture and prioritization prototype—not a claim of enterprise MES, SCADA, PLC, digital-twin, OT-cybersecurity, or multi-site deployment experience.
 
+The inspection, compliance, Kanban, CMMS, and telemetry demonstrations include role-appropriate phone, tablet, and full-system experience modes. These modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, or analyst would encounter the same operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
+
 ## Navigation model
 
 The homepage provides three complementary navigation surfaces:
