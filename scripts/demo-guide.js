@@ -14,7 +14,7 @@
       steps: [
         { selector: "[data-scan]", event: "click", title: "Resolve the asset", text: "Use the simulated QR scan to load the governed identity for LAD-017." },
         { selector: '[data-scenario="exception"]', event: "click", title: "Load the exception", text: "Populate every required answer, including a failed hardware check, isolation decision, note, and synthetic evidence." },
-        { selector: "[data-inspection-form]", event: "submit", title: "Validate and submit", text: "Submit the occurrence and inspect how deterministic rules route the failed condition." }
+        { selector: "[data-inspection-form]", event: "demo:state", signal: "inspection-submitted", title: "Validate and submit", text: "Submit the occurrence and inspect how deterministic rules route the failed condition." }
       ]
     },
     "compliance-workflow": {
@@ -26,7 +26,7 @@
       steps: [
         { selector: "[data-generate]", event: "click", title: "Generate the occurrence", text: "Create the due instance without changing the requirement master." },
         { selector: '[data-scenario="exception"]', event: "click", title: "Load an exception path", text: "Populate the owner, evidence, status, and notes for an obligation that needs escalation." },
-        { selector: "[data-occurrence-form]", event: "submit", title: "Validate the lifecycle update", text: "Submit the record and inspect the owned follow-up and history response." }
+        { selector: "[data-occurrence-form]", event: "demo:state", signal: "compliance-submitted", title: "Validate the lifecycle update", text: "Submit the record and inspect the owned follow-up and history response." }
       ]
     },
     "digital-kanban": {
@@ -38,8 +38,8 @@
       steps: [
         { selector: "[data-phone-scan]", event: "click", title: "Scan the stock point", text: "Resolve the synthetic QR route into the correct stock point and eligible items." },
         { selector: '[data-item][data-blocked="false"]', event: "click", title: "Select an eligible item", text: "Choose one physical shortage. Items with an open request remain blocked." },
-        { selector: "[data-submit]", event: "click", title: "Send the replenishment signal", text: "Create one controlled request and hand it to the restocker view." },
-        { selector: "[data-open-requests] [data-complete]", event: "click", title: "Confirm the refill", text: "Close the owned request, retain the event, and release the item for a future physical signal." }
+        { selector: "[data-submit]", event: "demo:state", signal: "kanban-request-created", title: "Send the replenishment signal", text: "Create one controlled request and hand it to the restocker view." },
+        { selector: "[data-open-requests] [data-complete]", event: "demo:state", signal: "kanban-refill-completed", title: "Confirm the refill", text: "Close the owned request, retain the event, and release the item for a future physical signal." }
       ]
     },
     "cmms-lifecycle": {
@@ -51,8 +51,8 @@
       outcome: "Template snapshot, execution evidence, exception review, and true history",
       steps: [
         { selector: '[data-scenario="exception"]', event: "click", title: "Load the exception packet", text: "Generate a PM occurrence with controlled task responses, evidence, a condition reading, and technician sign-off." },
-        { selector: "[data-submit]", event: "click", title: "Validate and route", text: "Lock the packet and route the deterministic exception to the review queue." },
-        { selector: '[data-disposition="Corrective work requested"]', event: "click", title: "Create corrective action", text: "Apply the human disposition and preserve it in the synthetic audit history." }
+        { selector: "[data-submit]", event: "demo:state", signal: "pm-submitted", title: "Validate and route", text: "Lock the packet and route the deterministic exception to the review queue." },
+        { selector: '[data-disposition="Corrective work requested"]', event: "demo:state", signal: "pm-disposition-recorded", title: "Create corrective action", text: "Apply the human disposition and preserve it in the synthetic audit history." }
       ]
     },
     "telemetry-explorer": {
@@ -88,7 +88,7 @@
       steps: [
         { selector: '[data-view="machine"]', event: "click", title: "Open the machine view", text: "Move from the synthetic building schematic to asset-level operating context." },
         { selector: '[data-select^="MCH-"]', event: "click", title: "Select a machine condition", text: "Choose a marker or queue item to connect location, asset, severity, status, and ownership." },
-        { selector: '[data-action="work"]', event: "click", title: "Create the work request", text: "Advance the selected condition into an explicit, human-owned corrective workflow." }
+        { selector: '[data-action="work"]', event: "demo:state", signal: "building-work-requested", title: "Create the work request", text: "Advance the selected condition into an explicit, human-owned corrective workflow." }
       ]
     },
     "smart-factory-roadmap": {
@@ -226,7 +226,9 @@
   function matchesStep(event, step) {
     var allowedEvents = Array.isArray(step.event) ? step.event : [step.event];
     if (allowedEvents.indexOf(event.type) === -1) return false;
+    if (step.signal && (!event.detail || event.detail.signal !== step.signal)) return false;
     if (event.type === "keydown" && step.keys && step.keys.indexOf(event.key) === -1) return false;
+    if (step.signal) return true;
     var target = event.target;
     if (!target || typeof target.closest !== "function") return false;
     return Boolean(target.closest(step.selector));
@@ -238,7 +240,7 @@
   root.querySelector("[data-guide-close]").addEventListener("click", function () { root.hidden = true; clearTarget(); });
   root.querySelector("[data-guide-restart]").addEventListener("click", function () { window.location.reload(); });
 
-  ["click", "change", "submit", "pointerdown", "keydown"].forEach(function (eventName) {
+  ["click", "change", "submit", "pointerdown", "keydown", "demo:state"].forEach(function (eventName) {
     document.addEventListener(eventName, function (event) {
       if (!state.active || state.complete) return;
       if (matchesStep(event, guide.steps[state.index])) window.setTimeout(advance, 110);

@@ -12,6 +12,7 @@
     var buttons = Array.prototype.slice.call(control.querySelectorAll("[data-preview-mode]"));
     var label = control.querySelector("[data-device-label]");
     var note = control.querySelector("[data-device-note]");
+    var settleTimer = null;
 
     function copyFor(mode) {
       return [
@@ -31,6 +32,10 @@
       var copy = copyFor(mode);
       if (label) label.textContent = copy[0];
       if (note) note.textContent = copy[1];
+      window.clearTimeout(settleTimer);
+      settleTimer = window.setTimeout(function () {
+        target.dispatchEvent(new CustomEvent("devicepreviewchange", { detail: { mode: mode } }));
+      }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 280);
     }
 
     buttons.forEach(function (button) {

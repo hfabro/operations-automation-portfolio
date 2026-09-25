@@ -113,6 +113,40 @@ for (const requiredFile of [
   if (!existsSync(target)) report(target, "required launch artifact is missing");
 }
 
+const expectedDemoOrder = [
+  "ladder-inspection", "compliance-workflow", "digital-kanban", "cmms-lifecycle",
+  "telemetry-explorer", "connected-operations", "building-operations", "smart-factory-roadmap"
+];
+const demoSeriesFile = join(root, "scripts/demo-series.js");
+const demoSeriesText = readFileSync(demoSeriesFile, "utf8");
+const actualDemoOrder = Array.from(demoSeriesText.matchAll(/slug:\s*"([^"]+)"/g), (match) => match[1]);
+if (actualDemoOrder.join("|") !== expectedDemoOrder.join("|")) {
+  report(demoSeriesFile, `demo sequence does not match the public library order (${actualDemoOrder.join(", ")})`);
+}
+
+const guideFile = join(root, "scripts/demo-guide.js");
+const guideText = readFileSync(guideFile, "utf8");
+for (const signal of [
+  "inspection-submitted", "compliance-submitted", "kanban-request-created",
+  "kanban-refill-completed", "pm-submitted", "pm-disposition-recorded", "building-work-requested"
+]) {
+  if (!guideText.includes(`signal: "${signal}"`)) report(guideFile, `missing confirmed-state guide signal "${signal}"`);
+}
+
+const buildingDemoFile = join(root, "demos/building-operations/demo.js");
+const buildingDemoText = readFileSync(buildingDemoFile, "utf8");
+if (!buildingDemoText.includes("allowedActions")) report(buildingDemoFile, "missing controlled lifecycle transition rules");
+if (!readFileSync(join(root, "demos/building-operations/index.html"), "utf8").includes("data-resolution-note")) {
+  report(join(root, "demos/building-operations/index.html"), "missing verified-resolution note control");
+}
+
+const devicePreviewFile = join(root, "scripts/device-preview.js");
+const telemetryDemoFile = join(root, "demos/telemetry-explorer/demo.js");
+if (!readFileSync(devicePreviewFile, "utf8").includes("devicepreviewchange")) report(devicePreviewFile, "missing settled device-preview event");
+const telemetryDemoText = readFileSync(telemetryDemoFile, "utf8");
+if (!telemetryDemoText.includes("devicepreviewchange")) report(telemetryDemoFile, "missing chart redraw listener for device changes");
+if (!telemetryDemoText.includes("ResizeObserver")) report(telemetryDemoFile, "missing dimension-based chart redraw guard");
+
 const sourceFiles = [".html", ".css", ".js", ".md", ".txt", ".xml", ".yml"].flatMap((extension) => walk(root, extension));
 const leakagePatterns = [
   [/\bcodex-remote-attachments\b/i, "local attachment path"],

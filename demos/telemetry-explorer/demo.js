@@ -233,4 +233,15 @@
     if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
     resizeFrame = window.requestAnimationFrame(render);
   });
+  document.querySelector("#telemetry-device").addEventListener("devicepreviewchange", function () {
+    if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+    render();
+  });
+  if ("ResizeObserver" in window) {
+    var chartResizeObserver = new ResizeObserver(function () {
+      if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+      render();
+    });
+    chartResizeObserver.observe(canvas.parentElement || canvas);
+  }
 })();

@@ -17,6 +17,7 @@
 .control-deck select,.view-control button,.reset-button,.action-row button,.submit-report,.report-fields select,.report-fields input{min-height:44px}
 .report-marker{width:44px;height:44px;border-width:8px}
 .report-marker:hover,.report-marker:focus-visible{transform:translate(-50%,-50%) scale(1.12)}
+.resolution-field{display:grid;gap:6px;margin:14px 0;color:var(--muted);font-size:.56rem;font-weight:850;letter-spacing:.05em;text-transform:uppercase}.resolution-field[hidden]{display:none}.resolution-field textarea{width:100%;resize:vertical;padding:10px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:.7rem;font-weight:650;letter-spacing:0;line-height:1.45;text-transform:none}.resolution-field small{font-size:.55rem;font-weight:650;letter-spacing:0;text-transform:none}.action-row button:disabled{border-color:var(--line);background:#edf0ee;color:#87918d;cursor:not-allowed}.action-row button:disabled:hover{background:#edf0ee;color:#87918d}
 
 /* Synthetic CAD drawing surface */
 .map-card{min-width:0}.facility-map{width:100%;max-width:100%;min-height:0;overflow-x:auto;overflow-y:hidden;border-color:#315862;background:#071a22;background-image:linear-gradient(rgba(111,190,196,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(111,190,196,.055) 1px,transparent 1px);background-size:22px 22px;scrollbar-color:#5caab0 #0a222b;scrollbar-width:thin}

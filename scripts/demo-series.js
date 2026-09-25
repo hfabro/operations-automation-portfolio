@@ -4,9 +4,9 @@
   var demos = [
     { slug: "ladder-inspection", short: "Inspection", title: "Digital Ladder Inspection", anchor: "ladder-inspection" },
     { slug: "compliance-workflow", short: "Compliance", title: "Compliance Workflow", anchor: "compliance" },
-    { slug: "telemetry-explorer", short: "Telemetry", title: "Telemetry & Energy Explorer", anchor: "telemetry" },
-    { slug: "cmms-lifecycle", short: "CMMS", title: "CMMS Lifecycle Control", anchor: "cmms" },
     { slug: "digital-kanban", short: "Kanban", title: "QR Digital Kanban", anchor: "kanban" },
+    { slug: "cmms-lifecycle", short: "CMMS", title: "CMMS Lifecycle Control", anchor: "cmms" },
+    { slug: "telemetry-explorer", short: "Telemetry", title: "Telemetry & Energy Explorer", anchor: "telemetry" },
     { slug: "connected-operations", short: "Connected Ops", title: "Connected Operations", anchor: "connected-operations" },
     { slug: "building-operations", short: "Building Ops", title: "Building Operations", anchor: "building-operations" },
     { slug: "smart-factory-roadmap", short: "Roadmap", title: "Smart Factory Roadmap", anchor: "smart-factory-program" }

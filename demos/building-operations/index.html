@@ -21,15 +21,15 @@
   <meta name="twitter:card" content="summary">
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/building-operations/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="demo.css?v=20260925.4">
-  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.2">
+  <link rel="stylesheet" href="demo.css?v=20260925.10">
+  <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
 <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.9">
   <script src="demo-data.js" defer></script>
-  <script src="../../scripts/canvas-sim.js?v=20260925.2" defer></script>
-  <script src="demo.js?v=20260925.2" defer></script>
-  <script src="../../scripts/demo-guide.js?v=20260924.5" defer></script>
-  <script src="../../scripts/demo-series.js?v=20260924.6" defer></script>
+  <script src="../../scripts/canvas-sim.js?v=20260925.10" defer></script>
+  <script src="demo.js?v=20260925.10" defer></script>
+  <script src="../../scripts/demo-guide.js?v=20260925.10" defer></script>
+  <script src="../../scripts/demo-series.js?v=20260925.10" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#command-center">Skip to command center</a>
@@ -49,7 +49,7 @@
       </div>
 
       <div class="response-grid">
-        <section class="detail-card" aria-labelledby="detail-title"><div class="detail-top"><div><span data-detail-id>SELECTED REPORT</span><h2 id="detail-title" data-detail-summary>—</h2></div><b data-detail-severity>—</b></div><dl><div><dt>Location / asset</dt><dd data-detail-location>—</dd></div><div><dt>Type</dt><dd data-detail-type>—</dd></div><div><dt>Status</dt><dd data-detail-status>—</dd></div><div><dt>Owner</dt><dd data-detail-owner>—</dd></div></dl><p data-detail-text></p><div class="action-row"><button type="button" data-action="acknowledge">Acknowledge</button><button type="button" data-action="work">Create work request</button><button type="button" data-action="resolve">Verify &amp; resolve</button></div><p class="action-message" data-action-message aria-live="polite"></p></section>
+        <section class="detail-card" aria-labelledby="detail-title"><div class="detail-top"><div><span data-detail-id>SELECTED REPORT</span><h2 id="detail-title" data-detail-summary>—</h2></div><b data-detail-severity>—</b></div><dl><div><dt>Location / asset</dt><dd data-detail-location>—</dd></div><div><dt>Type</dt><dd data-detail-type>—</dd></div><div><dt>Status</dt><dd data-detail-status>—</dd></div><div><dt>Owner</dt><dd data-detail-owner>—</dd></div></dl><p data-detail-text></p><label class="resolution-field" data-resolution-field hidden>Verification note<textarea rows="3" maxlength="180" placeholder="Describe what was verified before closure" data-resolution-note></textarea><small>Required before a work-requested condition can be resolved.</small></label><div class="action-row"><button type="button" data-action="acknowledge">Acknowledge</button><button type="button" data-action="work">Create work request</button><button type="button" data-action="resolve">Verify &amp; resolve</button></div><p class="action-message" data-action-message aria-live="polite"></p></section>
         <section class="report-card" aria-labelledby="report-title"><p class="eyebrow">Synthetic reporter</p><h2 id="report-title">Add a modeled observation.</h2><div class="report-fields"><label>Type<select data-new-type></select></label><label>Zone<select data-new-zone></select></label><label>Priority<select data-new-severity><option value="low">Low</option><option value="medium" selected>Medium</option><option value="high">High</option><option value="critical">Immediate hazard</option></select></label><label class="wide">Description<input type="text" maxlength="90" value="Unusual condition requires review" data-new-summary></label></div><button type="button" class="submit-report" data-submit-report>Create synthetic report</button><small>No information leaves this browser session. Refreshing clears the scenario.</small></section>
       </div>
       <noscript><p class="no-script">JavaScript is required to operate this synthetic command center. The portfolio case study remains available without it.</p></noscript>

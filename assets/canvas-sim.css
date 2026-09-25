@@ -289,7 +289,8 @@
   .request-panel[data-canvas-app] > .canvas-command-bar { margin-right: -17px; margin-left: -17px; }
   .request-panel[data-canvas-app] > .canvas-app-bar { margin-top: -17px; }
   .request-panel[data-canvas-app] > .canvas-bottom-nav { margin: 16px -17px -17px; }
-  .canvas-bottom-nav.canvas-top-nav { top: 92px; overflow-x: auto; grid-auto-columns: minmax(108px, 1fr); }
+  .canvas-bottom-nav.canvas-top-nav { top: 92px; overflow-x: auto; grid-auto-columns: minmax(108px, 1fr); scroll-snap-type: x proximity; overscroll-behavior-inline: contain; }
+  .canvas-bottom-nav.canvas-top-nav button { scroll-snap-align: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {

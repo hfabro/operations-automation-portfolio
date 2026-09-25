@@ -163,6 +163,7 @@
     ]);
     updateLiveState(isException ? "Exception open" : "Complete");
     setStep("result", true);
+    document.dispatchEvent(new CustomEvent("demo:state", { detail: { signal: "compliance-submitted" } }));
   }
 
   function resetDemo() {

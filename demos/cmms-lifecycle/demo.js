@@ -197,6 +197,7 @@
     message.innerHTML = issues.length ? "<strong>Validated.</strong> The packet is locked and routed to supervisor review." : "<strong>Validated.</strong> The packet is locked and recorded as complete.";
     renderAll();
     setTab(issues.length ? "review" : "execute");
+    document.dispatchEvent(new CustomEvent("demo:state", { detail: { signal: "pm-submitted" } }));
   }
 
   function loadScenario(type) {
@@ -237,6 +238,7 @@
     state.packet.status = value;
     addHistory(`${state.packet.id}: ${value}`, value.includes("rework") ? "warn" : "good");
     renderAll();
+    document.dispatchEvent(new CustomEvent("demo:state", { detail: { signal: "pm-disposition-recorded" } }));
   }
 
   function renderHistory() {

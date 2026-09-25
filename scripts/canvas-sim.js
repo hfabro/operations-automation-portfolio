@@ -89,10 +89,18 @@
   function setActive(root, action) {
     root = shellFor(root);
     if (!root) return;
+    var activeButton = null;
     root.querySelectorAll(".canvas-bottom-nav [data-canvas-action]").forEach(function (button) {
-      if (button.getAttribute("data-canvas-action") === action) button.setAttribute("aria-current", "page");
+      if (button.getAttribute("data-canvas-action") === action) { button.setAttribute("aria-current", "page"); activeButton = button; }
       else button.removeAttribute("aria-current");
     });
+    var nav = activeButton && activeButton.parentElement;
+    if (nav && nav.scrollWidth > nav.clientWidth) {
+      nav.scrollTo({
+        left: Math.max(0, activeButton.offsetLeft - (nav.clientWidth - activeButton.offsetWidth) / 2),
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
+      });
+    }
   }
 
   function buildShell(root) {

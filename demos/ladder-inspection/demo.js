@@ -268,6 +268,7 @@
     document.querySelector("[data-state-history]").textContent = "Occurrence preserved";
     updateRecordPreview(status);
     setStep("result", true);
+    document.dispatchEvent(new CustomEvent("demo:state", { detail: { signal: "inspection-submitted" } }));
   }
 
   function resetDemo() {
