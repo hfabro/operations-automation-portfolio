@@ -17,3 +17,40 @@
 .control-deck select,.view-control button,.reset-button,.action-row button,.submit-report,.report-fields select,.report-fields input{min-height:44px}
 .report-marker{width:44px;height:44px;border-width:8px}
 .report-marker:hover,.report-marker:focus-visible{transform:translate(-50%,-50%) scale(1.12)}
+
+/* Synthetic CAD drawing surface */
+.map-card{min-width:0}.facility-map{width:100%;max-width:100%;min-height:0;overflow-x:auto;overflow-y:hidden;border-color:#315862;background:#071a22;background-image:linear-gradient(rgba(111,190,196,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(111,190,196,.055) 1px,transparent 1px);background-size:22px 22px;scrollbar-color:#5caab0 #0a222b;scrollbar-width:thin}
+.cad-canvas{position:relative;width:100%;min-width:720px;aspect-ratio:1000/560;background:radial-gradient(circle at 52% 48%,rgba(52,117,118,.11),transparent 56%)}
+.zone-grid{position:absolute;inset:0;display:block}
+.cad-plan{display:block;width:100%;height:100%;font-family:Consolas,"Courier New",monospace}
+.cad-plan path,.cad-plan rect,.cad-plan circle{vector-effect:non-scaling-stroke}
+.cad-grid-reference text{fill:#6d9fa4;font-size:13px;font-weight:800;letter-spacing:.12em}
+.cad-dimensions path{fill:none;stroke:#416f75;stroke-width:1}
+.cad-dimensions text{fill:#5f8e93;font-size:11px;letter-spacing:.08em}
+.cad-zone-fill path{fill:rgba(56,127,123,.055);stroke:none}
+.cad-zone-fill path:nth-child(2){fill:rgba(56,127,123,.09)}
+.cad-zone-fill path:nth-child(3){fill:rgba(214,90,49,.05)}
+.cad-walls path{fill:none;stroke:#c3e4df;stroke-width:8;stroke-linejoin:miter}
+.cad-columns circle{fill:#071a22;stroke:#88c8c5;stroke-width:2}
+.cad-docks path,.cad-doors path,.cad-access path{fill:none;stroke:#87c7c4;stroke-width:2}
+.cad-docks text,.cad-access text{fill:#78a9ad;font-size:10px;letter-spacing:.08em}
+.cad-equipment rect,.cad-equipment path,.cad-equipment circle,.cad-utilities rect,.cad-utilities path,.cad-utilities circle,.cad-racking path,.cad-machine rect,.cad-machine path,.cad-machine circle,.cad-panels rect,.cad-panels path,.cad-panels circle{fill:rgba(69,142,135,.055);stroke:#63aaa8;stroke-width:1.6}
+.cad-racking path{fill:rgba(83,144,138,.035)}
+.cad-guarding path{fill:none;stroke:#9bd3cf;stroke-width:2;stroke-dasharray:10 6}
+.cad-machine rect{fill:rgba(74,148,139,.085);stroke:#94d2cd;stroke-width:2}
+.cad-sensors circle{fill:#ef7b51;stroke:#fff;stroke-width:2}
+.cad-sensors path{fill:none;stroke:#ef9a79;stroke-width:1.5}
+.cad-labels text{fill:#9bc9c8;font-size:12px;font-weight:800;letter-spacing:.06em}
+.cad-labels text:nth-child(even){fill:#638f93;font-size:9px;font-weight:600}
+.cad-flow path{fill:none;stroke:#d9956f;stroke-width:1.5;stroke-dasharray:7 5}
+.cad-north path{fill:none;stroke:#ef9977;stroke-width:2}
+.cad-north text{fill:#ef9977;font-size:15px;font-weight:900}
+.marker-layer{position:absolute;z-index:5;inset:0}
+.report-marker{z-index:2;box-shadow:0 0 0 1px rgba(3,15,19,.75),0 4px 14px rgba(0,0,0,.38)}
+.report-marker[aria-current="true"]{box-shadow:0 0 0 2px #f2f7f4,0 0 0 7px rgba(239,123,81,.38),0 5px 18px rgba(0,0,0,.5)}
+.cad-drawing-stamp{position:absolute;z-index:3;right:16px;bottom:12px;display:grid;min-width:205px;padding:8px 10px;border:1px solid #4c7b80;background:rgba(5,22,29,.9);color:#8cb8ba;font-family:Consolas,"Courier New",monospace;line-height:1.25}
+.cad-drawing-stamp span{color:#ef9977;font-size:.52rem;font-weight:900;letter-spacing:.1em}
+.cad-drawing-stamp strong{font-size:.58rem;letter-spacing:.07em}
+.cad-drawing-stamp small{color:#5e8a8e;font-size:.46rem;letter-spacing:.05em}
+.map-note::before{content:"CAD-style synthetic schematic · ";color:var(--accent);font-weight:850}
+@media(max-width:640px){.cad-canvas{min-width:700px}.facility-map{min-height:0}.map-note{line-height:1.55}}

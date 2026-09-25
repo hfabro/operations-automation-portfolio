@@ -808,3 +808,12 @@ h1 span { display: block; color: var(--green); }
   .mobile-quick-nav, .demo-toolbar { display: none!important; }
   body { padding-bottom: 0; }
 }
+
+/* CAD-style spatial-operations preview */
+.building-visual > .cad-thumb { position: relative; display: block; height: 94px; overflow: hidden; border: 1px solid rgba(137,211,207,.35); background: #071a22; background-image: linear-gradient(rgba(112,190,195,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(112,190,195,.06) 1px,transparent 1px); background-size: 12px 12px; }
+.cad-thumb svg { display: block; width: 100%; height: 100%; font-family: Consolas,"Courier New",monospace; }
+.cad-thumb-wall { fill: none; stroke: #c4e5df; stroke-width: 3; }
+.cad-thumb-detail { fill: rgba(70,145,137,.08); stroke: #69aaa7; stroke-width: 1; }
+.cad-thumb-flow { fill: none; stroke: #e08b67; stroke-width: 1; stroke-dasharray: 4 3; }
+.cad-thumb text { fill: #699b9e; font-size: 6px; font-weight: 800; letter-spacing: .04em; }
+.cad-thumb .pin { z-index: 2; width: 12px; height: 12px; }

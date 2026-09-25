@@ -15,9 +15,9 @@
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="demo.css?v=20260924.2">
+  <link rel="stylesheet" href="demo.css?v=20260924.3">
   <script src="demo-data.js" defer></script>
-  <script src="demo.js" defer></script>
+  <script src="demo.js?v=20260924.3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#command-center">Skip to command center</a>
@@ -32,7 +32,7 @@
       <div class="kpi-grid" aria-live="polite"><article><span>Active reports</span><strong data-kpi-active>—</strong><small>Open, acknowledged, or work requested</small></article><article><span>Immediate / high</span><strong data-kpi-priority>—</strong><small>Requires prompt human review</small></article><article><span>Work requested</span><strong data-kpi-work>—</strong><small>Linked corrective workflow</small></article><article class="context-card"><span>Current view</span><strong data-kpi-view>—</strong><small>All records are synthetic</small></article></div>
 
       <div class="operations-grid">
-        <section class="map-card" aria-labelledby="map-title"><div class="card-heading"><div><span data-map-kicker>SYNTHETIC OPERATING VIEW</span><h3 id="map-title" data-map-title>—</h3><p data-map-subtitle></p></div><div class="map-legend"><span><i class="critical"></i>Immediate</span><span><i class="high"></i>High</span><span><i class="medium"></i>Medium</span><span><i class="low"></i>Low</span></div></div><div class="facility-map" data-map><div class="zone-grid" data-zones aria-hidden="true"></div><div class="marker-layer" data-markers></div><div class="map-axis x">01 · 02 · 03 · 04</div><div class="map-axis y">A<br>B<br>C<br>D</div></div><p class="map-note">Select a marker or queue item to review its spatial, asset, and lifecycle context.</p></section>
+        <section class="map-card" aria-labelledby="map-title"><div class="card-heading"><div><span data-map-kicker>SYNTHETIC CAD OPERATING VIEW</span><h3 id="map-title" data-map-title>—</h3><p data-map-subtitle></p></div><div class="map-legend"><span><i class="critical"></i>Immediate</span><span><i class="high"></i>High</span><span><i class="medium"></i>Medium</span><span><i class="low"></i>Low</span></div></div><div class="facility-map" data-map><div class="cad-canvas"><div class="zone-grid" data-zones aria-hidden="true"></div><div class="marker-layer" data-markers></div><div class="cad-drawing-stamp"><span>OPS-01</span><strong>SYNTHETIC SCHEMATIC</strong><small>NOT TO SCALE · REV A</small></div></div></div><p class="map-note">Select a marker or queue item to review its spatial, asset, and lifecycle context. On smaller screens, pan the drawing horizontally.</p></section>
         <aside class="queue-card" aria-labelledby="queue-title"><div class="queue-heading"><div><p class="eyebrow">Owned response</p><h2 id="queue-title">Active report queue</h2></div><span data-queue-count>—</span></div><div class="queue-list" data-queue></div></aside>
       </div>
 
