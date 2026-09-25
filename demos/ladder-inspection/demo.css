@@ -80,7 +80,7 @@ h1 { max-width: 780px; margin: 0; font-size: clamp(3.2rem, 7vw, 6.7rem); line-he
 .progress-track span { display: block; width: 0; height: 100%; background: var(--accent); transition: width .2s ease; }
 .scenario-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 20px; padding: 12px; border: 1px dashed var(--line); }
 .scenario-controls span { margin-right: auto; color: var(--muted); font-size: .65rem; font-weight: 750; }
-.scenario-controls button, .evidence-row > button { min-height: 34px; padding: 0 10px; border: 1px solid var(--line); background: #fff; color: var(--green); font-size: .65rem; font-weight: 850; cursor: pointer; }
+.scenario-controls button, .evidence-row > button { min-height: 44px; padding: 0 12px; border: 1px solid var(--line); background: #fff; color: var(--green); font-size: .68rem; font-weight: 850; cursor: pointer; }
 .scenario-controls button:hover, .scenario-controls button:focus-visible, .evidence-row > button:hover, .evidence-row > button:focus-visible { border-color: var(--accent); outline: 2px solid color-mix(in srgb, var(--accent) 25%, transparent); }
 .error-summary { margin: 0 0 18px; padding: 16px; border: 1px solid #c34e3c; background: #fff0ec; color: #7c2d23; }
 .error-summary strong { font-size: .78rem; }
@@ -95,7 +95,7 @@ h1 { max-width: 780px; margin: 0; font-size: clamp(3.2rem, 7vw, 6.7rem); line-he
 .response-options { grid-column: 2; grid-row: 1 / span 3; display: flex; align-items: center; gap: 6px; }
 .response-option { cursor: pointer; }
 .response-option input { position: absolute; opacity: 0; pointer-events: none; }
-.response-option span { display: grid; place-items: center; min-width: 52px; min-height: 34px; padding: 0 9px; border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: .62rem; font-weight: 850; }
+.response-option span { display: grid; place-items: center; min-width: 52px; min-height: 44px; padding: 0 9px; border: 1px solid var(--line); background: #fff; color: var(--muted); font-size: .66rem; font-weight: 850; }
 .response-option input:checked + span { border-color: var(--green); background: var(--green); color: #fff; }
 .response-option input[value="Fail"]:checked + span, .response-option input[value="Yes"]:checked + span { border-color: #9b392d; background: #9b392d; }
 .response-option input[value="Review"]:checked + span { border-color: #a66b17; background: #a66b17; }
@@ -110,7 +110,7 @@ h1 { max-width: 780px; margin: 0; font-size: clamp(3.2rem, 7vw, 6.7rem); line-he
 .evidence-row > div { display: grid; margin-right: auto; }
 .evidence-row strong { font-size: .73rem; }.evidence-row span { color: var(--muted); font-size: .62rem; }
 .evidence-chip { display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px; background: var(--green-soft); color: var(--green)!important; font-weight: 750; }
-.evidence-chip button { width: 22px; height: 22px; border: 0; background: transparent; color: inherit; cursor: pointer; }
+.evidence-chip button { width: 44px; height: 44px; border: 0; background: transparent; color: inherit; cursor: pointer; }
 .form-actions { display: grid; grid-template-columns: auto 1fr; gap: 10px; margin-top: 24px; }
 .result-banner { margin-bottom: 20px; padding: 24px; border-left: 5px solid var(--green); background: var(--green-soft); }
 .result-banner > span { color: var(--green); font-size: .62rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }

@@ -54,3 +54,4 @@
 .cad-drawing-stamp small{color:#5e8a8e;font-size:.46rem;letter-spacing:.05em}
 .map-note::before{content:"CAD-style synthetic schematic · ";color:var(--accent);font-weight:850}
 @media(max-width:640px){.cad-canvas{min-width:700px}.facility-map{min-height:0}.map-note{line-height:1.55}}
+.reset-button,.submit-report{color:#0e1915}

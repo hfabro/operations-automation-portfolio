@@ -131,7 +131,7 @@ tbody th { width: 18%; }
 .closing-callout span { color: var(--accent); font-size: .58rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
 .closing-callout strong { display: block; margin-top: 5px; font-size: 1.15rem; }
 .closing-callout p { max-width: 800px; margin: 7px 0 0; color: rgba(255,255,255,.58); font-size: .7rem; }
-.closing-callout a { padding: 13px 16px; background: var(--accent); color: #fff; font-size: .68rem; font-weight: 850; text-decoration: none; white-space: nowrap; }
+.closing-callout a { padding: 13px 16px; background: var(--accent); color: #14211d; font-size: .68rem; font-weight: 850; text-decoration: none; white-space: nowrap; }
 footer { padding: 28px 0; border-top: 1px solid var(--line); background: var(--surface); }
 footer .shell { display: flex; justify-content: space-between; gap: 30px; }
 footer p, footer a { margin: 0; color: var(--muted); font-size: .64rem; }
