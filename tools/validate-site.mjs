@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const validatorFile = fileURLToPath(import.meta.url);
 const ignoredDirectories = new Set([".git", "tmp"]);
 const errors = [];
 
@@ -81,9 +82,26 @@ for (const file of demoFiles) {
   }
 }
 
-for (const requiredFile of ["COPYRIGHT.md", "robots.txt", "sitemap.xml", "assets/og.png"]) {
+for (const requiredFile of ["COPYRIGHT.md", "SECURITY.md", ".well-known/security.txt", ".github/workflows/validate.yml", "robots.txt", "sitemap.xml", "assets/og.png"]) {
   const target = join(root, requiredFile);
   if (!existsSync(target)) report(target, "required launch artifact is missing");
+}
+
+const sourceFiles = [".html", ".css", ".js", ".md", ".txt", ".xml", ".yml"].flatMap((extension) => walk(root, extension));
+const leakagePatterns = [
+  [/\bcodex-remote-attachments\b/i, "local attachment path"],
+  [/[A-Z]:\\Users\\/i, "absolute Windows user path"],
+  [/https?:\/\/[^\s\"'<>]*\.sharepoint\.com/i, "SharePoint tenant URL"],
+  [/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/i, "private key material"],
+  [/\bgh[pousr]_[A-Za-z0-9_]{20,}\b/, "GitHub access token"]
+];
+
+for (const file of sourceFiles) {
+  if (resolve(file) === resolve(validatorFile)) continue;
+  const text = readFileSync(file, "utf8");
+  for (const [pattern, label] of leakagePatterns) {
+    if (pattern.test(text)) report(file, `possible ${label}`);
+  }
 }
 
 for (const file of walk(root, ".js")) {
@@ -97,4 +115,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Site validation passed: ${htmlFiles.length} HTML pages, ${demoFiles.length} demo pages, local links, fragments, policies, metadata, and JavaScript syntax.`);
+console.log(`Site validation passed: ${htmlFiles.length} HTML pages, ${demoFiles.length} demo pages, local links, fragments, policies, metadata, leakage indicators, and JavaScript syntax.`);

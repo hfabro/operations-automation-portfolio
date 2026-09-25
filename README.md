@@ -47,7 +47,7 @@ When Node.js is available, run the included no-dependency validation command bef
 node .\tools\validate-site.mjs
 ```
 
-It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, and JavaScript syntax.
+It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, common leakage indicators, and JavaScript syntax. The same validator runs automatically on pushes and pull requests through a least-privilege GitHub Actions workflow whose checkout dependency is pinned to an immutable commit.
 
 ## Deployment options
 
@@ -171,6 +171,10 @@ All project descriptions are sanitized. All interface previews, lists, records, 
 Interactive demonstrations must follow the same rule. Demo data should remain visibly synthetic, require no production credentials, and avoid camera, upload, or external-system permissions unless a future version has a documented and privacy-reviewed reason for them.
 
 The public site is intentionally static and uses a restrictive Content Security Policy: scripts and assets are limited to the site itself, network connections are disabled, forms cannot submit, and embedded frames, objects, media, and workers are blocked. This reduces browser-side attack surface, but it does not replace dependency review if third-party services are added later.
+
+`SECURITY.md` defines a bounded vulnerability-reporting policy, and `/.well-known/security.txt` publishes the canonical reporting route. Neither document represents a bug-bounty program, security-service offering, or authorization to test third-party systems.
+
+The current GitHub Pages response provides HTTPS and HSTS, while the project-controlled CSP and referrer policy are delivered in the HTML. A CSP delivered through a `<meta>` element cannot enforce `frame-ancestors` or report-only collection. If stronger response-header controls such as `frame-ancestors`, `Permissions-Policy`, and `X-Content-Type-Options` become a priority, move the static files behind a host or edge layer that supports repository-defined response headers rather than implying those controls are active here.
 
 ## Pre-publication checklist
 

@@ -1,0 +1,5 @@
+Contact: mailto:hfabro85@gmail.com
+Expires: 2027-09-24T23:59:59Z
+Preferred-Languages: en
+Canonical: https://hfabro.github.io/operations-automation-portfolio/.well-known/security.txt
+Policy: https://github.com/hfabro/operations-automation-portfolio/security/policy

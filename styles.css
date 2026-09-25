@@ -676,6 +676,25 @@ h1 span { display: block; color: var(--green); }
 .strategy-grid article { min-height: 220px; padding: 24px; border-right: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.035); }
 .strategy-grid h3 { margin: 42px 0 10px; font-size: 1.08rem; }
 .strategy-grid p { margin: 0; color: rgba(255,255,255,.52); font-size: .68rem; }
+.security-by-design { margin-top: 22px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.18); }
+.security-heading { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: end; padding: clamp(26px, 4vw, 44px); border-bottom: 1px solid rgba(255,255,255,.14); }
+.security-heading span, .security-control-grid article > span { color: #f08a64; font-size: .57rem; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+.security-heading h3 { max-width: 650px; margin: 12px 0 0; font-size: clamp(1.7rem, 3.4vw, 3.3rem); line-height: .98; letter-spacing: -.045em; }
+.security-heading p { margin: 0; color: rgba(255,255,255,.6); font-size: .76rem; }
+.security-lifecycle { display: grid; grid-template-columns: repeat(6, 1fr); margin: 0; padding: 0; list-style: none; }
+.security-lifecycle li { min-height: 148px; display: grid; align-content: space-between; gap: 8px; padding: 18px; border-right: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14); }
+.security-lifecycle li:last-child { border-right: 0; }
+.security-lifecycle b { color: #f08a64; font-size: .57rem; }
+.security-lifecycle strong { align-self: end; font-size: .77rem; }
+.security-lifecycle small { color: rgba(255,255,255,.45); font-size: .56rem; }
+.security-control-grid { display: grid; grid-template-columns: 1fr 1fr; }
+.security-control-grid article { padding: 28px; border-right: 1px solid rgba(255,255,255,.14); }
+.security-control-grid article:last-child { border-right: 0; }
+.security-control-grid ul { margin: 20px 0 0; padding: 0; list-style: none; }
+.security-control-grid li { position: relative; margin-top: 10px; padding-left: 16px; color: rgba(255,255,255,.56); font-size: .65rem; }
+.security-control-grid li::before { content: "+"; position: absolute; left: 0; color: #f08a64; font-weight: 900; }
+.security-limit { margin: 0; padding: 18px 28px; color: rgba(255,255,255,.56); border-top: 1px solid rgba(255,255,255,.14); font-size: .65rem; }
+.security-limit strong { color: #f08a64; }
 .truth-boundary { display: grid; grid-template-columns: .32fr 1fr; gap: 28px; margin-top: 20px; padding: 22px; border-left: 4px solid var(--accent); background: rgba(255,255,255,.05); }
 .truth-boundary strong { color: #f08a64; font-size: .68rem; }
 .truth-boundary p { margin: 0; color: rgba(255,255,255,.59); font-size: .7rem; }
@@ -698,6 +717,11 @@ h1 span { display: block; color: var(--green); }
   .project-directory > div { grid-column: 1 / -1; }
   .sf-hero-panel { grid-template-columns: 1fr; gap: 38px; }
   .strategy-grid { grid-template-columns: 1fr 1fr; }
+  .security-heading, .security-control-grid { grid-template-columns: 1fr; gap: 24px; }
+  .security-lifecycle { grid-template-columns: repeat(3, 1fr); }
+  .security-lifecycle li:nth-child(3) { border-right: 0; }
+  .security-control-grid article { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); }
+  .security-control-grid article:last-child { border-bottom: 0; }
   .truth-boundary { grid-template-columns: 1fr; }
 }
 @media screen and (max-width: 600px) {
@@ -709,6 +733,10 @@ h1 span { display: block; color: var(--green); }
   .roadmap-mini b { transform: rotate(90deg); justify-self: center; }
   .sf-hero-panel { padding: 25px 20px; }
   .transformation-flow, .strategy-grid { grid-template-columns: 1fr; }
+  .security-lifecycle { grid-template-columns: 1fr 1fr; }
+  .security-lifecycle li:nth-child(3) { border-right: 1px solid rgba(255,255,255,.14); }
+  .security-lifecycle li:nth-child(even) { border-right: 0; }
+  .security-lifecycle li { min-height: 126px; }
   .transformation-flow li { min-height: 120px; }
   .back-to-top { right: 14px; bottom: 14px; }
 }
