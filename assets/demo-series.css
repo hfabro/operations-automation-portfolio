@@ -1,8 +1,8 @@
 .demo-series-nav {
   --series-ink: #14251f;
-  --series-muted: #68756f;
+  --series-muted: #58665f;
   --series-line: #d1dad5;
-  --series-accent: #d75e38;
+  --series-accent: #a94327;
   position: sticky;
   z-index: 62;
   top: 0;

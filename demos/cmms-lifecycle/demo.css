@@ -22,6 +22,11 @@
   --line: #cbd4d2;
   --ink: #172029;
   --muted: #5d6c73;
+  --accent: #a94327;
+  --accent-2: #2f7164;
+  --warning: #875900;
+  --danger: #a83b35;
+  --good: #226b58;
   --shadow: 0 22px 60px rgba(24,36,42,.11);
 }
 * { box-sizing: border-box; }
@@ -47,6 +52,7 @@ button { cursor: pointer; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 .primary, .secondary { min-height: 46px; padding: 0 17px; border: 1px solid transparent; font-size: .76rem; font-weight: 850; }
 .primary { background: var(--accent); color: #0b1117; }
+[data-theme="light"] .primary { color: #fff; }
 .primary:hover { background: #e5643a; }
 .secondary { border-color: var(--line); background: var(--panel); color: var(--ink); }
 .secondary:hover { border-color: var(--accent); }

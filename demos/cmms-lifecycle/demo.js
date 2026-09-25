@@ -15,6 +15,23 @@
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
+  function setTheme(theme, persist) {
+    const next = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    const toggle = $('[data-theme-toggle]');
+    if (toggle) toggle.setAttribute("aria-label", `Switch to ${next === "dark" ? "light" : "dark"} theme`);
+    if (persist) {
+      try { window.localStorage.setItem("portfolio-theme", next); } catch (error) { /* Preference remains page-only. */ }
+    }
+  }
+
+  let initialTheme = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  try {
+    const storedTheme = window.localStorage.getItem("portfolio-theme");
+    if (storedTheme === "light" || storedTheme === "dark") initialTheme = storedTheme;
+  } catch (error) { /* Use the system preference. */ }
+  setTheme(initialTheme, false);
+
   function escapeHtml(value) {
     return String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" }[character]));
   }
@@ -288,8 +305,7 @@
     if (event.target.closest('[data-theme-toggle]')) {
       const root = document.documentElement;
       const next = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      $('[data-theme-toggle]').setAttribute("aria-label", `Switch to ${next === "dark" ? "light" : "dark"} theme`);
+      setTheme(next, true);
     }
   });
 
