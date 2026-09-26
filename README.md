@@ -109,9 +109,7 @@ Primary implemented-system recreations are available at:
 
 The hub also links to the intentionally simple `/demos/service-intake/` form. Supporting architecture and concept demonstrations remain available at:
 
-- `/demos/ladder-inspection/`
 - `/demos/compliance-workflow/`
-- `/demos/digital-kanban/`
 - `/demos/cmms-lifecycle/`
 - `/demos/telemetry-explorer/`
 - `/demos/connected-operations/`
@@ -167,7 +165,7 @@ The Building Operations Command Center generalizes a map-based reporting pattern
 
 The Smart Factory Roadmap Studio adds the transformation-management layer. Visitors can compare three synthetic plant profiles, select a strategic priority, review an eight-domain maturity assessment, see a synthetic use-case backlog reorder using an inspectable scoring model, and examine a gated foundation-to-sustainment roadmap. It also includes a platform-neutral IT/OT reference architecture and cross-functional governance model. It is an architecture and prioritization prototype—not a claim of enterprise MES, SCADA, PLC, digital-twin, OT-cybersecurity, or multi-site deployment experience.
 
-The original eight demonstrations retain their existing app presentation. New implemented-system recreations use platform-specific layouts rather than extending the Canvas shell to every report and portal. Transactional workflows use phone-oriented navigation, while analytics, maintenance, connected-operations, spatial-response, and roadmap experiences use tablet or workspace-oriented screens. Role-appropriate phone, tablet, and full-system experience modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, analyst, facilities leader, or transformation manager would encounter the operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
+The eight legacy interactive routes retain their validated behavior; their application surfaces now use the shared Microsoft-style finishing layer. Ladder and Kanban remain implemented-system recreations, not supporting concepts. New implemented-system recreations use platform-specific layouts rather than extending the Canvas shell to every report and portal. Transactional workflows use phone-oriented navigation, while analytics, maintenance, connected-operations, spatial-response, and roadmap experiences use tablet or workspace-oriented screens. Role-appropriate phone, tablet, and full-system experience modes preserve the working controls and controlled state changes while showing how a frontline user, planner, supervisor, analyst, facilities leader, or transformation manager would encounter the operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
 
 ## Navigation model
 
@@ -220,3 +218,9 @@ The current GitHub Pages response provides HTTPS and HSTS, while the project-con
 - Confirm that the 143 requirements, 500+ annual tasks, 69,000+ telemetry records, five forklifts, and energy-savings figures are safe and accurate for public disclosure.
 - Confirm the GitHub Pages URL or replace it with the selected custom domain.
 - Re-run responsive, accessibility, console, and broken-link checks on the selected host.
+
+## Microsoft ecosystem presentation
+
+`assets/microsoft-surfaces.css` is the shared presentation-only layer, loaded after route CSS. It separates Canvas workflows, SharePoint pages, Forms questionnaires, and Power BI-style reports from portfolio branding. `scripts/operations-systems.js` sets `data-platform` when switching an operational view to a reporting snapshot. Preserve those markers when adding views. Public navigation says Systems; `/demos/` URLs stay stable. No Microsoft tenant shell, trademark logo, account profile, or live integration is simulated.
+
+Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/device-preview.css`, with internal vertical scrolling and local horizontal table scrolling. System mode remains a normal page. Facility Leak uses its own bounded Canvas surface in `microsoft-surfaces.css`. Connected Operations and Smart Factory are full workspaces, not simulated devices. Do not introduce large minimum heights or nested vertical form/gallery scrollers that expand the outer device. Test bottom actions and confirmations after changing content density.

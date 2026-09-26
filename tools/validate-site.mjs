@@ -162,6 +162,13 @@ if (!telemetryDemoText.includes("devicepreviewchange")) report(telemetryDemoFile
 if (!telemetryDemoText.includes("ResizeObserver")) report(telemetryDemoFile, "missing dimension-based chart redraw guard");
 
 const sourceFiles = [".html", ".css", ".js", ".mjs", ".svg", ".json", ".md", ".txt", ".xml", ".yml"].flatMap((extension) => walk(root, extension));
+for (const file of demoFiles) {
+  const html = readFileSync(file, 'utf8');
+  if (!html.includes('microsoft-surfaces.css')) report(file, 'missing platform finishing stylesheet');
+  if (/View all demos|Previous demo|Next demo|>Demos</.test(html)) report(file, 'outdated public systems terminology');
+}
+const deviceStyle = readFileSync(join(root,'assets/device-preview.css'),'utf8');
+if (!deviceStyle.includes('overflow-y:auto') || !deviceStyle.includes('height:min(780px,85svh)')) report(root,'bounded device scrollport rule missing');
 const leakagePatterns = [
   [/\bsk-(?:proj|svcac)-[A-Za-z0-9_-]{15,}/, "API credential"],
   [/\bgithub_pat_[A-Za-z0-9_]{15,}/, "GitHub credential"],

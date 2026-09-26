@@ -18,3 +18,25 @@
 @media(max-width:980px){.device-preview-stage[data-device-mode="phone"],.device-preview-stage[data-device-mode="tablet"]{grid-template-columns:1fr}.device-preview-stage[data-device-mode="phone"] .device-surface,.device-preview-stage[data-device-mode="tablet"] .device-surface{margin-inline:auto}.device-preview-stage[data-device-mode="phone"]>.system-panel,.device-preview-stage[data-device-mode="tablet"]>.system-panel{max-width:980px;margin-inline:auto}}
 @media(max-width:640px){.device-preview-bar{position:sticky;z-index:24;top:64px;display:grid;gap:10px;padding:10px 11px}.device-preview-copy small{display:none}.device-preview-actions{justify-content:stretch}.device-preview-actions button{flex:1;padding-inline:8px}.device-preview-stage[data-device-mode="phone"] .device-surface,.device-preview-stage.device-surface[data-device-mode="phone"],.device-preview-stage[data-device-mode="tablet"] .device-surface,.device-preview-stage.device-surface[data-device-mode="tablet"]{max-width:100%;border-width:6px;border-radius:26px}.device-status{min-height:25px}}
 @media(prefers-reduced-motion:reduce){.device-surface{transition:none}}
+
+/* A device is a bounded scrollport, never a full-height screenshot of an app.
+   The border and application share one main vertical scroll region. Horizontal
+   table scrolling remains local; the full System mode remains a normal page. */
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .device-surface,
+.device-preview-stage.device-surface:is([data-device-mode="phone"],[data-device-mode="tablet"]),
+#kanban-device[data-device-mode="tablet"] .restocker-panel{
+  height:min(780px,85svh)!important;min-height:0!important;max-height:850px!important;
+  overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior-y:contain;
+  scrollbar-width:thin;scrollbar-gutter:stable;scroll-padding-block:90px 70px;
+  align-self:start;box-shadow:0 4px 12px #00000018!important;
+}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .request-panel{height:auto;min-height:100%}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .request-list{max-height:none;overflow:visible}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .device-status{position:sticky;top:0;z-index:15}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .canvas-app-bar{position:sticky;top:27px;z-index:14}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .canvas-command-bar{position:relative;top:auto}
+.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .canvas-top-nav{position:relative;top:auto}
+.device-preview-stage[data-device-mode="system"]{height:auto;max-height:none}
+.device-preview-bar{box-shadow:none}.device-preview-actions button{font-size:14px}.device-preview-copy strong{font-size:15px}.device-preview-copy small{font-size:13px}
+@media(max-width:640px){.device-preview-bar{position:relative;top:auto}.device-preview-stage:is([data-device-mode="phone"],[data-device-mode="tablet"]) .canvas-app-bar{top:25px}}
+@media print{.device-preview-stage .device-surface,.device-preview-stage.device-surface,#kanban-device .restocker-panel{height:auto!important;max-height:none!important;overflow:visible!important}}

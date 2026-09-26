@@ -34,14 +34,14 @@
 
   var nav = document.createElement("nav");
   nav.className = "demo-series-nav";
-  nav.setAttribute("aria-label", "Interactive demonstration series");
+  nav.setAttribute("aria-label", "Interactive system series");
   nav.innerHTML =
-    '<a class="series-previous" href="' + demoUrl(previous) + '" aria-label="Previous demo: ' + previous.title + '">' +
-      '<span class="demo-series-direction" aria-hidden="true">←</span><span class="demo-series-link-copy"><span>Previous demo</span><strong>' + previous.short + '</strong></span>' +
+    '<a class="series-previous" href="' + demoUrl(previous) + '" aria-label="Previous system: ' + previous.title + '">' +
+      '<span class="demo-series-direction" aria-hidden="true">←</span><span class="demo-series-link-copy"><span>Previous system</span><strong>' + previous.short + '</strong></span>' +
     '</a>' +
-    '<div class="demo-series-center"><span>Systems library</span><strong>' + String(index + 1).padStart(2, "0") + ' / ' + String(demos.length).padStart(2, "0") + ' · ' + current.short + '</strong><a href="../">View all demos</a></div>' +
-    '<a class="series-next" href="' + demoUrl(next) + '" aria-label="Next demo: ' + next.title + '">' +
-      '<span class="demo-series-link-copy"><span>Next demo</span><strong>' + next.short + '</strong></span><span class="demo-series-direction" aria-hidden="true">→</span>' +
+    '<div class="demo-series-center"><span>Systems library</span><strong>' + String(index + 1).padStart(2, "0") + ' / ' + String(demos.length).padStart(2, "0") + ' · ' + current.short + '</strong><a href="../">View all systems</a></div>' +
+    '<a class="series-next" href="' + demoUrl(next) + '" aria-label="Next system: ' + next.title + '">' +
+      '<span class="demo-series-link-copy"><span>Next system</span><strong>' + next.short + '</strong></span><span class="demo-series-direction" aria-hidden="true">→</span>' +
     '</a>';
 
   if (header && header.nextSibling) header.parentNode.insertBefore(nav, header.nextSibling);

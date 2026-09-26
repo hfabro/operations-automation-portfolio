@@ -32,7 +32,8 @@
   <script src="../../scripts/canvas-sim.js?v=20260925.10" defer></script>
   <script src="demo.js?v=20260925.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260925.10" defer></script>
-  <script src="../../scripts/demo-series.js?v=20260925.11" defer></script>
+  <script src="../../scripts/demo-series.js?v=20260926.1" defer></script>
+  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.1">
 </head>
 <body>
   <a class="skip-link" href="#console">Skip to connected operations console</a>
@@ -46,7 +47,7 @@
   <main>
     <section class="demo-intro" aria-labelledby="demo-title">
       <div class="shell intro-grid">
-        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Operate four production scenarios and trace how raw machine states become contextualized losses, governed metrics, and human-reviewed action.</p><a class="demo-jump-link" href="#console">Jump to interactive demo ↓</a></div>
+        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Operate four production scenarios and trace how raw machine states become contextualized losses, governed metrics, and human-reviewed action.</p><a class="demo-jump-link" href="#console">Jump to interactive system ↓</a></div>
         <ul class="demo-guardrails" aria-label="Demo guardrails"><li>Concept / interactive prototype</li><li>No PLC, SCADA, MES, or historian connection</li><li>All equipment and events are synthetic</li><li>No autonomous production decisions</li></ul>
       </div>
     </section>
@@ -96,13 +97,13 @@
 
     <section class="architecture-section" aria-labelledby="architecture-title">
       <div class="shell">
-        <div class="architecture-heading"><div><p class="eyebrow">OT-to-decision architecture</p><h2 id="architecture-title">Connectivity is only the first layer.</h2></div><p>The differentiator is the governed context between a machine signal and a business response: identity, state logic, time, product, reason, ownership, and history.</p></div>
+        <div class="architecture-heading"><div><p class="eyebrow">OT-to-decision architecture</p><h2 id="architecture-title">Connectivity is only the first layer.</h2></div><p>The differentiator is the defined context between a machine signal and a business response: identity, state logic, time, product, reason, ownership, and history.</p></div>
         <div class="architecture-flow" data-architecture-flow></div>
         <div class="design-grid"><article><span>01 / identity</span><h3>Asset context</h3><p>Every tag or event belongs to a stable asset, production area, and operating hierarchy.</p></article><article><span>02 / semantics</span><h3>State and reason model</h3><p>Run, idle, blocked, starved, planned, and fault states need controlled definitions.</p></article><article><span>03 / time</span><h3>Event integrity</h3><p>Timestamps, duration, late data, gaps, and clock alignment determine whether metrics are trustworthy.</p></article><article><span>04 / action</span><h3>Human operating loop</h3><p>Alerts should route a defined exception to an owner—not create noise or bypass judgment.</p></article></div>
       </div>
     </section>
   </main>
 
-  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to production equipment.</p><a href="../">View all demos</a></div></footer>
+  <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to production equipment.</p><a href="../">View all systems</a></div></footer>
 </body>
 </html>

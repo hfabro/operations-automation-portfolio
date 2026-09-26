@@ -24,6 +24,24 @@
     function setMode(mode, focus) {
       if (!labels[mode]) mode = "system";
       target.setAttribute("data-device-mode", mode);
+      // Give keyboard users a focusable main device scrollport without adding
+      // nested form/gallery scrollers or changing application state.
+      var surfaces = target.matches('.device-surface') ? [target] : Array.prototype.slice.call(target.querySelectorAll('.device-surface, .restocker-panel'));
+      surfaces.forEach(function (surface) {
+        if (mode !== 'system') {
+          surface.tabIndex = 0;
+          if (!surface.hasAttribute('aria-label') && !surface.hasAttribute('aria-labelledby')) {
+            surface.setAttribute('aria-label', 'Scrollable application viewport');
+            surface.dataset.deviceScrollLabel = 'true';
+          }
+        } else {
+          surface.removeAttribute('tabindex');
+          if (surface.dataset.deviceScrollLabel) {
+            surface.removeAttribute('aria-label');
+            delete surface.dataset.deviceScrollLabel;
+          }
+        }
+      });
       buttons.forEach(function (button) {
         var selected = button.getAttribute("data-preview-mode") === mode;
         button.setAttribute("aria-pressed", String(selected));

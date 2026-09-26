@@ -1,0 +1,158 @@
+/* Presentation only. Independently selected public palette; no source-company theme.
+   Fluent blue #0f6cbd, slate #243a5e, report violet #8764b8; green means success. */
+:root{--o-blue:#115ea3;--o-green:#0f6cbd}
+[data-system="plant-operations-hub"] #system .ops-band{background:#f3f2f1;color:#323130;border-left:4px solid #0f6cbd}
+[data-system="plant-operations-hub"] #system .portal-link{background:#fff;color:#323130;border:1px solid #d2d0ce;text-align:left;box-shadow:none}
+[data-system="plant-operations-hub"] #system .portal-icon{color:#0f6cbd;margin:0}
+[data-system="plant-operations-hub"] #system .portal-link small{color:#605e5c}
+[data-system="plant-operations-hub"] #system .portal-link:hover{background:#eff6fc;border-color:#0f6cbd}
+.ops-app .ops-bar-fill,.ops-app .ops-bar-fill.green{background:#0f6cbd}
+.ops-app .ops-chart polyline{stroke:#0f6cbd}.ops-app .ops-chart polyline.secondary{stroke:#8764b8}
+.ops-app .ops-chart rect{fill:#0f6cbd}
+.ops-app .ops-kpi{border-left-color:#0f6cbd}
+.ops-app .ops-grid button[aria-pressed=true]{background:#0f6cbd;border-color:#0f6cbd;color:white}
+.ops-app .ops-plan .marker{fill:#0f6cbd}
+.ops-app .ops-queue button[aria-pressed=true]{background:#eff6fc}
+.ops-disclosure{background:#f3f2f1}
+.physical-signal{border-color:#c8c6c4!important}
+.physical-signal>header{background:#243a5e!important;color:white!important}
+.physical-signal>footer{background:#f3f2f1!important;color:#323130!important}
+.ops-app,[data-canvas-app]{font-family:"Segoe UI",Arial,sans-serif;color-scheme:light}
+[hidden]{display:none!important}
+[data-canvas-app]{--bg:#f3f2f1;--panel:#fff;--panel-2:#f3f2f1;--accent-2:#115ea3;--warning:#875900;--danger:#a4262c;--good:#107c10}
+[data-canvas-app] :is(input,select,textarea){background:white;color:#323130;border-color:#8a8886}
+[data-canvas-app] :is(.packet-meta,.rule-card,.condition-banner,.decision-panel,.score-card){background:#f3f2f1;color:#323130;border-color:#d2d0ce}
+[data-canvas-app] .primary{background:#0f6cbd;color:white}
+.demo-series-nav{position:relative;top:auto;box-shadow:none}
+.ops-app{--o-bg:#f3f2f1;--o-line:#d2d0ce;--o-text:#323130;--o-muted:#605e5c;background:var(--o-bg);color:#323130}
+.ops-app h2{font-size:23px;font-weight:600;letter-spacing:normal}
+.ops-app h3{font-size:17px;font-weight:600;letter-spacing:normal}
+.ops-app button,.ops-app input,.ops-app select,.ops-app textarea{border-radius:2px}
+.ops-app button{font-size:14px;font-weight:600}
+.ops-app .primary:hover,.ops-app .primary:focus-visible{background:#115ea3;color:white;border-color:#115ea3}
+.ops-card{border-radius:2px;box-shadow:none;padding:18px}
+.ops-toolbar{padding:20px 24px;background:white;border-bottom:1px solid #d2d0ce}
+.ops-toolbar strong{font-size:22px;font-weight:600}.ops-toolbar small{font-size:13px}
+.ops-tabs{padding:0 16px;gap:8px;background:white}
+.ops-tabs button{background:transparent;color:#323130;padding:10px 12px;border-bottom-width:3px}
+.ops-tabs button[aria-pressed=true]{background:white;border-bottom-color:#0f6cbd;color:#115ea3}
+.ops-band{background:#f3f2f1;color:#323130;border-bottom:1px solid #edebe9;padding:26px}
+.ops-band h2{font-size:28px;font-weight:600}
+/* SharePoint: page sections, quick links, list and reference content. */
+[data-system="plant-operations-hub"] .ops-app,[data-system="toolbox-talks"] .ops-app,[data-system="ehs-control"] .ops-app{background:white}
+[data-system="plant-operations-hub"] .ops-pad{padding:28px 32px}
+[data-system="plant-operations-hub"] .ops-cards{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.portal-link{background:white;color:#323130;border:1px solid #edebe9;border-radius:2px;padding:20px 16px;min-height:156px;box-shadow:0 1px 2px #0000000d}
+.portal-link:hover{background:#eff6fc;color:#115ea3;border-color:#0f6cbd}
+.portal-icon{display:flex;width:42px;height:42px;align-items:center;justify-content:center;color:#0f6cbd;font-size:28px}
+.portal-link strong{font-size:17px;font-weight:600;margin:14px 0 6px}.portal-link small{color:#605e5c;font-size:13px}
+[data-system="plant-operations-hub"] .ops-band{background:#243a5e;color:white}
+[data-system="plant-operations-hub"] .portal-link{background:#0f6cbd;color:white;border:0;text-align:center}
+[data-system="plant-operations-hub"] .portal-link small,[data-system="plant-operations-hub"] .portal-icon{color:white}
+[data-system="plant-operations-hub"] .portal-icon{margin:auto}
+[data-system="plant-operations-hub"] .portal-link:hover{background:#115ea3}
+.ops-section-title{margin-top:36px;padding-top:18px;border-top:1px solid #edebe9}
+.ops-calendar button{width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;font-size:13px;padding:6px;text-align:left;justify-content:start;background:#eff6fc;border:0;border-left:3px solid #0f6cbd}
+.ops-day{min-width:0;color:#323130}.ops-day span{background:#eff6fc;border-left:3px solid #0f6cbd}
+/* Power BI: restrained report page, compact slicers and visual containers. */
+.ops-app[data-platform="report"]{background:#f0f0f0}
+[data-platform="report"] .ops-report-title{background:#f0f0f0;color:#323130;border-bottom:1px solid #d2d0ce;padding:14px 18px}
+[data-platform="report"] .ops-report-title small{color:#605e5c}
+[data-platform="report"] .ops-report-title strong{font-size:17px}
+[data-platform="report"] .ops-pad{padding:14px 18px}
+[data-platform="report"] .ops-pad>h2{font-size:20px;margin:4px 0 12px}
+[data-platform="report"] .ops-filters{background:#f0f0f0;gap:8px;padding:10px 18px;border:0}
+[data-platform="report"] .ops-filters label{background:white;border:1px solid #e1dfdd;padding:7px 9px;font-size:12px;min-width:0}
+[data-platform="report"] .ops-filters input,[data-platform="report"] .ops-filters select{margin:5px 0 0;padding:6px;min-height:36px;font-size:13px;border-color:#d2d0ce}
+[data-platform="report"] .ops-kpis{gap:8px;margin:10px 0}
+[data-platform="report"] .ops-kpi{border:1px solid #e1dfdd;padding:12px;min-width:0}
+[data-platform="report"] .ops-kpi strong{font-size:25px;font-weight:600;margin-top:16px;color:#243a5e;overflow-wrap:anywhere}
+[data-platform="report"] .ops-card{border-color:#e1dfdd;padding:12px;margin-bottom:10px}
+[data-platform="report"] .ops-columns{gap:10px}
+[data-platform="report"] .ops-table-wrap{margin-top:12px;border-color:#e1dfdd}
+[data-platform="report"] th{background:white;color:#323130;border-bottom:2px solid #0f6cbd}
+[data-platform="report"] td{padding:7px 10px}
+[data-platform="report"] tr:nth-child(even){background:#f7f7f7}
+[data-platform="report"] .ops-chart{max-height:245px}
+[data-platform="report"] .ops-notice{font-size:13px;padding:10px;border-left-width:3px}
+.evidence-key{display:flex;flex-wrap:wrap;gap:8px;font-size:12px;padding:8px 18px;border-bottom:1px solid #d2d0ce;background:#faf9f8}
+.evidence-key span{border:1px solid #d2d0ce;padding:3px 7px;color:#323130;background:white}
+.evidence-key strong{font-weight:600}.evidence-key .modeled{border-left:3px solid #8a6800}.evidence-key .measured{border-left:3px solid #0f6cbd}
+/* Canvas: operational headers, form rows, gallery selections, and bottom actions. */
+[data-canvas-app]{--ink:#323130;--muted:#605e5c;--surface:#fff;--line:#d2d0ce;--accent:#0f6cbd;--green:#0f6cbd;--green-2:#115ea3;--shadow:none;background:#f3f2f1!important;color:#323130!important}
+[data-canvas-app] .canvas-app-bar{position:relative;background:#0f6cbd;color:white;box-shadow:none;border:0;min-height:64px}
+[data-canvas-app] .canvas-app-identity strong{color:white;font-size:17px;font-weight:600;white-space:normal;line-height:1.2}
+[data-canvas-app] .canvas-app-identity small{color:white;font-size:12px;white-space:normal;line-height:1.4}
+[data-canvas-app] .canvas-app-tile,[data-canvas-app] .canvas-user,[data-canvas-app] .canvas-app-environment{display:none}
+[data-canvas-app] .canvas-icon-button{color:white;min-width:44px;min-height:44px}
+[data-canvas-app] .canvas-command-bar{box-shadow:none;background:white}
+[data-canvas-app] .canvas-command-bar button{font-size:14px;min-height:40px}
+[data-canvas-app] h2,[data-canvas-app] h3{font-family:"Segoe UI",Arial,sans-serif;letter-spacing:normal;font-weight:600;line-height:1.3}
+[data-canvas-app] h2{font-size:23px}[data-canvas-app] h3{font-size:19px}
+[data-canvas-app] button,[data-canvas-app] select,[data-canvas-app] input,[data-canvas-app] textarea{font-family:"Segoe UI",Arial,sans-serif;border-radius:2px;letter-spacing:normal}
+[data-canvas-app] button{min-height:44px;font-size:14px}
+[data-canvas-app] :is(p,label,select,input,textarea,li){font-size:15px;line-height:1.5}
+[data-canvas-app] :is(td,th){font-size:14px}
+[data-canvas-app] .kpi-grid article{background:white!important;color:#323130;border-color:#d2d0ce;box-shadow:none}
+[data-canvas-app] .kpi-grid article :is(span,small){color:#605e5c!important;font-size:12px}
+[data-canvas-app] .kpi-grid article strong{color:#243a5e!important}
+[data-canvas-app] :is(small,.canvas-command-context){font-size:12px}
+[data-canvas-app] .canvas-bottom-nav button{font-size:13px}
+[data-canvas-app] .demo-guide{background:#faf9f8;border:1px solid #d2d0ce;border-left:3px solid #0f6cbd;border-radius:2px;box-shadow:none;padding:14px}
+[data-canvas-app] .demo-guide h3{font-size:18px}
+.roadmap-canvas-suite section{padding-top:24px;padding-bottom:24px}
+.roadmap-canvas-suite :is(.control-deck,.kpi-grid,.maturity-grid,.portfolio-grid){box-shadow:none}
+[data-canvas-app] .app-content{padding:16px}
+[data-canvas-app] .department-gallery{padding:12px;margin:12px 0;background:white}
+[data-canvas-app] .expected-asset{padding:10px;margin:0;border:0;border-bottom:1px solid #c9e3eb;border-left:4px solid #0f6cbd;background:#f5f9fa}
+[data-canvas-app] .expected-asset strong{font-size:15px}.expected-asset small{font-size:12px}
+[data-canvas-app] .expected-asset>div{margin-top:6px;gap:6px}
+[data-canvas-app] .expected-asset button{padding:6px 10px;font-size:12px}
+[data-canvas-app] .primary-action,[data-canvas-app] .phone-scan,[data-canvas-app] .request-footer button{background:#0f6cbd;color:white}
+[data-canvas-app] .asset-banner{background:#f3f2f1;color:#323130;box-shadow:none}
+[data-canvas-app] .asset-banner :is(span,dt,dd,strong){color:#323130}
+[data-canvas-app] .checklist-item{border-radius:2px;box-shadow:none}
+.restocker-panel[data-canvas-app]{background:#f3f2f1!important;color:#323130!important}
+.restocker-panel .restocker-heading{background:#eff6fc;color:#243a5e;padding:16px;margin-inline:-8px}
+.restocker-panel .restocker-heading h2{color:#243a5e;text-transform:uppercase;font-size:22px}
+.restocker-panel .restocker-heading>span{color:#405b65;font-size:13px}
+.restocker-panel .request-item{background:white;border:1px solid #c8c6c4;padding:18px;margin-bottom:8px}
+.restocker-panel .request-item>span{color:#243a5e;font-size:12px}
+.restocker-panel .request-item strong{color:#323130;font-size:19px;margin:6px 0 12px}
+.restocker-panel .request-item small{color:#605e5c;font-size:14px;line-height:1.55}
+.restocker-panel .request-item button{background:#0f6cbd;color:white;border:0;margin-top:16px;font-size:15px;text-transform:uppercase}
+.restocker-panel .authorization-note,.restocker-panel .authorization-note strong,.restocker-panel .empty-state{color:#605e5c;border-color:#c8c6c4;font-size:13px}
+[data-system="facility-leaks"] .ops-toolbar{background:#0f6cbd;color:white;border:0}
+[data-system="facility-leaks"] .ops-toolbar :is(a,small){color:white}
+[data-system="facility-leaks"] .ops-app[data-view="0"]{max-width:680px}
+[data-system="facility-leaks"] [data-view="0"] .ops-columns{grid-template-columns:1fr}
+[data-system="facility-leaks"] .ops-card{border-radius:4px}
+[data-system="facility-leaks"] .ops-grid{gap:4px}
+[data-system="facility-leaks"] .ops-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+[data-system="facility-leaks"] #continue{width:100%}
+[data-system="facility-leaks"] .ops-queue button{border-radius:0;border-left:4px solid #0f6cbd}
+[data-system="facility-leaks"] #system{height:min(800px,85svh);min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;scrollbar-gutter:stable;scrollbar-width:thin;scroll-padding-block:100px 20px;border:6px solid #323130;border-radius:8px}
+[data-system="facility-leaks"] .ops-toolbar{position:sticky;top:0;z-index:5}
+@media print{[data-system="facility-leaks"] #system{height:auto;overflow:visible}}
+/* Forms remains a simple questionnaire, not a canvas workspace. */
+[data-system="service-intake"] .ops-app{background:#eeedec;max-width:860px}
+[data-system="service-intake"] .ops-toolbar{display:none}
+.ops-form{border-top:8px solid #537980;border-radius:0;box-shadow:none;padding:28px 36px}
+.ops-form h2{font-size:28px;font-weight:400;line-height:1.35}
+.ops-form fieldset{border:0;padding:0;margin:28px 0}
+.ops-form legend{font-size:17px;font-weight:400;margin-bottom:12px}
+.ops-form fieldset label{display:flex;align-items:center;gap:8px;min-height:44px}
+.ops-form textarea{border:0!important;border-bottom:1px solid #605e5c!important;background:#faf9f8!important}
+#talk-form{border-top:6px solid #537980;background:#faf9f8;padding:20px}
+#talk-form fieldset{border:0;padding:0}#talk-form label{padding:10px 0}
+/* Concept analytical surfaces keep their prototype labels; no equipment controls. */
+.roadmap-canvas-suite .panel,.roadmap-canvas-suite article,[data-canvas-title="Connected Operations"] article{background:white;color:#323130;border:1px solid #d2d0ce;border-radius:2px;box-shadow:none}
+.roadmap-canvas-suite .section-heading h2{font-size:26px}
+.roadmap-canvas-suite .section-heading p{color:#605e5c}
+[data-canvas-title="Connected Operations"] .canvas-app-bar,.roadmap-canvas-suite .canvas-app-bar{background:#f3f2f1;border-top:4px solid #0f6cbd}
+[data-canvas-title="Connected Operations"] .canvas-app-identity strong,.roadmap-canvas-suite .canvas-app-identity strong{color:#323130}
+[data-canvas-title="Connected Operations"] .canvas-app-identity small,.roadmap-canvas-suite .canvas-app-identity small{color:#605e5c}
+[data-canvas-title="Connected Operations"] .canvas-icon-button,.roadmap-canvas-suite .canvas-icon-button{color:#323130}
+@media(min-width:900px){[data-system="electrical-analytics"] [data-platform="report"]>.ops-pad{display:grid;grid-template-columns:2fr 1fr;gap:10px}[data-system="electrical-analytics"] .ops-pad>:not(article){grid-column:1/-1}}
+@media(max-width:780px){[data-system="plant-operations-hub"] .ops-cards{grid-template-columns:repeat(2,minmax(0,1fr))}[data-system="plant-operations-hub"] .ops-pad{padding:20px}.ops-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ops-toolbar{padding:16px}}
+@media(max-width:440px){[data-system="plant-operations-hub"] .ops-cards{grid-template-columns:1fr}.portal-link{min-height:110px}.ops-form{padding:22px 18px;margin:12px}.ops-toolbar strong{font-size:20px}.ops-band{padding:20px}.ops-band h2{font-size:24px}.ops-kpi strong{font-size:21px!important}.ops-filters label{flex-basis:120px}.ops-tabs{padding:0 6px}.ops-tabs button{font-size:13px;flex-basis:120px}[data-canvas-app] .canvas-command-context{display:none}}
