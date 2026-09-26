@@ -311,6 +311,8 @@
   updateLiveState();
 
   document.querySelector("[data-scan]").addEventListener("click", function () {
+    // The displayed QR fixture always identifies LAD-104, independent of the last gallery selection.
+    resetDemo();
     if (!window.CanvasSim) { resolveAsset(); return; }
     window.CanvasSim.busy(canvasRoot, "Resolving synthetic asset record…", resolveAsset, 460).then(function () {
       canvasNotify("Asset " + data.asset.assetId + " loaded from the synthetic asset register.", "success");
@@ -335,7 +337,15 @@
       resetDemo();
       canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to asset identification.", "info");
     } else if (action === "inspect") {
-      if (state.assetResolved) setStep("inspect", true);
+      if (state.assetResolved) {
+        if (state.submitted) {
+          state.submitted = false;
+          data.inspection.inspectionId = "INS-DEMO-" + String(++occurrenceSequence).padStart(4,"0");
+          renderPreviousHistory();
+          updateLiveState();
+        }
+        setStep("inspect", true);
+      }
       else canvasNotify("Scan the synthetic asset before opening the inspection.", "warning");
     } else if (action === "history") {
       if (state.submitted) setStep("result", true);
