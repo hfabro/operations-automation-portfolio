@@ -18,6 +18,19 @@
 .physical-signal>header{background:#243a5e!important;color:white!important}
 .physical-signal>footer{background:#f3f2f1!important;color:#323130!important}
 .ops-app,[data-canvas-app]{font-family:"Segoe UI",Arial,sans-serif;color-scheme:light}
+.spatial-plan{position:relative;aspect-ratio:5/3}.spatial-plan>svg{width:100%;height:100%;display:block}
+.ops-app .spatial-cell{position:absolute;min-height:0;padding:2px;display:flex;align-items:flex-start;justify-content:flex-start;border:1px solid #0f6cbd66;background:#eff6fc20;color:#243a5e;border-radius:0}
+.spatial-cell span{background:#ffffffe6;padding:0 3px;font-size:12px;font-weight:700}
+.ops-app .spatial-cell[aria-pressed=true]{background:#0f6cbd33;border:3px solid #0f6cbd}
+.ops-app .spatial-cell:hover{background:#0f6cbd22}.spatial-cell:focus-visible{z-index:3;outline:3px solid #875900}
+.ops-app .report-pin{position:absolute;transform:translate(-50%,-50%);min-width:36px;min-height:40px;padding:2px 4px;display:grid;gap:0;background:#eff6fc;border:2px solid #0f6cbd;color:#243a5e;font-size:13px;z-index:2}
+.ops-app .report-pin[aria-pressed=true]{outline:3px solid #243a5e;outline-offset:2px;z-index:3}
+.ops-app .report-pin.hazard{border-color:#a4262c;color:#a4262c;background:#fff4f4}.report-pin span{font-size:11px}
+.hazard-switch{display:flex!important;align-items:center;gap:12px;margin-block:20px}
+.ops-app .hazard-switch input{appearance:none;width:48px;height:26px;border:2px solid #605e5c;border-radius:16px;background:#fff;position:relative;flex:none}
+.hazard-switch input:before{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;border-radius:50%;background:#605e5c}
+.hazard-switch input:checked{background:#a4262c;border-color:#a4262c}.hazard-switch input:checked:before{background:#fff;left:25px}
+.photo-control{margin-block:20px}.quiz-fields{border:0!important;padding:0!important}.quiz-fields:disabled{opacity:.65}
 [hidden]{display:none!important}
 [data-canvas-app]{--bg:#f3f2f1;--panel:#fff;--panel-2:#f3f2f1;--accent-2:#115ea3;--warning:#875900;--danger:#a4262c;--good:#107c10}
 [data-canvas-app] :is(input,select,textarea){background:white;color:#323130;border-color:#8a8886}
@@ -46,11 +59,6 @@
 .portal-link:hover{background:#eff6fc;color:#115ea3;border-color:#0f6cbd}
 .portal-icon{display:flex;width:42px;height:42px;align-items:center;justify-content:center;color:#0f6cbd;font-size:28px}
 .portal-link strong{font-size:17px;font-weight:600;margin:14px 0 6px}.portal-link small{color:#605e5c;font-size:13px}
-[data-system="plant-operations-hub"] .ops-band{background:#243a5e;color:white}
-[data-system="plant-operations-hub"] .portal-link{background:#0f6cbd;color:white;border:0;text-align:center}
-[data-system="plant-operations-hub"] .portal-link small,[data-system="plant-operations-hub"] .portal-icon{color:white}
-[data-system="plant-operations-hub"] .portal-icon{margin:auto}
-[data-system="plant-operations-hub"] .portal-link:hover{background:#115ea3}
 .ops-section-title{margin-top:36px;padding-top:18px;border-top:1px solid #edebe9}
 .ops-calendar button{width:100%;min-width:0;white-space:normal;overflow-wrap:anywhere;font-size:13px;padding:6px;text-align:left;justify-content:start;background:#eff6fc;border:0;border-left:3px solid #0f6cbd}
 .ops-day{min-width:0;color:#323130}.ops-day span{background:#eff6fc;border-left:3px solid #0f6cbd}
@@ -137,13 +145,13 @@
 /* Forms remains a simple questionnaire, not a canvas workspace. */
 [data-system="service-intake"] .ops-app{background:#eeedec;max-width:860px}
 [data-system="service-intake"] .ops-toolbar{display:none}
-.ops-form{border-top:8px solid #537980;border-radius:0;box-shadow:none;padding:28px 36px}
+.ops-form{border-top:8px solid #8764b8;border-radius:0;box-shadow:none;padding:28px 36px}
 .ops-form h2{font-size:28px;font-weight:400;line-height:1.35}
 .ops-form fieldset{border:0;padding:0;margin:28px 0}
 .ops-form legend{font-size:17px;font-weight:400;margin-bottom:12px}
 .ops-form fieldset label{display:flex;align-items:center;gap:8px;min-height:44px}
 .ops-form textarea{border:0!important;border-bottom:1px solid #605e5c!important;background:#faf9f8!important}
-#talk-form{border-top:6px solid #537980;background:#faf9f8;padding:20px}
+#talk-form{border-top:6px solid #8764b8;background:#faf9f8;padding:20px}
 #talk-form fieldset{border:0;padding:0}#talk-form label{padding:10px 0}
 /* Concept analytical surfaces keep their prototype labels; no equipment controls. */
 .roadmap-canvas-suite .panel,.roadmap-canvas-suite article,[data-canvas-title="Connected Operations"] article{background:white;color:#323130;border:1px solid #d2d0ce;border-radius:2px;box-shadow:none}

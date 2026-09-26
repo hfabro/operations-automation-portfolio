@@ -169,6 +169,10 @@ for (const file of demoFiles) {
 }
 const deviceStyle = readFileSync(join(root,'assets/device-preview.css'),'utf8');
 if (!deviceStyle.includes('overflow-y:auto') || !deviceStyle.includes('height:min(780px,85svh)')) report(root,'bounded device scrollport rule missing');
+const workflowSource=readFileSync(join(root,'scripts/workflow-recreations.js'),'utf8');
+if(!workflowSource.includes('data-spatial-overlay')||workflowSource.includes('class="ops-grid"')) report(root,'spatial workflow contract missing or redundant location matrix present');
+const ladderSource=readFileSync(join(root,'demos/ladder-inspection/index.html'),'utf8');
+for(const hook of ['data-month','data-department','data-expected-assets','data-certify']) if(!ladderSource.includes(hook)) report(root,'missing ladder cycle/gallery/certification hook');
 const leakagePatterns = [
   [/\bsk-(?:proj|svcac)-[A-Za-z0-9_-]{15,}/, "API credential"],
   [/\bgithub_pat_[A-Za-z0-9_]{15,}/, "GitHub credential"],
@@ -199,6 +203,11 @@ for (const file of sourceFiles) {
   if (resolve(file) === resolve(validatorFile)) continue;
   const text = readFileSync(file, "utf8");
   const publicPath=relative(root,file).replaceAll('\\','/');
+  if (/\.(html|css|js|svg|json)$/i.test(publicPath)) {
+    if (/(?:maclean[ -]?fogg|\bmaclean\b|mundelein|maclean365|Richard Mellor|Jeff Hensley|Dan Curtis|Ashley Skelton|Tasha Taylor|Jay Oberrieder|Curtis Raatz|Jason Johnson|Maneval|QuestMark|Velocity|ThingsBoard|Uplight|B295N04069R|B295N04052R|624101071|624101070)/i.test(text)) report(file,'private source identifier in public runtime content');
+    if (/system[n]stration/i.test(text)) report(file,'malformed editorial replacement');
+    if (file.endsWith('.html') && /(?:Demo library|demonstration library|complete interactive proof lab)/i.test(text)) report(file,'obsolete Systems library wording');
+  }
   if((publicPath.startsWith('demos/')||publicPath.startsWith('assets/')||publicPath.startsWith('scripts/')) && /(?:maclean[ -]?fogg|mundelein|maclean365|references-private[\\/])/i.test(text)) report(file,'private source identifier in recreation');
   for (const [pattern, label] of leakagePatterns) {
     if (pattern.test(text)) report(file, `possible ${label}`);

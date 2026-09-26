@@ -221,6 +221,8 @@ The current GitHub Pages response provides HTTPS and HSTS, while the project-con
 
 ## Microsoft ecosystem presentation
 
+`scripts/workflow-contracts.js` holds public bilingual five-question quiz fixtures, pure scoring/report metrics, and fictional spatial grid coordinates. `scripts/workflow-recreations.js` renders the leak location/details/response workflow and Toolbox Talks material/quiz/snapshot workflow. Both load before `operations-systems.js`; do not replace them with static illustrations. Ladder cycle/disposition/history logic remains in its route's `demo.js`. Run the system-data tests after fixture changes.
+
 `assets/microsoft-surfaces.css` is the shared presentation-only layer, loaded after route CSS. It separates Canvas workflows, SharePoint pages, Forms questionnaires, and Power BI-style reports from portfolio branding. `scripts/operations-systems.js` sets `data-platform` when switching an operational view to a reporting snapshot. Preserve those markers when adding views. Public navigation says Systems; `/demos/` URLs stay stable. No Microsoft tenant shell, trademark logo, account profile, or live integration is simulated.
 
 Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/device-preview.css`, with internal vertical scrolling and local horizontal table scrolling. System mode remains a normal page. Facility Leak uses its own bounded Canvas surface in `microsoft-surfaces.css`. Connected Operations and Smart Factory are full workspaces, not simulated devices. Do not introduce large minimum heights or nested vertical form/gallery scrollers that expand the outer device. Test bottom actions and confirmations after changing content density.

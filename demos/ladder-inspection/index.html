@@ -6,11 +6,11 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#edf2ed">
-  <title>Interactive Ladder Inspection Demo | David H. Fabro</title>
-  <meta name="description" content="A synthetic interactive systemnstration of a governed QR-based ladder inspection workflow, including asset identity, validation, exception handling, history, and reporting behavior.">
+  <meta name="theme-color" content="#f3f2f1">
+  <title>Digital Ladder Inspection System | David H. Fabro</title>
+  <meta name="description" content="A synthetic interactive demonstration of a governed QR-based ladder inspection workflow, including asset identity, validation, exception handling, history, and reporting behavior.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Interactive Ladder Inspection Demo | David H. Fabro">
+  <meta property="og:title" content="Digital Ladder Inspection System | David H. Fabro">
   <meta property="og:description" content="Operate a synthetic QR-based inspection workflow and see how identity, validation, exceptions, corrective action, history, and reporting fit together.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
@@ -18,25 +18,25 @@
   <meta property="og:image" content="https://hfabro.github.io/operations-automation-portfolio/assets/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Interactive Ladder Inspection Demo — David H. Fabro">
+  <meta property="og:image:alt" content="Digital Ladder Inspection System — David H. Fabro">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Interactive Ladder Inspection Demo | David H. Fabro">
+  <meta name="twitter:title" content="Digital Ladder Inspection System | David H. Fabro">
   <meta name="twitter:description" content="A safe, synthetic proof of concept for a governed digital inspection workflow.">
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/ladder-inspection/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="demo.css?v=20260925.5">
-  <link rel="stylesheet" href="../../assets/device-preview.css?v=20260926.1">
+  <link rel="stylesheet" href="demo.css?v=20260926.2">
+  <link rel="stylesheet" href="../../assets/device-preview.css?v=20260926.2">
   <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.11">
-  <script src="demo-data.js" defer></script>
+  <script src="demo-data.js?v=20260926.2" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.10" defer></script>
-  <script src="demo.js?v=20260925.11" defer></script>
-  <script src="../../scripts/device-preview.js?v=20260926.1" defer></script>
-  <script src="../../scripts/demo-guide.js?v=20260925.10" defer></script>
-  <script src="../../scripts/demo-series.js?v=20260926.1" defer></script>
-<link rel="stylesheet" href="../../assets/platform-fidelity.css?v=20260925.11">
-  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.1">
+  <script src="demo.js?v=20260926.2" defer></script>
+  <script src="../../scripts/device-preview.js?v=20260926.2" defer></script>
+  <script src="../../scripts/demo-guide.js?v=20260926.2" defer></script>
+  <script src="../../scripts/demo-series.js?v=20260926.2" defer></script>
+<link rel="stylesheet" href="../../assets/platform-fidelity.css?v=20260926.2">
+  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.2">
 </head>
 <body>
   <a class="skip-link" href="#demo">Skip to interactive system</a>
@@ -62,8 +62,8 @@
 
     <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
       <div class="shell">
-        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>The demo uses asset <strong>LAD-104</strong>, a fictional ladder assigned to Shipping Operations.</p></div>
-        <div class="device-preview-bar" data-device-preview data-target="ladder-device" data-device-default="phone" data-label-phone="Inspector phone" data-note-phone="Scan, inspect, attach evidence, and submit at the asset." data-label-tablet="Supervisor tablet" data-note-tablet="A wider execution view for review alongside the asset." data-label-system="Application + controls" data-note-system="See the user workflow and controlled system response together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Inspector phone</strong><small data-device-note>Scan, inspect, attach evidence, and submit at the asset.</small></div><div class="device-preview-actions" role="group" aria-label="Inspection experience size"><button type="button" data-preview-mode="phone" aria-pressed="true">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="false">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
+        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>Choose a fictional inspection month, department, and expected ladder.</p></div>
+        <div class="device-preview-bar" data-device-preview data-target="ladder-device" data-device-default="phone" data-label-phone="Inspector phone" data-note-phone="Select the cycle and expected asset, inspect, and submit." data-label-tablet="Supervisor tablet" data-note-tablet="A wider execution view for review alongside the asset." data-label-system="Application + controls" data-note-system="See the user workflow and controlled system response together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Inspector phone</strong><small data-device-note>Select the cycle and expected asset, inspect, and submit.</small></div><div class="device-preview-actions" role="group" aria-label="Inspection experience size"><button type="button" data-preview-mode="phone" aria-pressed="true">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="false">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
         <div class="workspace-grid device-preview-stage" id="ladder-device" data-device-mode="phone">
           <div class="device-surface"><div class="device-status" aria-hidden="true"><span>9:41</span><span>FIELD OPS · ●●●</span></div><section class="app-frame" aria-labelledby="app-title" data-canvas-app data-canvas-title="LADDER INSPECTION APP" data-canvas-subtitle="September 2026 · Department inspection" data-canvas-initials="FI" data-canvas-user="OP" data-canvas-commands="Home,Refresh" data-canvas-nav="Identify,Inspect,History">
             <div class="app-toolbar"><span>Inspection application</span><span class="demo-label">DEMO</span></div>
@@ -72,10 +72,13 @@
 
               <section class="demo-screen" data-screen="identify">
                 <p class="screen-kicker">STEP 1 / ASSET IDENTITY</p>
-                <h3 id="app-title">Scan the asset QR code.</h3>
-                <p>In a working solution, the code routes the inspector to the correct identified asset record. This demonstration simulates that scan.</p>
-                <div class="qr-card" aria-hidden="true"><div class="qr-pattern"></div><div><strong>LAD-104</strong><span>Shipping · Operations</span></div></div>
-                <button class="primary-action" type="button" data-scan>Simulate QR scan</button>
+                <h3 id="app-title">Select the inspection cycle.</h3>
+                <p>Choose the month and department. FOUND opens that ladder's inspection; NOT FOUND records a missing asset, not a completed inspection.</p>
+                <div class="department-gallery" data-department-gallery>
+                  <label>Inspection Month<select data-month><option>September 2026</option><option>October 2026</option></select></label>
+                  <label>Department<select data-department><option>Shipping</option><option>Facilities</option></select></label>
+                  <h3>Expected ladders</h3><div data-expected-assets></div>
+                </div>
               </section>
 
               <section class="demo-screen" data-screen="inspect" hidden>
@@ -87,8 +90,10 @@
                 <form data-inspection-form novalidate>
                   <div class="checklist" data-checklist></div>
                   <div class="notes-field"><label for="inspection-notes">Inspection notes <span data-notes-requirement>Optional unless an exception is identified</span></label><textarea id="inspection-notes" rows="3" data-notes placeholder="Describe damage, review needs, or follow-up context."></textarea></div>
-                  <div class="evidence-row"><div><strong>Evidence</strong><span>Simulated attachment only—no file leaves this page.</span></div><button type="button" data-evidence>Add demo evidence</button><span class="evidence-chip" data-evidence-chip hidden>photo-lad-017-demo.jpg <button type="button" aria-label="Remove synthetic evidence" data-remove-evidence>×</button></span></div>
-                  <div class="form-actions"><button class="secondary-action" type="button" data-back>← Back to asset</button><button class="primary-action" type="submit">Validate and submit</button></div>
+                  <div class="evidence-row"><div><strong>Evidence</strong><span>Simulated attachment only—no file leaves this page.</span></div><button type="button" data-evidence>Add demo evidence</button><span class="evidence-chip" data-evidence-chip hidden>inspection-evidence-demo.jpg <button type="button" aria-label="Remove synthetic evidence" data-remove-evidence>×</button></span></div>
+                  <p data-cycle-context></p>
+                  <label><input type="checkbox" data-certify> I certify that I inspected the selected asset for this inspection month.</label>
+                  <div class="form-actions"><button class="secondary-action" type="button" data-back>← Back to expected assets</button><button class="primary-action" type="submit">Validate and submit</button></div>
                 </form>
               </section>
 
@@ -97,7 +102,7 @@
                 <div class="result-banner" data-result-banner><span data-result-label>Inspection processed</span><strong data-result-status>Passed</strong><p data-result-explanation></p></div>
                 <div class="result-grid"><div><span>Inspection ID</span><strong data-result-id>INS-DEMO-0048</strong></div><div><span>Asset</span><strong>LAD-104</strong></div><div><span>Corrective action</span><strong data-result-action>Not required</strong></div><div><span>Notification</span><strong data-result-notification>Not required</strong></div></div>
                 <div class="history-panel"><div class="history-heading"><h3>Inspection history</h3><span>Occurrence records remain separate from the asset master.</span></div><div class="history-table" role="table" aria-label="Synthetic inspection history"><div class="history-row history-head" role="row"><span role="columnheader">Record</span><span role="columnheader">Date</span><span role="columnheader">Status</span><span role="columnheader">Evidence</span></div><div data-current-history></div><div data-previous-history></div></div></div>
-                <div class="form-actions"><button class="secondary-action" type="button" data-edit>← Review responses</button><button class="primary-action" type="button" data-reset>Run another scenario</button></div>
+                <div class="form-actions"><button class="secondary-action" type="button" data-edit>Start new inspection</button><button class="primary-action" type="button" data-reset>Return to expected assets</button></div>
               </section>
             </div>
           </section></div>
@@ -105,7 +110,7 @@
           <aside class="system-panel" aria-labelledby="system-title">
             <div class="panel-heading"><p class="eyebrow">Live system response</p><h2 id="system-title">Controls and state</h2></div>
             <div class="state-grid" aria-live="polite"><div><span>Asset identity</span><strong data-state-asset>Pending scan</strong></div><div><span>Required responses</span><strong data-state-responses>0 / 6</strong></div><div><span>Exception state</span><strong data-state-exception>Not evaluated</strong></div><div><span>Occurrence history</span><strong data-state-history>Pending</strong></div></div>
-            <div class="event-panel"><div><strong>Workflow event stream</strong><span>Synthetic execution trace</span></div><ol data-event-stream><li class="pending"><span>Waiting</span><p>Simulate the QR scan to begin.</p></li></ol></div>
+            <div class="event-panel"><div><strong>Workflow event stream</strong><span>Synthetic execution trace</span></div><ol data-event-stream><li class="pending"><span>Waiting</span><p>Select month, department, and expected asset.</p></li></ol></div>
             <details class="record-panel" open><summary>Synthetic record preview</summary><pre data-record-json>{
   "assetId": null,
   "status": "Not started"
