@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const validatorFile = fileURLToPath(import.meta.url);
-const ignoredDirectories = new Set([".git", "tmp"]);
+const ignoredDirectories = new Set([".git", "tmp", "references-private"]);
 const errors = [];
 
 function walk(directory, extension) {
@@ -43,10 +43,22 @@ const idCache = new Map();
 
 for (const file of htmlFiles) {
   const html = readFileSync(file, "utf8");
+  if ((html.match(/<h1\b/gi) || []).length !== 1) report(file, "expected exactly one main heading");
   const ids = Array.from(html.matchAll(/\bid="([^"]+)"/g), (match) => match[1]);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
   for (const id of new Set(duplicates)) report(file, `duplicate id "${id}"`);
   idCache.set(file, new Set(ids));
+  for (const needle of ['rel="canonical"', 'property="og:url"', 'property="og:image"']) {
+    if (!html.includes(needle) && !/name="robots"[^>]*noindex/i.test(html)) report(file, `missing ${needle}`);
+  }
+  const primary = html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)?.[0];
+  if(primary){
+    const labels=Array.from(primary.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g),m=>m[1]);
+    if(labels.join('|')!== 'Work|Systems|Smart Factory|About|Resume|Contact') report(file,'primary navigation differs from current structure');
+    const current=Array.from(primary.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/g));
+    for(const match of current){const href=match[0].match(/href="([^"]+)"/)?.[1];if(!href||resolveLocalTarget(file,href)!==file)report(file,'aria-current does not identify this page');}
+  }
+  if(/references-private(?:\/|\\)/i.test(html)) report(file,'private reference path exposed in HTML');
 
   const semanticRequirements = [
     [/<html\s+lang="[^"]+"/i, "document language"],
@@ -114,8 +126,10 @@ for (const requiredFile of [
 }
 
 const expectedDemoOrder = [
-  "ladder-inspection", "compliance-workflow", "digital-kanban", "cmms-lifecycle",
-  "telemetry-explorer", "connected-operations", "building-operations", "smart-factory-roadmap"
+  "plant-operations-hub", "facility-leaks", "ladder-inspection", "digital-kanban",
+  "toolbox-talks", "ehs-control", "electrical-analytics", "forklift-fleet",
+  "cmms-lifecycle", "connected-operations", "smart-factory-roadmap",
+  "compliance-workflow", "telemetry-explorer", "building-operations"
 ];
 const demoSeriesFile = join(root, "scripts/demo-series.js");
 const demoSeriesText = readFileSync(demoSeriesFile, "utf8");
@@ -147,8 +161,14 @@ const telemetryDemoText = readFileSync(telemetryDemoFile, "utf8");
 if (!telemetryDemoText.includes("devicepreviewchange")) report(telemetryDemoFile, "missing chart redraw listener for device changes");
 if (!telemetryDemoText.includes("ResizeObserver")) report(telemetryDemoFile, "missing dimension-based chart redraw guard");
 
-const sourceFiles = [".html", ".css", ".js", ".md", ".txt", ".xml", ".yml"].flatMap((extension) => walk(root, extension));
+const sourceFiles = [".html", ".css", ".js", ".mjs", ".svg", ".json", ".md", ".txt", ".xml", ".yml"].flatMap((extension) => walk(root, extension));
 const leakagePatterns = [
+  [/\bsk-(?:proj|svcac)-[A-Za-z0-9_-]{15,}/, "API credential"],
+  [/\bgithub_pat_[A-Za-z0-9_]{15,}/, "GitHub credential"],
+  [/\b(?:OPENAI_API_KEY|CODEX_API_KEY)\s*[:=]\s*["']?[^\s"']{8,}/, "credential assignment"],
+  [/\bBearer\s+[A-Za-z0-9_.-]{20,}/, "bearer credential"],
+  [/https?:\/\/(?:apps\.powerapps\.com|forms\.cloud\.microsoft)/i, "production application URL"],
+  [/\bmaclean365\b/i, "tenant identifier"],
   [/\bcodex-remote-attachments\b/i, "local attachment path"],
   [/[A-Z]:\\Users\\/i, "absolute Windows user path"],
   [/https?:\/\/[^\s\"'<>]*\.sharepoint\.com/i, "SharePoint tenant URL"],
@@ -156,15 +176,29 @@ const leakagePatterns = [
   [/\bgh[pousr]_[A-Za-z0-9_]{20,}\b/, "GitHub access token"]
 ];
 
+const privateTracked = spawnSync("git", ["ls-files", "references-private"], {cwd:root,encoding:"utf8"});
+if(privateTracked.status !== 0) report(root,"cannot verify private reference tracking status");
+else if(privateTracked.stdout.trim()) report(root,"private reference files are tracked; release prohibited");
+if(!readFileSync(join(root,".gitignore"),"utf8").includes("references-private/")) report(root,"private reference ignore rule missing");
+const resumeHtml=readFileSync(join(root,"resume/index.html"),"utf8");
+if(!/name="robots"[^>]*noindex/.test(resumeHtml)) report(root,"resume must remain noindex");
+if(/<loc>[^<]*\/resume\//.test(readFileSync(join(root,"sitemap.xml"),"utf8"))) report(root,"resume must remain out of sitemap");
+for(const slug of ["plant-operations-hub","facility-leaks","toolbox-talks","electrical-analytics","forklift-fleet","service-intake","ehs-control"]){
+ const file=join(root,"demos",slug,"index.html");
+ if(!readFileSync(file,"utf8").includes("Employer branding, records, URLs, identifiers, drawings, and production data have been replaced")) report(file,"missing recreation disclosure");
+}
+
 for (const file of sourceFiles) {
   if (resolve(file) === resolve(validatorFile)) continue;
   const text = readFileSync(file, "utf8");
+  const publicPath=relative(root,file).replaceAll('\\','/');
+  if((publicPath.startsWith('demos/')||publicPath.startsWith('assets/')||publicPath.startsWith('scripts/')) && /(?:maclean[ -]?fogg|mundelein|maclean365|references-private[\\/])/i.test(text)) report(file,'private source identifier in recreation');
   for (const [pattern, label] of leakagePatterns) {
     if (pattern.test(text)) report(file, `possible ${label}`);
   }
 }
 
-for (const file of walk(root, ".js")) {
+for (const file of [...walk(root, ".js"), ...walk(root, ".mjs")]) {
   const result = spawnSync(process.execPath, ["--check", file], { encoding: "utf8" });
   if (result.status !== 0) report(file, (result.stderr || result.stdout || "JavaScript syntax check failed").trim());
 }

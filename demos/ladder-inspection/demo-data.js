@@ -1,6 +1,6 @@
 window.LADDER_DEMO_DATA = Object.freeze({
   asset: {
-    assetId: "LAD-017",
+    assetId: "LAD-104",
     location: "Shipping",
     department: "Operations",
     assetType: "6 ft fiberglass step ladder",
@@ -26,7 +26,7 @@ window.LADDER_DEMO_DATA = Object.freeze({
     { id: "INS-2026-0021", date: "Jul 05, 2026", status: "Follow-up closed", note: "Label condition reviewed and documented." }
   ],
   architecture: [
-    { name: "QR identity", detail: "Resolves LAD-017" },
+    { name: "QR identity", detail: "Resolves LAD-104" },
     { name: "Inspection UI", detail: "Structured responses" },
     { name: "Asset + occurrence", detail: "Separate records" },
     { name: "Workflow rules", detail: "Exceptions + actions" },

@@ -26,7 +26,7 @@ This dependency-free static architecture avoids an unnecessary package and build
 Because the site uses clean directory routes, run it through the included local static server from this project folder:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\serve.ps1
+node .\tools\serve.mjs
 ```
 
 Then open:
@@ -37,6 +37,8 @@ http://127.0.0.1:4173/
 
 Stop the server with `Ctrl+C`.
 
+The preview binds only to loopback and denies private inputs, Git metadata, temporary files, and tooling. No installation or package download is needed when Node.js is available.
+
 ## Build instructions
 
 There is no compilation or bundling step. The source files are the production files. A production check consists of serving the folder and verifying that all local routes and assets return successfully.
@@ -45,6 +47,7 @@ When Node.js is available, run the included no-dependency validation command bef
 
 ```powershell
 node .\tools\validate-site.mjs
+node .\tools\test-system-data.mjs
 ```
 
 It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, common leakage indicators, and JavaScript syntax. The same validator runs automatically on pushes and pull requests through a least-privilege GitHub Actions workflow whose checkout dependency is pinned to an immutable commit.
@@ -93,7 +96,18 @@ Shared presentation lives in `styles.css`, while hub and case-study layouts live
 
 ## Interactive demonstrations
 
-Synthetic proof-of-concept demos are available at:
+Primary implemented-system recreations are available at:
+
+- `/demos/plant-operations-hub/`
+- `/demos/facility-leaks/`
+- `/demos/ladder-inspection/`
+- `/demos/digital-kanban/`
+- `/demos/toolbox-talks/`
+- `/demos/ehs-control/`
+- `/demos/electrical-analytics/`
+- `/demos/forklift-fleet/`
+
+The hub also links to the intentionally simple `/demos/service-intake/` form. Supporting architecture and concept demonstrations remain available at:
 
 - `/demos/ladder-inspection/`
 - `/demos/compliance-workflow/`
@@ -104,9 +118,20 @@ Synthetic proof-of-concept demos are available at:
 - `/demos/building-operations/`
 - `/demos/smart-factory-roadmap/`
 
-Every demo includes an optional guided run. The shared `scripts/demo-guide.js` configuration defines a short business scenario, points to the real interactive controls, and advances only after the visitor performs the required action. `assets/demo-guide.css` supplies the responsive, keyboard-visible presentation. The guide does not auto-play, simulate user actions, add persistence, or change the synthetic-data boundaries of the demonstrations.
+The original eight demos retain optional guided runs. The shared `scripts/demo-guide.js` configuration points to real interactive controls and advances on confirmed state signals where required. The new platform recreations use direct, labeled task steps instead of an additional guide overlay.
 
-Every demo also loads the shared `scripts/demo-series.js` and `assets/demo-series.css` assets. This adds consistent previous/next navigation and a return path to the complete proof lab without duplicating navigation markup across eight demos. The shared `scripts/canvas-sim.js` and `assets/canvas-sim.css` layer gives the complete suite a consistent Canvas-style application shell, role context, command surface, responsive navigation, notifications, loading states, and review dialogs without copying Microsoft branding or connecting to a Power Platform environment.
+The systems library uses `scripts/demo-series.js` and `assets/demo-series.css` for previous/next navigation. The simple service form returns directly to the hub. Canvas-style workflows retain `scripts/canvas-sim.js` and `assets/canvas-sim.css`; new SharePoint, Forms, and Power BI recreations intentionally use different platform-appropriate interfaces.
+
+### Maintaining the recreated systems
+
+- `scripts/operations-data.js`: deterministic fictional interval and fleet fixtures.
+- `scripts/operations-systems.js`: portal, report calculations, and browser-only workflow state.
+- `assets/operations-systems.css`: source-platform-inspired presentation.
+- `assets/platform-fidelity.css`: targeted ladder and physical Kanban refinements.
+- `tools/build-system-pages.mjs`: assembles the seven new static HTML wrappers. Run only when changing wrapper metadata or structure; edit the generator rather than generated wrapper files.
+- `tools/test-system-data.mjs`: verifies interval identity, energy integration, fleet records, and charging-model arithmetic.
+
+Private visual inputs are ignored and never part of the release. Do not deploy this entire working directory indiscriminately: publish the reviewed Git tree. Temporary implementation helpers are not supported build tools and must not be committed. No Microsoft authentication, live list, upload, equipment control, or report service is connected.
 
 The ladder inspection demo demonstrates:
 
@@ -142,7 +167,7 @@ The Building Operations Command Center generalizes a map-based reporting pattern
 
 The Smart Factory Roadmap Studio adds the transformation-management layer. Visitors can compare three synthetic plant profiles, select a strategic priority, review an eight-domain maturity assessment, see a synthetic use-case backlog reorder using an inspectable scoring model, and examine a gated foundation-to-sustainment roadmap. It also includes a platform-neutral IT/OT reference architecture and cross-functional governance model. It is an architecture and prioritization prototype—not a claim of enterprise MES, SCADA, PLC, digital-twin, OT-cybersecurity, or multi-site deployment experience.
 
-All eight demonstrations now use a Canvas-style app presentation. Transactional workflows use phone-oriented navigation, while analytics, maintenance, connected-operations, spatial-response, and roadmap experiences use tablet or workspace-oriented screens. Role-appropriate phone, tablet, and full-system experience modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, analyst, facilities leader, or transformation manager would encounter the operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
+The original eight demonstrations retain their existing app presentation. New implemented-system recreations use platform-specific layouts rather than extending the Canvas shell to every report and portal. Transactional workflows use phone-oriented navigation, while analytics, maintenance, connected-operations, spatial-response, and roadmap experiences use tablet or workspace-oriented screens. Role-appropriate phone, tablet, and full-system experience modes preserve the working controls and governed state changes while showing how a frontline user, planner, supervisor, analyst, facilities leader, or transformation manager would encounter the operating model. The telemetry chart also supports pointer/touch inspection and keyboard interval navigation; the Kanban workflow explicitly hands a submitted requester signal into the restocker view.
 
 ## Navigation model
 
@@ -153,7 +178,7 @@ The site uses a hub-and-spoke information architecture:
 - Work, Demos, Approach, Smart Factory, and About each have a dedicated URL
 - long hub and case-study pages include a contextual “On this page” navigation
 - individual case studies use breadcrumbs and previous/next paths
-- every demo includes a return path to its related case or work context and shared previous/next demo navigation
+- every demo includes a return path to its case, work context, or operating hub; the main series also provides previous/next navigation
 
 On desktop, the contextual navigation remains sticky beside the content. On smaller screens it becomes a native expandable disclosure instead of a persistent bottom bar, leaving more viewport space for the work itself. A keyboard-accessible back-to-top control appears after the visitor moves beyond the opening content.
 
@@ -192,6 +217,6 @@ The current GitHub Pages response provides HTTPS and HSTS, while the project-con
 - Re-scan the résumé PDF after every replacement to confirm that no phone number or precise home location has returned.
 - Verify the scope, timeframe, and attribution of every result metric.
 - Confirm project maturity labels.
-- Confirm that the 143 requirements, 500+ annual tasks, 42,000+ telemetry records, five forklifts, and energy-savings figures are safe and accurate for public disclosure.
+- Confirm that the 143 requirements, 500+ annual tasks, 69,000+ telemetry records, five forklifts, and energy-savings figures are safe and accurate for public disclosure.
 - Confirm the GitHub Pages URL or replace it with the selected custom domain.
 - Re-run responsive, accessibility, console, and broken-link checks on the selected host.

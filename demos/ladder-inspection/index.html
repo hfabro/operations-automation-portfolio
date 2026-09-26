@@ -35,6 +35,7 @@
   <script src="../../scripts/device-preview.js?v=20260925.10" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260925.10" defer></script>
   <script src="../../scripts/demo-series.js?v=20260925.10" defer></script>
+<link rel="stylesheet" href="../../assets/platform-fidelity.css">
 </head>
 <body>
   <a class="skip-link" href="#demo">Skip to interactive demo</a>
@@ -45,7 +46,7 @@
     </div>
   </header>
 
-  <main>
+  <main><details class="platform-disclosure"><summary>Implemented workflow / synthetic recreation</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p></details>
     <section class="demo-intro" aria-labelledby="demo-title">
       <div class="shell intro-grid">
         <div>
@@ -60,7 +61,7 @@
 
     <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
       <div class="shell">
-        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>The demo uses asset <strong>LAD-017</strong>, a fictional ladder assigned to Shipping Operations.</p></div>
+        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>The demo uses asset <strong>LAD-104</strong>, a fictional ladder assigned to Shipping Operations.</p></div>
         <div class="device-preview-bar" data-device-preview data-target="ladder-device" data-device-default="phone" data-label-phone="Inspector phone" data-note-phone="Scan, inspect, attach evidence, and submit at the asset." data-label-tablet="Supervisor tablet" data-note-tablet="A wider execution view for review alongside the asset." data-label-system="Application + controls" data-note-system="See the user workflow and governed system response together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Inspector phone</strong><small data-device-note>Scan, inspect, attach evidence, and submit at the asset.</small></div><div class="device-preview-actions" role="group" aria-label="Inspection experience size"><button type="button" data-preview-mode="phone" aria-pressed="true">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="false">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
         <div class="workspace-grid device-preview-stage" id="ladder-device" data-device-mode="phone">
           <div class="device-surface"><div class="device-status" aria-hidden="true"><span>9:41</span><span>FIELD OPS · ●●●</span></div><section class="app-frame" aria-labelledby="app-title" data-canvas-app data-canvas-title="Field Inspection" data-canvas-subtitle="Operations · Inspector workspace" data-canvas-initials="FI" data-canvas-user="OP" data-canvas-commands="Home,Refresh" data-canvas-nav="Identify,Inspect,History">
@@ -72,13 +73,13 @@
                 <p class="screen-kicker">STEP 1 / ASSET IDENTITY</p>
                 <h3 id="app-title">Scan the asset QR code.</h3>
                 <p>In a working solution, the code routes the inspector to the correct governed asset record. This demonstration simulates that scan.</p>
-                <div class="qr-card" aria-hidden="true"><div class="qr-pattern"></div><div><strong>LAD-017</strong><span>Shipping · Operations</span></div></div>
+                <div class="qr-card" aria-hidden="true"><div class="qr-pattern"></div><div><strong>LAD-104</strong><span>Shipping · Operations</span></div></div>
                 <button class="primary-action" type="button" data-scan>Simulate QR scan</button>
               </section>
 
               <section class="demo-screen" data-screen="inspect" hidden>
                 <p class="screen-kicker">STEP 2 / STRUCTURED INSPECTION</p>
-                <div class="asset-banner"><div><span>ASSET</span><strong data-asset-id>LAD-017</strong></div><dl><div><dt>Location</dt><dd data-asset-location>Shipping</dd></div><div><dt>Department</dt><dd data-asset-department>Operations</dd></div><div><dt>Frequency</dt><dd data-asset-frequency>Monthly</dd></div></dl></div>
+                <div class="asset-banner"><div><span>ASSET</span><strong data-asset-id>LAD-104</strong></div><dl><div><dt>Location</dt><dd data-asset-location>Shipping</dd></div><div><dt>Department</dt><dd data-asset-department>Operations</dd></div><div><dt>Frequency</dt><dd data-asset-frequency>Monthly</dd></div></dl></div>
                 <div class="inspection-heading"><div><h3>Complete six required checks.</h3><p data-progress-text>0 of 6 responses captured</p></div><div class="progress-track" aria-hidden="true"><span data-progress-bar></span></div></div>
                 <div class="scenario-controls" aria-label="Demo scenario shortcuts"><span>Try a scenario:</span><button type="button" data-scenario="safe">All checks pass</button><button type="button" data-scenario="exception">Safety exception</button></div>
                 <div class="error-summary" role="alert" tabindex="-1" data-error-summary hidden><strong>Inspection cannot be submitted yet.</strong><ul data-error-list></ul></div>
@@ -93,7 +94,7 @@
               <section class="demo-screen" data-screen="result" hidden>
                 <p class="screen-kicker">STEP 3 / SYSTEM RESULT</p>
                 <div class="result-banner" data-result-banner><span data-result-label>Inspection processed</span><strong data-result-status>Passed</strong><p data-result-explanation></p></div>
-                <div class="result-grid"><div><span>Inspection ID</span><strong data-result-id>INS-DEMO-0048</strong></div><div><span>Asset</span><strong>LAD-017</strong></div><div><span>Corrective action</span><strong data-result-action>Not required</strong></div><div><span>Notification</span><strong data-result-notification>Not required</strong></div></div>
+                <div class="result-grid"><div><span>Inspection ID</span><strong data-result-id>INS-DEMO-0048</strong></div><div><span>Asset</span><strong>LAD-104</strong></div><div><span>Corrective action</span><strong data-result-action>Not required</strong></div><div><span>Notification</span><strong data-result-notification>Not required</strong></div></div>
                 <div class="history-panel"><div class="history-heading"><h3>Inspection history</h3><span>Occurrence records remain separate from the asset master.</span></div><div class="history-table" role="table" aria-label="Synthetic inspection history"><div class="history-row history-head" role="row"><span role="columnheader">Record</span><span role="columnheader">Date</span><span role="columnheader">Status</span><span role="columnheader">Evidence</span></div><div data-current-history></div><div data-previous-history></div></div></div>
                 <div class="form-actions"><button class="secondary-action" type="button" data-edit>← Review responses</button><button class="primary-action" type="button" data-reset>Run another scenario</button></div>
               </section>
@@ -119,7 +120,7 @@
       <div class="shell">
         <div class="architecture-heading"><div><p class="eyebrow">Architecture behind the interaction</p><h2 id="architecture-title">The interface is one layer of the system.</h2></div><p>The proof of concept separates identity, execution, workflow, and history so the operating process can remain supportable as requirements change.</p></div>
         <div class="architecture-flow" data-architecture-flow></div>
-        <div class="design-proof-grid"><article><span>01 / identity</span><h3>Asset master</h3><p>LAD-017 owns stable information such as location, department, class, and inspection frequency.</p></article><article><span>02 / occurrence</span><h3>Inspection record</h3><p>Each execution gets a unique ID and captures the responses that were valid at that moment.</p></article><article><span>03 / exception</span><h3>Corrective action</h3><p>Rules create follow-up work when unsafe conditions are reported; AI is not needed for predictable safety logic.</p></article><article><span>04 / sustainment</span><h3>History and reporting</h3><p>Completed occurrences remain historically true and become the reporting-ready record of execution.</p></article></div>
+        <div class="design-proof-grid"><article><span>01 / identity</span><h3>Asset master</h3><p>LAD-104 owns stable information such as location, department, class, and inspection frequency.</p></article><article><span>02 / occurrence</span><h3>Inspection record</h3><p>Each execution gets a unique ID and captures the responses that were valid at that moment.</p></article><article><span>03 / exception</span><h3>Corrective action</h3><p>Rules create follow-up work when unsafe conditions are reported; AI is not needed for predictable safety logic.</p></article><article><span>04 / sustainment</span><h3>History and reporting</h3><p>Completed occurrences remain historically true and become the reporting-ready record of execution.</p></article></div>
       </div>
     </section>
   </main>

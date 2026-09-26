@@ -3,6 +3,8 @@
 
   var data = window.LADDER_DEMO_DATA;
   if (!data) return;
+  var occurrenceSequence = 48;
+  var assetHistory = { "LAD-104": data.previousHistory.slice(), "LAD-107": [], "LAD-112": [] };
 
   var state = {
     step: "identify",
@@ -39,7 +41,7 @@
   function renderChecklist() {
     checklistRoot.innerHTML = data.checklist.map(function (item, index) {
       var options = item.options.map(function (option) {
-        return '<label class="response-option"><input type="radio" name="' + item.id + '" value="' + option + '"><span>' + option + "</span></label>";
+        return '<label class="response-option"><input type="radio" name="' + item.id + '" value="' + option + '"><span>' + (option === "Pass" ? "OK" : option === "Fail" ? "DEFECT" : option) + "</span></label>";
       }).join("");
       return '<fieldset class="inspection-item" data-item="' + item.id + '"><legend><span>' + String(index + 1).padStart(2, "0") + '</span><strong>' + escapeHtml(item.label) + '</strong>' + (item.critical ? '<small>Safety critical</small>' : "") + '</legend><div class="response-options">' + options + "</div></fieldset>";
     }).join("");
@@ -66,7 +68,7 @@
   function renderPreviousHistory() {
     var root = document.querySelector("[data-previous-history]");
     if (!root) return;
-    root.innerHTML = data.previousHistory.map(function (record) {
+    root.innerHTML = (assetHistory[data.asset.assetId] || []).filter(function (record) { return record.id !== data.inspection.inspectionId; }).map(function (record) {
       return '<div class="history-row" role="row"><strong role="cell">' + escapeHtml(record.id) + '</strong><span role="cell">' + escapeHtml(record.date) + '</span><span role="cell">' + escapeHtml(record.status) + '</span><span role="cell">' + escapeHtml(record.note) + "</span></div>";
     }).join("");
   }
@@ -173,9 +175,14 @@
   }
 
   function resolveAsset() {
+    data.inspection.inspectionId = "INS-DEMO-" + String(++occurrenceSequence).padStart(4, "0");
+    renderPreviousHistory();
+    document.querySelector('[data-asset-id]').textContent = data.asset.assetId;
+    document.querySelector('[data-asset-location]').textContent = data.asset.location;
+    document.querySelector('[data-asset-department]').textContent = data.asset.department;
     state.assetResolved = true;
     setEvents([
-      { label: "Identity", text: "QR value resolved to governed asset LAD-017.", tone: "complete" },
+      { label: "Identity", text: "QR value resolved to governed asset " + data.asset.assetId + ".", tone: "complete" },
       { label: "Source record", text: "Location, department, class, and frequency loaded from the asset master.", tone: "complete" },
       { label: "Occurrence", text: "A new synthetic inspection instance is ready for required responses.", tone: "active" }
     ]);
@@ -248,6 +255,8 @@
         : "All required responses passed. The completed occurrence was preserved in inspection history.";
 
     state.submitted = true;
+    document.querySelector('[data-result-id]').textContent = data.inspection.inspectionId;
+    document.querySelector('[data-result-id]').closest('.result-grid').children[1].querySelector('strong').textContent = data.asset.assetId;
     document.querySelector("[data-result-status]").textContent = status;
     document.querySelector("[data-result-explanation]").textContent = explanation;
     document.querySelector("[data-result-action]").textContent = evaluation.correctiveAction ? "CA-DEMO-011 created" : "Not required";
@@ -257,9 +266,13 @@
 
     var currentHistory = document.querySelector("[data-current-history]");
     currentHistory.innerHTML = '<div class="history-row current" role="row"><strong role="cell">' + data.inspection.inspectionId + '</strong><span role="cell">Demo session</span><span role="cell">' + escapeHtml(status) + '</span><span role="cell">' + (state.evidence ? "1 synthetic file" : "No attachment") + "</span></div>";
+    var history = assetHistory[data.asset.assetId] || (assetHistory[data.asset.assetId] = []);
+    if (!history.some(function (record) { return record.id === data.inspection.inspectionId; })) {
+      history.unshift({id:data.inspection.inspectionId,date:"Demo session",status:status,note:state.notes || "Required responses captured.",snapshot:JSON.parse(JSON.stringify(buildRecord(status,evaluation)))});
+    }
 
     setEvents([
-      { label: "Occurrence", text: data.inspection.inspectionId + " created separately from asset LAD-017.", tone: "complete" },
+      { label: "Occurrence", text: data.inspection.inspectionId + " created separately from asset " + data.asset.assetId + ".", tone: "complete" },
       { label: "Validation", text: "Six required responses and exception-note rules passed.", tone: "complete" },
       { label: evaluation.correctiveAction ? "Corrective action" : "Control result", text: evaluation.correctiveAction ? "CA-DEMO-011 created and linked to the inspection occurrence." : "No corrective action was required.", tone: evaluation.correctiveAction ? "alert" : "complete" },
       { label: "Notification", text: evaluation.hasException ? "A synthetic exception notice was generated for the responsible owner." : "Notification workflow was correctly skipped.", tone: evaluation.hasException ? "alert" : "complete" },
@@ -272,6 +285,9 @@
   }
 
   function resetDemo() {
+    data.asset.assetId = "LAD-104";
+    data.asset.department = "Shipping";
+    data.asset.location = "Demo dispatch bay";
     state.step = "identify";
     state.assetResolved = false;
     state.responses = {};
@@ -297,7 +313,7 @@
   document.querySelector("[data-scan]").addEventListener("click", function () {
     if (!window.CanvasSim) { resolveAsset(); return; }
     window.CanvasSim.busy(canvasRoot, "Resolving synthetic asset record…", resolveAsset, 460).then(function () {
-      canvasNotify("Asset LAD-017 loaded from the synthetic asset register.", "success");
+      canvasNotify("Asset " + data.asset.assetId + " loaded from the synthetic asset register.", "success");
     });
   });
   document.querySelectorAll("[data-scenario]").forEach(function (button) {
@@ -311,7 +327,7 @@
   document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference attached.", "success"); });
   document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference removed.", "info"); });
   document.querySelector("[data-back]").addEventListener("click", function () { state.assetResolved = false; updateLiveState(); setStep("identify", true); });
-  document.querySelector("[data-edit]").addEventListener("click", function () { state.submitted = false; updateLiveState(); setStep("inspect", true); });
+  document.querySelector("[data-edit]").addEventListener("click", function () { state.submitted = false; data.inspection.inspectionId = "INS-DEMO-" + String(++occurrenceSequence).padStart(4,"0"); renderPreviousHistory(); updateLiveState(); setStep("inspect", true); });
   document.querySelector("[data-reset]").addEventListener("click", resetDemo);
   canvasRoot.addEventListener("canvas:navigate", function (event) {
     var action = event.detail.action;
@@ -342,4 +358,36 @@
       });
     });
   });
+
+  // Department gallery mirrors the implemented mobile workflow without sharing any real register.
+  var register = [
+    { id: "LAD-104", department: "Shipping", location: "Demo dispatch bay" },
+    { id: "LAD-107", department: "Shipping", location: "Demo packing station" },
+    { id: "LAD-112", department: "Facilities", location: "Demo support room" }
+  ];
+  var identityScreen = document.querySelector('[data-screen="identify"]');
+  var gallery = document.createElement('div');
+  gallery.className = 'department-gallery';
+  gallery.innerHTML = '<label>Department<select data-department><option>Shipping</option><option>Facilities</option></select></label><h3>Expected ladders</h3><p>Confirm the asset is present before inspecting. A missing asset is an exception, not a completed inspection.</p><div data-expected-assets></div><p data-missing-notice role="status"></p>';
+  identityScreen.insertBefore(gallery, identityScreen.querySelector('.qr-card'));
+  var missing = [];
+  function renderGallery() {
+    var department = gallery.querySelector('select').value;
+    gallery.querySelector('[data-expected-assets]').innerHTML = register.filter(function (a) { return a.department === department; }).map(function (a) {
+      return '<div class="expected-asset"><strong>' + a.id + '</strong><small>' + a.location + '</small><div><button type="button" data-found="' + a.id + '">FOUND</button><button type="button" data-missing="' + a.id + '">NOT FOUND</button></div></div>';
+    }).join('');
+    gallery.querySelectorAll('[data-found]').forEach(function (b) { b.addEventListener('click',function () {
+      var a = register.find(function (row) { return row.id === b.dataset.found; });
+      resetDemo();
+      data.asset.assetId = a.id; data.asset.department = a.department; data.asset.location = a.location;
+      resolveAsset(); canvasNotify(a.id + ' identified. Complete the required checks.', 'success');
+    }); });
+    gallery.querySelectorAll('[data-missing]').forEach(function (b) { b.addEventListener('click',function () {
+      if (missing.indexOf(b.dataset.missing) < 0) missing.push(b.dataset.missing);
+      gallery.querySelector('[data-missing-notice]').textContent = missing.join(', ') + ': missing-asset follow-up recorded. No inspection completion recorded.';
+      b.disabled = true;
+    }); });
+  }
+  gallery.querySelector('select').addEventListener('change',renderGallery);
+  renderGallery();
 })();

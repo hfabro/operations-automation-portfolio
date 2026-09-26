@@ -87,7 +87,7 @@
       outcome: "Location-aware triage with explicit ownership and lifecycle state",
       steps: [
         { selector: '[data-view="machine"]', event: "click", title: "Open the machine view", text: "Move from the synthetic building schematic to asset-level operating context." },
-        { selector: '[data-select^="MCH-"]', event: "click", title: "Select a machine condition", text: "Choose a marker or queue item to connect location, asset, severity, status, and ownership." },
+        { selector: '[data-select="MCH-221"]', event: "click", title: "Select a machine condition", text: "Choose a marker or queue item to connect location, asset, severity, status, and ownership." },
         { selector: '[data-action="work"]', event: "demo:state", signal: "building-work-requested", title: "Create the work request", text: "Advance the selected condition into an explicit, human-owned corrective workflow." }
       ]
     },

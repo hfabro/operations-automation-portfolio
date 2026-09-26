@@ -28,3 +28,5 @@ jobs:
 
       - name: Run the dependency-free site validator
         run: node ./tools/validate-site.mjs
+      - name: Verify synthetic report fixtures
+        run: node ./tools/test-system-data.mjs

@@ -129,3 +129,7 @@ main [id] { scroll-margin-top: 76px; }
 @media print {
   .demo-series-nav { display: none !important; }
 }
+
+.demo-series-link-copy strong,.demo-series-center strong{font-size:14px}
+.demo-series-center a,.demo-series-link-copy span,.demo-series-center>span{font-size:12px}
+@media(max-width:720px){.demo-series-link-copy strong,.demo-series-center strong{font-size:12px}.demo-series-center a{font-size:12px}.demo-series-center{max-width:52vw}.demo-series-nav{position:relative}}

@@ -2,3 +2,6 @@
 Thumbs.db
 *.log
 tmp/
+
+# Private visual references - never publish
+references-private/

@@ -172,3 +172,23 @@ main [id] { scroll-margin-top: 104px; }
   .page-layout { display: block; }
   .hub-hero { padding-block: 20px; }
 }
+/* Readable portfolio shell; source-platform demos keep their own visual language. */
+.hub-page .primary-nav a{font-size:14px}
+.hub-page .page-toc a{font-size:14px}
+.hub-page .card-tags span,.hub-page .card-meta{font-size:12px}
+.hub-page .work-summary-card p{font-size:16px}
+.hub-page .hub-footer-nav a{font-size:14px}
+.platform-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;padding:0;list-style:none;margin:28px 0}
+.platform-flow li{border:1px solid var(--line,#8a9b94);padding:18px 14px;font-size:16px;font-weight:650}
+.platform-secondary{margin-top:36px}
+.hub-page .hub-section{padding-block:clamp(48px,6vw,80px)}
+.hub-page .eyebrow{font-size:12px}
+.hub-page .split-heading>p{font-size:16px}
+.hub-card-grid>.demo-proof-card{display:flex;flex-direction:column;gap:14px;padding:20px;border:1px solid var(--line);background:var(--surface);color:var(--ink);text-decoration:none;min-width:0}
+.hub-card-grid>.demo-proof-card>strong{font-size:19px;line-height:1.35}
+.hub-card-grid>.demo-proof-card>small{font-size:14px;color:var(--muted);line-height:1.5}
+.hub-card-grid>.demo-proof-card .demo-card-meta{font-size:13px}
+.hub-card-grid>.demo-proof-card .proof-visual{color:#e9f4ee}
+.hub-card-grid>.demo-proof-card:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.hub-card-grid>.demo-proof-card:hover{border-color:var(--accent)}
+@media(max-width:760px){.platform-flow{grid-template-columns:1fr}.platform-flow li:not(:last-child)::after{content:' ↓';float:right}}

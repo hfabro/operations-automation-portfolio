@@ -1,0 +1,29 @@
+// Dependency-free page assembly. Run after changing page metadata or static portal content.
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+const root=new URL('../',import.meta.url);
+const pages=[
+ ['plant-operations-hub','Plant Operations Hub','SharePoint-style portal','Find employee tools, facilities workflows, and operational reports in one synthetic manufacturing campus.'],
+ ['facility-leaks','Facility Leak Management','Power Apps-style workflow','Select a fictional map location, report a condition, assign a response, and verify closure.'],
+ ['toolbox-talks','Toolbox Talks','SharePoint + Forms + Power BI','Open bilingual learning materials, complete an acknowledgment, and review the completion snapshot.'],
+ ['electrical-analytics','Electrical Usage Analytics','Power BI-style report','Explore energy, interval demand, matched evidence, weather context, and billing boundaries.'],
+ ['forklift-fleet','Forklift Fleet & Battery Decision Support','Power BI-style report','Review five synthetic trucks through shipping, energy, readiness, and charging-pilot views.'],
+ ['service-intake','Service Issue Report','Microsoft Forms-style intake','Submit a simple synthetic service request with required fields and a mock attachment.'],
+ ['ehs-control','EHS Compliance Control','SharePoint + Lists + Power BI','Move from scheduled requirement through execution evidence to a dated management snapshot.']
+];
+for(const [slug,title,platform,description] of pages){
+ const url=`https://hfabro.github.io/operations-automation-portfolio/demos/${slug}/`;
+ const html=`<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
+<meta name="referrer" content="no-referrer"><meta name="color-scheme" content="light"><meta name="description" content="${description}"><title>${title} | David H. Fabro</title>
+<meta property="og:title" content="${title} | David H. Fabro"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:image" content="https://hfabro.github.io/operations-automation-portfolio/assets/og.png"><link rel="canonical" href="${url}"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../assets/operations-systems.css"><link rel="stylesheet" href="../../assets/demo-series.css">
+<script src="../../scripts/operations-data.js" defer></script><script src="../../scripts/operations-systems.js" defer></script><script src="../../scripts/demo-series.js" defer></script></head>
+<body data-system="${slug}"><a class="skip-link" href="#main">Skip to system</a><header class="ops-header"><a href="../../">DF <strong>David H. Fabro</strong></a><nav aria-label="Portfolio"><a href="../../work/">Work</a><a href="../">All systems</a><a href="../plant-operations-hub/">Plant hub</a></nav></header>
+<main id="main"><section class="ops-intro"><span class="ops-eyebrow">Implemented workflow · synthetic recreation</span><h1>${title}</h1><p>${description}</p><p class="ops-caption">${platform} · Browser simulation, not an embedded Microsoft application. No production connections. Changes reset on reload.</p><details class="ops-disclosure"><summary>Recreation boundary and privacy</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p><p>Only use fictional information. Nothing is transmitted or uploaded. The interface stays light, like its source platform, independently of the portfolio theme.</p></details></section>
+<section class="ops-app" id="system" aria-label="${title}"><noscript><p>JavaScript is needed to operate this simulation. ${description} All records and diagrams are fictional.</p><a href="../../work/">Read the static case studies</a></noscript></section>
+<p id="ops-live" class="ops-message" role="status" aria-live="polite"></p></main><footer class="ops-footer"><a href="../">Back to systems</a><p>Synthetic manufacturing campus. No equipment commands, uploads, or external services.</p></footer></body></html>`;
+ mkdirSync(new URL(`demos/${slug}/`,root),{recursive:true});writeFileSync(new URL(`demos/${slug}/index.html`,root),html);
+}
+console.log(`Assembled ${pages.length} static system pages.`);
