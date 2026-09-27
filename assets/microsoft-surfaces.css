@@ -164,3 +164,29 @@
 @media(min-width:900px){[data-system="electrical-analytics"] [data-platform="report"]>.ops-pad{display:grid;grid-template-columns:2fr 1fr;gap:10px}[data-system="electrical-analytics"] .ops-pad>:not(article){grid-column:1/-1}}
 @media(max-width:780px){[data-system="plant-operations-hub"] .ops-cards{grid-template-columns:repeat(2,minmax(0,1fr))}[data-system="plant-operations-hub"] .ops-pad{padding:20px}.ops-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.ops-toolbar{padding:16px}}
 @media(max-width:440px){[data-system="plant-operations-hub"] .ops-cards{grid-template-columns:1fr}.portal-link{min-height:110px}.ops-form{padding:22px 18px;margin:12px}.ops-toolbar strong{font-size:20px}.ops-band{padding:20px}.ops-band h2{font-size:24px}.ops-kpi strong{font-size:21px!important}.ops-filters label{flex-basis:120px}.ops-tabs{padding:0 6px}.ops-tabs button{font-size:13px;flex-basis:120px}[data-canvas-app] .canvas-command-context{display:none}}
+
+/* Contrast corrections on intentionally light app surfaces; no state/layout changes. */
+.demo-header:has(.system-context){background:#f3f2f1;color:#323130}.demo-header:has(.system-context) .brand strong{color:#323130}.demo-header:has(.system-context) .brand small{color:#605e5c}
+.architecture-proof :is(.architecture-node>span,.design-proof-grid article>span){color:#9d3e23}
+.step-indicator .active,.active-pill{color:#115ea3!important;background:#eff6fc!important}
+.architecture-proof .architecture-heading>p,body:has(.architecture-proof) .demo-intro .lede{color:#605e5c}
+body:has(.architecture-proof) :is(footer p,footer a,.brand small){color:#605e5c}
+body:has(.roadmap-canvas-suite) .hero .eyebrow{color:#f08a64}
+.history-panel .eyebrow,.kanban-section>.shell>.section-heading .eyebrow{color:#9d3e23}.kanban-section>.shell>.section-heading>p{color:#605e5c}
+[data-canvas-title="Connected Operations"] .decision-panel :is(p,span){color:#605e5c}
+[data-canvas-title="Connected Operations"] .decision-panel :is(strong,h2){color:#323130}
+.roadmap-canvas-suite :is(.portfolio-section,.architecture-section){background:#f3f2f1;color:#323130}
+.roadmap-canvas-suite :is(.rank span,.rank small,.use-case-copy span,.use-case-copy p,.use-case-copy ul,.method-note,.score-key span,.architecture-flow p,.architecture-flow article span){color:#605e5c}
+.roadmap-canvas-suite .score-key b{color:#323130}.roadmap-canvas-suite .score-key span{border-color:#8a8886}
+.roadmap-canvas-suite .section-heading.light :is(p,.eyebrow){color:#605e5c}
+.device-preview-bar.shell .device-preview-copy>span{color:inherit}
+.device-preview-bar .device-preview-actions button[aria-pressed="true"]{background:#0f6cbd;border-color:#0f6cbd;color:#fff}
+.reset-button,.submit-report{color:#fff!important;background:#0f6cbd!important}
+.queue-card .eyebrow{color:#a9d3f5!important}.queue-card small{color:#c8d2cd}
+.roadmap-canvas-suite .closing-callout span{color:#a9d3f5}.roadmap-canvas-suite .closing-callout a{color:#fff}
+.opportunity-medium{color:#765017!important}
+/* Portfolio relationships live outside the fixed-light application surface. */
+.system-context{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}.system-context a{color:#115ea3;text-decoration:underline;text-underline-offset:3px;font:600 14px/1.5 "Segoe UI",sans-serif}
+.system-relationship{max-width:1240px;margin:20px auto;padding:16px 20px;background:#f3f2f1;color:#323130;border:1px solid #d2d0ce;font:16px/1.5 "Segoe UI",sans-serif}.system-relationship p{color:#323130!important;margin:0 0 10px}
+.system-context a:focus-visible{outline:3px solid #0f6cbd;outline-offset:3px}.system-context a:hover{color:#243a5e}
+@media(max-width:600px){.demo-header .header-inner{flex-wrap:wrap;gap:16px;padding-block:16px}.system-relationship{margin-inline:16px}.system-context{gap:12px}}

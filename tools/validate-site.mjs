@@ -219,6 +219,21 @@ for (const file of [...walk(root, ".js"), ...walk(root, ".mjs")]) {
   if (result.status !== 0) report(file, (result.stderr || result.stdout || "JavaScript syntax check failed").trim());
 }
 
+// Navigation relationships are content contracts; URL resolution is checked above.
+for (const [page, links] of [
+  ['demos/index.html',['service-intake/']],
+  ['resume/index.html',['../','../work/','../demos/','../about/']],
+  ['demos/compliance-workflow/index.html',['../ehs-control/','../../work/compliance-automation/']],
+  ['demos/telemetry-explorer/index.html',['../forklift-fleet/','../../work/telemetry-energy/']],
+  ['demos/building-operations/index.html',['../facility-leaks/']],
+  ['demos/connected-operations/index.html',['../../smart-factory/']]
+]) {
+  const source=readFileSync(join(root,page),'utf8');
+  for (const href of links) if (!source.includes(`href="${href}"`)) report(join(root,page),'missing contextual navigation route');
+}
+const series=readFileSync(join(root,'scripts/demo-series.js'),'utf8');
+if ((series.match(/category: "/g)||[]).length!==14) report(root,'system series maturity coverage changed');
+
 if (errors.length) {
   console.error(`Site validation failed with ${errors.length} issue${errors.length === 1 ? "" : "s"}:`);
   for (const error of errors) console.error(`- ${error}`);

@@ -7,10 +7,10 @@
   <meta name="referrer" content="no-referrer">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f3f2f1">
-  <title>Interactive Telemetry &amp; Energy Explorer | David H. Fabro</title>
+  <title>Telemetry Model Explorer | David H. Fabro</title>
   <meta name="description" content="A synthetic interactive telemetry and energy explorer demonstrating equipment filtering, 30-minute state modeling, charging behavior, peak-demand context, and decision support.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Interactive Telemetry &amp; Energy Explorer | David H. Fabro">
+  <meta property="og:title" content="Telemetry Model Explorer | David H. Fabro">
   <meta property="og:description" content="Explore synthetic forklift telemetry and utility context across equipment utilization, state of charge, charging demand, and off-peak opportunity.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
@@ -20,7 +20,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Telemetry and Energy Explorer — David H. Fabro">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Interactive Telemetry &amp; Energy Explorer | David H. Fabro">
+  <meta name="twitter:title" content="Telemetry Model Explorer | David H. Fabro">
   <meta name="twitter:description" content="A safe synthetic demonstration of telemetry modeling and operational energy analytics.">
   <link rel="canonical" href="https://hfabro.github.io/operations-automation-portfolio/demos/telemetry-explorer/">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
@@ -28,21 +28,22 @@
   <link rel="stylesheet" href="../../assets/device-preview.css?v=20260926.2">
   <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
-  <link rel="stylesheet" href="../../assets/demo-series.css?v=20260925.11">
+  <link rel="stylesheet" href="../../assets/demo-series.css?v=20260926.3">
   <script src="demo-data.js" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.10" defer></script>
   <script src="demo.js?v=20260926.2" defer></script>
   <script src="../../scripts/device-preview.js?v=20260926.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260926.2" defer></script>
-  <script src="../../scripts/demo-series.js?v=20260926.2" defer></script>
-  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.2">
+  <script src="../../scripts/demo-series.js?v=20260926.3" defer></script>
+  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 </head>
 <body>
   <a class="skip-link" href="#explorer">Skip to analytics explorer</a>
   <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../work/telemetry-energy/">← Back to case study</a></div></header>
 
   <main>
-    <section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Interactive analytics proof / synthetic data</p><h1 id="demo-title">Fleet Telemetry &amp; Energy Explorer</h1><p class="lede">Filter a five-equipment synthetic fleet, compare 30-minute operating states, and evaluate where charging behavior overlaps a modeled peak-demand window.</p><a class="demo-jump-link" href="#explorer">Jump to interactive system ↓</a></div><ul class="demo-guardrails" aria-label="Demo guardrails"><li>69,000+ scale represented conceptually</li><li>Charts use synthetic records</li><li>No live API connection</li><li>No savings attribution</li></ul></div></section>
+    <aside class="system-relationship" aria-label="System context"><p>Supporting technical view of the data-model and interval-analysis concepts behind the fleet analytics.</p><nav class="system-context" aria-label="Related systems"><a href="../forklift-fleet/">Open Fleet &amp; Battery Decision Support</a><a href="../../work/telemetry-energy/">Read Telemetry &amp; Energy case study</a><a href="../">View all systems</a></nav></aside>
+<section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Supporting technical view / synthetic data</p><h1 id="demo-title">Telemetry Model Explorer</h1><p class="lede">Filter a five-equipment synthetic fleet, compare 30-minute operating states, and evaluate where charging behavior overlaps a modeled peak-demand window.</p><a class="demo-jump-link" href="#explorer">Jump to interactive system ↓</a></div><ul class="demo-guardrails" aria-label="Demo guardrails"><li>69,000+ scale represented conceptually</li><li>Charts use synthetic records</li><li>No live API connection</li><li>No savings attribution</li></ul></div></section>
 
     <section class="explorer-section" id="explorer" aria-labelledby="explorer-title">
       <div class="shell">

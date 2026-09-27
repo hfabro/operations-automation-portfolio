@@ -404,7 +404,7 @@ h1 span { display: block; color: var(--green); }
 .primary-nav a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--accent); transition: right .22s ease; }
 .primary-nav a:hover::after, .primary-nav a[aria-current="true"]::after { right: 0; }
 .primary-nav a[aria-current="true"] { color: var(--ink); }
-.theme-toggle { transition: border-color .2s ease, transform .2s ease, background .2s ease; }
+.theme-toggle { transition: border-color .2s ease, transform .2s ease; }
 .theme-toggle:hover { transform: translateY(-2px); border-color: var(--accent); }
 
 .hero { position: relative; isolation: isolate; padding: 0; overflow: hidden; background: #0d1915; color: #f4f8f5; }
@@ -763,9 +763,9 @@ h1 span { display: block; color: var(--green); }
 .mobile-quick-nav { display: none; }
 
 .demo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin: 0 0 17px; padding-top: 17px; border-top: 1px solid rgba(255,255,255,.14); }
-.content-block#demo-library { padding: clamp(28px,4vw,44px); background: #12201b; color: #f4f8f5; }
-.content-block#demo-library .eyebrow { color: #f08a64; }
-.content-block#demo-library .section-heading > p:not(.eyebrow) { color: rgba(255,255,255,.68); }
+.content-block#demo-library { padding: clamp(28px,4vw,44px); background: var(--surface); color: var(--ink); }
+.content-block#demo-library .eyebrow { color: var(--accent-dark); }
+.content-block#demo-library .section-heading > p:not(.eyebrow) { color: var(--muted); }
 .demo-filters { display: flex; flex-wrap: wrap; gap: 7px; }
 .demo-filters button { min-height: 44px; padding: 8px 12px; border: 1px solid rgba(255,255,255,.17); background: rgba(255,255,255,.035); color: rgba(255,255,255,.72); font: inherit; font-size: .62rem; font-weight: 850; letter-spacing: .04em; cursor: pointer; }
 .demo-filters button span { margin-left: 4px; color: rgba(255,255,255,.62); }
@@ -914,3 +914,8 @@ h1 span { display: block; color: var(--green); }
   .proof-matrix-note { color: #111; background: #fff; border: 1px solid #bbb; }
   .proof-matrix-note p, .proof-matrix-note a { color: #111; }
 }
+
+/* Static Resume keeps its script-free, high-contrast return navigation. */
+@media(min-width:360px) and (max-width:600px){.theme-toggle .theme-label{display:inline;font-size:10px}.theme-toggle{padding-inline:8px;gap:4px}}
+.resume-nav{display:flex;gap:16px;flex-wrap:wrap}.resume-nav a{font-weight:700;text-underline-offset:4px}
+@media(max-width:900px){body:has(.resume-nav) .header-inner{flex-wrap:wrap;gap:16px;padding-block:16px}.resume-nav{width:100%}}
