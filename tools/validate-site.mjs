@@ -172,7 +172,7 @@ if (!deviceStyle.includes('overflow-y:auto') || !deviceStyle.includes('height:mi
 const workflowSource=readFileSync(join(root,'scripts/workflow-recreations.js'),'utf8');
 if(!workflowSource.includes('data-spatial-overlay')||workflowSource.includes('class="ops-grid"')) report(root,'spatial workflow contract missing or redundant location matrix present');
 const ladderSource=readFileSync(join(root,'demos/ladder-inspection/index.html'),'utf8');
-for(const hook of ['data-month','data-department','data-expected-assets','data-certify']) if(!ladderSource.includes(hook)) report(root,'missing ladder cycle/gallery/certification hook');
+for(const hook of ['data-month','data-department','data-expected-assets','data-qr-scan','data-certify']) if(!ladderSource.includes(hook)) report(root,'missing ladder cycle/identity/gallery/certification hook');
 const leakagePatterns = [
   [/\bsk-(?:proj|svcac)-[A-Za-z0-9_-]{15,}/, "API credential"],
   [/\bgithub_pat_[A-Za-z0-9_]{15,}/, "GitHub credential"],

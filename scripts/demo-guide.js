@@ -12,7 +12,7 @@
       time: "About 60 seconds",
       outcome: "Asset-specific occurrence, exception routing, and preserved history",
       steps: [
-        { selector: "[data-found]", event: "click", title: "Select an expected asset", text: "Choose the month and department, then select FOUND for the ladder you are inspecting." },
+        { selector: "[data-qr-scan]", event: "click", title: "Scan the ladder tag", text: "Choose the inspection cycle, then simulate the ladder QR scan. The tag resolves the asset and automatically follows the FOUND path." },
         { selector: '[data-scenario="exception"]', event: "click", title: "Load the exception", text: "Populate every required answer, including a failed hardware check, isolation decision, note, and synthetic evidence." },
         { selector: "[data-inspection-form]", event: "demo:state", signal: "inspection-submitted", title: "Validate and submit", text: "Submit the occurrence and inspect how deterministic rules route the failed condition." }
       ]

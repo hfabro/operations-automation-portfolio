@@ -11,11 +11,12 @@
   var state = {
     step: "identify",
     assetResolved: false,
+    identityMethod: null,
     responses: {},
     notes: "",
     evidence: false,
     submitted: false,
-    events: [{ label: "Waiting", text: "Select month and department, then mark an expected ladder FOUND or NOT FOUND.", tone: "pending" }]
+    events: [{ label: "Waiting", text: "Select month and department, then scan a synthetic QR tag or mark an expected ladder FOUND or NOT FOUND.", tone: "pending" }]
   };
 
   var screens = Array.prototype.slice.call(document.querySelectorAll("[data-screen]"));
@@ -138,6 +139,7 @@
     return {
       inspectionId: data.inspection.inspectionId,
       assetId: state.assetResolved ? data.asset.assetId : null,
+      identityMethod: state.assetResolved ? state.identityMethod : null,
       inspectionType: data.inspection.inspectionType,
       inspectionMonth: inspectionMonth,
       department: state.assetResolved ? data.asset.department : null,
@@ -188,7 +190,7 @@
     document.querySelector("[data-cycle-context]").textContent = inspectionMonth + " · " + data.asset.department + " · Completed by Demo Inspector";
     document.querySelector("[data-certify]").checked = false;
     setEvents([
-      { label: "Identity", text: "Expected gallery selection resolved to asset " + data.asset.assetId + ".", tone: "complete" },
+      { label: state.identityMethod === "QR scan" ? "QR identity" : "Identity", text: state.identityMethod === "QR scan" ? "Simulated QR tag resolved to asset " + data.asset.assetId + " and automatically applied FOUND." : "Expected gallery selection resolved to asset " + data.asset.assetId + ".", tone: "complete" },
       { label: "Source record", text: "Location, department, class, and frequency loaded from the asset master.", tone: "complete" },
       { label: "Occurrence", text: "A new synthetic inspection instance is ready for required responses.", tone: "active" }
     ]);
@@ -296,6 +298,7 @@
   function resetDemo() {
     state.step = "identify";
     state.assetResolved = false;
+    state.identityMethod = null;
     state.responses = {};
     state.notes = "";
     state.evidence = false;
@@ -304,7 +307,7 @@
     notesField.value = "";
     clearValidation();
     renderEvidence();
-    setEvents([{ label: "Waiting", text: "Select month and department, then mark an expected ladder FOUND or NOT FOUND.", tone: "pending" }]);
+    setEvents([{ label: "Waiting", text: "Select month and department, then scan a synthetic QR tag or mark an expected ladder FOUND or NOT FOUND.", tone: "pending" }]);
     updateLiveState();
     setStep("identify", true);
   }
@@ -327,7 +330,7 @@
   document.querySelector("[data-evidence]").addEventListener("click", function () { state.evidence = true; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference attached.", "success"); });
   document.querySelector("[data-remove-evidence]").addEventListener("click", function () { state.evidence = false; renderEvidence(); updateRecordPreview(); canvasNotify("Synthetic evidence reference removed.", "info"); });
   document.querySelector("[data-back]").addEventListener("click", function () { state.assetResolved = false; updateLiveState(); setStep("identify", true); });
-  document.querySelector("[data-edit]").addEventListener("click", function () { resetDemo(); resolveAsset(); });
+  document.querySelector("[data-edit]").addEventListener("click", function () { startInspectionForAsset(register.find(function(a){return a.id===data.asset.assetId;}), state.identityMethod); });
   document.querySelector("[data-reset]").addEventListener("click", resetDemo);
   canvasRoot.addEventListener("canvas:navigate", function (event) {
     var action = event.detail.action;
@@ -336,10 +339,10 @@
       canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to asset identification.", "info");
     } else if (action === "inspect") {
       if (state.assetResolved) {
-        if (state.submitted) { resetDemo(); resolveAsset(); }
+        if (state.submitted) { startInspectionForAsset(register.find(function(a){return a.id===data.asset.assetId;}), state.identityMethod); }
         setStep("inspect", true);
       }
-      else canvasNotify("Choose FOUND in the expected-asset gallery before inspecting.", "warning");
+      else canvasNotify("Scan a synthetic QR tag or choose FOUND in the expected-asset gallery before inspecting.", "warning");
     } else if (action === "history") {
       if (state.submitted) setStep("result", true);
       else canvasNotify("Inspection history is available after a validated submission.", "info");
@@ -369,8 +372,26 @@
     { id: "LAD-112", department: "Facilities", location: "Demo support room" }
   ];
   var gallery = document.querySelector('[data-department-gallery]');
+  var qrButton = gallery.querySelector('[data-qr-scan]');
+  function startInspectionForAsset(asset, identityMethod) {
+    if (!asset) return;
+    resetDemo();
+    state.identityMethod = identityMethod;
+    data.asset.assetId = asset.id;
+    data.asset.department = asset.department;
+    data.asset.location = asset.location;
+    gallery.querySelector('[data-department]').value = asset.department;
+    renderGallery();
+    resolveAsset();
+    canvasNotify(identityMethod === "QR scan" ? 'Synthetic scan: '+asset.id+' QR scanned. Asset marked FOUND for '+inspectionMonth+'.' : asset.id+' identified for '+inspectionMonth+'.', 'success');
+  }
   function renderGallery() {
     var department = gallery.querySelector('[data-department]').value;
+    var qrTarget = register.find(function(a){return a.department===department;});
+    qrButton.dataset.qrScan = qrTarget.id;
+    qrButton.setAttribute('aria-label', 'Simulate QR scan for ladder '+qrTarget.id);
+    gallery.querySelector('[data-qr-asset]').textContent = qrTarget.id;
+    gallery.querySelector('[data-qr-location]').textContent = qrTarget.location;
     var subtitle = canvasRoot.querySelector('.canvas-app-identity small');
     if (subtitle) subtitle.textContent = inspectionMonth + ' · ' + department;
     gallery.querySelector('[data-expected-assets]').innerHTML = register.filter(function(a){return a.department===department;}).map(function(a){
@@ -380,8 +401,7 @@
     }).join('');
     gallery.querySelectorAll('[data-found]').forEach(function(b){b.onclick=function(){
       var a=register.find(function(r){return r.id===b.dataset.found;});
-      resetDemo();data.asset.assetId=a.id;data.asset.department=a.department;data.asset.location=a.location;
-      resolveAsset();canvasNotify(a.id+' identified for '+inspectionMonth+'.','success');
+      startInspectionForAsset(a, 'Expected asset gallery');
     };});
     gallery.querySelectorAll('[data-missing]').forEach(function(b){b.onclick=function(){
       cycleDispositions[inspectionMonth+"|"+b.dataset.missing]="Not found · not inspected";
@@ -389,6 +409,9 @@
     };});
   }
   gallery.querySelector('[data-department]').onchange=renderGallery;
+  qrButton.addEventListener('click', function(){
+    startInspectionForAsset(register.find(function(a){return a.id===qrButton.dataset.qrScan;}), 'QR scan');
+  });
   gallery.querySelector('[data-month]').onchange=function(e){inspectionMonth=e.target.value;renderGallery();};
   renderGallery();
 })();
