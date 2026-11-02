@@ -1,0 +1,140 @@
+.demo-series-nav {
+  --series-ink: #14251f;
+  --series-muted: #58665f;
+  --series-line: #d1dad5;
+  --series-accent: #a94327;
+  position: sticky;
+  z-index: 62;
+  top: 0;
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) auto minmax(150px, 1fr);
+  align-items: stretch;
+  min-height: 58px;
+  color: var(--series-ink);
+  background: rgba(249, 251, 250, .96);
+  border-bottom: 1px solid var(--series-line);
+  box-shadow: 0 8px 22px rgba(14, 31, 24, .07);
+  backdrop-filter: blur(16px);
+}
+
+.demo-series-nav a {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: .72rem clamp(.8rem, 2.6vw, 2.4rem);
+  color: inherit;
+  text-decoration: none;
+}
+
+.demo-series-nav a:hover,
+.demo-series-nav a:focus-visible {
+  color: #fff;
+  background: var(--series-ink);
+  outline: 0;
+}
+
+.demo-series-nav a:focus-visible { box-shadow: inset 0 0 0 3px var(--series-accent); }
+.demo-series-nav .series-next { justify-content: flex-end; text-align: right; }
+
+.demo-series-direction {
+  flex: 0 0 auto;
+  color: var(--series-accent);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.demo-series-link-copy {
+  min-width: 0;
+  display: grid;
+  gap: .1rem;
+}
+
+.demo-series-link-copy span,
+.demo-series-center span {
+  color: var(--series-muted);
+  font-size: .56rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.demo-series-link-copy strong {
+  overflow: hidden;
+  font-size: .7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.demo-series-nav a:hover span,
+.demo-series-nav a:focus-visible span { color: rgba(255,255,255,.62); }
+
+.demo-series-center {
+  min-width: 230px;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: .08rem;
+  padding: .55rem 1.3rem;
+  border-inline: 1px solid var(--series-line);
+  text-align: center;
+}
+
+.demo-series-center strong { font-size: .7rem; }
+.demo-series-center a { min-height: 0; padding: 0; color: var(--series-accent); font-size: .58rem; font-weight: 850; }
+.demo-series-center a:hover,
+.demo-series-center a:focus-visible { color: var(--series-ink); background: transparent; text-decoration: underline; box-shadow: none; }
+
+main [id] { scroll-margin-top: 76px; }
+
+.demo-jump-link {
+  min-height: 46px;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.25rem;
+  padding: .7rem 1rem;
+  color: #fff;
+  background: #a94327;
+  border: 1px solid #a94327;
+  font-size: .72rem;
+  font-weight: 900;
+  text-decoration: none;
+}
+.demo-jump-link:hover { background: #14251f; border-color: #14251f; }
+.demo-jump-link:focus-visible { outline: 3px solid rgba(215, 94, 56, .48); outline-offset: 3px; }
+
+@media (max-width: 720px) {
+  main [id] { scroll-margin-top: 116px; }
+  .demo-series-nav { grid-template-columns: 1fr auto 1fr; min-height: 54px; }
+  .demo-series-nav a { min-height: 54px; padding: .55rem .65rem; }
+  .demo-series-link-copy span { display: none; }
+  .demo-series-link-copy strong { max-width: 28vw; font-size: .6rem; }
+  .demo-series-center { min-width: 110px; padding: .45rem .55rem; }
+  .demo-series-center strong { font-size: .61rem; }
+  .demo-series-center a { font-size: .58rem; }
+  .demo-jump-link { min-height: 48px; width: 100%; margin-top: 1rem; font-size: .76rem; }
+  .demo-intro h1,
+  main > .hero h1,
+  .hero.shell h1 { font-size: clamp(2.6rem, 12vw, 3.35rem) !important; line-height: .92 !important; }
+}
+
+@media (max-width: 420px) {
+  .demo-series-link-copy strong { display: none; }
+  .demo-series-nav a { justify-content: center; }
+  .demo-series-center { min-width: 150px; }
+}
+
+@media print {
+  .demo-series-nav { display: none !important; }
+}
+
+.demo-series-link-copy strong,.demo-series-center strong{font-size:14px}
+.demo-series-center a,.demo-series-link-copy span,.demo-series-center>span{font-size:12px}
+@media(max-width:720px){.demo-series-link-copy strong,.demo-series-center strong{font-size:12px}.demo-series-center a{font-size:12px}.demo-series-center{max-width:52vw}.demo-series-nav{position:relative}}
+
+.demo-series-link-copy small{font-size:11px;line-height:1.4;color:var(--series-muted)}
+.demo-series-nav a:hover small,.demo-series-nav a:focus-visible small{color:#fff}
+.demo-series-center a:focus-visible{outline:2px solid #115ea3;outline-offset:3px}
+@media(max-width:720px){.demo-series-link-copy small{display:none}.demo-series-center>span{font-size:11px;letter-spacing:.02em}}
