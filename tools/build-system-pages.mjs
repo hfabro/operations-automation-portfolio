@@ -7,7 +7,7 @@ const pages=[
  ['facility-leaks','Facility Leak Management','Power Apps-style workflow','Select a fictional map location, report a condition, assign a response, and verify closure.'],
  ['toolbox-talks','Toolbox Talks','SharePoint + Forms + Power BI','Open bilingual material, complete a five-question quiz and acknowledgment, and review the completion snapshot.'],
  ['electrical-analytics','Electrical Usage Analytics','Power BI-style report','Explore energy, interval demand, matched evidence, weather context, and billing boundaries.'],
- ['forklift-fleet','Forklift Fleet & Battery Decision Support','Power BI-style report','Review five synthetic trucks through shipping, energy, readiness, and charging-pilot views.'],
+ ['forklift-fleet','Forklift Fleet & Battery Decision Support','Power BI-style report','Review a fictional 24-truck campus fleet through shipping, energy, readiness, and charging-pilot views.'],
  ['service-intake','Service Issue Report','Microsoft Forms-style intake','Submit a simple synthetic service request with required fields and a mock attachment.'],
  ['ehs-control','EHS Compliance Control','SharePoint + Lists + Power BI','Move from scheduled requirement through execution evidence to a dated management snapshot.']
 ];
@@ -19,7 +19,7 @@ for(const [slug,title,platform,description] of pages){
 <meta name="referrer" content="no-referrer"><meta name="color-scheme" content="light"><meta name="description" content="${description}"><title>${title} | David H. Fabro</title>
 <meta property="og:title" content="${title} | David H. Fabro"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:image" content="https://hfabro.github.io/operations-automation-portfolio/assets/og.png"><link rel="canonical" href="${url}"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../assets/operations-systems.css?v=20260926.2"><link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
-<script src="../../scripts/operations-data.js" defer></script><script src="../../scripts/workflow-contracts.js?v=20260926.2" defer></script><script src="../../scripts/workflow-recreations.js?v=20260926.3" defer></script><script src="../../scripts/operations-systems.js?v=20261103.1" defer></script><script src="../../scripts/demo-series.js?v=20261102.1" defer></script>  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
+<script src="../../scripts/operations-data.js?v=20261103.1" defer></script><script src="../../scripts/workflow-contracts.js?v=20260926.2" defer></script><script src="../../scripts/workflow-recreations.js?v=20260926.3" defer></script><script src="../../scripts/operations-systems.js?v=20261103.2" defer></script><script src="../../scripts/demo-series.js?v=20261102.1" defer></script>  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
 </head>
 <body data-system="${slug}"><a class="skip-link" href="#main">Skip to system</a><header class="ops-header"><a href="../../">DF <strong>David H. Fabro</strong></a><nav aria-label="Portfolio"><a href="../../work/">Work</a><a href="../">All systems</a><a href="../plant-operations-hub/">Plant hub</a></nav></header>

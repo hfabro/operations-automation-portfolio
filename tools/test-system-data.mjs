@@ -9,14 +9,16 @@ assert.equal(new Set(intervals.map(r=>r.date+'|'+r.slot)).size,intervals.length)
 for(const r of intervals){assert.equal(r.kwh,r.kw*.5);assert(r.kw>0);assert(r.slot>=0&&r.slot<48);}
 assert.equal(intervals.reduce((s,r)=>s+r.kwh,0),203813);
 assert.equal(Math.max(...intervals.map(r=>r.kw)),498);
-assert.equal(trucks.length,5);assert.equal(new Set(trucks.map(r=>r.id)).size,5);
-for(const t of trucks){assert(t.soc>=0&&t.soc<=100);assert(t.age>=0);}
+assert.equal(trucks.length,24);assert.equal(new Set(trucks.map(r=>r.id)).size,trucks.length);assert.equal(new Set(trucks.map(r=>r.battery)).size,trucks.length);
+for(const t of trucks){assert(t.soc>=0&&t.soc<=100);assert(t.age>=0);assert(t.use>=0&&t.use<=100);assert(['Working','Idle','Charging'].includes(t.state));}
+assert(trucks.some(t=>t.age>15));assert(trucks.some(t=>t.errors>0));
+assert(Math.abs(trucks.reduce((s,t)=>s+(100-t.soc)*.36,0)-331.56)<1e-8);
 for(const selected of [trucks,...trucks.map(t=>[t])])for(const coverage of [1,.5]){
  const kwh=selected.reduce((s,t)=>s+(100-t.soc)*.36,0)*coverage;
  const charging=Array.from({length:48},(_,slot)=>slot>=14&&slot<=19?kwh/3:0);
  assert(Math.abs(charging.reduce((s,kw)=>s+kw*.5,0)-kwh)<1e-8);
 }
-console.log('Synthetic data tests passed: unique intervals, energy/demand consistency, five trucks, and modeled charging integration.');
+console.log('Synthetic data tests passed: unique intervals, energy/demand consistency, 24 independently fictional trucks, and modeled charging integration.');
 runInNewContext(readFileSync(new URL('../scripts/workflow-contracts.js',import.meta.url),'utf8'),context);
 const C=context.window.WORKFLOW_CONTRACTS;
 assert.equal(C.cells.length,11);assert(!C.cells.some(c=>c.id==='D3'));
