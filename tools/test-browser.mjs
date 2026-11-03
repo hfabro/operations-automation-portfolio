@@ -151,6 +151,34 @@ try {
     assert.match(await page.locator('[data-screen="inspect"]').innerText(),/LAD-104/);
   });
 
+  await check('Connected Operations chart colors agree with its state legend',async()=>{
+    for(const width of [375,1440]) {
+      await page.setViewportSize({width,height:900});
+      await go('/demos/connected-operations/');
+      const scenarios=page.locator('[data-scenarios] button');
+      for(let index=0;index<await scenarios.count();index++) {
+        await scenarios.nth(index).click();
+        const result=await page.evaluate(()=>{
+          const canvas=document.querySelector('[data-output-chart]'), rect=canvas.getBoundingClientRect();
+          const ctx=canvas.getContext('2d'), ratio=window.devicePixelRatio||1;
+          const cells=[...document.querySelectorAll('[data-timeline] span')], step=(rect.width-70)/cells.length;
+          const mismatches=[];let sampled=0;
+          cells.forEach((cell,i)=>{
+            const state=[...cell.classList].find(name=>name.startsWith('state-')).slice(6);
+            const legend=getComputedStyle(document.querySelector('.legend .'+state)).backgroundColor;
+            const timeline=getComputedStyle(cell).backgroundColor;
+            if(legend!==timeline)mismatches.push(state+': legend and timeline differ');
+            const pixel=ctx.getImageData(Math.floor((52+i*step+step/2)*ratio),Math.floor((rect.height-51)*ratio),1,1).data;
+            if(pixel[3]===255){sampled++;const chart=`rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;if(chart!==legend)mismatches.push(state+': chart '+chart+' vs '+legend);}
+          });
+          return {sampled,mismatches};
+        });
+        assert.ok(result.sampled>0,`No chart bars sampled at ${width}px`);
+        assert.deepEqual(result.mismatches,[],`State colors at ${width}px, scenario ${index}`);
+      }
+    }
+  });
+
   async function htmlFiles(dir){const entries=await readdir(dir,{withFileTypes:true});const results=await Promise.all(entries.filter(e=>!['.git','tmp','references-private'].includes(e.name)).map(e=>e.isDirectory()?htmlFiles(resolve(dir,e.name)):e.name.endsWith('.html')?[resolve(dir,e.name)]:[]));return results.flat();}
   const routes=(await htmlFiles(root)).map(file=>'/'+relative(root,file).replaceAll('\\','/').replace(/index\.html$/,''));
   await check('Case-study headings fit narrow screens with a wider fallback font',async()=>{

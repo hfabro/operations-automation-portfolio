@@ -335,8 +335,9 @@
   canvasRoot.addEventListener("canvas:navigate", function (event) {
     var action = event.detail.action;
     if (action === "home" || action === "refresh" || action === "identify") {
+      if (action === "refresh") event.preventDefault();
       resetDemo();
-      canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to asset identification.", "info");
+      canvasNotify(action === "refresh" ? "Inspection entry cleared. Recorded history remains." : "Returned to asset identification. Inspection entry cleared; recorded history remains.", "info");
     } else if (action === "inspect") {
       if (state.assetResolved) {
         if (state.submitted) { startInspectionForAsset(register.find(function(a){return a.id===data.asset.assetId;}), state.identityMethod); }

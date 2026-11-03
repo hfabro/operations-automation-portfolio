@@ -430,3 +430,39 @@
 @media (prefers-reduced-motion: reduce) {
   [data-system="plant-operations-hub"] #system .portal-link { transition: none; }
 }
+
+/* Readable operating labels for the Connected Operations and Kanban demonstrations. */
+[data-canvas-title="Connected Operations"] :is(.select-field label, .scenario-control > span, .live-stamp strong, .live-stamp small, .legend span, .kpi-grid span, .kpi-grid small) {
+  font-size: .75rem;
+  line-height: 1.35;
+  letter-spacing: .025em;
+}
+[data-canvas-title="Connected Operations"] .state-timeline :is(i, b) {
+  font-size: .75rem;
+  line-height: 1.3;
+}
+[data-canvas-title="Connected Operations"] .state-timeline b {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+  [data-canvas-title="Connected Operations"] .state-timeline {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+#kanban-console .route-deck label,
+#kanban-console .route-readout :is(span, small),
+#kanban-console .kpi-grid :is(span, small) {
+  font-size: .75rem;
+  line-height: 1.35;
+  letter-spacing: .025em;
+}
+#kanban-console .route-deck select,
+#kanban-console .route-readout strong,
+#kanban-console :is(.scan-button, .reset-button) {
+  font-size: .875rem;
+  line-height: 1.35;
+}

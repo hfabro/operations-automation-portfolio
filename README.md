@@ -66,10 +66,11 @@ To reuse an existing local installation, set `PLAYWRIGHT_MODULE` to its module d
 node tools/test-browser.mjs
 node tools/test-gallery.mjs
 node tools/test-card-links.mjs
+node tools/test-canvas-refresh.mjs
 node tools/audit-accessibility.mjs
 ```
 
-Each check starts and stops its own loopback preview (ports 4174, 4175, 4184, and 4186; override with `TEST_PORT`). The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
+Each check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, and 4188; override with `TEST_PORT`). The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
 
 The Work library uses `data-work-kind` (`implemented`, `analytics`, or `architecture`) on each project card. Its optional search and maturity filters use native controls, announce result counts, preserve shareable `q`/`maturity` query parameters, and show all projects when JavaScript is unavailable. Add new cards to the evidence table as well as the library, and update the library summary count.
 

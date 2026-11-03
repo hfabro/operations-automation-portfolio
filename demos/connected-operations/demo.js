@@ -61,6 +61,11 @@
     var plotWidth = width - margin.left - margin.right;
     var plotHeight = height - margin.top - margin.bottom;
     var step = plotWidth / item.rates.length;
+    var stateColors = {};
+    ["run", "planned", "idle", "stop"].forEach(function (machineState) {
+      var swatch = document.querySelector(".legend ." + machineState);
+      if (swatch) stateColors[machineState] = window.getComputedStyle(swatch).backgroundColor;
+    });
     context.clearRect(0, 0, width, height);
     context.font = "11px system-ui, sans-serif";
     context.textAlign = "right";
@@ -76,7 +81,7 @@
       var actual = rateFor(assetItem, percent);
       var barHeight = Math.min(plotHeight, (actual / assetItem.targetRate) * plotHeight);
       var machineState = item.states[index];
-      context.fillStyle = machineState === "run" ? "#2f765d" : machineState === "planned" ? "#69808f" : machineState === "idle" ? "#d8a446" : "#d75e38";
+      context.fillStyle = stateColors[machineState] || "#68736f";
       context.fillRect(margin.left + index * step + 3, margin.top + plotHeight - barHeight, Math.max(4, step - 6), barHeight);
       if (index % 2 === 0) { context.fillStyle = "#66736d"; context.textAlign = "center"; context.textBaseline = "top"; context.fillText(source.intervals[index], margin.left + index * step + step / 2, height - margin.bottom + 12); }
     });

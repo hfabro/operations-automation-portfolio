@@ -186,7 +186,7 @@
   document.querySelector("[data-reset]").addEventListener("click", resetDemo);
   canvasRoot.addEventListener("canvas:navigate", function (event) {
     var action = event.detail.action;
-    if (action === "home" || action === "refresh" || action === "requirement") { resetDemo(); canvasNotify(action === "refresh" ? "Demo session refreshed." : "Returned to the requirement master.", "info"); }
+    if (action === "home" || action === "refresh" || action === "requirement") { if (action === "refresh") event.preventDefault(); resetDemo(); canvasNotify(action === "refresh" ? "Workflow reset. Current entry cleared." : "Returned to the requirement master. Current entry cleared.", "info"); }
     else if (action === "occurrence") { if (state.generated) setStep("occurrence", true); else canvasNotify("Generate an occurrence from the requirement master first.", "warning"); }
     else if (action === "history") { if (state.submitted) setStep("result", true); else canvasNotify("Current history appears after lifecycle validation.", "info"); }
   });
