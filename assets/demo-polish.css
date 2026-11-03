@@ -9,6 +9,13 @@
 .demo-guide, [data-canvas-app] .demo-guide { border-radius: 16px; }
 .demo-guide button { border-radius: 9px; }
 
+/* These are progress indicators, not controls for skipping workflow steps. */
+[data-canvas-app] .step-indicator { border: 0; }
+[data-canvas-app] .step-indicator::before { content: "Workflow progress"; grid-column: 1 / -1; color: #605e5c; font-size: .68rem; font-weight: 700; margin-bottom: 6px; }
+[data-canvas-app] .step-indicator span { border: 0; border-bottom: 2px solid #d2d0ce; background: transparent; }
+[data-canvas-app] .step-indicator .active { border-bottom: 3px solid #0f6cbd; background: transparent !important; }
+[data-canvas-app] .step-indicator .complete { border-bottom-color: #107c10; background: transparent; }
+
 /* The outer explanatory panels keep the portfolio's softer visual language. */
 .boundary-card, .system-panel, .history-panel, .control-panel, .radar-card,
 .gap-card, .map-card, .queue-card, .detail-card, .report-card, .chart-card,

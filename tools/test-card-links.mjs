@@ -13,6 +13,8 @@ if (!process.env.SITE_URL) {
   await new Promise((resolve, reject) => {server.stdout.once('data', resolve); server.once('error', reject); server.once('exit', code => reject(Error(`Preview exited ${code}`)));});
 }
 const browser = await chromium.launch({headless: true, ...(process.env.BROWSER_CHANNEL ? {channel: process.env.BROWSER_CHANNEL} : {})});
+const demoPaths = ['plant-operations-hub', 'electrical-analytics', 'toolbox-talks', 'ladder-inspection', 'ehs-control', 'forklift-fleet', 'digital-kanban'];
+const conceptPaths = ['cmms-lifecycle', 'connected-operations', 'smart-factory-roadmap', 'building-operations'];
 try {
   for (const width of [375, 1440]) {
     const context = await browser.newContext({viewport: {width, height: 900}, hasTouch: true});
@@ -25,6 +27,9 @@ try {
       await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
     }
     await page.goto(base + '/');
+    await tapSurface('.home-perspective h2');
+    await page.waitForURL('**/approach/');
+    await page.goto(base + '/');
     await tapSurface('.home-project h3');
     await page.waitForURL('**/work/facilities-digital-operations/');
     assert.ok(page.url().endsWith('/work/facilities-digital-operations/'));
@@ -36,11 +41,35 @@ try {
     for (let i = 0; i < 7; i++) {
       const card = page.locator('.gallery-card').nth(i);
       const destination = await card.locator('h3 a').getAttribute('href');
-      assert.ok(destination.startsWith('../demos/'));
+      assert.equal(destination, '../demos/' + demoPaths[i] + '/');
       const expected = new URL(destination, page.url()).href;
-      await tapSurface(card.locator(i === 0 || width > 640 ? '.gallery-preview' : 'h3'));
+      await tapSurface(card.locator(i === 0 || width > 640 ? '.gallery-preview' : '.gallery-card-content > p').last());
       await page.waitForURL(expected);
       await page.goto(base + '/work/');
+    }
+    await page.goto(base + '/work/');
+    for (let i = 0; i < conceptPaths.length; i++) {
+      const card = page.locator('.hub-card.has-card-link').nth(i);
+      assert.equal(await card.locator('a').getAttribute('href'), '../demos/' + conceptPaths[i] + '/');
+      await tapSurface(card.locator('h3'));
+      await page.waitForURL('**/demos/' + conceptPaths[i] + '/');
+      await page.goto(base + '/work/');
+    }
+    assert.equal(await page.locator('.hub-card.static-concept').count(), 2);
+    assert.equal(await page.locator('.hub-card.static-concept a').count(), 0);
+    if (width === 1440) {
+      const row = page.locator('.gallery-card-lead .card-links');
+      await row.scrollIntoViewIfNeeded();
+      const box = await row.boundingBox();
+      await page.touchscreen.tap(box.x + box.width - 4, box.y + box.height - 4);
+      await page.waitForURL('**/demos/plant-operations-hub/');
+    }
+    for (const [slug, nextStep, currentScreen] of [['ladder-inspection', 'inspect', 'identify'], ['compliance-workflow', 'occurrence', 'master']]) {
+      await page.goto(base + '/demos/' + slug + '/');
+      const progress = page.locator('.step-indicator');
+      assert.match(await progress.evaluate(el => getComputedStyle(el, '::before').content), /Workflow progress/);
+      await page.locator(`[data-step-indicator="${nextStep}"]`).click();
+      assert.equal(await page.locator(`[data-screen="${currentScreen}"]`).isVisible(), true);
     }
     await page.goto(base + '/work/');
     await page.locator('.gallery-card .gallery-proof summary').first().click();
