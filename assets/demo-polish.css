@@ -40,3 +40,393 @@
   [data-scenario], [data-generate], [data-submit], [data-certify]),
 [data-canvas-app] input:not([type="radio"]):not([type="checkbox"]),
 [data-canvas-app] select, [data-canvas-app] textarea { border-radius: 7px; }
+
+/* Shared portfolio framing for the demos. App interiors retain their own controls and data. */
+.demo-header:has(.system-context) {
+  background: #f8faf8;
+  border-bottom: 1px solid #dbe5df;
+}
+.demo-header:has(.system-context) .brand-mark {
+  background: #173d32;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(20, 52, 42, .14);
+}
+.demo-header .system-context { gap: 4px 18px; }
+.demo-header .system-context a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #245747;
+  font-weight: 650;
+  text-decoration-color: #94b4a7;
+  text-underline-offset: 4px;
+  white-space: normal;
+}
+.demo-header .system-context a:hover { color: #123a2d; text-decoration-color: currentColor; }
+
+/* Keep the disclosure readable and clearly actionable without another large card. */
+.platform-disclosure {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #d7e3dc;
+  color: #36534a;
+}
+.platform-disclosure summary { min-height: 44px; align-content: center; color: #245747; text-decoration: underline; text-decoration-color: #a5c1b4; text-underline-offset: 4px; }
+.platform-disclosure summary:focus-visible { outline: 3px solid #0f6cbd; outline-offset: 3px; }
+
+/* An optional guided run is visually distinct from the live simulation below it. */
+.demo-guide, [data-canvas-app] .demo-guide {
+  --guide-ink: #15352b;
+  --guide-muted: #445f53;
+  --guide-line: #cfe0d7;
+  --guide-accent: #a64a2c;
+  --guide-green: #175b46;
+  padding: 20px 22px;
+  border: 1px solid #d5e4da;
+  border-left: 4px solid #388064;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #fbfdfb, #eef6f1);
+  box-shadow: 0 8px 24px rgba(23, 54, 41, .06);
+}
+.demo-guide::before { background: none; }
+.demo-guide-kicker { font-size: .7rem; letter-spacing: .1em; }
+.demo-guide h2, .demo-guide h3, [data-canvas-app] .demo-guide h3 {
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.015em;
+}
+.demo-guide p { font-size: .92rem; line-height: 1.55; }
+.demo-guide-meta { color: #49665a; font-weight: 600; }
+.demo-guide button {
+  min-height: 44px;
+  border-radius: 10px;
+  font-size: .86rem;
+  font-weight: 700;
+}
+.demo-guide .demo-guide-primary { background: #175b46; border-color: #175b46; color: #fff; }
+.demo-guide .demo-guide-primary:hover { background: #104a38; border-color: #104a38; }
+.demo-guide button:focus-visible { outline: 3px solid #0f6cbd; outline-offset: 3px; }
+
+/* The active device option reads as one segmented control, not three unrelated boxes. */
+.device-preview-bar {
+  padding: 16px 18px;
+  border: 1px solid #d7e4dd;
+  border-radius: 16px;
+  background: #fff;
+  color: #17342a;
+  box-shadow: 0 8px 24px rgba(23, 54, 41, .06);
+}
+.device-preview-copy { gap: 3px; }
+.device-preview-copy > span, .device-preview-bar.shell .device-preview-copy > span {
+  color: #536d60;
+  font-size: .7rem;
+  font-weight: 750;
+  letter-spacing: .08em;
+}
+.device-preview-bar.shell .device-preview-copy > span { color: var(--muted); }
+.device-preview-copy strong { font-size: 1rem; line-height: 1.3; }
+.device-preview-copy small { color: #536d60; font-size: .82rem; line-height: 1.45; }
+.device-preview-actions {
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid #d8e4dd;
+  border-radius: 12px;
+  background: #f0f5f2;
+}
+.device-preview-bar .device-preview-actions button {
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #345547;
+  font-size: .875rem;
+  font-weight: 700;
+}
+.device-preview-bar .device-preview-actions button:hover { background: #e2eee7; color: #173d32; }
+.device-preview-bar .device-preview-actions button[aria-pressed="true"] {
+  background: #175b46;
+  border-color: #175b46;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(23, 54, 41, .18);
+}
+.device-preview-bar .device-preview-actions button:focus-visible { outline: 3px solid #0f6cbd; outline-offset: 2px; }
+
+.demo-series-nav { border-color: #d7e4dd; background: #f8faf8; box-shadow: 0 4px 16px rgba(23, 54, 41, .05); }
+.demo-series-nav a:hover, .demo-series-nav a:focus-visible { background: #173d32; color: #fff; }
+.demo-jump-link { border-radius: 10px; background: #175b46; border-color: #175b46; font-size: .85rem; font-weight: 700; }
+.demo-jump-link:hover { background: #103f31; border-color: #103f31; }
+
+@media (max-width: 640px) {
+  .demo-header .system-context { gap: 0 14px; }
+  .demo-guide, [data-canvas-app] .demo-guide { padding: 17px 16px; }
+  .device-preview-bar { gap: 12px; padding: 14px; }
+  .device-preview-actions { width: 100%; }
+  .device-preview-bar .device-preview-actions button { flex: 1; min-width: 0; padding-inline: 8px; }
+}
+
+/* Product finish for the simulated Canvas workspaces. Workflow and device sizing stay local to each demo. */
+[data-canvas-app] {
+  --canvas-blue: #125ca6;
+  --canvas-blue-dark: #104b84;
+  --canvas-line: #d9e1e8;
+  background: #f3f6f9 !important;
+}
+
+/* A distinct application header and quieter command layer make the work area easier to scan. */
+[data-canvas-app] .canvas-app-bar {
+  background: linear-gradient(120deg, #104e89, #176eaf);
+  border-bottom: 1px solid #0d477d;
+  padding-block: 10px;
+}
+[data-canvas-app] .canvas-app-identity strong {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -.015em;
+}
+[data-canvas-app] .canvas-app-identity small { color: #e3f0fb; }
+[data-canvas-app] .canvas-icon-button { border-radius: 9px; }
+[data-canvas-app] .canvas-icon-button:hover { background: #ffffff29; color: #fff; }
+[data-canvas-app] .canvas-icon-button:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+[data-canvas-app] .canvas-command-bar {
+  background: #fff;
+  border-bottom: 1px solid #dce4eb;
+  gap: 5px;
+}
+[data-canvas-app] .canvas-command-bar button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding-inline: 12px;
+  border-radius: 8px;
+  color: #34485a;
+  font-weight: 650;
+  white-space: nowrap;
+}
+[data-canvas-app] .canvas-command-bar button:hover { background: #edf4fa; color: #104b84; }
+[data-canvas-app] .canvas-command-context { color: #526273; }
+
+/* Concepts retain a report-like header rather than imitating a connected application. */
+.roadmap-canvas-suite .canvas-app-bar,
+[data-canvas-title="Connected Operations"] .canvas-app-bar {
+  background: #fff;
+  border-top: 4px solid #176eaf;
+  border-bottom: 1px solid #dce4eb;
+}
+.roadmap-canvas-suite .canvas-app-identity strong,
+[data-canvas-title="Connected Operations"] .canvas-app-identity strong { color: #21364a; }
+.roadmap-canvas-suite .canvas-app-identity small,
+[data-canvas-title="Connected Operations"] .canvas-app-identity small { color: #526273; }
+.roadmap-canvas-suite .canvas-icon-button,
+[data-canvas-title="Connected Operations"] .canvas-icon-button { color: #21364a; }
+.roadmap-canvas-suite .canvas-icon-button:hover,
+[data-canvas-title="Connected Operations"] .canvas-icon-button:hover { background: #edf4fa; color: #104b84; }
+.roadmap-canvas-suite .canvas-icon-button:focus-visible,
+[data-canvas-title="Connected Operations"] .canvas-icon-button:focus-visible { outline-color: #125ca6; }
+
+[data-canvas-app] .canvas-bottom-nav {
+  background: #fff;
+  border-color: #dce4eb;
+  box-shadow: 0 -3px 14px #20364a0d;
+}
+[data-canvas-app] .canvas-bottom-nav button {
+  min-height: 48px;
+  color: #4c5b6a;
+  border-color: #edf1f4;
+  font-weight: 650;
+}
+[data-canvas-app] .canvas-bottom-nav button:hover { background: #f1f6fb; }
+[data-canvas-app] .canvas-bottom-nav button[aria-current="page"] {
+  background: #eaf3fb;
+  color: #104b84;
+}
+
+/* Keep progress compact and make labels, form controls, and response choices legible. */
+[data-canvas-app] .step-indicator { margin-bottom: 14px; }
+[data-canvas-app] .step-indicator span { padding: 10px 6px; }
+[data-canvas-app] :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea):not(.is-invalid):not([aria-invalid="true"]) {
+  border-radius: 8px;
+  border-color: #91a4b3;
+}
+[data-canvas-app] :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea):focus-visible {
+  outline: 3px solid #62a7df;
+  outline-offset: 2px;
+}
+[data-canvas-app] :is(.qr-card, .master-card, .expected-asset, .request-item) {
+  border-radius: 11px;
+}
+[data-canvas-app] :is(.qr-card, .master-card) {
+  border-color: #d3dfe7;
+  box-shadow: 0 4px 14px #1d3f570b;
+}
+[data-canvas-app] .expected-asset { margin-block: 8px; }
+[data-canvas-app] :is(.primary-action, .phone-scan, .primary, .request-footer button, .canvas-confirm):not(:disabled) {
+  border-radius: 9px;
+  font-weight: 700;
+}
+[data-canvas-app] :is(.secondary-action, .scenario-controls button, .evidence-row > button, .canvas-dialog-actions button) { border-radius: 8px; }
+[data-canvas-app] .item-card { border-radius: 11px; }
+[data-canvas-app] .item-card:focus-visible { outline: 3px solid #62a7df; outline-offset: 3px; }
+[data-canvas-app] :is(.canvas-dialog, .canvas-toast, .canvas-busy-card) { border-radius: 12px; }
+
+@media (max-width: 520px) {
+  [data-canvas-app] .canvas-command-bar button { padding-inline: 9px; }
+}
+
+/* Product styling for the simulated portal, workflows, forms and reports.
+   Each surface retains its existing data, interaction model and status colors. */
+.ops-app {
+  --product-border: #d6e0e7;
+  --product-muted: #4e6170;
+  background: #f3f6f9;
+  border: 1px solid #c8d6df;
+  border-radius: 18px;
+  box-shadow: 0 16px 38px #1c354914;
+}
+
+/* The app title establishes context; the lighter body keeps work content primary. */
+.ops-app .ops-toolbar {
+  min-height: 78px;
+  padding: 19px 24px;
+  color: #fff;
+  background: linear-gradient(120deg, #104e89, #176eaf);
+  border-bottom: 1px solid #0d477d;
+  border-radius: 17px 17px 0 0;
+}
+.ops-app .ops-toolbar strong { color: #fff; font-size: 21px; font-weight: 700; letter-spacing: -.015em; }
+.ops-app .ops-toolbar small { color: #e4f1fc; line-height: 1.45; }
+.ops-app .ops-toolbar a { color: #fff; text-underline-offset: 3px; }
+.ops-app .ops-toolbar a:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.ops-app h2, .ops-app h3 { color: #1b3446; letter-spacing: -.015em; }
+.ops-app .ops-pad > h2 { font-weight: 700; }
+
+/* Navigation is visibly interactive and the selected page retains a non-color cue. */
+.ops-app .ops-tabs {
+  gap: 4px;
+  padding: 8px 16px 0;
+  background: #fff;
+  border-bottom: 1px solid #d6e0e7;
+}
+.ops-app .ops-tabs button {
+  min-height: 44px;
+  padding: 10px 13px;
+  color: #34485a;
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  font-weight: 650;
+}
+.ops-app .ops-tabs button:hover { background: #f0f6fb; color: #104b84; }
+.ops-app .ops-tabs button[aria-pressed="true"] {
+  color: #104b84;
+  background: #eaf3fb;
+  box-shadow: inset 0 -3px #125ca6;
+}
+.ops-app :is(button:not(.spatial-cell):not(.report-pin), input, select, textarea):focus-visible {
+  outline: 3px solid #125ca6;
+  outline-offset: 2px;
+}
+
+/* The portal's links stay recognizable as links, with room for bilingual labels. */
+[data-system="plant-operations-hub"] #system .ops-band {
+  padding: 28px 30px;
+  color: #19394b;
+  background: linear-gradient(120deg, #e8f3fb, #f4f8fb);
+  border-left: 4px solid #176eaf;
+  border-bottom: 1px solid #dce7ef;
+}
+[data-system="plant-operations-hub"] #system .ops-band h2 { color: #19394b; font-weight: 700; }
+[data-system="plant-operations-hub"] #system .portal-link {
+  border: 1px solid #d8e2e9;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #203a4e0a;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+}
+[data-system="plant-operations-hub"] #system .portal-link:hover,
+[data-system="plant-operations-hub"] #system .portal-link:focus-visible {
+  background: #f4f9fd;
+  border-color: #125ca6;
+  box-shadow: 0 6px 18px #173d5b19;
+}
+[data-system="plant-operations-hub"] #system .portal-icon {
+  width: 42px;
+  height: 42px;
+  color: #125ca6;
+  background: #e9f3fb;
+  border-radius: 10px;
+}
+.ops-app .portal-link strong { color: #1b3446; font-weight: 700; }
+.ops-app .portal-link small { color: #4e6170; }
+.ops-app .portal-link:focus-visible { outline: 3px solid #125ca6; outline-offset: 2px; }
+.ops-app .ops-section-title { color: #1b3446; border-top-color: #dce5eb; }
+
+/* Separate actionable controls from passive results. Metrics use a quiet divider,
+   while forms and report visualizations stay grouped for easy scanning. */
+.ops-app .ops-card, .ops-app .ops-form, .ops-app .ops-table-wrap {
+  border-color: #d6e0e7;
+  border-radius: 12px;
+  box-shadow: 0 3px 14px #203a4e0a;
+}
+.ops-app .ops-card h3 { color: #1b3446; font-weight: 700; }
+.ops-app .ops-kpi, [data-platform="report"] .ops-kpi {
+  min-width: 0;
+  padding: 12px 14px;
+  background: transparent;
+  border: 0;
+  border-left: 3px solid #a9c5d9;
+  border-radius: 0;
+  box-shadow: none;
+}
+.ops-app .ops-kpi span { color: #425a69; line-height: 1.4; }
+.ops-app .ops-kpi strong, [data-platform="report"] .ops-kpi strong {
+  margin-top: 8px;
+  color: #19394b;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 700;
+  letter-spacing: -.025em;
+}
+.ops-app :is(input:not([type="radio"]):not([type="checkbox"]), select, textarea) {
+  border-color: #91a4b3;
+  border-radius: 8px;
+}
+.ops-app .ops-notice { border-radius: 10px; }
+.ops-app .ops-table-wrap { background: #fff; }
+.ops-app .ops-table-wrap th { color: #294456; background: #eef4f7; }
+.ops-app .ops-queue button:not([aria-pressed="true"]):hover { border-color: #125ca6; background: #f1f7fc; }
+
+/* Report pages remain compact and use a distinct report title, filter rail and canvas. */
+.ops-app[data-platform="report"] { background: #eef3f6; }
+[data-platform="report"] .ops-report-title {
+  padding: 16px 20px;
+  color: #fff;
+  background: #173f5e;
+  border-bottom: 1px solid #12344f;
+  border-radius: 17px 17px 0 0;
+}
+[data-platform="report"] .ops-report-title strong { color: #fff; font-size: 17px; font-weight: 700; letter-spacing: .01em; }
+[data-platform="report"] .ops-report-title small { color: #e2f0fa; }
+[data-platform="report"] .ops-filters { gap: 8px; padding: 12px 18px; background: #eef3f6; }
+[data-platform="report"] .ops-filters label {
+  padding: 8px 10px;
+  color: #344d5d;
+  background: #fff;
+  border: 1px solid #d6e0e7;
+  border-radius: 9px;
+  font-weight: 600;
+}
+[data-platform="report"] .ops-filters :is(input, select) { min-height: 44px; }
+[data-platform="report"] .ops-card { border-color: #d6e0e7; padding: 16px; }
+[data-platform="report"] .ops-pad > h2 { margin: 8px 0 16px; color: #1b3446; font-weight: 700; }
+[data-platform="report"] .ops-kpis { gap: 8px; margin: 14px 0 18px; }
+[data-platform="report"] .ops-table-wrap th { color: #294456; background: #eef4f7; border-bottom-color: #125ca6; }
+.ops-app .evidence-key { gap: 8px; padding-block: 10px; background: #f8fafb; border-color: #d6e0e7; }
+.ops-app .evidence-key span { border-color: #d6e0e7; color: #294456; }
+
+@media (max-width: 780px) {
+  .ops-app { border-left: 0; border-right: 0; border-radius: 0; }
+  .ops-app .ops-toolbar, [data-platform="report"] .ops-report-title { border-radius: 0; }
+  .ops-app .ops-toolbar { padding: 17px 16px; }
+  [data-system="plant-operations-hub"] #system .ops-band { padding: 22px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-system="plant-operations-hub"] #system .portal-link { transition: none; }
+}
