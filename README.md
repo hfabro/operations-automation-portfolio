@@ -146,6 +146,7 @@ The systems library uses `scripts/demo-series.js` and `assets/demo-series.css` f
 - `scripts/operations-data.js`: deterministic fictional interval and fleet fixtures.
 - `scripts/operations-systems.js`: portal, report calculations, and browser-only workflow state.
 - `assets/operations-systems.css`: source-platform-inspired presentation.
+- `assets/demo-polish.css`: shared rounded surfaces and controls across the demo library.
 - `assets/platform-fidelity.css`: targeted ladder and physical Kanban refinements.
 - `tools/build-system-pages.mjs`: assembles the seven new static HTML wrappers. Run only when changing wrapper metadata or structure; edit the generator rather than generated wrapper files.
 - `tools/test-system-data.mjs`: verifies interval identity, energy integration, fleet records, and charging-model arithmetic.
