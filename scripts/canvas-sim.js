@@ -110,6 +110,7 @@
     var initials = root.getAttribute("data-canvas-initials") || title.split(/\s+/).slice(0, 2).map(function (word) { return word.charAt(0); }).join("");
     var user = root.getAttribute("data-canvas-user") || "OP";
     var commands = root.getAttribute("data-canvas-commands") || "Home,Refresh";
+    var refreshLabel = root.getAttribute("data-canvas-refresh-label") || "Refresh";
     var nav = root.getAttribute("data-canvas-nav") || "";
     var navPosition = root.getAttribute("data-canvas-nav-position") || "bottom";
     var actionMap = {};
@@ -130,7 +131,7 @@
     commandBar.className = "canvas-command-bar";
     commands.split(",").map(function (item) { return item.trim(); }).filter(Boolean).forEach(function (command, index) {
       if (index) { var divider = document.createElement("span"); divider.className = "canvas-command-divider"; divider.setAttribute("aria-hidden", "true"); commandBar.appendChild(divider); }
-      commandBar.appendChild(makeButton(command === "Refresh" ? "↻  Refresh" : "⌂  " + command, command.toLowerCase()));
+      commandBar.appendChild(makeButton(command === "Refresh" ? "↻  " + refreshLabel : "⌂  " + command, command.toLowerCase()));
     });
     var context = document.createElement("span");
     context.className = "canvas-command-context";
@@ -189,7 +190,7 @@
       var actionButton = event.target.closest("[data-canvas-action]");
       if (!actionButton || !root.contains(actionButton)) return;
       var action = actionButton.getAttribute("data-canvas-action");
-      root.dispatchEvent(new CustomEvent("canvas:navigate", { detail: { action: action } }));
+      var useDefault = root.dispatchEvent(new CustomEvent("canvas:navigate", { detail: { action: action }, cancelable: true }));
       if (actionMap[action]) {
         var target = document.querySelector(actionMap[action]);
         if (target) {
@@ -197,7 +198,7 @@
           else target.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
           setActive(root, action);
         }
-      } else if (action === "refresh") {
+      } else if (action === "refresh" && useDefault) {
         notify(root, "View refreshed from the current synthetic session state.", "success");
       }
     });
