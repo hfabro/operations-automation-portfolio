@@ -1,0 +1,54 @@
+/* A softer, consistent finish for the portfolio pages and case studies. */
+body.hub-page, body.resume-page {
+  --portfolio-card-radius: 22px;
+  --portfolio-control-radius: 12px;
+  --portfolio-soft-shadow: 0 12px 32px rgba(23, 33, 30, .06);
+}
+
+.hub-page .brand-mark, .resume-page .brand-mark { border-radius: 11px; }
+.hub-page .button, .hub-page .home-button, .hub-page .theme-toggle,
+.hub-page .nav-toggle, .hub-page .work-search input, .hub-page .work-focus select,
+.resume-page .button { border-radius: var(--portfolio-control-radius); }
+.hub-page .back-to-top { border-radius: 50%; }
+.hub-page .primary-nav.is-open { border-radius: 16px; }
+
+.home-page .home-intro {
+  background: radial-gradient(ellipse at 80% 15%, color-mix(in srgb, var(--green) 8%, transparent), transparent 42%), var(--bg);
+}
+.home-page .home-perspective {
+  border-radius: 24px;
+  background: linear-gradient(145deg, #294c40, #1a342b);
+  box-shadow: 0 22px 50px rgba(23, 33, 30, .13);
+}
+.home-page .home-projects { gap: 16px; border: 0; background: transparent; }
+.home-page .home-project {
+  border: 1px solid var(--line);
+  border-radius: var(--portfolio-card-radius);
+  background: var(--surface-strong);
+  box-shadow: var(--portfolio-soft-shadow);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.home-page .home-contact-inner { border-radius: 24px; box-shadow: var(--portfolio-soft-shadow); }
+.home-page .home-capabilities span { border-radius: 999px; }
+
+.hub-page .gallery-card, .hub-page .hub-card, .hub-page .work-summary-card,
+.hub-page .narrative-grid article, .hub-page .control-grid article,
+.hub-page .ownership-callout, .hub-page .hub-summary, .hub-page .case-pagination a,
+.hub-page .decision-lab details { border-radius: var(--portfolio-card-radius); }
+.hub-page .gallery-card { overflow: hidden; box-shadow: var(--portfolio-soft-shadow); }
+.systems-page .work-summary-card, .gallery-page .hub-card { box-shadow: var(--portfolio-soft-shadow); }
+.hub-page .card-tags span { border-radius: 999px; }
+.hub-page .table-wrap { border-radius: 14px; }
+.resume-page .resume-checklist { border-radius: var(--portfolio-card-radius); }
+
+@media (hover:hover) {
+  .home-page .home-project:hover, .home-page .home-project:focus-within {
+    transform: translateY(-3px);
+    border-color: var(--green);
+    box-shadow: 0 18px 38px rgba(23, 33, 30, .11);
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .home-page .home-project { transition: none; }
+  .home-page .home-project:hover, .home-page .home-project:focus-within { transform: none; }
+}
