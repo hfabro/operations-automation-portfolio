@@ -35,6 +35,17 @@ try {
     const links=await page.locator('.gallery-card h3 a,.gallery-card .card-links a').evaluateAll(nodes=>nodes.map(n=>n.href));
     for(const url of new Set(links)) assert.equal((await context.request.get(url)).status(),200,url);
   });
+  await check('Case details expand and collapse with the keyboard',async()=>{
+    const details=page.locator('.gallery-card details.gallery-proof');
+    assert.equal(await details.count(),7);
+    const first=details.first();
+    assert.equal(await first.locator('dt').first().isVisible(),false);
+    await first.locator('summary').focus();
+    await page.keyboard.press('Enter');
+    assert.equal(await first.locator('dt').first().isVisible(),true);
+    await page.keyboard.press('Enter');
+    assert.equal(await first.locator('dt').first().isVisible(),false);
+  });
   await check('Operational focus intersects maturity and text; reset restores all projects',async()=>{
     for(const [focus,count] of [['facilities',8],['assurance',4],['analytics',4],['reliability',9]]){
       await page.locator('[data-work-focus]').selectOption(focus);
@@ -108,6 +119,8 @@ try {
     const p=await nojs.newPage();await p.goto(base+'/work/?focus=analytics');
     assert.equal(await p.locator('[data-work-kind]:visible').count(),13);
     assert.equal(await p.locator('[data-work-controls]').isVisible(),false);
+    await p.locator('.gallery-card details.gallery-proof summary').first().click();
+    assert.equal(await p.locator('.gallery-card details.gallery-proof dt').first().isVisible(),true);
     await p.locator('.gallery-card h3 a').first().click();
     assert.ok(p.url().endsWith('/work/facilities-digital-operations/'));
     await nojs.close();
