@@ -1,10 +1,10 @@
 /* A compact, scannable index for the full set of demonstrations. */
-.systems-page .hub-hero { padding-block: 36px 54px; }
+.systems-page .hub-hero { padding-block: 24px 28px; }
 .systems-heading { max-width: 790px; }
 .systems-heading .eyebrow { margin-bottom: 14px; }
 .systems-page .systems-heading h1 { font-size: clamp(3rem,5vw,4.5rem); line-height: 1.06; }
 .systems-heading .hub-lead { margin: 18px 0 12px; }
-.systems-boundary { margin: 0 0 24px; color: var(--muted); font-size: .9rem; }
+.systems-boundary { margin: 18px 0 0; color: var(--muted); font-size: .9rem; }
 .systems-page .page-layout { display: flex; flex-direction: column; gap: 32px; }
 .systems-page .page-content { width: 100%; }
 .systems-page .page-toc { order: -1; width: 100%; position: static; border: 0; border-bottom: 1px solid var(--line); }
@@ -21,6 +21,10 @@
 .systems-page .work-summary-card h3 { font-size: 1.35rem; }
 .systems-page .work-summary-card .card-meta { margin-bottom: 20px; }
 .systems-page .platform-secondary { margin-top: 48px; }
+.systems-page #demo-library > details.platform-secondary { margin-top: 24px; border-top: 1px solid var(--line); }
+.systems-page #demo-library > details > summary { min-height: 48px; padding: 12px 4px; font-weight: 700; line-height: 24px; cursor: pointer; }
+.systems-page #demo-library > details > summary:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.systems-page #demo-library > details > .hub-card-grid { margin-top: 12px; }
 @media(max-width:900px) {
   .systems-page .page-toc nav { display: grid; }
   .systems-page .page-toc strong { display: none; }
