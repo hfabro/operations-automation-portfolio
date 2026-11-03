@@ -55,7 +55,7 @@ for (const file of htmlFiles) {
   const primary = html.match(/<nav class="primary-nav"[\s\S]*?<\/nav>/)?.[0];
   if(primary){
     const labels=Array.from(primary.matchAll(/<a\b[^>]*>([^<]+)<\/a>/g),m=>m[1]);
-    if(labels.join('|')!== 'Work|Systems|Smart Factory|About|Resume|Contact') report(file,'primary navigation differs from current structure');
+    if(labels.join('|')!== 'Work|Demos|Smart Factory|About|Resume|Contact') report(file,'primary navigation differs from current structure');
     const current=Array.from(primary.matchAll(/<a\b[^>]*aria-current="page"[^>]*>/g));
     for(const match of current){const href=match[0].match(/href="([^"]+)"/)?.[1];if(!href||resolveLocalTarget(file,href)!==file)report(file,'aria-current does not identify this page');}
   }

@@ -14,7 +14,7 @@
       steps: [
         { selector: "[data-qr-scan]", event: "click", title: "Scan the ladder tag", text: "Choose the inspection cycle, then simulate the ladder QR scan. The tag resolves the asset and automatically follows the FOUND path." },
         { selector: '[data-scenario="exception"]', event: "click", title: "Load the exception", text: "Populate every required answer, including a failed hardware check, isolation decision, note, and synthetic evidence." },
-        { selector: "[data-inspection-form]", event: "demo:state", signal: "inspection-submitted", title: "Validate and submit", text: "Submit the occurrence and inspect how deterministic rules route the failed condition." }
+        { selector: '[data-inspection-form] button[type="submit"]', event: "demo:state", signal: "inspection-submitted", title: "Validate and submit", text: "Confirm the inspection certification, then submit the occurrence and inspect how deterministic rules route the failed condition." }
       ]
     },
     "compliance-workflow": {
@@ -26,7 +26,7 @@
       steps: [
         { selector: "[data-generate]", event: "click", title: "Generate the occurrence", text: "Create the due instance without changing the requirement master." },
         { selector: '[data-scenario="exception"]', event: "click", title: "Load an exception path", text: "Populate the owner, evidence, status, and notes for an obligation that needs escalation." },
-        { selector: "[data-occurrence-form]", event: "demo:state", signal: "compliance-submitted", title: "Validate the lifecycle update", text: "Submit the record and inspect the owned follow-up and history response." }
+        { selector: '[data-occurrence-form] button[type="submit"]', event: "demo:state", signal: "compliance-submitted", title: "Validate the lifecycle update", text: "Submit the record and inspect the owned follow-up and history response." }
       ]
     },
     "digital-kanban": {
