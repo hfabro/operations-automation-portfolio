@@ -33,7 +33,7 @@
 .gallery-page .work-filter-status p { font-size: .875rem; }
 .gallery-page .content-block > .lead { margin-bottom: 32px; }
 .gallery-page .featured-work-grid { gap: 28px; }
-.gallery-page .gallery-card { padding: 0; min-width: 0; background: var(--surface-strong); transition: border-color .15s ease,box-shadow .15s ease; }
+.gallery-page .gallery-card { position: relative; padding: 0; min-width: 0; background: var(--surface-strong); transition: border-color .15s ease,box-shadow .15s ease; }
 .gallery-card:hover,.gallery-card:focus-within { border-color: var(--green); box-shadow: var(--shadow); }
 .gallery-card-content { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 28px; }
 .gallery-page .gallery-card .card-meta { margin-bottom: 22px; gap: 12px; }
@@ -41,6 +41,8 @@
 .gallery-page .gallery-card .gallery-discipline { color: var(--muted); font-weight: 700; font-size: .75rem; margin-bottom: 10px; }
 .gallery-page .gallery-card h3 { font-size: clamp(1.6rem,2.5vw,2.25rem); line-height: 1.12; letter-spacing: -.035em; }
 .gallery-card h3 a { text-decoration: none; }
+.gallery-card h3 a::after { content: ""; position: absolute; inset: 0; }
+.gallery-card .gallery-proof, .gallery-card .card-links { position: relative; z-index: 1; }
 .gallery-card h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .gallery-page .gallery-card p { line-height: 1.6; }
 .gallery-proof { margin: 24px 0 0; padding-top: 18px; border-top: 1px solid var(--line); }
@@ -110,7 +112,10 @@
   .gallery-card-lead .gallery-card-content { padding: 28px; }
 }
 @media(max-width:640px) {
-  .gallery-page .work-controls { grid-template-columns: 1fr; }
+  .gallery-page .hub-hero { padding-block: 28px 32px; }
+  .gallery-page .hub-section { padding-block: 32px; }
+  .gallery-page .page-layout { gap: 16px; }
+  .gallery-page .work-controls { grid-template-columns: 1fr; gap: 16px; padding-block: 18px; margin-bottom: 28px; }
   .gallery-page .featured-work-grid { grid-template-columns: 1fr; }
   .gallery-page .hub-hero h1 { font-size: clamp(2.35rem,9.5vw,3.8rem); }
   .gallery-page .gallery-card-content,.gallery-page .gallery-card-lead .gallery-card-content { padding: 22px; }

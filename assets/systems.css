@@ -15,7 +15,9 @@
 .systems-page .content-block + .content-block { padding-top: clamp(50px,6vw,80px); }
 .systems-page .content-block h2 { font-size: clamp(2rem,3.7vw,3.4rem); }
 .systems-page .page-content .hub-card-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
-.systems-page .work-summary-card { min-height: 210px; padding: 24px; }
+.systems-page .work-summary-card { position: relative; min-height: 210px; padding: 24px; }
+.systems-page .work-summary-card > a::after { content: ""; position: absolute; inset: 0; }
+.systems-page .work-summary-card:hover, .systems-page .work-summary-card:focus-within { border-color: var(--green); }
 .systems-page .work-summary-card h3 { font-size: 1.35rem; }
 .systems-page .work-summary-card .card-meta { margin-bottom: 20px; }
 .systems-page .platform-secondary { margin-top: 48px; }

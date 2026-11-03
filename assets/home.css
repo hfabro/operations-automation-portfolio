@@ -29,13 +29,14 @@
 .home-section-heading h2,.home-background h2,.home-contact h2 { margin: 0; font-size: clamp(2.15rem,3.5vw,3.4rem); line-height: 1.12; letter-spacing: -.045em; }
 .home-section-heading p:not(.home-kicker) { max-width: 600px; margin: 14px 0 0; color: var(--muted); line-height: 1.65; }
 .home-projects { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); border: 1px solid var(--line); background: var(--surface-strong); }
-.home-project { min-width: 0; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; padding: 28px; border-right: 1px solid var(--line); }
+.home-project { position: relative; min-width: 0; min-height: 300px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; padding: 28px; border-right: 1px solid var(--line); }
 .home-project:last-child { border-right: 0; }
 .project-top { display: flex; justify-content: space-between; gap: 16px; color: var(--accent-dark); font-size: .64rem; font-weight: 800; letter-spacing: .08em; }
 .project-top span:last-child { color: var(--muted); }
 .home-project h3 { margin: 0 0 12px; font-size: 1.35rem; line-height: 1.2; letter-spacing: -.025em; }
 .home-project p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.6; }
 .home-project > a { align-self: flex-start; color: var(--ink); font-size: .82rem; font-weight: 800; text-decoration: none; }
+.home-project > a::after { content: ""; position: absolute; inset: 0; }
 .home-project > a:hover { text-decoration: underline; text-underline-offset: 5px; }
 .home-demo-note { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 22px 0 0; }
 .home-demo-note p { max-width: 700px; margin: 0; color: var(--muted); font-size: .85rem; line-height: 1.55; }
@@ -61,12 +62,17 @@
   .home-contact-inner { align-items: flex-start; flex-direction: column; }
 }
 @media (max-width:600px) {
-  .home-page .home-intro { padding: 48px 0 56px; }
+  .home-page .home-intro { padding: 38px 0 40px; }
+  .home-intro-grid { gap: 28px; }
   .home-intro h1 { font-size: clamp(2.8rem,11.5vw,4rem); }
   .home-intro-lead { margin-top: 20px; }
   .home-actions { gap: 18px; margin: 24px 0; }
-  .home-perspective { padding: 27px; }
-  .perspective-top { margin-bottom: 26px; }
+  .home-perspective { padding: 24px; }
+  .perspective-top { margin-bottom: 18px; }
+  .home-perspective > p { margin: 12px 0 18px; }
+  .perspective-line { padding: 10px 0; }
+  .home-perspective > a { margin-top: 16px; }
+  .home-work { padding-block: 48px; }
   .home-section-heading,.home-demo-note { align-items: flex-start; flex-direction: column; }
   .home-section-heading { margin-bottom: 28px; }
   .home-project { padding: 24px; }
