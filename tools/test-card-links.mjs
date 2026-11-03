@@ -40,8 +40,15 @@ try {
     assert.ok(page.url().endsWith('/work/facilities-digital-operations/'));
     await page.goto(base + '/demos/');
     await tapSurface('.systems-page .work-summary-card h3');
-    await page.waitForURL('**/demos/plant-operations-hub/');
-    assert.ok(page.url().endsWith('/demos/plant-operations-hub/'));
+    await page.waitForURL('**/demos/ladder-inspection/');
+    await page.goto(base + '/demos/');
+    for (const name of ['More workflow recreations', 'Architecture & strategy concepts', 'Supporting technical views']) {
+      const disclosure = page.locator('details').filter({has: page.getByText(name, {exact: true})});
+      await disclosure.locator('summary').click();
+      assert.equal(await disclosure.getAttribute('open'), '');
+      assert.ok(await disclosure.locator('a:visible').count() > 0);
+    }
+    assert.equal(await page.locator('#demo-library a[href$="/"]').count(), 15);
     await page.goto(base + '/work/');
     for (let i = 0; i < 7; i++) {
       const card = page.locator('.gallery-card').nth(i);
@@ -91,8 +98,14 @@ try {
   await page.goto(base + '/demos/');
   await page.locator('.systems-page .work-summary-card > a').first().focus();
   await page.keyboard.press('Enter');
+  await page.waitForURL('**/demos/ladder-inspection/');
+  await page.goto(base + '/demos/');
+  await page.getByText('More workflow recreations', {exact: true}).focus();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.getByRole('link', {name: 'Explore system →'}).first().isVisible(), true);
+  await page.getByRole('link', {name: 'Explore system →'}).first().focus();
+  await page.keyboard.press('Enter');
   await page.waitForURL('**/demos/plant-operations-hub/');
-  assert.ok(page.url().endsWith('/demos/plant-operations-hub/'));
   await nojs.close();
   console.log('PASS: card surfaces open their links; independent controls, keyboard and no-JavaScript navigation work');
 } finally { await browser.close(); if (server) server.kill(); }

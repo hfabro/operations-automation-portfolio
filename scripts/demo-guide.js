@@ -36,7 +36,7 @@
       time: "About 75 seconds",
       outcome: "Minimal request experience with visible fulfillment and closeout",
       steps: [
-        { selector: "[data-phone-scan]", event: "click", title: "Scan the stock point", text: "Resolve the synthetic QR route into the correct stock point and eligible items." },
+        { selector: "[data-phone-scan], [data-scan]", event: "click", title: "Scan the stock point", text: "Resolve the synthetic QR route into the correct stock point and eligible items." },
         { selector: '[data-item][data-blocked="false"]', event: "click", title: "Select an eligible item", text: "Choose one physical shortage. Items with an open request remain blocked." },
         { selector: "[data-submit]", event: "demo:state", signal: "kanban-request-created", title: "Send the replenishment signal", text: "Create one controlled request and hand it to the restocker view." },
         { selector: "[data-open-requests] [data-complete]", event: "demo:state", signal: "kanban-refill-completed", title: "Confirm the refill", text: "Close the owned request, retain the event, and release the item for a future physical signal." }
