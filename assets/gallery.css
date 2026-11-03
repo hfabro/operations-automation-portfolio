@@ -1,4 +1,8 @@
 /* Work gallery only: visual explanations and progressive discovery. */
+.gallery-page .gallery-heading { max-width: 780px; }
+.gallery-page .gallery-heading .eyebrow { margin-bottom: 14px; }
+.gallery-page .gallery-heading h1 { font-size: clamp(3rem,5vw,4.5rem); line-height: 1.06; }
+.gallery-page .gallery-heading .hub-lead { margin: 18px 0 24px; }
 .gallery-page .site-header { background: var(--bg); }
 .gallery-page .hub-hero { padding-block: 36px 54px; }
 .gallery-page .hub-hero-grid { grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: center; }
@@ -89,6 +93,12 @@
 .gallery-page .hub-card { min-height: 0; padding: 24px; }
 .gallery-page .hub-card h3 { font-size: 1.5rem; line-height: 1.15; }
 .gallery-page .hub-card p { font-size: .95rem; }
+@media(min-width:1101px) {
+  .gallery-page .page-content .featured-work-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+  .gallery-page .gallery-card h3 { font-size: 1.65rem; }
+  .gallery-page .gallery-card-content { padding: 24px; }
+  .gallery-page .gallery-card-lead .gallery-card-content { padding: 32px; }
+}
 @media(max-width:900px) {
   .gallery-page .hub-hero-grid { grid-template-columns: 1fr; gap: 32px; }
   .gallery-intro { padding: 24px; }

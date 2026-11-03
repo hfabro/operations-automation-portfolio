@@ -113,7 +113,7 @@ The concise homepage lives in `index.html`. Major content is organized into task
 - `smart-factory/` — maturity, roadmap, IT/OT, governance, and value-realization approach
 - `about/` — results, experience progression, capabilities, credentials, and contact
 
-Shared presentation lives in `styles.css`, while hub and case-study layouts live in `assets/hubs.css`. Shared interaction behavior lives in `scripts/app.js`.
+Shared presentation lives in `styles.css`, hub and case-study layouts live in `assets/hubs.css`, and the homepage layout lives in `assets/home.css`. Shared interaction behavior lives in `scripts/app.js`.
 
 ## Interactive demonstrations
 
@@ -192,7 +192,7 @@ The eight legacy interactive routes retain their validated behavior; their appli
 
 The site uses a hub-and-spoke information architecture:
 
-- the homepage provides a concise orientation and five task routes
+- the homepage provides a concise orientation, three selected cases, and paths to the complete work and systems libraries
 - global navigation stays consistent across all portfolio hubs and case studies
 - Work, Demos, Approach, Smart Factory, and About each have a dedicated URL
 - long hub and case-study pages include a contextual “On this page” navigation
