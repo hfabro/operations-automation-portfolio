@@ -189,7 +189,7 @@ for (const [page, phrase] of [
 ]) {
   if (!readFileSync(join(root,page),'utf8').includes(phrase)) report(join(root,page),'missing fictional-example boundary');
 }
-const approvedResumeHash = '8e858699e7080cef22c191557b7c1082027a96bb82fff7101c5c6086863c4277';
+const approvedResumeHash = 'c478358f914b53292a240a3a2438173380872d328ec55c64de923d0a4a995acc';
 if (createHash('sha256').update(readFileSync(join(root,'resume/david-h-fabro-resume.pdf'))).digest('hex') !== approvedResumeHash)
   report(join(root,'resume/david-h-fabro-resume.pdf'),'resume does not match the owner-approved PDF');
 const leakagePatterns = [

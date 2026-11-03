@@ -71,7 +71,7 @@ Each check starts and stops its own loopback preview (ports 4174 and 4175; overr
 
 The Work library uses `data-work-kind` (`implemented`, `analytics`, or `architecture`) on each project card. Its optional search and maturity filters use native controls, announce result counts, preserve shareable `q`/`maturity` query parameters, and show all projects when JavaScript is unavailable. Add new cards to the evidence table as well as the library, and update the library summary count.
 
-Current development rationale, evidence, and rollback instructions: [Executive quality release notes](RELEASE-2026-10-31.md). For the subsequent evidence-led case studies and remaining research limits, see [enrichment release notes](ENRICHMENT-2026-10-31.md).
+For release and recovery steps, see [Release and recovery](RELEASE.md).
 
 ## Deployment options
 
