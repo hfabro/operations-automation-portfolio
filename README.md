@@ -113,7 +113,7 @@ The concise homepage lives in `index.html`. Major content is organized into task
 - `smart-factory/` — maturity, roadmap, IT/OT, governance, and value-realization approach
 - `about/` — results, experience progression, capabilities, credentials, and contact
 
-Shared presentation lives in `styles.css`, hub and case-study layouts live in `assets/hubs.css`, and the homepage layout lives in `assets/home.css`. Shared interaction behavior lives in `scripts/app.js`.
+Shared presentation lives in `styles.css`, hub and case-study layouts live in `assets/hubs.css`, and the homepage, Work gallery, and Systems index have page-specific styles in `assets/home.css`, `assets/gallery.css`, and `assets/systems.css`. Shared interaction behavior lives in `scripts/app.js`.
 
 ## Interactive demonstrations
 
