@@ -35,6 +35,15 @@ try {
     const links=await page.locator('.gallery-card h3 a,.gallery-card .card-links a').evaluateAll(nodes=>nodes.map(n=>n.href));
     for(const url of new Set(links)) assert.equal((await context.request.get(url)).status(),200,url);
   });
+  await check('The featured card surface opens its interactive demo',async()=>{
+    const preview=page.locator('.gallery-card-lead .gallery-preview');
+    await preview.scrollIntoViewIfNeeded();
+    const box=await preview.boundingBox();
+    assert.ok(box);
+    await page.mouse.click(box.x+box.width/2,box.y+box.height/2);
+    await page.waitForURL('**/demos/plant-operations-hub/');
+    await page.goto(base+'/work/');
+  });
   await check('Case details expand and collapse with the keyboard',async()=>{
     const details=page.locator('.gallery-card details.gallery-proof');
     assert.equal(await details.count(),7);
@@ -122,7 +131,7 @@ try {
     await p.locator('.gallery-card details.gallery-proof summary').first().click();
     assert.equal(await p.locator('.gallery-card details.gallery-proof dt').first().isVisible(),true);
     await p.locator('.gallery-card h3 a').first().click();
-    assert.ok(p.url().endsWith('/work/facilities-digital-operations/'));
+    assert.ok(p.url().endsWith('/demos/plant-operations-hub/'));
     await nojs.close();
   });
   assert.deepEqual(report.errors,[]);
