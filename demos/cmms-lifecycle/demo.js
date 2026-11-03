@@ -50,7 +50,7 @@
     $$('[data-tab]').forEach((button) => {
       const selected = button.dataset.tab === name;
       button.classList.toggle("active", selected);
-      button.setAttribute("aria-selected", String(selected));
+      button.setAttribute("aria-pressed", String(selected));
     });
     $$('[data-panel]').forEach((panel) => {
       const selected = panel.dataset.panel === name;

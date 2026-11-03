@@ -188,8 +188,7 @@
 
   function renderComparison() {
     document.querySelector("[data-comparison-rows]").innerHTML = source.equipment.map(function (profile) {
-      var label = "Select " + profile.label + ", " + profile.utilization + "% utilization, " + profile.chargingEnergy.toFixed(1) + " kilowatt-hours charging energy, " + profile.peakDemand.toFixed(1) + " kilowatts peak exposure, " + profile.offPeakOpportunity + " opportunity";
-      return '<button class="comparison-row comparison-data' + (profile.id === state.equipmentId ? " active" : "") + '" type="button" aria-label="' + label + '" data-profile="' + profile.id + '"><strong>' + profile.label + '</strong><span>' + profile.utilization + '%</span><span>' + profile.chargingEnergy.toFixed(1) + ' kWh</span><span>' + profile.peakDemand.toFixed(1) + ' kW</span><span class="opportunity-' + profile.offPeakOpportunity.toLowerCase() + '">' + profile.offPeakOpportunity + "</span></button>";
+      return '<button class="comparison-row comparison-data' + (profile.id === state.equipmentId ? " active" : "") + '" type="button" data-profile="' + profile.id + '"><strong>' + profile.label + '</strong><span>' + profile.utilization + '%</span><span>' + profile.chargingEnergy.toFixed(1) + ' kWh</span><span>' + profile.peakDemand.toFixed(1) + ' kW</span><span class="opportunity-' + profile.offPeakOpportunity.toLowerCase() + '">' + profile.offPeakOpportunity + "</span></button>";
     }).join("");
     document.querySelectorAll("[data-profile]").forEach(function (button) {
       button.addEventListener("click", function () {
