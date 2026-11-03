@@ -110,7 +110,10 @@
   .gallery-card-lead .gallery-card-content { padding: 28px; }
 }
 @media(max-width:640px) {
-  .gallery-page .work-controls { grid-template-columns: 1fr; }
+  .gallery-page .hub-hero { padding-block: 28px 32px; }
+  .gallery-page .hub-section { padding-block: 32px; }
+  .gallery-page .page-layout { gap: 16px; }
+  .gallery-page .work-controls { grid-template-columns: 1fr; gap: 16px; padding-block: 18px; margin-bottom: 28px; }
   .gallery-page .featured-work-grid { grid-template-columns: 1fr; }
   .gallery-page .hub-hero h1 { font-size: clamp(2.35rem,9.5vw,3.8rem); }
   .gallery-page .gallery-card-content,.gallery-page .gallery-card-lead .gallery-card-content { padding: 22px; }
