@@ -138,3 +138,4 @@ main [id] { scroll-margin-top: 76px; }
 .demo-series-nav a:hover small,.demo-series-nav a:focus-visible small{color:#fff}
 .demo-series-center a:focus-visible{outline:2px solid #115ea3;outline-offset:3px}
 @media(max-width:720px){.demo-series-link-copy small{display:none}.demo-series-center>span{font-size:11px;letter-spacing:.02em}}
+@media(max-width:420px){.demo-series-link-copy{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.demo-series-link-copy span,.demo-series-link-copy strong,.demo-series-link-copy small{display:block}}

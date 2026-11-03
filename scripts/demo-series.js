@@ -36,11 +36,11 @@
   nav.className = "demo-series-nav";
   nav.setAttribute("aria-label", "Interactive system series");
   nav.innerHTML =
-    '<a class="series-previous" href="' + demoUrl(previous) + '" aria-label="Previous system: ' + previous.title + '">' +
+    '<a class="series-previous" href="' + demoUrl(previous) + '">' +
       '<span class="demo-series-direction" aria-hidden="true">←</span><span class="demo-series-link-copy"><span>Previous system</span><strong>' + previous.short + '</strong><small>' + previous.category + '</small></span>' +
     '</a>' +
     '<div class="demo-series-center"><span>' + current.category + '</span><strong>' + String(index + 1).padStart(2, "0") + ' / ' + String(demos.length).padStart(2, "0") + ' · ' + current.short + '</strong><a href="../">View all systems</a></div>' +
-    '<a class="series-next" href="' + demoUrl(next) + '" aria-label="Next system: ' + next.title + '">' +
+    '<a class="series-next" href="' + demoUrl(next) + '">' +
       '<span class="demo-series-link-copy"><span>Next system</span><strong>' + next.short + '</strong><small>' + next.category + '</small></span><span class="demo-series-direction" aria-hidden="true">→</span>' +
     '</a>';
 
