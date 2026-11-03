@@ -210,3 +210,14 @@
 @media print {
   .demo-guide { display: none !important; }
 }
+
+/* A compact return to the optional guide, shown only while it is offscreen on phones. */
+.demo-guide-quick {
+  position: fixed; z-index: 30; left: 12px; right: 12px; bottom: max(10px, env(safe-area-inset-bottom));
+  min-height: 48px; padding: 9px 14px; border: 1px solid #164f3d; border-radius: 10px;
+  background: #164f3d; color: #fff; font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.25; cursor: pointer;
+  box-shadow: 0 4px 16px rgba(15, 35, 27, .25);
+}
+.demo-guide-quick[hidden] { display: none; }
+.demo-guide-quick:focus-visible { outline: 3px solid #d75e38; outline-offset: 2px; }
+@media (min-width: 641px), print { .demo-guide-quick { display: none !important; } }

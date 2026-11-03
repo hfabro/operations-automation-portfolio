@@ -132,6 +132,52 @@
 
   var state = { active: false, complete: false, index: 0, target: null };
   var live = root.querySelector("[data-guide-live]");
+  var quickGuide = null;
+  var completionSeen = false;
+  var ladderWorkspace = slug === "ladder-inspection" ? document.getElementById("demo") : null;
+
+  // Keep the optional guide reachable when its original panel is outside the phone viewport.
+  function updateQuickGuide() {
+    if (!quickGuide) return;
+    var guideRect = root.getBoundingClientRect();
+    var workRect = ladderWorkspace.getBoundingClientRect();
+    var guideVisible = guideRect.top >= 0 && guideRect.bottom <= window.innerHeight;
+    var workspaceVisible = workRect.bottom > 0 && workRect.top < window.innerHeight;
+    if (state.complete && guideVisible) completionSeen = true;
+    var canvasBusy = document.querySelector('[data-canvas-busy]:not([hidden]), [data-canvas-dialog-layer]:not([hidden])');
+    if (state.complete) quickGuide.textContent = "Scenario complete · Show guide";
+    else if (state.active) quickGuide.textContent = "Step " + (state.index + 1) + " of " + guide.steps.length + " · " + guide.steps[state.index].title + " · Show guide";
+    quickGuide.hidden = window.innerWidth > 640 || !(state.active || (state.complete && !completionSeen)) || guideVisible || !workspaceVisible || Boolean(canvasBusy) || root.hidden;
+    if (!quickGuide.hidden && canvasRoot) {
+      var bar = quickGuide.getBoundingClientRect();
+      var coveredControl = Array.prototype.some.call(ladderWorkspace.querySelectorAll("button, input, select, textarea, a[href]"), function (control) {
+        if (control.disabled || !control.getClientRects().length || getComputedStyle(control).visibility === "hidden") return false;
+        var surface = control.closest(".device-surface");
+        var clip = surface ? surface.getBoundingClientRect() : workRect;
+        var rect = control.getBoundingClientRect();
+        return Math.min(rect.right, clip.right) > Math.max(rect.left, clip.left, bar.left) &&
+          Math.min(rect.bottom, clip.bottom) > Math.max(rect.top, clip.top, bar.top) && rect.left < bar.right && rect.top < bar.bottom;
+      });
+      if (coveredControl) quickGuide.hidden = true;
+    }
+  }
+  if (ladderWorkspace) {
+    quickGuide = document.createElement("button");
+    quickGuide.type = "button";
+    quickGuide.className = "demo-guide-quick";
+    quickGuide.hidden = true;
+    quickGuide.addEventListener("click", function () {
+      root.scrollIntoView({ behavior: "auto", block: "center" });
+      var next = root.querySelector(state.complete ? "[data-guide-restart]" : "[data-guide-find]");
+      if (next) next.focus({ preventScroll: true });
+      updateQuickGuide();
+    });
+    document.body.appendChild(quickGuide);
+    window.addEventListener("scroll", updateQuickGuide, { passive: true, capture: true });
+    window.addEventListener("resize", updateQuickGuide, { passive: true });
+    var canvasRoot = ladderWorkspace.querySelector("[data-canvas-app]");
+    if (canvasRoot) new MutationObserver(updateQuickGuide).observe(canvasRoot, { attributes: true, subtree: true, attributeFilter: ["hidden"] });
+  }
 
   function setGroup(selector, hidden) {
     root.querySelectorAll(selector).forEach(function (node) { node.hidden = hidden; });
@@ -173,11 +219,13 @@
     state.active = true;
     state.complete = false;
     state.index = 0;
+    completionSeen = false;
     setGroup("[data-guide-intro]", true);
     setGroup("[data-guide-complete]", true);
     setGroup("[data-guide-active]", false);
     renderStep();
     live.textContent = "Guided run started. " + guide.steps[0].title + ".";
+    updateQuickGuide();
   }
 
   function exit() {
@@ -188,6 +236,7 @@
     setGroup("[data-guide-complete]", true);
     setGroup("[data-guide-intro]", false);
     live.textContent = "Guided run closed. The demo remains available.";
+    updateQuickGuide();
   }
 
   function finish() {
@@ -198,6 +247,7 @@
     setGroup("[data-guide-intro]", true);
     setGroup("[data-guide-complete]", false);
     live.textContent = "Guided scenario complete. " + guide.outcome + ".";
+    updateQuickGuide();
     root.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
@@ -207,6 +257,7 @@
     state.index += 1;
     renderStep();
     live.textContent = "Step " + (state.index + 1) + ". " + guide.steps[state.index].title + ".";
+    updateQuickGuide();
   }
 
   function findControl() {
@@ -237,7 +288,7 @@
   root.querySelector("[data-guide-start]").addEventListener("click", start);
   root.querySelector("[data-guide-find]").addEventListener("click", findControl);
   root.querySelector("[data-guide-exit]").addEventListener("click", exit);
-  root.querySelector("[data-guide-close]").addEventListener("click", function () { root.hidden = true; clearTarget(); });
+  root.querySelector("[data-guide-close]").addEventListener("click", function () { root.hidden = true; clearTarget(); updateQuickGuide(); });
   root.querySelector("[data-guide-restart]").addEventListener("click", function () { window.location.reload(); });
 
   ["click", "change", "submit", "pointerdown", "keydown", "demo:state"].forEach(function (eventName) {
