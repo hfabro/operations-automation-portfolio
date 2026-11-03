@@ -1,0 +1,35 @@
+/* A shared finish for the demo library. Layout, status colors, and device scrollports stay with each demo. */
+.demo-header .brand-mark, .ops-header .brand-mark { border-radius: 10px; }
+
+.device-preview-bar {
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(23, 33, 30, .06);
+}
+.device-preview-actions button { border-radius: 8px; }
+.demo-guide, [data-canvas-app] .demo-guide { border-radius: 16px; }
+.demo-guide button { border-radius: 9px; }
+
+/* The outer explanatory panels keep the portfolio's softer visual language. */
+.boundary-card, .system-panel, .history-panel, .control-panel, .radar-card,
+.gap-card, .map-card, .queue-card, .detail-card, .report-card, .chart-card,
+.insight-panel, .production-card, .decision-panel, .loss-card, .event-card,
+.selection-panel, .capacity-card, .history-card, .score-card {
+  border-radius: 16px;
+}
+.roadmap-canvas-suite :is(.radar-card, .gap-card),
+[data-canvas-title="Connected Operations"] :is(.production-card, .decision-panel, .loss-card, .event-card) {
+  border-radius: 12px;
+}
+
+/* Inside the simulated Microsoft surfaces, use smaller radii that fit the platform. */
+.ops-app .ops-card, .ops-app .ops-kpi, .ops-app .portal-link,
+.ops-app .ops-form, .ops-app .ops-notice, .ops-app .ops-table-wrap,
+.ops-app .ops-filters label { border-radius: 9px; }
+.ops-app button:not([data-tab]):not(.spatial-cell):not(.report-pin),
+.ops-app input:not([type="radio"]):not([type="checkbox"]),
+.ops-app select, .ops-app textarea { border-radius: 7px; }
+
+[data-canvas-app] :is(.primary, .secondary, .item-card, .scenario-button,
+  [data-scenario], [data-generate], [data-submit], [data-certify]),
+[data-canvas-app] input:not([type="radio"]):not([type="checkbox"]),
+[data-canvas-app] select, [data-canvas-app] textarea { border-radius: 7px; }
