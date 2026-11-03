@@ -29,7 +29,8 @@ body.hub-page, body.resume-page {
   transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .home-page .home-contact-inner { border-radius: 24px; box-shadow: var(--portfolio-soft-shadow); }
-.home-page .home-capabilities span { border-radius: 999px; }
+.home-page .home-capabilities span { border: 0; padding: 0; }
+.home-page .home-capabilities span:not(:last-child)::after { content: " ·"; }
 
 .hub-page .gallery-card, .hub-page .hub-card, .hub-page .work-summary-card,
 .hub-page .narrative-grid article, .hub-page .control-grid article,
@@ -37,7 +38,10 @@ body.hub-page, body.resume-page {
 .hub-page .decision-lab details { border-radius: var(--portfolio-card-radius); }
 .hub-page .gallery-card { overflow: hidden; box-shadow: var(--portfolio-soft-shadow); }
 .systems-page .work-summary-card, .gallery-page .hub-card { box-shadow: var(--portfolio-soft-shadow); }
-.hub-page .card-tags span { border-radius: 999px; }
+.hub-page .narrative-grid article, .hub-page .control-grid article { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; }
+.hub-page .card-tags span { border: 0; padding: 0; }
+.hub-page .card-tags span:not(:last-child)::after { content: " ·"; }
+.hub-page .status { min-height: 0; padding: 0; border-radius: 0; background: transparent; color: var(--ink); }
 .hub-page .table-wrap { border-radius: 14px; }
 .resume-page .resume-checklist { border-radius: var(--portfolio-card-radius); }
 
