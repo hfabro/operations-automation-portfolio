@@ -28,9 +28,10 @@
   <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
-  <script src="demo-data.js" defer></script>
+  <script src="demo-data.js?v=20261103.1" defer></script>
+  <script src="demo-rules.js?v=20261103.1" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.11" defer></script>
-  <script src="demo.js?v=20261103.1" defer></script>
+  <script src="demo.js?v=20261103.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260926.2" defer></script>
   <script src="../../scripts/demo-series.js?v=20261102.1" defer></script>
   <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
@@ -49,7 +50,7 @@
     <aside class="system-relationship" aria-label="System context"><p>Architecture concept within the Smart Factory strategy—not an implemented plant integration.</p><nav class="system-context" aria-label="Related systems"><a href="../../smart-factory/">View Smart Factory Strategy</a><a href="../">View all systems</a></nav></aside>
 <section class="demo-intro" aria-labelledby="demo-title">
       <div class="shell intro-grid">
-        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Operate four production scenarios and trace how raw machine states become contextualized losses, governed metrics, and human-reviewed action.</p><a class="demo-jump-link" href="#console">Jump to interactive system ↓</a></div>
+        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Explore four fictional production scenarios, modeled metrics, and rules that support human review.</p><a class="demo-jump-link" href="#console">Jump to interactive system ↓</a></div>
         <ul class="demo-guardrails" aria-label="Demo guardrails"><li>Concept / interactive prototype</li><li>No PLC, SCADA, MES, or historian connection</li><li>All equipment and events are synthetic</li><li>No autonomous production decisions</li></ul>
       </div>
     </section>
@@ -71,6 +72,7 @@
           <article class="oee-card"><span>Modeled OEE</span><strong data-kpi-oee>—</strong><small>Availability × performance × quality</small></article>
         </div>
 
+        <p class="chart-description">OEE components are scenario assumptions shared by both assets; interval and loss examples are separate and do not calculate those components. The starvation rule uses the scenario’s assumed loss minutes.</p>
         <div class="console-grid">
           <section class="production-card" aria-labelledby="production-title">
             <div class="card-heading"><div><span>Production intelligence</span><h3 id="production-title" data-production-title>—</h3></div><div class="legend" aria-label="Machine-state legend"><span><i class="run"></i>Run</span><span><i class="idle"></i>Idle / starved</span><span><i class="stop"></i>Stop / fault</span><span><i class="planned"></i>Planned</span></div></div>
@@ -83,7 +85,7 @@
           <aside class="decision-panel" aria-labelledby="decision-title">
             <p class="eyebrow">Context and control</p><h2 id="decision-title">From event to response.</h2>
             <div class="condition-banner" data-condition-banner><span data-condition-code>—</span><strong data-condition-title>—</strong><p data-condition-text></p></div>
-            <div class="rule-card"><span>Deterministic escalation</span><code data-rule-expression>—</code><strong data-rule-status>—</strong><p data-rule-note></p></div>
+            <div class="rule-card"><span>Illustrative rule evaluation</span><code data-rule-expression>—</code><strong data-rule-status>—</strong><p data-rule-note></p></div>
             <div class="decision-question"><span>Human decision</span><strong data-decision-question>—</strong><p data-decision-context></p></div>
             <div class="boundary-note"><strong>What this console does not do</strong><p>It does not control equipment, predict failure, or change schedules. Valid production action requires trusted tags, synchronized time, approved thresholds, operating context, and accountable human review.</p></div>
           </aside>
