@@ -3,6 +3,9 @@
   var source = window.CONNECTED_OPERATIONS_DATA;
   if (!source) return;
 
+  var rules = window.CONNECTED_OPERATIONS_RULES;
+  if (!rules) return;
+
   var state = { assetId: source.assets[0].id, scenarioId: source.scenarios[0].id };
   var assetSelect = document.querySelector("[data-asset]");
   var canvas = document.querySelector("[data-output-chart]");
@@ -14,7 +17,7 @@
   function scenario() { return source.scenarios.find(function (item) { return item.id === state.scenarioId; }) || source.scenarios[0]; }
   function oee(item) { return item.availability * item.performance * item.quality / 10000; }
   function rateFor(assetItem, percent) { return Math.round(assetItem.targetRate * percent / 100); }
-  function signalFor(assetItem, rawValue) { var value = rawValue * assetItem.signalScale; return (assetItem.signalScale < 1 ? value.toFixed(1) : Math.round(value)) + " " + assetItem.signalUnit; }
+  function signalFor(assetItem, rawValue) { if (!Number.isFinite(rawValue)) return "—"; var value = rawValue * assetItem.signalScale; return (assetItem.signalScale < 1 ? value.toFixed(1) : Math.round(value)) + " " + assetItem.signalUnit; }
   function ruleExpression(assetItem, item) {
     if (item.ruleType === "signal") return assetItem.signalLabel.toLowerCase() + " > " + assetItem.signalThreshold + " " + assetItem.signalUnit + " for 3 intervals";
     if (item.ruleType === "microstops") return "microstops ≥ 3 within 4 hours";
@@ -91,7 +94,7 @@
     document.querySelector("[data-table-caption]").textContent = assetItem.label + " · " + item.label + " modeled intervals";
     document.querySelector("[data-table-body]").innerHTML = source.intervals.map(function (time, index) {
       var operationalContext = item.states[index] === "run" ? assetItem.product : item.states[index] === "planned" ? "Planned startup" : item.label;
-      return "<tr><td>" + time + "</td><td>" + stateLabel(item.states[index]) + "</td><td>" + rateFor(assetItem, item.rates[index]) + " " + assetItem.rateUnit + "</td><td>" + signalFor(assetItem, item.signals[index]) + "</td><td>" + escapeHtml(operationalContext) + "</td></tr>";
+      return "<tr><td>" + time + "</td><td>" + stateLabel(item.states[index]) + "</td><td>" + rateFor(assetItem, item.rates[index]) + " " + assetItem.rateUnit + "</td><td>" + signalFor(assetItem, Array.isArray(item.signals) ? item.signals[index] : null) + "</td><td>" + escapeHtml(operationalContext) + "</td></tr>";
     }).join("");
   }
 
@@ -101,8 +104,9 @@
     document.querySelector("[data-condition-title]").textContent = item.title;
     document.querySelector("[data-condition-text]").textContent = item.text;
     document.querySelector("[data-rule-expression]").textContent = ruleExpression(assetItem, item);
-    document.querySelector("[data-rule-status]").textContent = item.ruleStatus;
-    document.querySelector("[data-rule-note]").textContent = item.ruleNote;
+    var evaluation = rules.evaluate(assetItem, item, source.intervals.length);
+    document.querySelector("[data-rule-status]").textContent = evaluation.status;
+    document.querySelector("[data-rule-note]").textContent = evaluation.note;
     document.querySelector("[data-decision-question]").textContent = item.question;
     document.querySelector("[data-decision-context]").textContent = item.decision;
     document.querySelector("[data-production-title]").textContent = assetItem.label + " · " + item.label;

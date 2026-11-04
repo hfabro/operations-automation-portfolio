@@ -1,0 +1,33 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {runInNewContext} from 'node:vm';
+const context={window:{}};
+for(const path of ['../demos/connected-operations/demo-data.js','../demos/connected-operations/demo-rules.js']) runInNewContext(readFileSync(new URL(path,import.meta.url),'utf8'),context);
+const {assets,scenarios,intervals}=context.window.CONNECTED_OPERATIONS_DATA;
+const evaluate=context.window.CONNECTED_OPERATIONS_RULES.evaluate;
+for(const asset of assets) for(const scenario of scenarios){
+ const expected=scenario.id==='stable'?'No escalation':'Review triggered';
+ assert.equal(evaluate(asset,scenario,intervals.length).status,expected,asset.id+' '+scenario.id);
+}
+const asset={signalScale:.1,signalThreshold:6.2};
+const signal=values=>evaluate(asset,{ruleType:'signal',signals:values},3).status;
+assert.equal(signal([62,62,62]),'No escalation');
+assert.equal(signal([63,63,63]),'Review triggered');
+assert.equal(signal([63,63,62]),'No escalation');
+assert.equal(signal([63,null,63]),'Insufficient data');
+assert.equal(signal([63,63]),'Insufficient data');
+const events=(times,category='microstop')=>times.map(time=>({time,type:'Stop',category}));
+const micro=(records,complete=true)=>evaluate(asset,{ruleType:'microstops',ruleEvidenceComplete:complete,events:records},12).status;
+assert.equal(micro(events(['06:00','08:00','10:00'])),'Review triggered');
+assert.equal(micro(events(['06:00','08:00','10:01'])),'No escalation');
+assert.equal(micro(events(['06:00','08:00','10:00'],'other')),'No escalation');
+assert.equal(micro([{time:'06:00',type:'Stop'}]),'Insufficient data');
+assert.equal(micro(events(['06:00','08:00','10:00']),false),'Insufficient data');
+assert.equal(micro(events(['08:00','06:00','10:00'])),'Insufficient data');
+assert.equal(micro(events(['06:00','bad','10:00'])),'Insufficient data');
+const starve=(minutes,complete=true)=>evaluate(asset,{ruleType:'starved',ruleEvidenceComplete:complete,losses:[{name:'Starved / no material',minutes}]},12).status;
+assert.equal(starve(30),'No escalation');assert.equal(starve(31),'Review triggered');
+assert.equal(starve(-1),'Insufficient data');assert.equal(starve(31,false),'Insufficient data');
+assert.equal(evaluate(asset,{ruleType:'starved',ruleEvidenceComplete:true,losses:[]},12).status,'Insufficient data');
+assert.equal((93.5*96.2*99.1/10000).toFixed(1),'89.1');
+console.log('PASS: eight scenario/asset rules, threshold boundaries, missing inputs, classified/ordered event evidence, and OEE arithmetic');

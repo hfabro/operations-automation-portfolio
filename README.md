@@ -73,10 +73,14 @@ node tools/test-kanban-guide-scan.mjs
 node tools/test-operations-focus.mjs
 node tools/test-fleet-scenario.mjs
 node tools/test-electrical-heatmap.mjs
+node tools/test-electrical-weather.mjs
+node tools/test-leak-workflow.mjs
+node tools/test-connected-logic.mjs
+node tools/test-connected-rules.mjs
 node tools/audit-accessibility.mjs
 ```
 
-Each check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, 4188, 4189, 4190, 4191, 4192, 4193, and 4198; override with `TEST_PORT`). The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
+Each browser check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, 4188–4193, and 4195–4198; override with `TEST_PORT`). The connected-rules check is a dependency-free unit test and does not start a server. The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
 
 The Work library uses `data-work-kind` (`implemented`, `analytics`, or `architecture`) on each project card. Its optional search and maturity filters use native controls, announce result counts, preserve shareable `q`/`maturity` query parameters, and show all projects when JavaScript is unavailable. Add new cards to the evidence table as well as the library, and update the library summary count.
 
@@ -188,7 +192,7 @@ The digital Kanban demo is a synthetic recreation of an implemented canvas-app p
 
 The telemetry explorer adds an analytical pattern. It provides five synthetic equipment profiles, 30-minute state modeling, accessible interval data, metric switching, a modeled peak-demand overlay, fleet comparison, and explicitly bounded decision-support interpretations. It does not connect to a live API or attribute production savings.
 
-The connected-operations console adds a Manufacturing 4.0 pattern. It provides two synthetic assets and four operating scenarios: stable operation, repeated microstops, quality drift, and material starvation. The interface decomposes OEE, visualizes machine states and modeled rate, classifies loss, preserves a contextualized event stream, applies inspectable deterministic escalation rules, and keeps the final decision with accountable people. It does not connect to PLC, SCADA, MES, historian, edge, CMMS, or production-control systems and does not claim deployed predictive maintenance.
+The connected-operations console adds a Manufacturing 4.0 pattern. It provides two synthetic assets and four operating scenarios: stable operation, repeated microstops, quality drift, and material starvation. The interface decomposes OEE, visualizes machine states and modeled rate, shows illustrative loss categories and a contextualized event stream, evaluates illustrative escalation rules against fictional samples, event times, or loss minutes, and keeps the final decision with accountable people. OEE components are scenario assumptions shared by both assets; the interval and loss examples are separate and do not calculate those components. It does not connect to PLC, SCADA, MES, historian, edge, CMMS, or production-control systems and does not claim deployed predictive maintenance.
 
 The CMMS lifecycle demo is a clean-room synthetic recreation of a broader local front-end prototype. It demonstrates asset and PM-plan selection, versioned template snapshots, unique occurrences, technician execution, threshold validation, evidence state, sign-off, supervisor disposition, capacity context, and transparent reliability prioritization. It has no live CMMS or ERP connection, does not persist records, and does not claim an enterprise deployment or predictive-maintenance capability.
 
