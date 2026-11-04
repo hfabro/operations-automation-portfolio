@@ -29,7 +29,7 @@ try {
   const note=page.locator('#response-note');
   await note.fill('short');await page.locator('#assign').click();assert.match(await page.locator('#ops-live').innerText(),/meaningful note/);assert.equal(await note.inputValue(),'short');
   await note.fill('Draft for the newly created report.');
-  await page.locator('.ops-queue [data-report="1"]').click();assert.equal(await note.inputValue(),'');
+  await page.locator('.ops-queue [data-report="1"]').focus();await page.keyboard.press('Enter');assert.equal(await page.locator('#report-detail-title').evaluate(e=>document.activeElement===e),true);assert.equal(await note.inputValue(),'');
   await note.fill('Draft for the earlier facilities report.');await page.locator('.ops-queue [data-report="0"]').click();assert.equal(await note.inputValue(),'Draft for the newly created report.');
   await page.locator('[data-tab="0"]').click();await page.locator('[data-tab="1"]').click();assert.equal(await note.inputValue(),'Draft for the newly created report.');
   await page.locator('.ops-queue [data-report="1"]').click();assert.equal(await note.inputValue(),'Draft for the earlier facilities report.');
