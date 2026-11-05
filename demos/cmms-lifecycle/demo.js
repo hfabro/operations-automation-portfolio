@@ -14,6 +14,7 @@
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  let generationPending = false;
 
   function setTheme(theme, persist) {
     const next = theme === "light" ? "light" : "dark";
@@ -37,8 +38,8 @@
   }
 
   function eventTime() {
-    const minutes = state.history.length * 7;
-    return `08:${String(minutes).padStart(2, "0")}`;
+    const totalMinutes = 8 * 60 + state.history.length * 7;
+    return `${String(Math.floor(totalMinutes / 60) % 24).padStart(2, "0")}:${String(totalMinutes % 60).padStart(2, "0")}`;
   }
 
   function addHistory(text, tone = "neutral") {
@@ -101,10 +102,31 @@
     state.signed = false;
     state.submitted = false;
     state.disposition = null;
+    $('[data-closeout-note]').value = "";
     addHistory(`${occurrenceId} generated from ${asset.template} Rev ${asset.revision}`, "good");
     renderAll();
     setTab("execute");
     $('[data-validation]').textContent = "Occurrence generated. Complete every step before submission.";
+  }
+
+  function requestPacket() {
+    if (generationPending) return;
+    if (!state.packet || state.submitted) { generatePacket(); return; }
+    const current = state.packet;
+    const shell = $('[data-canvas-app]');
+    if (!window.CanvasSim || !shell) {
+      setTab("execute");
+      $('[data-validation]').textContent = "Finish or reset this occurrence before creating another.";
+      return;
+    }
+    generationPending = true;
+    window.CanvasSim.confirm(shell, {
+      title: "Replace in-progress occurrence?",
+      message: `${current.id} and its unsaved responses will be replaced.`,
+      confirmLabel: "Replace occurrence"
+    }).then((confirmed) => {
+      if (confirmed && state.packet === current && !state.submitted) generatePacket();
+    }).finally(() => { generationPending = false; });
   }
 
   function taskMarkup(task, index) {
@@ -160,7 +182,7 @@
     const issues = [];
     state.packet.tasks.forEach((task) => {
       if (["Issue found", "Blocked"].includes(task.status)) issues.push(`${task.id}: ${task.status}`);
-      if (task.type === "reading" && task.value !== "") {
+      if (task.type === "reading" && !["N/A", "Blocked"].includes(task.status) && task.value !== "") {
         const value = Number(task.value);
         if (value < task.min || value > task.max) issues.push(`${task.id}: ${value} ${task.unit} outside ${task.min}–${task.max}`);
       }
@@ -173,7 +195,7 @@
     const problems = [];
     state.packet.tasks.forEach((task) => {
       if (task.status === "Not started") problems.push(`${task.id} needs a controlled result.`);
-      if (task.type === "reading" && task.status !== "N/A" && task.value === "") problems.push(`${task.id} needs a reading.`);
+      if (task.type === "reading" && !["N/A", "Blocked"].includes(task.status) && task.value === "") problems.push(`${task.id} needs a reading.`);
       if ((task.status === "Issue found" || task.status === "Blocked") && task.evidence && !task.evidenceCaptured) problems.push(`${task.id} needs simulated evidence for the exception.`);
     });
     if (exceptionSummary().length && !$('[data-closeout-note]').value.trim()) problems.push("Add a closeout note for the exception.");
@@ -201,6 +223,21 @@
   }
 
   function loadScenario(type) {
+    if (state.submitted) {
+      setTab("execute");
+      const message = $('[data-validation]');
+      message.className = "validation-message";
+      message.textContent = "This occurrence is locked. Generate a new occurrence before loading another scenario.";
+      return;
+    }
+    const hasWork = state.packet && (state.signed || $('[data-closeout-note]').value.trim() || state.packet.tasks.some((task) => task.status !== "Not started" || task.value !== "" || task.evidenceCaptured));
+    if (hasWork) {
+      setTab("execute");
+      const message = $('[data-validation]');
+      message.className = "validation-message";
+      message.textContent = "This occurrence has work in progress. Generate a new occurrence before loading the scenario.";
+      return;
+    }
     if (!state.packet) generatePacket();
     if (type === "exception") {
       state.packet.tasks.forEach((task, index) => {
@@ -216,6 +253,7 @@
       renderAll();
       setTab("execute");
       $('[data-validation]').textContent = "Scenario loaded. Review the issue, reading, evidence, and closeout note; then submit.";
+      document.dispatchEvent(new CustomEvent("demo:state", { detail: { signal: "pm-scenario-loaded" } }));
     }
   }
 
@@ -275,6 +313,14 @@
     renderWatchlist();
   }
 
+  function invalidateSignOff() {
+    if (!state.signed || state.submitted) return;
+    state.signed = false;
+    $('[data-sign-state]').textContent = "Not signed";
+    $('[data-sign-state]').className = "";
+    addHistory("Technician sign-off cleared after an edit", "warn");
+  }
+
   document.addEventListener("click", (event) => {
     const tab = event.target.closest('[data-tab]');
     if (tab) setTab(tab.dataset.tab);
@@ -284,7 +330,7 @@
       renderAssets();
       renderSelection();
     }
-    if (event.target.closest('[data-generate]')) generatePacket();
+    if (event.target.closest('[data-generate]')) requestPacket();
     const jump = event.target.closest('[data-jump]');
     if (jump) setTab(jump.dataset.jump);
     const scenario = event.target.closest('[data-scenario]');
@@ -292,6 +338,7 @@
     const evidence = event.target.closest('[data-task-evidence]');
     if (evidence && state.packet && !state.submitted) {
       const task = state.packet.tasks[Number(evidence.dataset.taskEvidence)];
+      invalidateSignOff();
       task.evidenceCaptured = !task.evidenceCaptured;
       renderPacket();
     }
@@ -314,13 +361,26 @@
   document.addEventListener("change", (event) => {
     if (!state.packet || state.submitted) return;
     if (event.target.matches('[data-task-status]')) {
-      state.packet.tasks[Number(event.target.dataset.taskStatus)].status = event.target.value;
+      const task = state.packet.tasks[Number(event.target.dataset.taskStatus)];
+      if (task.status !== event.target.value) invalidateSignOff();
+      task.status = event.target.value;
       renderPacket();
     }
     if (event.target.matches('[data-task-reading]')) {
-      state.packet.tasks[Number(event.target.dataset.taskReading)].value = event.target.value;
+      const task = state.packet.tasks[Number(event.target.dataset.taskReading)];
+      if (task.value !== event.target.value) invalidateSignOff();
+      task.value = event.target.value;
     }
   });
+
+  document.addEventListener("input", (event) => {
+    if (!state.packet || state.submitted || !event.target.matches('[data-task-reading]')) return;
+    const task = state.packet.tasks[Number(event.target.dataset.taskReading)];
+    if (task.value !== event.target.value) invalidateSignOff();
+    task.value = event.target.value;
+  });
+
+  $('[data-closeout-note]').addEventListener("input", invalidateSignOff);
 
   renderAll();
 })();
