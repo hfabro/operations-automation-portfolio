@@ -66,6 +66,12 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
         run: node tools/audit-accessibility.mjs
 
+      - name: Screen all demos and expanded help for accessibility
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+        run: node tools/audit-demo-accessibility.mjs
+
   workflows:
     name: Workflow state, identity, and record integrity
     runs-on: ubuntu-latest
@@ -84,3 +90,33 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
         run: node tools/run-regressions.mjs
+
+  engines:
+    name: Compatibility (${{ matrix.engine }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Prepare pinned engine and accessibility tools
+        run: |
+          npm install --prefix "$RUNNER_TEMP/portfolio-qa" --no-save --package-lock=false --ignore-scripts playwright@1.62.1 axe-core@4.14.0
+          "$RUNNER_TEMP/portfolio-qa/node_modules/.bin/playwright" install --with-deps "${{ matrix.engine }}"
+      - name: Verify route layouts and representative workflows
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          BROWSER_ENGINE: ${{ matrix.engine }}
+        run: node tools/test-engine-compatibility.mjs
+      - name: Screen demo entry and expanded-help states
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+          BROWSER_ENGINE: ${{ matrix.engine }}
+        run: node tools/audit-demo-accessibility.mjs

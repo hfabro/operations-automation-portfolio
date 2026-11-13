@@ -70,9 +70,12 @@ node tools/test-browser.mjs
 node tools/test-gallery.mjs
 node tools/run-regressions.mjs
 node tools/audit-accessibility.mjs
+node tools/audit-demo-accessibility.mjs
 ```
 
 Every demo shares a task-specific help disclosure and a confirmed full-session restart. Its existing application controls remain specific to the workflow.
+
+`tools/test-engine-compatibility.mjs` checks all 30 routes at four widths in both theme preferences, then exercises representative navigation and workflow paths. `tools/audit-demo-accessibility.mjs` screens all 15 demo entries and their expanded help disclosures. Both default to Chromium; set `BROWSER_ENGINE=firefox` or `BROWSER_ENGINE=webkit` to use a matching installed Playwright test browser. `BROWSER_CHANNEL` applies only to Chromium. CI runs the Firefox and WebKit checks as separate jobs using the same pinned development tools. The WebKit test build does not replace physical Safari/iOS acceptance. Follow the [Playwright browser installation instructions](https://playwright.dev/docs/browsers) when setting up these optional development browsers.
 
 The maintained workflow runner lists the focused tests in `tools/run-regressions.mjs`; individual scripts can be run separately to investigate a failure. CI uses the same runner, including notification draft/cancel/submit/reset behavior, identity, record locking, guided controls, report filters, and evidence handling.
 
