@@ -152,7 +152,7 @@
       evidence: state.evidence ? ["inspection-evidence-demo.jpg"] : [],
       exception: evaluation.hasException,
       correctiveActionRequired: evaluation.correctiveAction,
-      notificationGenerated: evaluation.hasException
+      notificationGenerated: state.submitted && evaluation.hasException
     };
   }
 

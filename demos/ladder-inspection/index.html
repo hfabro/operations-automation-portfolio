@@ -31,30 +31,31 @@
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
   <script src="demo-data.js?v=20260926.2" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.11" defer></script>
-  <script src="demo.js?v=20261103.1" defer></script>
+  <script src="demo.js?v=20261112.1" defer></script>
   <script src="../../scripts/device-preview.js?v=20260926.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20261103.3" defer></script>
-  <script src="../../scripts/demo-series.js?v=20261102.1" defer></script>
+  <script src="../../scripts/demo-series.js?v=20261112.1" defer></script>
 <link rel="stylesheet" href="../../assets/platform-fidelity.css?v=20260926.2">
   <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
+<link rel="stylesheet" href="../../assets/demo-workspace.css?v=20261112.1">
 </head>
-<body>
+<body class="demo-workspace-page" data-series-position="footer">
   <a class="skip-link" href="#demo">Skip to interactive system</a>
   <header class="demo-header">
     <div class="shell header-inner">
       <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a>
-      <nav class="system-context" aria-label="Related portfolio pages"><a class="back-link" href="../../work/ladder-inspection/">← Back to case study</a><a href="../plant-operations-hub/">Plant Hub</a><a href="../">All systems</a></nav>
+      <nav class="system-context" aria-label="Related portfolio pages"><a class="back-link" href="../../work/ladder-inspection/">Case study</a><a href="../plant-operations-hub/">Plant Hub</a><a href="../">All systems</a></nav>
     </div>
   </header>
 
-  <main><details class="platform-disclosure"><summary>Implemented workflow / synthetic recreation</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p></details>
+  <main>
     <section class="demo-intro" aria-labelledby="demo-title">
       <div class="shell intro-grid">
         <div>
           <p class="eyebrow">Interactive proof of concept / synthetic data</p>
           <h1 id="demo-title">Digital Ladder Inspection System</h1>
-          <p class="lede">Operate a safe demonstration of the workflow—from QR-assisted asset identification and expected-asset verification through structured inspection, deterministic exception handling, history, and reporting readiness.</p>
+          <p class="lede">Scan a fictional asset, complete six checks, and follow the result into inspection history.</p>
           <a class="demo-jump-link" href="#demo">Jump to interactive system ↓</a>
         </div>
         <ul class="demo-guardrails" aria-label="Demo guardrails"><li>No backend</li><li>No data retained</li><li>No real company records</li><li>Deterministic rules</li></ul>
@@ -63,7 +64,7 @@
 
     <section class="demo-workspace" id="demo" aria-labelledby="workspace-title">
       <div class="shell">
-        <div class="workspace-heading"><div><p class="eyebrow">Scenario 01</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>Choose the inspection cycle, then scan a synthetic ladder QR or select an expected asset manually.</p></div>
+        <div class="workspace-heading"><div><p class="eyebrow">Your task</p><h2 id="workspace-title">Run the inspection workflow.</h2></div><p>Choose a cycle and identify the ladder. Try a safety exception to see the follow-up.</p></div>
         <div class="device-preview-bar" data-device-preview data-target="ladder-device" data-device-default="phone" data-label-phone="Inspector phone" data-note-phone="Select the cycle, scan or locate the expected asset, inspect, and submit." data-label-tablet="Supervisor tablet" data-note-tablet="A wider execution view for review alongside the asset." data-label-system="Application + controls" data-note-system="See the user workflow and controlled system response together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Inspector phone</strong><small data-device-note>Select the cycle, scan or locate the expected asset, inspect, and submit.</small></div><div class="device-preview-actions" role="group" aria-label="Inspection experience size"><button type="button" data-preview-mode="phone" aria-pressed="true">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="false">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
         <div class="workspace-grid device-preview-stage" id="ladder-device" data-device-mode="phone">
           <div class="device-surface"><div class="device-status" aria-hidden="true"><span>9:41</span><span>FIELD OPS · ●●●</span></div><section class="app-frame" aria-labelledby="app-title" data-canvas-app data-canvas-title="LADDER INSPECTION APP" data-canvas-subtitle="September 2026 · Department inspection" data-canvas-initials="FI" data-canvas-user="OP" data-canvas-commands="Home,Refresh" data-canvas-refresh-label="Reset inspection" data-canvas-nav="Identify,Inspect,History">
@@ -118,7 +119,7 @@
             <div class="panel-heading"><p class="eyebrow">Live system response</p><h2 id="system-title">Controls and state</h2></div>
             <div class="state-grid" aria-live="polite"><div><span>Asset identity</span><strong data-state-asset>Pending scan</strong></div><div><span>Required responses</span><strong data-state-responses>0 / 6</strong></div><div><span>Exception state</span><strong data-state-exception>Not evaluated</strong></div><div><span>Occurrence history</span><strong data-state-history>Pending</strong></div></div>
             <div class="event-panel"><div><strong>Workflow event stream</strong><span>Synthetic execution trace</span></div><ol data-event-stream><li class="pending"><span>Waiting</span><p>Select month, department, and expected asset.</p></li></ol></div>
-            <details class="record-panel" open><summary>Synthetic record preview</summary><pre data-record-json>{
+            <details class="record-panel" open><summary>Synthetic record preview</summary><pre data-record-json tabindex="0" role="region" aria-label="Synthetic inspection record">{
   "assetId": null,
   "status": "Not started"
 }</pre></details>
@@ -129,6 +130,7 @@
       </div>
     </section>
 
+    <details class="platform-disclosure"><summary>Implemented workflow / synthetic recreation</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p></details>
     <section class="architecture-proof" aria-labelledby="architecture-title">
       <div class="shell">
         <div class="architecture-heading"><div><p class="eyebrow">Architecture behind the interaction</p><h2 id="architecture-title">The interface is one layer of the system.</h2></div><p>The proof of concept separates identity, execution, workflow, and history so the operating process can remain supportable as requirements change.</p></div>

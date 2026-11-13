@@ -1,0 +1,59 @@
+/* Shared workspace framing for the first execution/report pair.
+   Local application layouts, workflow selectors, and semantic status colors stay owned by each demo. */
+.demo-workspace-page {
+  --demo-ink: #19372e;
+  --demo-muted: #4f625a;
+  --demo-line: #d3ded8;
+  --demo-surface: #fff;
+  --demo-backdrop: #f2f6f3;
+  --demo-radius: 14px;
+  background: var(--demo-backdrop);
+}
+.demo-workspace-page .demo-header,
+.demo-workspace-page .ops-header { position: static; background: var(--demo-surface); border-bottom: 1px solid var(--demo-line); }
+.demo-workspace-page .header-inner { min-height: 64px; }
+.demo-workspace-page .ops-header { align-items: center; min-height: 64px; padding-block: 14px; }
+.demo-workspace-page .system-context a,
+.demo-workspace-page .ops-header nav a { font-size: .8rem; color: var(--demo-ink); }
+.demo-workspace-page .demo-intro { padding: 28px 0 22px; }
+.demo-workspace-page .intro-grid { display: block; }
+.demo-workspace-page .demo-intro h1,
+.demo-workspace-page .ops-intro h1 { max-width: none; font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -.035em; }
+.demo-workspace-page .lede,
+.demo-workspace-page .ops-intro > p { margin: 10px 0 0; font-size: .95rem; color: var(--demo-muted); }
+.demo-workspace-page .demo-jump-link { margin-top: 12px; }
+.demo-workspace-page .demo-guardrails { display: flex; flex-wrap: wrap; gap: 6px 18px; border: 0; margin: 14px 0 0; }
+.demo-workspace-page .demo-guardrails li { padding: 0; border: 0; background: transparent; color: var(--demo-muted); }
+.demo-workspace-page .demo-workspace { padding: 24px 0 48px; background: var(--demo-backdrop); }
+.demo-workspace-page .workspace-heading { gap: 16px; margin-bottom: 14px; }
+.demo-workspace-page .workspace-heading h2 { font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.2; letter-spacing: -.025em; }
+.demo-workspace-page .workspace-heading .eyebrow { margin-bottom: 5px; }
+.demo-workspace-page .workspace-heading > p { font-size: .85rem; color: var(--demo-muted); }
+.demo-workspace-page .demo-guide { box-shadow: none; background: var(--demo-surface); border-radius: var(--demo-radius); margin-block: 12px; padding: 14px 16px; gap: 12px; }
+.demo-workspace-page .demo-guide::before { display: none; }
+.demo-workspace-page .demo-guide-copy > p,
+.demo-workspace-page .demo-guide-meta { display: none; }
+.demo-workspace-page .demo-guide:has([data-guide-active]:not([hidden])) .demo-guide-copy > p,
+.demo-workspace-page .demo-guide:has([data-guide-active]:not([hidden])) .demo-guide-meta { display: flex; }
+.demo-workspace-page .device-preview-bar { margin-block: 12px; box-shadow: none; border-color: var(--demo-line); }
+.demo-workspace-page .ops-intro { padding-block: 24px 18px; }
+.demo-workspace-page .ops-intro .ops-caption { font-size: .78rem; }
+.demo-workspace-page .ops-disclosure { margin-top: 12px; font-size: .8rem; }
+.demo-workspace-page .ops-app { border-radius: var(--demo-radius); border-color: var(--demo-line); box-shadow: 0 6px 22px #19372e08; }
+.demo-workspace-page .ops-report-title { background: var(--demo-ink); }
+.demo-workspace-page .ops-kpi { border-color: var(--demo-line); box-shadow: none; font-variant-numeric: tabular-nums; }
+.demo-workspace-page .demo-series-nav { position: static; margin-top: 28px; box-shadow: none; border-top: 1px solid var(--demo-line); }
+@media (max-width: 640px) {
+  .demo-workspace-page .brand small { display: none; }
+  .demo-workspace-page .header-inner { min-height: 0; padding-block: 12px; gap: 10px; }
+  .demo-workspace-page .demo-intro { padding-block: 22px 18px; }
+  .demo-workspace-page .workspace-heading { grid-template-columns: 1fr; gap: 6px; }
+  .demo-workspace-page .demo-guide { grid-template-columns: minmax(0, 1fr) auto; padding: 10px 12px; }
+  .demo-workspace-page .demo-guide-copy h2 { font-size: .85rem; }
+  .demo-workspace-page .demo-guide-copy > .demo-guide-kicker { display: none; }
+  .demo-workspace-page .demo-guide-actions { justify-content: flex-start; }
+  .demo-workspace-page .ops-app { border-radius: 0; }
+  .demo-workspace-page .ops-tabs { flex-wrap: nowrap; overflow-x: auto; padding: 4px; scrollbar-width: thin; }
+  .demo-workspace-page .ops-tabs button { flex: 0 0 auto; white-space: nowrap; }
+  .demo-workspace-page .ops-tabs button:focus-visible { outline-offset: -3px; }
+}

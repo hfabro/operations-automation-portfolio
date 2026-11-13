@@ -65,25 +65,13 @@ To reuse an existing local installation, set `PLAYWRIGHT_MODULE` to its module d
 ```text
 node tools/test-browser.mjs
 node tools/test-gallery.mjs
-node tools/test-card-links.mjs
-node tools/test-canvas-refresh.mjs
-node tools/test-guided-controls.mjs
-node tools/test-ladder-guide-quick.mjs
-node tools/test-kanban-guide-scan.mjs
-node tools/test-operations-focus.mjs
-node tools/test-fleet-scenario.mjs
-node tools/test-electrical-heatmap.mjs
-node tools/test-electrical-weather.mjs
-node tools/test-leak-workflow.mjs
-node tools/test-cmms-record-integrity.mjs
-node tools/test-fleet-ehs-state.mjs
-node tools/test-toolbox-kanban.mjs
-node tools/test-connected-logic.mjs
-node tools/test-connected-rules.mjs
+node tools/run-regressions.mjs
 node tools/audit-accessibility.mjs
 ```
 
-Each browser check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, 4188–4193, 4195–4198, 4201, 4204, and 4207; override with `TEST_PORT`). The connected-rules check is a dependency-free unit test and does not start a server. The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
+The maintained workflow runner lists the focused tests in `tools/run-regressions.mjs`; individual scripts can be run separately to investigate a failure. CI uses the same runner, including notification draft/cancel/submit/reset behavior, identity, record locking, guided controls, report filters, and evidence handling.
+
+Each browser check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, 4188–4193, 4195–4198, 4201, 4204, 4207, and 4209; override with `TEST_PORT`). The connected-rules check is a dependency-free unit test and does not start a server. The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.
 
 The Work library uses `data-work-kind` (`implemented`, `analytics`, or `architecture`) on each project card. Its optional search and maturity filters use native controls, announce result counts, preserve shareable `q`/`maturity` query parameters, and show all projects when JavaScript is unavailable. Add new cards to the evidence table as well as the library, and update the library summary count.
 
