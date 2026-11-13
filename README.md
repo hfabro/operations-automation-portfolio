@@ -52,9 +52,12 @@ When Node.js is available, run the included no-dependency validation command bef
 ```powershell
 node .\tools\validate-site.mjs
 node .\tools\test-system-data.mjs
+node .\tools\test-system-page-build.mjs
 ```
 
 It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, common leakage indicators, and JavaScript syntax. The same validator runs automatically on pushes and pull requests through a least-privilege GitHub Actions workflow whose checkout dependency is pinned to an immutable commit.
+
+Seven system pages are assembled from `tools/build-system-pages.mjs`. Edit that source when changing their metadata or static framing, then run `node tools/build-system-pages.mjs` to regenerate them. `node tools/build-system-pages.mjs --check` detects drift without writing files. The rebuild-safety test also verifies that regeneration preserves the shared workspace/help hooks and that check mode rejects an edited output without overwriting it; CI runs this test before release.
 
 ## Browser quality checks
 

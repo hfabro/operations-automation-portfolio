@@ -30,6 +30,8 @@ jobs:
         run: node ./tools/validate-site.mjs
       - name: Verify synthetic report fixtures
         run: node ./tools/test-system-data.mjs
+      - name: Verify generated-page consistency and rebuild safety
+        run: node ./tools/test-system-page-build.mjs
 
   browser:
     name: Responsive behavior and accessibility

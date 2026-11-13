@@ -1,31 +1,44 @@
 // Dependency-free page assembly. Run after changing page metadata or static portal content.
-import {mkdirSync,writeFileSync} from 'node:fs';
-import {fileURLToPath} from 'node:url';
+import {mkdirSync,writeFileSync,readFileSync,existsSync} from 'node:fs';
 const root=new URL('../',import.meta.url);
+const check=process.argv.includes('--check');
+const stale=[];
+const normalize=text=>text.replace(/\r\n/g,'\n');
 const pages=[
  ['plant-operations-hub','Plant Operations Hub','SharePoint-style portal','Find employee tools, facilities workflows, and operational reports in one synthetic manufacturing campus.'],
  ['facility-leaks','Facility Leak Management','Power Apps-style workflow','Select a fictional map location, report a condition, assign a response, and verify closure.'],
  ['toolbox-talks','Toolbox Talks','SharePoint + Forms + Power BI','Open bilingual material, complete a five-question quiz and acknowledgment, and review the completion snapshot.'],
- ['electrical-analytics','Electrical Usage Analytics','Power BI-style report','Explore energy, interval demand, matched evidence, weather context, and billing boundaries.'],
+ ['electrical-analytics','Electrical Usage Analytics','Power BI-style report','Explore energy, interval demand, matched evidence, weather context, and billing boundaries.','Choose a date range, compare demand, and inspect the evidence behind the figures.'],
  ['forklift-fleet','Forklift Fleet & Battery Decision Support','Power BI-style report','Review a fictional 24-truck campus fleet through shipping, energy, readiness, and charging-pilot views.'],
  ['service-intake','Service Issue Report','Microsoft Forms-style intake','Submit a simple synthetic service request with required fields and a mock attachment.'],
  ['ehs-control','EHS Compliance Control','SharePoint + Lists + Power BI','Move from scheduled requirement through execution evidence to a dated management snapshot.']
 ];
-for(const [slug,title,platform,description] of pages){
+for(const [slug,title,platform,description,lead=description] of pages){
  const url=`https://hfabro.github.io/operations-automation-portfolio/demos/${slug}/`;
  const html=`<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'none'; media-src 'none'; worker-src 'none'">
 <meta name="referrer" content="no-referrer"><meta name="color-scheme" content="light"><meta name="description" content="${description}"><title>${title} | David H. Fabro</title>
 <meta property="og:title" content="${title} | David H. Fabro"><meta property="og:description" content="${description}"><meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:image" content="https://hfabro.github.io/operations-automation-portfolio/assets/og.png"><link rel="canonical" href="${url}"><link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../../assets/operations-systems.css?v=20261103.1"><link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
-<script src="../../scripts/operations-data.js?v=20261103.1" defer></script><script src="../../scripts/workflow-contracts.js?v=20260926.2" defer></script><script src="../../scripts/workflow-recreations.js?v=20261103.2" defer></script><script src="../../scripts/operations-systems.js?v=20261103.5" defer></script><script src="../../scripts/demo-series.js?v=20261102.1" defer></script>  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
+<link rel="stylesheet" href="../../assets/operations-systems.css?v=20261103.1"><link rel="stylesheet" href="../../assets/demo-series.css?v=20261112.3">
+<script src="../../scripts/operations-data.js?v=20261103.1" defer></script><script src="../../scripts/workflow-contracts.js?v=20260926.2" defer></script><script src="../../scripts/workflow-recreations.js?v=20261103.2" defer></script><script src="../../scripts/operations-systems.js?v=20261103.5" defer></script><script src="../../scripts/demo-series.js?v=20261112.2" defer></script>  <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
+<link rel="stylesheet" href="../../assets/demo-workspace.css?v=20261112.2">
 </head>
-<body data-system="${slug}"><a class="skip-link" href="#main">Skip to system</a><header class="ops-header"><a href="../../">DF <strong>David H. Fabro</strong></a><nav aria-label="Portfolio"><a href="../../work/">Work</a>${slug==='electrical-analytics'?'<a href="../../work/facilities-decision-support/">Energy case study</a>':''}<a href="../">All systems</a><a href="../plant-operations-hub/">Plant hub</a></nav></header>
-<main id="main"><section class="ops-intro"><span class="ops-eyebrow">Implemented workflow · synthetic recreation</span><h1>${title}</h1><p>${description}</p><p class="ops-caption">${platform} · Browser simulation, not an embedded Microsoft application. No production connections. Changes reset on reload.</p><details class="ops-disclosure"><summary>Recreation boundary and privacy</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p><p>Only use fictional information. Nothing is transmitted or uploaded. The interface stays light, like its source platform, independently of the portfolio theme.</p></details></section>
-${slug==='forklift-fleet'?`<aside class="system-relationship" aria-label="System context"><p>Related implemented analytics case study.</p><nav class="system-context" aria-label="Related systems"><a href="../../work/telemetry-energy/">Read related case study</a><a href="../">View all systems</a></nav></aside>`:slug==='ehs-control'?`<aside class="system-relationship" aria-label="System context"><p>Primary implemented recreation of the compliance operating model.</p><nav class="system-context" aria-label="Related systems"><a href="../../work/compliance-automation/">Read Compliance Automation case study</a><a href="../">View all systems</a></nav></aside>`:''}${slug==='forklift-fleet'||slug==='ehs-control'?'\n':''}<section class="ops-app" id="system"${slug==='facility-leaks'?' tabindex="0"':''} aria-label="${title}"><noscript><p>JavaScript is needed to operate this simulation. ${description} All records and diagrams are fictional.</p><a href="../../work/">Read the static case studies</a></noscript></section>
-<p id="ops-live" class="ops-message" role="status" aria-live="polite"></p></main><footer class="ops-footer"><a href="../">Back to systems</a><p>Synthetic manufacturing campus. No equipment commands, uploads, or external services.</p></footer></body></html>`;
- mkdirSync(new URL(`demos/${slug}/`,root),{recursive:true});writeFileSync(new URL(`demos/${slug}/index.html`,root),html+'\n');
+<body class="demo-workspace-page" data-series-position="footer" data-system="${slug}"><a class="skip-link" href="#main">Skip to system</a><header class="ops-header"><a href="../../">DF <strong>David H. Fabro</strong></a><nav aria-label="Portfolio">${slug!=='electrical-analytics'?'<a href="../../work/">Work</a>':''}${slug==='electrical-analytics'?'<a href="../../work/facilities-decision-support/">Energy case study</a>':''}<a href="../">All systems</a><a href="../plant-operations-hub/">Plant hub</a></nav></header>
+<main id="main"><section class="ops-intro"><span class="ops-eyebrow">Implemented workflow · synthetic recreation</span><h1>${title}</h1><p>${lead}</p><p class="ops-caption">${platform} · Browser simulation, not an embedded Microsoft application. No production connections. Changes reset on reload.</p><details class="ops-disclosure"><summary>Recreation boundary and privacy</summary><p>This demonstration recreates the workflow structure, screen hierarchy, controls, and operating logic of an implemented Microsoft 365 solution. Employer branding, records, URLs, identifiers, drawings, and production data have been replaced with synthetic equivalents.</p><p>Only use fictional information. Nothing is transmitted or uploaded. The interface stays light, like its source platform, independently of the portfolio theme.</p></details></section>
+<section class="ops-app" id="system"${slug==='facility-leaks'?' tabindex="0"':''} aria-label="${title}"><noscript><p>JavaScript is needed to operate this simulation. ${description} All records and diagrams are fictional.</p><a href="../../work/">Read the static case studies</a></noscript></section>
+<p id="ops-live" class="ops-message" role="status" aria-live="polite"></p>${slug==='forklift-fleet'?`<aside class="system-relationship" aria-label="System context"><p>Related implemented analytics case study.</p><nav class="system-context" aria-label="Related systems"><a href="../../work/telemetry-energy/">Read related case study</a><a href="../">View all systems</a></nav></aside>`:slug==='ehs-control'?`<aside class="system-relationship" aria-label="System context"><p>Primary implemented recreation of the compliance operating model.</p><nav class="system-context" aria-label="Related systems"><a href="../../work/compliance-automation/">Read Compliance Automation case study</a><a href="../">View all systems</a></nav></aside>`:''}${slug==='forklift-fleet'||slug==='ehs-control'?'\n':''}</main><footer class="ops-footer"><a href="../">Back to systems</a><p>Synthetic manufacturing campus. No equipment commands, uploads, or external services.</p></footer><script src="../../scripts/demo-workspace.js?v=20261112.2" defer></script>
+</body></html>`;
+ const target=new URL(`demos/${slug}/index.html`,root);
+ const expected=html+'\n';
+ if(check){
+   if(!existsSync(target)||normalize(readFileSync(target,'utf8'))!==normalize(expected))stale.push(slug);
+ }else{
+   mkdirSync(new URL(`demos/${slug}/`,root),{recursive:true});writeFileSync(target,expected);
+ }
 }
-console.log(`Assembled ${pages.length} static system pages.`);
+if(check){
+ if(stale.length){console.error('Generated system pages are out of date: '+stale.join(', '));process.exitCode=1;}
+ else console.log(`PASS: ${pages.length} generated system pages match their source template.`);
+}else console.log(`Assembled ${pages.length} static system pages.`);
