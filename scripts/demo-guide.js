@@ -50,7 +50,7 @@
       time: "About 75 seconds",
       outcome: "Template snapshot, execution evidence, exception review, and true history",
       steps: [
-        { selector: '[data-scenario="exception"]', event: "click", title: "Load the exception packet", text: "Generate a PM occurrence with controlled task responses, evidence, a condition reading, and technician sign-off." },
+        { selector: '[data-scenario="exception"]', event: "demo:state", signal: "pm-scenario-loaded", title: "Load the exception packet", text: "Generate a PM occurrence with controlled task responses, evidence, a condition reading, and technician sign-off." },
         { selector: "[data-submit]", event: "demo:state", signal: "pm-submitted", title: "Validate and route", text: "Lock the packet and route the deterministic exception to the review queue." },
         { selector: '[data-disposition="Corrective work requested"]', event: "demo:state", signal: "pm-disposition-recorded", title: "Create corrective action", text: "Apply the human disposition and preserve it in the synthetic audit history." }
       ]
