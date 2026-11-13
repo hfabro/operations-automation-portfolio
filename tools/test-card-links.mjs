@@ -36,8 +36,10 @@ try {
     await page.waitForURL('**/approach/');
     await page.goto(base + '/');
     await tapSurface('.home-project h3');
+    await page.waitForURL('**/demos/plant-operations-hub/');
+    await page.goto(base + '/');
+    await page.locator('.home-project .project-case').first().click();
     await page.waitForURL('**/work/facilities-digital-operations/');
-    assert.ok(page.url().endsWith('/work/facilities-digital-operations/'));
     await page.goto(base + '/demos/');
     await tapSurface('.systems-page .work-summary-card h3');
     await page.waitForURL('**/demos/ladder-inspection/');

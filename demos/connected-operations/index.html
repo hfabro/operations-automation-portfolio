@@ -27,30 +27,31 @@
   <link rel="stylesheet" href="demo.css?v=20261102.1">
   <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
-  <link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
+  <link rel="stylesheet" href="../../assets/demo-series.css?v=20261112.3">
   <script src="demo-data.js?v=20261103.1" defer></script>
   <script src="demo-rules.js?v=20261103.1" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.11" defer></script>
   <script src="demo.js?v=20261103.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260926.2" defer></script>
-  <script src="../../scripts/demo-series.js?v=20261102.1" defer></script>
+  <script src="../../scripts/demo-series.js?v=20261112.2" defer></script>
   <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
+<link rel="stylesheet" href="../../assets/demo-workspace.css?v=20261112.2">
 </head>
-<body>
+<body class="demo-workspace-page" data-series-position="footer">
   <a class="skip-link" href="#console">Skip to connected operations console</a>
   <header class="demo-header">
     <div class="shell header-inner">
       <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a>
-      <a class="back-link" href="../../work/#additional-systems">← Back to selected work</a>
+      <a class="back-link" href="../../work/#additional-systems">Selected work</a>
     </div>
   </header>
 
   <main>
-    <aside class="system-relationship" aria-label="System context"><p>Architecture concept within the Smart Factory strategy—not an implemented plant integration.</p><nav class="system-context" aria-label="Related systems"><a href="../../smart-factory/">View Smart Factory Strategy</a><a href="../">View all systems</a></nav></aside>
+
 <section class="demo-intro" aria-labelledby="demo-title">
       <div class="shell intro-grid">
-        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Explore four fictional production scenarios, modeled metrics, and rules that support human review.</p><a class="demo-jump-link" href="#console">Jump to interactive system ↓</a></div>
+        <div><p class="eyebrow">Manufacturing 4.0 proof / synthetic data</p><h1 id="demo-title">Connected Operations Console</h1><p class="lede">Compare a fictional production scenario, its losses, and the rule that requests human review.</p><a class="demo-jump-link" href="#console">Jump to interactive system ↓</a></div>
         <ul class="demo-guardrails" aria-label="Demo guardrails"><li>Concept / interactive prototype</li><li>No PLC, SCADA, MES, or historian connection</li><li>All equipment and events are synthetic</li><li>No autonomous production decisions</li></ul>
       </div>
     </section>
@@ -106,8 +107,10 @@
         <div class="design-grid"><article><span>01 / identity</span><h3>Asset context</h3><p>Every tag or event belongs to a stable asset, production area, and operating hierarchy.</p></article><article><span>02 / semantics</span><h3>State and reason model</h3><p>Run, idle, blocked, starved, planned, and fault states need controlled definitions.</p></article><article><span>03 / time</span><h3>Event integrity</h3><p>Timestamps, duration, late data, gaps, and clock alignment determine whether metrics are trustworthy.</p></article><article><span>04 / action</span><h3>Human operating loop</h3><p>Alerts should route a defined exception to an owner—not create noise or bypass judgment.</p></article></div>
       </div>
     </section>
-  </main>
+  <aside class="system-relationship" aria-label="System context"><p>Architecture concept within the Smart Factory strategy—not an implemented plant integration.</p><nav class="system-context" aria-label="Related systems"><a href="../../smart-factory/">View Smart Factory Strategy</a><a href="../">View all systems</a></nav></aside>
+</main>
 
   <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to production equipment.</p><a href="../">View all systems</a></div></footer>
+<script src="../../scripts/demo-workspace.js?v=20261112.2" defer></script>
 </body>
 </html>

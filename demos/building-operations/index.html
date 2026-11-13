@@ -24,22 +24,23 @@
   <link rel="stylesheet" href="demo.css?v=20260926.2">
   <link rel="stylesheet" href="../../assets/canvas-sim.css?v=20260925.10">
   <link rel="stylesheet" href="../../assets/demo-guide.css?v=20260924.5">
-<link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
+<link rel="stylesheet" href="../../assets/demo-series.css?v=20261112.3">
   <script src="demo-data.js" defer></script>
   <script src="../../scripts/canvas-sim.js?v=20260925.11" defer></script>
   <script src="demo.js?v=20260926.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20260926.2" defer></script>
-  <script src="../../scripts/demo-series.js?v=20261102.1" defer></script>
+  <script src="../../scripts/demo-series.js?v=20261112.2" defer></script>
   <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
+<link rel="stylesheet" href="../../assets/demo-workspace.css?v=20261112.2">
 </head>
-<body>
+<body class="demo-workspace-page" data-series-position="footer">
   <a class="skip-link" href="#command-center">Skip to command center</a>
-  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../work/#additional-systems">← Back to selected work</a></div></header>
+  <header class="demo-header"><div class="shell header-inner"><a class="brand" href="../../"><span class="brand-mark" aria-hidden="true">DF</span><span><strong>David H. Fabro</strong><small>Operations Automation &amp; Digital Transformation</small></span></a><a class="back-link" href="../../work/#additional-systems">Selected work</a></div></header>
 
   <main>
-    <aside class="system-relationship" aria-label="System context"><p>Conceptual extension of spatial operations beyond the implemented Facility Leak workflow. Not a deployed building-control system.</p><nav class="system-context" aria-label="Related systems"><a href="../facility-leaks/">See implemented Facility Leak workflow</a><a href="../">View all systems</a></nav></aside>
-<section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Spatial operations proof / synthetic data</p><h1 id="demo-title">Building Operations Command Center</h1><p class="lede">A SCADA-inspired visualization that extends a map-based reporting pattern into building-wide and machine-level awareness, triage, corrective work, and history.</p><a class="demo-jump-link" href="#command-center">Jump to interactive system ↓</a></div><ul class="demo-guardrails" aria-label="Demo boundaries"><li>Concept / interactive prototype</li><li>Not a BMS, SCADA, PLC, or control interface</li><li>No live sensors, commands, or employer data</li><li>Human validation before operational action</li></ul></div></section>
+
+<section class="demo-intro" aria-labelledby="demo-title"><div class="shell intro-grid"><div><p class="eyebrow">Spatial operations proof / synthetic data</p><h1 id="demo-title">Building Operations Command Center</h1><p class="lede">Locate a condition, assign corrective work, and record verified closure.</p><a class="demo-jump-link" href="#command-center">Jump to interactive system ↓</a></div><ul class="demo-guardrails" aria-label="Demo boundaries"><li>Concept / interactive prototype</li><li>Not a BMS, SCADA, PLC, or control interface</li><li>No live sensors, commands, or employer data</li><li>Human validation before operational action</li></ul></div></section>
 
     <section class="command-section" id="command-center" aria-labelledby="command-title"><div class="shell" data-canvas-app data-canvas-title="Building Operations" data-canvas-subtitle="Facilities · Spatial response workspace" data-canvas-initials="BO" data-canvas-user="FM" data-canvas-commands="Home,Refresh" data-canvas-nav="Map,Queue,Detail,Report" data-canvas-nav-position="top" data-canvas-actions="home=.control-deck;map=.map-card;queue=.queue-card;detail=.detail-card;report=.report-card">
       <div class="section-heading"><div><p class="eyebrow">Observe → locate → triage → verify</p><h2 id="command-title">Put every report in operating context.</h2></div><p>The map is not the system of record by itself. Value comes from stable location and asset identity, structured lifecycle state, ownership, evidence, and an accountable closeout path.</p></div>
@@ -59,7 +60,9 @@
     </div></section>
 
     <section class="architecture-section" aria-labelledby="architecture-title"><div class="shell"><div class="architecture-heading"><div><p class="eyebrow">Architecture boundary</p><h2 id="architecture-title">Visualization follows the operating model.</h2></div><p>This concept can accept human reports and approved signals, but it intentionally separates awareness from equipment control. Commands, interlocks, and safety functions remain in qualified control systems.</p></div><div class="architecture-flow" data-architecture></div><div class="design-grid"><article><span>01 / identity</span><h3>Location and asset first</h3><p>A report is anchored to a controlled building zone, map revision, or equipment record.</p></article><article><span>02 / severity</span><h3>Explicit escalation</h3><p>Immediate hazards direct people to secure the area and notify the accountable function.</p></article><article><span>03 / lifecycle</span><h3>One owned response</h3><p>Open, acknowledged, work requested, and resolved states make responsibility visible.</p></article><article><span>04 / history</span><h3>Evidence survives the map</h3><p>Closeout, corrective action, and trend records remain available after markers disappear.</p></article></div></div></section>
-  </main>
+  <aside class="system-relationship" aria-label="System context"><p>Conceptual extension of spatial operations beyond the implemented Facility Leak workflow. Not a deployed building-control system.</p><nav class="system-context" aria-label="Related systems"><a href="../facility-leaks/">See implemented Facility Leak workflow</a><a href="../">View all systems</a></nav></aside>
+</main>
   <footer><div class="shell"><p>Synthetic demonstration. No information is submitted, stored, or connected to production or building systems.</p><a href="../">View all systems</a></div></footer>
+<script src="../../scripts/demo-workspace.js?v=20261112.2" defer></script>
 </body>
 </html>

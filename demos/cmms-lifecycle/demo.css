@@ -54,6 +54,7 @@ button { cursor: pointer; }
 .primary { background: var(--accent); color: #0b1117; }
 [data-theme="light"] .primary { color: #fff; }
 .primary:hover { background: #e5643a; }
+[data-theme="light"] .hero-actions .primary:hover { background: #934126; }
 .secondary { border-color: var(--line); background: var(--panel); color: var(--ink); }
 .secondary:hover { border-color: var(--accent); }
 .full { width: 100%; }

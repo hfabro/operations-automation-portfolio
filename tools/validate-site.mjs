@@ -185,7 +185,7 @@ for(const hook of ['data-month','data-department','data-expected-assets','data-q
 for (const [page, phrase] of [
   ['work/facilities-decision-support/index.html', 'not a measured or achieved employer result'],
   ['work/telemetry-energy/index.html', 'no measured financial savings are attributed to it'],
-  ['about/index.html', 'numerical scenarios below are fictional teaching examples']
+  ['about/index.html', 'demonstrations for clearly labeled fictional examples']
 ]) {
   if (!readFileSync(join(root,page),'utf8').includes(phrase)) report(join(root,page),'missing fictional-example boundary');
 }

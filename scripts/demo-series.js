@@ -44,6 +44,7 @@
       '<span class="demo-series-link-copy"><span>Next system</span><strong>' + next.short + '</strong><small>' + next.category + '</small></span><span class="demo-series-direction" aria-hidden="true">→</span>' +
     '</a>';
 
-  if (header && header.nextSibling) header.parentNode.insertBefore(nav, header.nextSibling);
+  if (document.body.getAttribute("data-series-position") === "footer") main.parentNode.insertBefore(nav, main.nextSibling);
+  else if (header && header.nextSibling) header.parentNode.insertBefore(nav, header.nextSibling);
   else main.parentNode.insertBefore(nav, main);
 })();
