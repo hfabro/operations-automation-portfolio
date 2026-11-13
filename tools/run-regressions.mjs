@@ -3,7 +3,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 
 const suites = [
-  'test-connected-rules', 'test-card-links', 'test-canvas-refresh',
+  'test-connected-rules', 'test-demo-support', 'test-card-links', 'test-canvas-refresh',
   'test-guided-controls', 'test-ladder-guide-quick', 'test-ladder-notification',
   'test-kanban-guide-scan', 'test-operations-focus', 'test-fleet-scenario',
   'test-electrical-heatmap', 'test-electrical-weather', 'test-leak-workflow',

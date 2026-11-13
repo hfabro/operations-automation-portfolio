@@ -1,4 +1,4 @@
-/* Shared workspace framing for the first execution/report pair.
+/* Shared workspace framing for the demo collection.
    Local application layouts, workflow selectors, and semantic status colors stay owned by each demo. */
 .demo-workspace-page {
   --demo-ink: #19372e;
@@ -9,16 +9,53 @@
   --demo-radius: 14px;
   background: var(--demo-backdrop);
 }
+.demo-workspace-page[data-demo-theme="adaptive"] {
+  --demo-ink: var(--ink);
+  --demo-muted: var(--muted);
+  --demo-line: var(--line);
+  --demo-surface: var(--panel);
+  --demo-backdrop: var(--bg);
+}
+.demo-workspace-page[data-demo-theme="adaptive"] .demo-guide { background: #fff; }
+.demo-workspace-page > main > .hero { padding-block: 28px 22px; background: var(--demo-backdrop); color: var(--demo-ink); }
+.demo-workspace-page .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.demo-workspace-page .hero h1 { font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -.035em; color: var(--demo-ink); }
+.demo-workspace-page .hero.shell { gap: 24px; grid-template-columns: minmax(0, 1.4fr) minmax(260px, .6fr); }
+.demo-workspace-page .hero .lede,
+.demo-workspace-page .hero-copy > p:not(.eyebrow) { margin-block: 10px; font-size: .95rem; color: var(--demo-muted); }
+.demo-workspace-page .hero-actions { margin-top: 14px; }
+.demo-workspace-page .guardrails { display: flex; flex-wrap: wrap; gap: 8px 18px; border: 0; padding: 0; margin: 12px 0 0; background: transparent; color: var(--demo-muted); }
+.demo-workspace-page .guardrails li { list-style: none; padding: 0; border: 0; background: transparent; font-size: .78rem; color: var(--demo-muted); }
+.demo-workspace-page :is(.console-section,.kanban-section,.explorer-section,.command-section) { padding-block: 24px 48px; }
+.demo-workspace-page .studio { padding-block: 24px; }
+.demo-workspace-page .section-heading { margin-bottom: 16px; gap: 16px; }
+.demo-workspace-page .section-heading h2 { font-size: clamp(1.3rem, 2.3vw, 1.8rem); line-height: 1.2; }
+.demo-workspace-page .section-heading p { font-size: .9rem; }
+.demo-workspace-page .boundary-card { align-self: start; padding: 16px; }
+.demo-workspace-page .boundary-card summary { cursor: pointer; font-weight: 700; }
+.demo-support { display: flex; flex-wrap: wrap; align-items: start; gap: 8px 16px; margin-top: 14px; color: var(--demo-ink); }
+.demo-support > details { flex: 1 1 200px; min-width: 0; }
+.demo-support summary { width: fit-content; min-height: 40px; align-content: center; padding: 5px 0; cursor: pointer; font-size: .82rem; font-weight: 650; }
+.demo-support p { max-width: 75ch; margin: 8px 0; color: var(--demo-muted); font-size: .85rem; line-height: 1.55; }
+.demo-support > button { flex: 0 0 auto; min-height: 40px; padding: 6px 14px; border: 1px solid var(--demo-line); border-radius: 7px; background: var(--demo-surface); color: var(--demo-ink); font: inherit; font-size: .82rem; font-weight: 650; cursor: pointer; }
+.demo-support summary:focus-visible,.demo-support button:focus-visible { outline: 3px solid #a54800; outline-offset: 3px; }
 .demo-workspace-page .demo-header,
 .demo-workspace-page .ops-header { position: static; background: var(--demo-surface); border-bottom: 1px solid var(--demo-line); }
 .demo-workspace-page .header-inner { min-height: 64px; }
 .demo-workspace-page .ops-header { align-items: center; min-height: 64px; padding-block: 14px; }
 .demo-workspace-page .system-context a,
 .demo-workspace-page .ops-header nav a { font-size: .8rem; color: var(--demo-ink); }
-.demo-workspace-page .demo-intro { padding: 28px 0 22px; }
+.demo-workspace-page .demo-header .brand,
+.demo-workspace-page .demo-header .brand strong,
+.demo-workspace-page .demo-header .back-link { color: var(--demo-ink); }
+.demo-workspace-page .demo-header .brand small { color: var(--demo-muted); }
+.demo-workspace-page .demo-header .brand > span:first-child { display: grid; place-items: center; flex: 0 0 40px; width: 40px; height: 40px; border-radius: 10px; background: var(--demo-ink); color: #fff; font-size: .74rem; font-weight: 800; }
+.demo-workspace-page .demo-header .back-link { font-size: .8rem; }
+.demo-workspace-page .demo-intro { padding: 28px 0 22px; background: var(--demo-backdrop); color: var(--demo-ink); }
+.demo-workspace-page:not([data-demo-theme]) :is(.demo-intro,.hero) .eyebrow { color: #934126; }
 .demo-workspace-page .intro-grid { display: block; }
 .demo-workspace-page .demo-intro h1,
-.demo-workspace-page .ops-intro h1 { max-width: none; font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -.035em; }
+.demo-workspace-page .ops-intro h1 { max-width: none; font-size: clamp(1.75rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -.035em; color: var(--demo-ink); }
 .demo-workspace-page .lede,
 .demo-workspace-page .ops-intro > p { margin: 10px 0 0; font-size: .95rem; color: var(--demo-muted); }
 .demo-workspace-page .demo-jump-link { margin-top: 12px; }
@@ -44,6 +81,8 @@
 .demo-workspace-page .ops-kpi { border-color: var(--demo-line); box-shadow: none; font-variant-numeric: tabular-nums; }
 .demo-workspace-page .demo-series-nav { position: static; margin-top: 28px; box-shadow: none; border-top: 1px solid var(--demo-line); }
 @media (max-width: 640px) {
+  .demo-workspace-page .hero.shell { grid-template-columns: 1fr; gap: 12px; }
+  .demo-support > details { flex-basis: 160px; }
   .demo-workspace-page .brand small { display: none; }
   .demo-workspace-page .header-inner { min-height: 0; padding-block: 12px; gap: 10px; }
   .demo-workspace-page .demo-intro { padding-block: 22px 18px; }

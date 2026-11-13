@@ -69,6 +69,8 @@ node tools/run-regressions.mjs
 node tools/audit-accessibility.mjs
 ```
 
+Every demo shares a task-specific help disclosure and a confirmed full-session restart. Its existing application controls remain specific to the workflow.
+
 The maintained workflow runner lists the focused tests in `tools/run-regressions.mjs`; individual scripts can be run separately to investigate a failure. CI uses the same runner, including notification draft/cancel/submit/reset behavior, identity, record locking, guided controls, report filters, and evidence handling.
 
 Each browser check starts and stops its own loopback preview (ports 4174, 4175, 4184, 4186, 4188–4193, 4195–4198, 4201, 4204, 4207, and 4209; override with `TEST_PORT`). The connected-rules check is a dependency-free unit test and does not start a server. The ordinary preview accepts `PORT` and otherwise uses 4173. Reports and screenshots go to ignored `tmp/` directories; never commit these directories. Automated accessibility results supplement keyboard and visual inspection and do not certify conformance. Physical touch devices, assistive technology, and other browser engines need separate validation.

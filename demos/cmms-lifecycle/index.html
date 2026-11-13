@@ -28,11 +28,12 @@
   <link rel="stylesheet" href="../../assets/demo-series.css?v=20261102.1">
   <link rel="stylesheet" href="../../assets/microsoft-surfaces.css?v=20260926.3">
 <link rel="stylesheet" href="../../assets/demo-polish.css?v=20261103.4">
+<link rel="stylesheet" href="../../assets/demo-workspace.css?v=20261112.2">
 </head>
-<body>
+<body class="demo-workspace-page" data-series-position="footer" data-demo-theme="adaptive">
   <a class="skip-link" href="#main">Skip to system</a>
   <header class="topbar">
-    <a class="back-link" href="../../work/#additional-systems"><span aria-hidden="true">←</span> Selected work</a>
+    <a class="back-link" href="../../work/#additional-systems">Selected work</a>
     <div class="demo-title"><span>Maintenance architecture prototype</span><strong>CMMS Lifecycle Control</strong></div>
     <button class="theme-toggle" type="button" aria-label="Switch to light theme" data-theme-toggle><span aria-hidden="true">◐</span></button>
   </header>
@@ -41,35 +42,22 @@
     <section class="hero shell" aria-labelledby="demo-heading">
       <div class="hero-copy">
         <p class="eyebrow">Synthetic maintenance system prototype</p>
-        <h1 id="demo-heading">Preserve the instruction. Control the work. Keep history true.</h1>
-        <p>Generate a PM occurrence from a versioned job plan, execute it as a technician, route deterministic exceptions, and review the resulting history. The prototype demonstrates lifecycle architecture—not a deployed CMMS.</p>
+        <h1 id="demo-heading">CMMS Lifecycle Control</h1>
+        <p>Generate a versioned PM packet, record a condition, and route the exception for review. This is an architecture prototype, not a deployed CMMS.</p>
         <a class="demo-jump-link" href="#cmms-device">Jump to interactive system ↓</a>
         <div class="hero-actions">
           <button class="primary" type="button" data-generate>Generate due PM <span aria-hidden="true">→</span></button>
           <button class="secondary" type="button" data-scenario="exception">Load exception scenario</button>
         </div>
       </div>
-      <aside class="boundary-card" aria-label="Prototype boundary">
+      <details class="boundary-card" aria-label="Prototype boundary"><summary>Prototype boundary · synthetic, no writeback</summary>
         <span>Prototype boundary</span>
         <strong>Browser-only · synthetic · no writeback</strong>
         <p>No live CMMS, ERP, asset, employee, plant, or maintenance data. The prototype is not a replacement for the approved system of record; any future integration requires business and IT review. No autonomous work decisions. Session state is discarded when the page is refreshed.</p>
-      </aside>
+      </details>
     </section>
 
-    <section class="architecture shell" aria-labelledby="architecture-title">
-      <div class="section-heading">
-        <div><p class="eyebrow">Lifecycle architecture</p><h2 id="architecture-title">A completed PM is a historical record—not a live template.</h2></div>
-        <p>When an occurrence is generated, the applicable template revision is snapshotted. Future improvements change future work without rewriting past instructions.</p>
-      </div>
-      <ol class="architecture-flow" aria-label="Preventive maintenance lifecycle">
-        <li><span>01</span><b>Asset</b><small>Stable identity</small></li>
-        <li><span>02</span><b>PM Plan</b><small>Schedule + ownership</small></li>
-        <li><span>03</span><b>Versioned Template</b><small>Ordered job steps</small></li>
-        <li><span>04</span><b>PM Occurrence</b><small>Revision snapshot</small></li>
-        <li><span>05</span><b>Responses + Evidence</b><small>Field execution</small></li>
-        <li><span>06</span><b>Actions + History</b><small>Review + traceability</small></li>
-      </ol>
-    </section>
+
 
     <div class="device-preview-bar shell" data-device-preview data-target="cmms-device" data-device-default="tablet" data-label-phone="Technician phone" data-note-phone="Execute the generated packet, record readings, capture evidence, and sign off." data-label-tablet="Planner tablet" data-note-tablet="Move from due-work planning through execution and controlled review." data-label-system="Full CMMS workspace" data-note-system="Expose planning, execution, review, reliability logic, and history together."><div class="device-preview-copy"><span>Interactive viewport</span><strong data-device-label>Planner tablet</strong><small data-device-note>Move from due-work planning through execution and controlled review.</small></div><div class="device-preview-actions" role="group" aria-label="CMMS experience size"><button type="button" data-preview-mode="phone" aria-pressed="false">Phone</button><button type="button" data-preview-mode="tablet" aria-pressed="true">Tablet</button><button type="button" data-preview-mode="system" aria-pressed="false">System</button></div></div>
     <section class="control-shell shell device-preview-stage device-surface" id="cmms-device" data-device-mode="tablet" aria-label="CMMS prototype workspace" data-canvas-app data-canvas-title="Maintenance Work Management" data-canvas-subtitle="Planner and technician workspace" data-canvas-initials="MW" data-canvas-user="MT" data-canvas-commands="Home,Refresh" data-canvas-actions="home=[data-tab='plan']">
@@ -169,7 +157,21 @@
       </div>
     </section>
 
-    <section class="principles shell" aria-labelledby="principles-title">
+    <section class="architecture shell" aria-labelledby="architecture-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Lifecycle architecture</p><h2 id="architecture-title">A completed PM is a historical record—not a live template.</h2></div>
+        <p>When an occurrence is generated, the applicable template revision is snapshotted. Future improvements change future work without rewriting past instructions.</p>
+      </div>
+      <ol class="architecture-flow" aria-label="Preventive maintenance lifecycle">
+        <li><span>01</span><b>Asset</b><small>Stable identity</small></li>
+        <li><span>02</span><b>PM Plan</b><small>Schedule + ownership</small></li>
+        <li><span>03</span><b>Versioned Template</b><small>Ordered job steps</small></li>
+        <li><span>04</span><b>PM Occurrence</b><small>Revision snapshot</small></li>
+        <li><span>05</span><b>Responses + Evidence</b><small>Field execution</small></li>
+        <li><span>06</span><b>Actions + History</b><small>Review + traceability</small></li>
+      </ol>
+    </section>
+<section class="principles shell" aria-labelledby="principles-title">
       <div class="section-heading"><div><p class="eyebrow">Design decisions</p><h2 id="principles-title">The interface is downstream of the operating model.</h2></div></div>
       <div class="principle-grid">
         <article><span>01</span><h3>Separate definition from execution</h3><p>Assets, plans, templates, and scheduled occurrences have different lifecycles and should not collapse into one record.</p></article>
@@ -187,6 +189,7 @@
   <script src="demo.js?v=20261103.1" defer></script>
   <script src="../../scripts/device-preview.js?v=20260926.2" defer></script>
   <script src="../../scripts/demo-guide.js?v=20261103.3" defer></script>
-  <script src="../../scripts/demo-series.js?v=20261102.1" defer></script>
+  <script src="../../scripts/demo-series.js?v=20261112.2" defer></script>
+<script src="../../scripts/demo-workspace.js?v=20261112.2" defer></script>
 </body>
 </html>
