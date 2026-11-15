@@ -98,7 +98,7 @@ License: https://creativecommons.org/licenses/by/4.0/
 
 ## Cross-view handoffs
 
-The hub paid card and workflow financial links open the saved purchasing journal directly. Invalid saved-journal entry is unavailable rather than silently showing an example. Machine source identity checks quarantine all conflicting copies before unit/quality admission. These hardening cases are part of the current 22-group acceptance runner.
+The hub paid card and workflow financial links open the saved purchasing journal directly. Invalid saved-journal entry is unavailable rather than silently showing an example. Machine source identity checks quarantine all conflicting copies before unit/quality admission. All checkpoint and CSV file readers reject malformed UTF-8 before parsing, preserving references/notes and prior valid results. These hardening cases are part of the current 22-group acceptance runner.
 
 ## Portable acceptance runner
 

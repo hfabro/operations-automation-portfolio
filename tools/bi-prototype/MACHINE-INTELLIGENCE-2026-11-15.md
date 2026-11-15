@@ -46,6 +46,8 @@ Reviewed mapping and quantities cannot be supplied as accounting overrides. Repe
 
 Thirteen rule groups cover reconciliation, intervals/gaps, replay boundaries, repeated episodes, invalid data/units/UTC, arrival order, role/reason gates, idempotent and collision-safe handoff, replay recovery, full financial lineage and unrelated-cost exclusion.
 
-Browser acceptance covers eight width/theme screens and 32 interaction assertions, including the complete UI handoff through settlement and the existing BI report, quality evidence, pagination, exports, corrupt-storage recovery and preserved purchasing records. Automated accessibility screening covers initial and populated states. Desktop/mobile screenshots are visually inspected. It does not establish comprehensive accessibility certification.
+Browser acceptance covers eight width/theme screens and 34 interaction assertions, including the complete UI handoff through settlement and the existing BI report, quality evidence, pagination, exports, corrupt-storage recovery and preserved purchasing records. Automated accessibility screening covers initial and populated states. Desktop/mobile screenshots are visually inspected. It does not establish comprehensive accessibility certification.
 
 The portable runner now contains 22 executable rule/export/browser groups, including all preceding scenarios. Hosted CI runs the same machine checks as part of the existing dedicated BI job.
+
+Import integrity: malformed UTF-8 is rejected before parsing, preserving existing journals and the prior valid view. Invalid bytes are not replaced inside references or review notes.

@@ -26,6 +26,8 @@ The full sample's unposted USD line value is $6,600, with one unsupported-curren
 
 Thirteen batch-rule groups verify grouping, exact arithmetic, read-only preview, atomic/idempotent staging, duplicate/competition symmetry, source revision checks, file contracts, collisions, tampered previews, effects on existing reviews and financial allocations through settlement.
 
-Eight width/theme screens and 26 browser assertions cover source selection, owned queues, multi-line coding evidence, import preservation, AP/stale-source gates, repeat staging, preserved maintenance/work records, posting/settlement, BI reconciliation, posted-state labeling, replacement cancellation and effects on existing pending reviews. Automated accessibility screening covers initial and populated states; desktop/mobile screenshots are visually inspected.
+Eight width/theme screens and 28 browser assertions cover source selection, owned queues, multi-line coding evidence, import preservation, AP/stale-source gates, repeat staging, preserved maintenance/work records, posting/settlement, BI reconciliation, posted-state labeling, replacement cancellation and effects on existing pending reviews. Automated accessibility screening covers initial and populated states; desktop/mobile screenshots are visually inspected.
 
 The portable runner contains 22 executable rule/export/browser groups. The dedicated hosted BI job invokes this runner. This browser-only simulation demonstrates deterministic data-integrity controls, not authenticated production AP, OCR, tax/credit/FX processing or actual enterprise integration.
+
+Import integrity: malformed UTF-8 is rejected before parsing, preserving existing journals and the prior valid view. Invalid bytes are not replaced inside references or review notes.
