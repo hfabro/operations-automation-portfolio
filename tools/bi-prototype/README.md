@@ -4,7 +4,9 @@ Status: local, unpublished working preview. The published site is unchanged. A d
 
 ## Completed
 
-Visitor hub: open `preview/showcase.html` for all seven demonstrations, the connected business story, current saved progress and a read-only evidence bundle. Historical public analysis remains a separate mode. See `SHOWCASE-HUB-2026-11-15.md`.
+Work execution: `preview/work-execution.html` now connects exact material acceptance to recorded technician work, returned/reworked versions and independent verification. The hub and machine view share the work lifecycle; the evidence bundle includes its separate journal. See `WORK-EXECUTION-2026-11-15.md`.
+
+Visitor hub: open `preview/showcase.html` for all eight demonstrations, the connected business story, current saved progress and a read-only evidence bundle. Historical public analysis remains a separate mode. See `SHOWCASE-HUB-2026-11-15.md`.
 
 Machine intelligence update: `preview/machine-intelligence.html` now replays fictional observations into explicit state/quality measures, condition evidence, reviewed maintenance disposition, an idempotent governed requisition, and an exact-request financial bridge. It connects to the existing purchasing workflow and BI report. See `MACHINE-INTELLIGENCE-2026-11-15.md`. No live machine or employer system is required.
 
@@ -80,7 +82,7 @@ Each duration metric declares the case grain, activity endpoints, date eligibili
 
 ## Next milestone
 
-The connected single/multi-line journeys, reviewed supplier corrections, browser BI report, simulated machine-to-purchasing bridge and unified visitor entry point are implemented. Continue with a bounded work-execution/completion story. A return to normal readings or a paid invoice does not establish maintenance completion. Add further accounting cases selectively, preserving existing journal behavior.
+The connected single/multi-line journeys, reviewed supplier corrections, browser BI report, simulated machine-to-purchasing bridge and unified visitor entry point are implemented. Recorded work and independent completion verification are also implemented. Continue with selective procurement/analytical cases that add business value. A return to normal readings or a paid invoice does not establish maintenance completion. Add further accounting cases selectively, preserving existing journal behavior.
 
 Native Power BI files can be an optional future presentation artifact once supported authoring and Desktop validation are available. No PBIP, semantic model, DAX report or native Power BI runtime acceptance is claimed. Company-system access is not required.
 
@@ -94,6 +96,6 @@ License: https://creativecommons.org/licenses/by/4.0/
 
 ## Portable acceptance runner
 
-Run `node tools/run_checks.cjs --rules-only` from this directory for the bounded rule/export suite, or `node tools/run_checks.cjs` for rules plus all nine browser suites. Configure `PLAYWRIGHT_MODULE`, `AXE_CORE_PATH`, optional `BROWSER_CHANNEL`, and `PYTHON_COMMAND` using existing auditor/runtime installations. Generated evidence and large research files are excluded from the source checkpoint. Native BI authoring remains optional future work; document-level invoice intake and fictional machine-data replay are implemented.
+Run `node tools/run_checks.cjs --rules-only` from this directory for the bounded rule/export suite, or `node tools/run_checks.cjs` for rules plus all ten browser suites. Configure `PLAYWRIGHT_MODULE`, `AXE_CORE_PATH`, optional `BROWSER_CHANNEL`, and `PYTHON_COMMAND` using existing auditor/runtime installations. Generated evidence and large research files are excluded from the source checkpoint. Native BI authoring remains optional future work; document-level invoice intake and fictional machine-data replay are implemented.
 
 Run the connected page’s **Load two-line invoice scenario** action for the new visitor journey. The portable runner now includes both single-line and multi-line acceptance. All system interactions remain simulated; the original real-data analysis stays separately identified.

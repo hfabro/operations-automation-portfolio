@@ -40,7 +40,7 @@ Pure modules separate deterministic samples, curation/intervals/conditions, main
 
 Maintenance storage uses `portfolio-phase2-machines-v1`. Purchasing keeps `portfolio-phase2-connected-v1`. Checkpoints validate schema, fixture/policy identity, roles, reasons, transitions, repeated command IDs and replay consistency. Invalid imports preserve both journals. A rejected saved journal is not silently replaced by an empty one. The explicit handoff writes the reviewed maintenance state and idempotent staged purchasing command with rollback on storage failure. This is browser recovery for a fictional demonstration, not authenticated or tamper-proof enterprise audit storage.
 
-Reviewed mapping and quantities cannot be supplied as accounting overrides. Repeated handoffs reuse one stable request/command ID. Existing unrelated journal records are preserved. A conflicting purchasing request is held rather than recoded. A signal returning to normal, an invoice being paid, or an already staged requisition does not complete maintenance work or prove a repair; a work-execution/completion scenario remains a separate presentation milestone.
+Reviewed mapping and quantities cannot be supplied as accounting overrides. Repeated handoffs reuse one stable request/command ID. Existing unrelated journal records are preserved. A conflicting purchasing request is held rather than recoded. A signal returning to normal, an invoice being paid, or an already staged requisition does not complete maintenance work or prove a repair; the separate work-execution/completion scenario is implemented in `preview/work-execution.html` with explicit technician and verifier actions. See `WORK-EXECUTION-2026-11-15.md`.
 
 ## Verification
 
@@ -48,4 +48,4 @@ Twelve rule groups cover reconciliation, intervals/gaps, replay boundaries, repe
 
 Browser acceptance covers eight width/theme screens and 32 interaction assertions, including the complete UI handoff through settlement and the existing BI report, quality evidence, pagination, exports, corrupt-storage recovery and preserved purchasing records. Automated accessibility screening covers initial and populated states. Desktop/mobile screenshots are visually inspected. It does not establish comprehensive accessibility certification.
 
-The portable runner now contains 17 executable rule/export/browser groups, including all preceding scenarios. Hosted CI runs the same machine checks as part of the existing dedicated BI job.
+The portable runner now contains 20 executable rule/export/browser groups, including all preceding scenarios. Hosted CI runs the same machine checks as part of the existing dedicated BI job.
