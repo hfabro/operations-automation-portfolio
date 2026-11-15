@@ -1,5 +1,6 @@
 # Phase 2 progress review and next steps
 
+Scope clarification: the entire portfolio is a simulated presentation for prospective employers/clients. Company-system access and live operational deployment are not required; see `SIMULATION-SCOPE.md`. Earlier integration-roadmap language is historical, not a completion prerequisite.
 Reviewed November 15, 2026. Evidence inspected: source code, current local manifests, and nine saved passing validation reports. Passing suites were not rerun merely to count them; they were executed during their respective implementation milestones. Phase 2 remains in the portfolio workspace, outside the published-source checkout. The existing portfolio checkout is clean at this review. No production deployment is part of this planning step.
 
 ## Assessment

@@ -1,5 +1,6 @@
 # ERP-centered purchasing and cost model
 
+Scope clarification: the entire portfolio is a simulated presentation for prospective employers/clients. Company-system access and live operational deployment are not required; see `SIMULATION-SCOPE.md`. Earlier integration-roadmap language is historical, not a completion prerequisite.
 ## Product decision
 
 The controlled P2P showcase is ERP-centered and vendor-neutral. PO lines are the purchasing control anchor. The original BPI public event log remains a separate historical analysis; it does not supply these fictional GL/cost-center assignments, invoice amounts, or control results. No live ERP or native Power BI connection has been made.

@@ -4,6 +4,10 @@ Status: local, unpublished working preview. The published site is unchanged. A d
 
 ## Completed
 
+Presentation scope: this portfolio is a simulated demonstration for prospective employers/clients. Company-system access and live operational deployment are not required. See `SIMULATION-SCOPE.md`.
+
+Multi-line update: the connected page now includes a loadable two-line supplier invoice, separate receipt and price exceptions, proposed/approved/rejected supplier revisions, atomic posting/settlement, and retained original versions. See `MULTILINE-SCENARIO-2026-11-15.md`.
+
 Connected journey update: `preview/connected-journey.html` now carries one coding snapshot through requisition, simulated purchasing approval, linked PO, partial receipts, invoice hold/re-evaluation, posting, authorization, and settlement. Its shared command journal supports validated reload and checkpoint replay. See `CONNECTED-JOURNEY-2026-11-15.md`. The earlier focused views remain separate component demonstrations.
 
 Invoice intake update: `preview/invoice-intake.html` now sorts fictional sample invoices or local structured CSV batches into owned review queues. It inherits approved PO coding, validates supplier identity, catches duplicate groups and quantity conflicts, and preserves good results when imports fail. See `INVOICE-INTAKE-2026-11-15.md`. PDF/email capture and OCR are not implemented; no live ERP posting occurs.
@@ -70,7 +74,7 @@ Each duration metric declares the case grain, activity endpoints, date eligibili
 
 ## Next milestone
 
-The connected single-line acceptance journey is now implemented and tested. Next work is document-level/multi-line modeling, controlled exception resolution, and native BI tooling/artifacts. Budget checks and real-system access remain unverified and unimplemented.
+The connected single-line acceptance journey is now implemented and tested. The bounded multi-line and reviewed-correction scenario is now implemented. Next showcase work is native BI artifacts and machine-data simulation; further accounting cases can be added selectively. Company-system access is not a project requirement.
 
 Update: the separate fictional PO/receipt/invoice matching scenario is implemented in `preview/erp-controls.html`, with cost distributions, partial receipts, duplicate-reference checks, price tolerances, simulated roles, payment authorization, and session history. See `ERP-COST-MODEL-2026-11-15.md` for the model contract and verified limits. `tools/export_erp_model.cjs` generates six fictional model-preparation tables. ERP rules and workflow checks are in `tools/test_erp_rules.cjs` and `tools/test_erp_browser.cjs`. Upstream requisition/PO approvals, non-PO exceptions, credits, tax/FX, full GL accounting, and budget control remain future extensions.
 
@@ -89,3 +93,5 @@ License: https://creativecommons.org/licenses/by/4.0/
 ## Portable acceptance runner
 
 Run `node tools/run_checks.cjs --rules-only` from this directory for the bounded rule/export suite, or `node tools/run_checks.cjs` for rules plus all five browser suites. Configure `PLAYWRIGHT_MODULE`, `AXE_CORE_PATH`, optional `BROWSER_CHANNEL`, and `PYTHON_COMMAND` using existing auditor/runtime installations. Generated evidence and large research files are excluded from the source checkpoint. Native BI, document-level intake and machine-data work remain future milestones.
+
+Run the connected page’s **Load two-line invoice scenario** action for the new visitor journey. The portable runner now includes both single-line and multi-line acceptance. All system interactions remain simulated; the original real-data analysis stays separately identified.

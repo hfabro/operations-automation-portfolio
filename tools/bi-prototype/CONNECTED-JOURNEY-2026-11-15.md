@@ -1,5 +1,6 @@
 # Connected purchasing journey checkpoint
 
+Scope clarification: the entire portfolio is a simulated presentation for prospective employers/clients. Company-system access and live operational deployment are not required; see `SIMULATION-SCOPE.md`. Earlier integration-roadmap language is historical, not a completion prerequisite.
 Implemented November 15, 2026. `preview/connected-journey.html` now runs the previously separate coding, ERP, and intake rules through a single fictional domain journal. The earlier focused pages remain available as component demonstrations; they do not share this journal and are not presented as connected records.
 
 ## Working journey
