@@ -46,7 +46,8 @@
   const counts=Object.fromEntries(Object.keys(queues).map(k=>[k,results.filter(r=>r.queue===k).length]));
   return {snapshotVersion:s.version,total:results.length,counts,results,erpUnchanged:true,scope:'Structured, single-line invoice triage only. No posting, approval, payment or live ERP write.'};
  }
- function parseCSV(text){
+ function parseCSV(text,expectedHeaders=headers,maxRows=1000){
+  if(!Array.isArray(expectedHeaders)||!expectedHeaders.length||expectedHeaders.some(h=>typeof h!=='string'||!h)||new Set(expectedHeaders).size!==expectedHeaders.length||!Number.isInteger(maxRows)||maxRows<1||maxRows>1000)throw Error('Invalid structured CSV contract.');
   if(typeof text!=='string'||text.length>262144)throw Error('CSV is limited to 256 KiB of text.');text=text.replace(/^\uFEFF/,'');
   const rows=[];let row=[],field='',quoted=false,closed=false;
   function emit(){row.push(field);field='';closed=false;}
@@ -56,9 +57,9 @@
    else if(ch===',')emit();else if(ch==='\r'||ch==='\n'){emit();if(row.some(v=>v!==''))rows.push(row);row=[];if(ch==='\r'&&text[i+1]==='\n')i++;}else field+=ch;
   }
   if(quoted)throw Error('Unclosed quoted CSV field.');if(field||row.length||closed){emit();if(row.some(v=>v!==''))rows.push(row);}
-  if(rows.length<2)throw Error('CSV needs a header and at least one data row.');const names=rows.shift();if(names.length!==headers.length||names.some((v,i)=>v!==headers[i]))throw Error('Use the exact sample CSV column names and order.');
-  if(rows.length>1000)throw Error('CSV is limited to 1,000 invoice rows.');
-  return rows.map((values,index)=>{if(values.length!==headers.length)throw Error('Wrong field count at data row '+(index+1));return Object.fromEntries(headers.map((name,i)=>[name,values[i]]));});
+  if(rows.length<2)throw Error('CSV needs a header and at least one data row.');const names=rows.shift();if(names.length!==expectedHeaders.length||names.some((v,i)=>v!==expectedHeaders[i]))throw Error('Use the exact sample CSV column names and order.');
+  if(rows.length>maxRows)throw Error('CSV is limited to '+maxRows+' invoice rows.');
+  return rows.map((values,index)=>{if(values.length!==expectedHeaders.length)throw Error('Wrong field count at data row '+(index+1));return Object.fromEntries(expectedHeaders.map((name,i)=>[name,values[i]]));});
  }
  function sample(){const row=(id,supplierId,supplierName,ref,po,quantity,unitPrice,currency='USD')=>({documentId:id,entityId:'SYN-CO-01',supplierId,supplierName,invoiceReference:ref,poLineId:po,quantity,unitPrice,currency});return [
   row('DOC-001','SYN-SUP-02','Fictional Filter Supply','FILTER-NEW-1','PO-26002/001',1,'50.00'),
