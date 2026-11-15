@@ -179,7 +179,8 @@ try {
     }
   });
 
-  async function htmlFiles(dir){const entries=await readdir(dir,{withFileTypes:true});const results=await Promise.all(entries.filter(e=>!['.git','tmp','references-private'].includes(e.name)).map(e=>e.isDirectory()?htmlFiles(resolve(dir,e.name)):e.name.endsWith('.html')?[resolve(dir,e.name)]:[]));return results.flat();}
+  // Match serve.mjs: development-only tools use their own browser suite, not public preview routes.
+  async function htmlFiles(dir){const entries=await readdir(dir,{withFileTypes:true});const results=await Promise.all(entries.filter(e=>!['.git','tmp','references-private','tools'].includes(e.name)).map(e=>e.isDirectory()?htmlFiles(resolve(dir,e.name)):e.name.endsWith('.html')?[resolve(dir,e.name)]:[]));return results.flat();}
   const routes=(await htmlFiles(root)).map(file=>'/'+relative(root,file).replaceAll('\\','/').replace(/index\.html$/,''));
   await check('Case-study headings fit narrow screens with a wider fallback font',async()=>{
     for(const width of [320,375]) {
