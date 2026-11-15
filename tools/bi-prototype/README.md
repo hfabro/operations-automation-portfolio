@@ -1,0 +1,91 @@
+# Phase 2 BI — P2P research foundation
+
+Status: local, unpublished working preview. The published site is unchanged. A development-only source checkpoint is prepared on `phase2/connected-business-intelligence`, with a dedicated CI job; it is not a production release. This now includes the real-data research foundation and a separate fictional ERP cost/control workflow, not the complete Phase 2 product.
+
+## Completed
+
+Connected journey update: `preview/connected-journey.html` now carries one coding snapshot through requisition, simulated purchasing approval, linked PO, partial receipts, invoice hold/re-evaluation, posting, authorization, and settlement. Its shared command journal supports validated reload and checkpoint replay. See `CONNECTED-JOURNEY-2026-11-15.md`. The earlier focused views remain separate component demonstrations.
+
+Invoice intake update: `preview/invoice-intake.html` now sorts fictional sample invoices or local structured CSV batches into owned review queues. It inherits approved PO coding, validates supplier identity, catches duplicate groups and quantity conflicts, and preserves good results when imports fail. See `INVOICE-INTAKE-2026-11-15.md`. PDF/email capture and OCR are not implemented; no live ERP posting occurs.
+
+Latest direction: automate repeatable assignments and data-integrity controls upstream. `preview/guided-entry.html` now demonstrates catalog/work-request-based coding, owned exceptions, effective policies, immutable snapshots, and duplicate-submission protection. See `GOVERNED-AUTOMATION-2026-11-15.md`. This is a local fictional demonstration; a ready coded requisition is not yet connected to approved-PO creation or a live ERP.
+
+- Retrieved BPI Challenge 2019 version 1 from its official 4TU DOI/catalog download. Catalog and metadata identify Boudewijn van Dongen as creator and CC BY 4.0 as the data license. Attribution, license link, changes, and non-endorsement notice are included in the preview.
+- Downloaded 728,558,522 bytes; verified the publisher's MD5 `4eb909242351193a61e1c15b9c3cc814`. SHA-256: `af63bc687fc4152f2123b05c3af7772b37ef3fce2d3f67f812666c9e356baae7`.
+- Streamed the full XML/XES dataset using standard Python libraries. Reconciled 76,349 purchase orders, 251,734 order-item cases, 1,595,923 events, and 42 activity labels against the creator's documented counts.
+- Built a case-level CSV, actual-field schema inventory, data-quality profile, reproducible measures, and compact 13 KB browser payload. Raw source and full curated CSV are separate from preview files.
+- Built an interactive HTML/CSS/JavaScript preview with policy selection, cohort-aware measures, deterministic case timelines, global activity frequencies, and source/method disclosures.
+- Verified independent CSV aggregation, median/P90 calculations, source hashing, sample-event duration calculations, and timestamp/coverage edge cases. Browser tests passed eight width/theme combinations and eight interaction checks on installed Edge. No reported axe rule violations or page overflow. This is not complete accessibility certification.
+
+## Findings that shape the model
+
+The event timestamp range is 1948–2020 even though most events are in 2018–2019. This is source content, not automatically a proven data error. Duration analysis therefore has an explicit rule: every event in a case must be within 2018–2019 UTC, both creation and clearing must be observed, timestamps must parse, and clearing must not precede creation. All source records remain in global case/event counts.
+
+- Cases outside that window: 266. Of these, 260 otherwise qualify for the observed-span metric.
+- Eligible in-window cases: 183,417.
+- Median observed creation-to-last-clearing span: 77.6431 calendar days; P90: 127.9514 days.
+- All-date sensitivity: 183,677 eligible cases; median 77.6424 days; P90 127.9514 days. The window barely changes aggregate values, but the explicit limitation matters.
+- Missing actor events: 399,090. Batch/human actor labels are not proof of full-process automation or its savings.
+- Repeated event signatures retained: 132,748. Similar event attributes do not establish duplicate invoices or invalid transactions.
+- Equal-case-timestamp excess events: 233,463. Source sequence is retained for ties, without asserting causal ordering.
+- This exact file contains four distinct company labels and 1,975 vendor labels. Do not replace these observed counts with broader organizational descriptions in source documentation.
+
+The observed span is the first `Create Purchase Order Item` to the last recorded `Clear Invoice` within a case. It does not prove final settlement, full lifecycle completion, total waiting time, or avoidable delay. `No clearing observed` is not labeled outstanding debt, current backlog, or noncompliance. Transformed monetary values are deliberately omitted.
+
+## Files and reproduction
+
+- `tools/inspect_source.py`: records the DOI catalog page and compatible download metadata. The historical `api.4tu.nl` hostname failed DNS resolution; the official catalog and Figshare metadata succeeded and matched on title, DOI, file size, and checksum.
+- `tools/download_source.py`: downloads to a partial file, checks length/MD5, then promotes the snapshot and records provenance. Existing snapshots are preserved; `test_p2p.py` re-verifies SHA-256.
+- `tools/build_p2p.py`: streaming ingestion, quality checks, full case export, cohort measures, illustrative timeline selection, and public payload generation.
+- `tools/test_p2p.py`: meaningful edge cases and independently computed reconciliation/percentiles.
+- `tools/test_preview.cjs`: local responsive, accessibility, filter, timeline, unavailable-data, and methods checks. Its Playwright and axe paths refer to this workstation's already installed auditors; no visitor runtime dependencies.
+- `source/`: original raw file, catalog, metadata, and checksum manifest; local research only.
+- `curated/`: full case CSV, schema inventory, and profile; local model preparation.
+- `preview/`: compact browser deliverable, with no credentials, remote requests, raw source file, or actual ERP integration.
+- `evidence/`: verification results and desktop/mobile screenshots.
+
+From the portfolio workspace, run:
+
+```powershell
+python phase2-bi/tools/inspect_source.py
+python phase2-bi/tools/download_source.py
+python phase2-bi/tools/build_p2p.py
+python phase2-bi/tools/test_p2p.py
+node phase2-bi/tools/test_preview.cjs
+```
+
+To inspect interactively, serve only the preview directory (do not serve the raw research directory):
+
+```powershell
+python -m http.server 4230 --bind 127.0.0.1 --directory phase2-bi/preview
+```
+
+Then open http://127.0.0.1:4230/. Stop with Ctrl+C when finished. Tools were verified on this workstation; no assumption is made about availability on corporate PCs.
+
+## Data contract
+
+Case identity: source-system namespace + company + published case ID. The published ID is PO number + item number, stored as strings to preserve leading zeros. Purchase orders are counted by source + company + PO. Source events have no guaranteed unique ID; ingestion uses case + source ordinal, retaining tied and repeated signatures. All times normalize to UTC; no naive timestamp is silently assigned a timezone. Monetary fields are inventoried but not aggregated.
+
+Each duration metric declares the case grain, activity endpoints, date eligibility, exclusion rule, and percentile definition. Policy is the source `Item Category` value. Cases from unrelated datasets will not share dimensions or keys merely because labels resemble each other. Timeline examples select the smallest SHA-256 case-key score per policy/clearing-status group, among cases entirely within the analysis window and with 3–45 events. They illustrate record behavior; they do not represent population frequencies. The timestamped source manifest identifies the exact snapshot.
+
+## Next milestone
+
+The connected single-line acceptance journey is now implemented and tested. Next work is document-level/multi-line modeling, controlled exception resolution, and native BI tooling/artifacts. Budget checks and real-system access remain unverified and unimplemented.
+
+Update: the separate fictional PO/receipt/invoice matching scenario is implemented in `preview/erp-controls.html`, with cost distributions, partial receipts, duplicate-reference checks, price tolerances, simulated roles, payment authorization, and session history. See `ERP-COST-MODEL-2026-11-15.md` for the model contract and verified limits. `tools/export_erp_model.cjs` generates six fictional model-preparation tables. ERP rules and workflow checks are in `tools/test_erp_rules.cjs` and `tools/test_erp_browser.cjs`. Upstream requisition/PO approvals, non-PO exceptions, credits, tax/FX, full GL accounting, and budget control remain future extensions.
+
+1. Improve business questions with supported event-based breakdowns: rework definitions, process variants, actor coverage, and cohort comparisons. Preserve clear denominators and open/censored lifecycle boundaries.
+2. Extend the existing fictional ERP scenario upstream to requisition/PO approval and explicit exception workflows; add a supported variance/budget bridge. Do not infer those controls from missing public-log fields.
+3. Build native Power BI model/report source once Desktop/source format support is verified. No PBIP, semantic model, DAX report, or native Power BI runtime acceptance is claimed yet.
+4. Integrate the reviewed compact interface into an isolated portfolio branch, with explicit source-data license exceptions to existing portfolio copyright language, source attribution, CI, and current site conventions. Re-run release checks before requesting publication.
+5. Start NIST machine-data feasibility and replay as the next domain, keeping real public analysis distinct from the integrated fictional company.
+
+Source: https://doi.org/10.4121/uuid:d06aff4b-79f0-45e6-8ec8-e19730c248f1
+
+Creator's documented dataset description: https://research.tue.nl/p/en/datasets/bpi-challenge-2019
+
+License: https://creativecommons.org/licenses/by/4.0/
+
+## Portable acceptance runner
+
+Run `node tools/run_checks.cjs --rules-only` from this directory for the bounded rule/export suite, or `node tools/run_checks.cjs` for rules plus all five browser suites. Configure `PLAYWRIGHT_MODULE`, `AXE_CORE_PATH`, optional `BROWSER_CHANNEL`, and `PYTHON_COMMAND` using existing auditor/runtime installations. Generated evidence and large research files are excluded from the source checkpoint. Native BI, document-level intake and machine-data work remain future milestones.

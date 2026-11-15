@@ -1,0 +1,7 @@
+evidence/
+curated/*
+!curated/profile.json
+!curated/schema.json
+source/*
+!source/manifest.json
+__pycache__/

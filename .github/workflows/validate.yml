@@ -120,3 +120,24 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           BROWSER_ENGINE: ${{ matrix.engine }}
         run: node tools/audit-demo-accessibility.mjs
+
+  bi:
+    name: Connected BI contracts and purchasing journey
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out the exact revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Prepare pinned development-only auditors
+        run: |
+          npm install --prefix "$RUNNER_TEMP/portfolio-qa" --no-save --package-lock=false --ignore-scripts playwright@1.62.1 axe-core@4.14.0
+          "$RUNNER_TEMP/portfolio-qa/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Verify data contracts, costs, sorting and connected recovery
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+          PYTHON_COMMAND: python3
+        run: node tools/bi-prototype/tools/run_checks.cjs
