@@ -11,10 +11,13 @@
  function curate(snapshot){
   if(!snapshot||snapshot.fictional!==true||!iso(snapshot.start)||!iso(snapshot.end)||Date.parse(snapshot.end)-Date.parse(snapshot.start)!==1800000||!Array.isArray(snapshot.rows)||snapshot.rows.length>1000)throw Error('Expected a bounded fictional 30-minute observation snapshot.');
   const candidates=[],quarantine=[];
+  const rawIdentities=new Map();for(const row of snapshot.rows)if(row&&typeof row==='object'&&typeof row.id==='string'&&row.id){if(!rawIdentities.has(row.id))rawIdentities.set(row.id,new Set());rawIdentities.get(row.id).add(stable(row));}
+  const conflictingIds=new Set([...rawIdentities].filter(([,values])=>values.size>1).map(([id])=>id));
   const reject=(row,ordinal,reason)=>quarantine.push({sourceOrdinal:ordinal,observation:clone(row),reason});
   snapshot.rows.forEach((row,i)=>{
    let reason='';
    if(!row||typeof row!=='object'||typeof row.id!=='string'||!row.id||row.id.length>100||Object.keys(row).some(k=>!['id','asset','tag','timestamp','sequence','value','unit','quality'].includes(k)))reason='Invalid observation schema';
+   else if(conflictingIds.has(row.id))reason='Conflicting observation ID; all copies quarantined';
    else if(!assets.some(a=>a.id===row.asset))reason='Unknown asset mapping';
    else if(!tags[row.tag])reason='Unknown tag';
    else if(!iso(row.timestamp)||row.timestamp<snapshot.start||row.timestamp>=snapshot.end)reason='Outside capture window or invalid UTC timestamp';

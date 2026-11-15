@@ -18,7 +18,7 @@ The reviewed repair uses CODE-002, account 6105 Equipment repairs, and FAC-100. 
 | Collection | Grain / control |
 | --- | --- |
 | Source rows | One fictional asset/tag/UTC timestamp/sequence observation, with explicit unit and quality. |
-| Accepted observations | One unambiguous source observation. Identical IDs count once; conflicting IDs and ambiguous asset/tag/time records are quarantined in full. |
+| Accepted observations | One unambiguous source observation. Identical IDs count once; conflicting IDs and ambiguous asset/tag/time records are quarantined in full. Identity conflicts are detected before unit/quality admission, so an invalid conflicting copy cannot leave a trusted original behind. |
 | Quarantine | One excluded source row with its ordinal, original content and reason. Exclusion counts describe the whole capture. |
 | State intervals | One non-overlapping [start, end) interval per asset. Good state expires after 60 seconds. Missing, bad or uncertain state becomes UNKNOWN. |
 | Condition episode | Three consecutive good one-minute vibration observations above the fictional threshold while a fresh good state is RUN. Source IDs and state-source IDs are retained. |
@@ -44,8 +44,8 @@ Reviewed mapping and quantities cannot be supplied as accounting overrides. Repe
 
 ## Verification
 
-Twelve rule groups cover reconciliation, intervals/gaps, replay boundaries, repeated episodes, invalid data/units/UTC, arrival order, role/reason gates, idempotent and collision-safe handoff, replay recovery, full financial lineage and unrelated-cost exclusion.
+Thirteen rule groups cover reconciliation, intervals/gaps, replay boundaries, repeated episodes, invalid data/units/UTC, arrival order, role/reason gates, idempotent and collision-safe handoff, replay recovery, full financial lineage and unrelated-cost exclusion.
 
 Browser acceptance covers eight width/theme screens and 32 interaction assertions, including the complete UI handoff through settlement and the existing BI report, quality evidence, pagination, exports, corrupt-storage recovery and preserved purchasing records. Automated accessibility screening covers initial and populated states. Desktop/mobile screenshots are visually inspected. It does not establish comprehensive accessibility certification.
 
-The portable runner now contains 20 executable rule/export/browser groups, including all preceding scenarios. Hosted CI runs the same machine checks as part of the existing dedicated BI job.
+The portable runner now contains 22 executable rule/export/browser groups, including all preceding scenarios. Hosted CI runs the same machine checks as part of the existing dedicated BI job.

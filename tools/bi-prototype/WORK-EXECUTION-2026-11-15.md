@@ -39,6 +39,6 @@ Native HTML/CSS/JavaScript follow the existing no-network content policy. Roles 
 
 Thirteen work-rule groups cover exact linked material/PO gates, UTC/order/role/reason validation, retained provenance before payment, explicit verification, stale work/evidence rejection, rework versions, idempotence, policy/replay consistency, immutable source journals and invalid source checkpoints.
 
-Work browser checks cover eight width/theme screens and 26 interaction assertions, including a three-version returned/reworked/accepted example, stale-decision protection, source preservation, exports, corrupt-storage recovery and shared hub/machine status. Expanded populated states receive automated accessibility screening; desktop/mobile screenshots are visually inspected. The hub's revised coverage includes eight layouts and 19 assertions.
+Work browser checks cover eight width/theme screens and 26 interaction assertions, including a three-version returned/reworked/accepted example, stale-decision protection, source preservation, exports, corrupt-storage recovery and shared hub/machine status. Expanded populated states receive automated accessibility screening; desktop/mobile screenshots are visually inspected. The hub's revised coverage includes eight layouts and 21 assertions.
 
-The complete portable runner contains 20 executable rule/export/browser groups. Hosted acceptance runs them through the existing BI job. Automated screening is not comprehensive accessibility conformance or physical equipment acceptance.
+The complete portable runner contains 22 executable rule/export/browser groups. Hosted acceptance runs them through the existing BI job. Automated screening is not comprehensive accessibility conformance or physical equipment acceptance.

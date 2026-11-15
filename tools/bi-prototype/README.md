@@ -96,6 +96,10 @@ Creator's documented dataset description: https://research.tue.nl/p/en/datasets/
 
 License: https://creativecommons.org/licenses/by/4.0/
 
+## Cross-view handoffs
+
+The hub paid card and workflow financial links open the saved purchasing journal directly. Invalid saved-journal entry is unavailable rather than silently showing an example. Machine source identity checks quarantine all conflicting copies before unit/quality admission. These hardening cases are part of the current 22-group acceptance runner.
+
 ## Portable acceptance runner
 
 Run `node tools/run_checks.cjs --rules-only` from this directory for the bounded rule/export suite, or `node tools/run_checks.cjs` for rules plus all eleven browser suites. Configure `PLAYWRIGHT_MODULE`, `AXE_CORE_PATH`, optional `BROWSER_CHANNEL`, and `PYTHON_COMMAND` using existing auditor/runtime installations. Generated evidence and large research files are excluded from the source checkpoint. Native BI authoring remains optional future work; document-level invoice intake and fictional machine-data replay are implemented.
