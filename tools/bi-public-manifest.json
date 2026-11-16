@@ -218,8 +218,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "19fa93ed8238b125335ef4166e636a2c3800ecb02631dc1a64182ac5fff792f2",
-      "sha256": "37d7ad8abe855476b66ea1f1cc6f80b59d0876ed7dea0006934d863255b20da0"
+      "sourceSha256": "c393d7d221125b031fea748bbb6b94d8c1daf54fb0061e773261a28f2ea81855",
+      "sha256": "5b088c064dace42a426432f0a04be172590b752897489bce2221e579ecdad02a"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -284,14 +284,14 @@
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.html",
       "output": "business-intelligence/machine-intelligence.html",
-      "sourceSha256": "0e2252a1078ecfe61474100a51a62cd805231adca2fc341f7b8f33c29c7ebe5b",
-      "sha256": "cb7c12fcce481b62a6a339542d4ed513d1385272334aa112507b38c95402c99c"
+      "sourceSha256": "62a834b5727f8b1bece092bbae41d8ba22133fac7a05d86e7c5f056929580668",
+      "sha256": "efcea7d243001d8ce63c9af5944388dfce1c03e417de49995de794251a26e051"
     },
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.js",
       "output": "business-intelligence/machine-intelligence.js",
-      "sourceSha256": "f84fb20e14f3f03deb4447549489c0393eb62f27b540fcd230da9a913e526302",
-      "sha256": "f84fb20e14f3f03deb4447549489c0393eb62f27b540fcd230da9a913e526302"
+      "sourceSha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754",
+      "sha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754"
     },
     {
       "source": "tools/bi-prototype/preview/machine-rules.js",
@@ -332,14 +332,20 @@
     {
       "source": "tools/bi-prototype/preview/showcase.js",
       "output": "business-intelligence/showcase.js",
-      "sourceSha256": "af94cc6b09a5000486384e26c7c89b50385b32f50a6b0bd370f0eba02b203b64",
-      "sha256": "af94cc6b09a5000486384e26c7c89b50385b32f50a6b0bd370f0eba02b203b64"
+      "sourceSha256": "17fafdf4f3d4305a8f75e77267cca04749657a3c9364f6a897d5c75dbd7bff6d",
+      "sha256": "17fafdf4f3d4305a8f75e77267cca04749657a3c9364f6a897d5c75dbd7bff6d"
     },
     {
       "source": "tools/bi-prototype/preview/simulation-examples.js",
       "output": "business-intelligence/simulation-examples.js",
       "sourceSha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889",
       "sha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-context.js",
+      "output": "business-intelligence/work-context.js",
+      "sourceSha256": "6250ef440b45e75db7812a902a96e8bf2fc557060b85b2871b0ce8474abe55b3",
+      "sha256": "6250ef440b45e75db7812a902a96e8bf2fc557060b85b2871b0ce8474abe55b3"
     },
     {
       "source": "tools/bi-prototype/preview/work-execution.css",
@@ -350,14 +356,14 @@
     {
       "source": "tools/bi-prototype/preview/work-execution.html",
       "output": "business-intelligence/work-execution.html",
-      "sourceSha256": "4b64c23b642941dfaf9c89e0d60a0226098051b3a32ee87582310868ec2d7b4b",
-      "sha256": "c313782f46109d97899f9a9e2179d3f1710c1b63e90c21015567f7c9888b459d"
+      "sourceSha256": "65b2ec3a84b7be0f0fecf3b29a359c4085df3260c3b1c30541d686510193fd41",
+      "sha256": "f71eaa71c040efe5da06fb793b5bee8714fd06154e25075305413143b9c62350"
     },
     {
       "source": "tools/bi-prototype/preview/work-execution.js",
       "output": "business-intelligence/work-execution.js",
-      "sourceSha256": "104744adda9021ee563ac6826d475c414a57f2c7f36cc555813088414893ce39",
-      "sha256": "104744adda9021ee563ac6826d475c414a57f2c7f36cc555813088414893ce39"
+      "sourceSha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790",
+      "sha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790"
     },
     {
       "source": "tools/bi-prototype/preview/work-rules.js",

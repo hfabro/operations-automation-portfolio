@@ -36,6 +36,8 @@ jobs:
         run: node ./tools/test-bi-page-build.mjs
       - name: Verify inspectable BI dictionary and reconciliation evidence
         run: node ./tools/test-bi-data-methods.cjs
+      - name: Verify work evidence against current journal ancestry
+        run: node ./tools/test-bi-work-context.cjs
 
   browser:
     name: Responsive behavior and accessibility
