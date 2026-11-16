@@ -9,3 +9,7 @@
 *.ps1 text eol=crlf
 *.png binary
 *.pdf binary
+
+# Generated BI projection has portable, checksum-stable text artifacts.
+business-intelligence/* text eol=lf
+tools/bi-public-manifest.json text eol=lf

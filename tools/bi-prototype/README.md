@@ -1,6 +1,6 @@
 # Phase 2 BI — P2P research foundation
 
-Status: local, unpublished working preview. The published site is unchanged. A development-only source checkpoint is prepared on `phase2/connected-business-intelligence`, with a dedicated CI job; it is not a production release. This now includes the real-data research foundation and a separate fictional ERP cost/control workflow, not the complete Phase 2 product.
+Status: canonical simulations plus a generated portfolio projection on `phase2/connected-business-intelligence`. The draft now prepares `/business-intelligence/` and its navigation for review; production remains unchanged until an authorized release. The canonical prototype source remains noindex and is not served by the public preview server. See `PUBLIC-PROJECTION-2026-11-15.md`.
 
 ## Completed
 

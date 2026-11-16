@@ -6,10 +6,13 @@ import {resolve,sep,extname} from 'node:path';
 const root=fileURLToPath(new URL('../',import.meta.url));
 const port=Number(process.env.PORT || 4173);
 if(!Number.isInteger(port)||port<1||port>65535)throw Error('PORT must be an integer from 1 to 65535');
-const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.pdf':'application/pdf','.xml':'application/xml','.txt':'text/plain'};
+const mount=process.env.BASE_PATH||'';
+if(mount&&!/^\/[A-Za-z0-9_-]+$/.test(mount))throw Error('BASE_PATH must be empty or one absolute project-directory name');
+const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.png':'image/png','.pdf':'application/pdf','.xml':'application/xml','.txt':'text/plain','.csv':'text/csv; charset=utf-8'};
 createServer(async(req,res)=>{
  try{
-  const path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+  let path=decodeURIComponent(new URL(req.url,'http://localhost').pathname);
+  if(mount){if(path!==mount&&!path.startsWith(mount+'/'))throw Error('blocked');path=path.slice(mount.length)||'/';}
   if(path.includes('\\'))throw Error('blocked');
   if(path.split('/').some(s=>s.startsWith('.')||['references-private','tmp','tools'].includes(s)))throw Error('blocked');
   let target=resolve(root,'.'+path);
@@ -18,4 +21,4 @@ createServer(async(req,res)=>{
   if(!types[extname(target)])throw Error('blocked');
   const body=await readFile(target);res.writeHead(200,{'Content-Type':types[extname(target)],'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'});res.end(body);
  }catch{res.writeHead(404,{'Content-Type':'text/plain'});res.end('Not found');}
-}).listen(port,'127.0.0.1',()=>console.log(`Local preview: http://127.0.0.1:${port}/`));
+}).listen(port,'127.0.0.1',()=>console.log(`Local preview: http://127.0.0.1:${port}${mount}/`));

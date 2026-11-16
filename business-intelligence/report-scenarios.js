@@ -1,0 +1,6 @@
+(function(root,factory){const api=typeof module==='object'&&module.exports?factory(require('./journey-rules.js'),require('./simulation-examples.js')):factory(root.Journey,root.SimulationExamples);if(typeof module==='object'&&module.exports)module.exports=api;else root.ReportScenarios=api;})(typeof window!=='undefined'?window:globalThis,function(J,S){
+ 'use strict';function checkpoints(){const held=S.multiLine();let state=held;const act=(type,payload)=>{state=J.dispatch(state,{id:'REPORT-'+(state.revision+1),type,actor:J.roles[type],payload});};
+  act('receive',{poLineId:state.erp.lines[0].id,receiptReference:'UPGRADE-PART-2',quantity:1});act('proposeCorrection',{documentId:'DOC-MULTI-001',expectedVersion:1,pricesCents:[125000,125000],declaredNetCents:375000,reason:'Simulated supplier corrected the repair price',sourceLabel:'Simulated supplier revision 2'});act('reviewCorrection',{documentId:'DOC-MULTI-001',decision:'approve',reason:'Reviewed supplier revision against approved PO'});const corrected=state;
+  act('post',{documentId:'DOC-MULTI-001'});act('authorize',{documentId:'DOC-MULTI-001'});act('pay',{documentId:'DOC-MULTI-001'});return {held,corrected,settled:state};}
+ return {checkpoints};
+});

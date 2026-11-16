@@ -62,7 +62,7 @@
       closeNavigation();
       navToggle.focus();
     });
-    window.addEventListener("resize", function () { if (window.innerWidth > 900) closeNavigation(); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 1180) closeNavigation(); });
     document.addEventListener("click", function (event) {
       if (!nav.contains(event.target) && !navToggle.contains(event.target)) closeNavigation();
     });

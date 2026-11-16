@@ -10,4 +10,4 @@ Contact David H. Fabro for written permission before reusing substantial portion
 
 ## Third-party research data
 
-The BPI Challenge 2019 source-derived data in `tools/bi-prototype/preview/p2p-data.js` and its historical profile/schema retain their CC BY 4.0 license. See [the data attribution and transformation notice](tools/bi-prototype/THIRD-PARTY-DATA.md). The restrictions on original portfolio material do not limit rights granted by that data license.
+The BPI Challenge 2019 source-derived data in `tools/bi-prototype/preview/p2p-data.js`, its generated public counterpart `business-intelligence/p2p-data.js`, and the historical profile/schema retain their CC BY 4.0 license. See [the data attribution and transformation notice](tools/bi-prototype/THIRD-PARTY-DATA.md). The restrictions on original portfolio material do not limit rights granted by that data license.

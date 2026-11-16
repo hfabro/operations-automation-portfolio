@@ -32,6 +32,8 @@ jobs:
         run: node ./tools/test-system-data.mjs
       - name: Verify generated-page consistency and rebuild safety
         run: node ./tools/test-system-page-build.mjs
+      - name: Verify canonical BI projection and rebuild safety
+        run: node ./tools/test-bi-page-build.mjs
 
   browser:
     name: Responsive behavior and accessibility
@@ -120,6 +122,12 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           BROWSER_ENGINE: ${{ matrix.engine }}
         run: node tools/audit-demo-accessibility.mjs
+      - name: Verify integrated BI journeys under the project path
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+          BROWSER_ENGINE: ${{ matrix.engine }}
+        run: node tools/test-bi-public.mjs --journeys-only
 
   bi:
     name: Connected BI contracts and purchasing journey
@@ -141,3 +149,8 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           PYTHON_COMMAND: python3
         run: node tools/bi-prototype/tools/run_checks.cjs
+      - name: Verify generated BI routes, project-path handoffs and accessibility
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+        run: node tools/test-bi-public.mjs
