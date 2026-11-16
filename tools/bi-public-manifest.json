@@ -410,20 +410,20 @@
     {
       "source": "tools/bi-prototype/preview/management-overview.css",
       "output": "business-intelligence/management-overview.css",
-      "sourceSha256": "f84d071af875631c1fcd29a1b3a8704f94d5f61c19ae6ad0bb44d655f50837ec",
-      "sha256": "f84d071af875631c1fcd29a1b3a8704f94d5f61c19ae6ad0bb44d655f50837ec"
+      "sourceSha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765",
+      "sha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.html",
       "output": "business-intelligence/management-overview.html",
-      "sourceSha256": "f2eb989dd95121117d184f7143264e03d481868911443d71728e9c695d4c55ad",
-      "sha256": "6862fde0ff1da7a717c69793058543054995d66a98eb8092376d83be3e650d52"
+      "sourceSha256": "4ae62a1c011cd1a07f1705a2bd387b683d91dbae0797face9556aaf923cea9f2",
+      "sha256": "7e54470f681f62f34fe0c79f2faed08b9a67976c5446b1cfb786071be678370f"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.js",
       "output": "business-intelligence/management-overview.js",
-      "sourceSha256": "abd8b99f1850ebdacd6d2b54c09eadeb74b71d34fde37eb0a6ceec19ed110549",
-      "sha256": "abd8b99f1850ebdacd6d2b54c09eadeb74b71d34fde37eb0a6ceec19ed110549"
+      "sourceSha256": "ac87be24f8c5d0b04267b9eeeec06847d9f6ddfe2ed05e6dc7dff8708f8a5bcc",
+      "sha256": "ac87be24f8c5d0b04267b9eeeec06847d9f6ddfe2ed05e6dc7dff8708f8a5bcc"
     },
     {
       "source": "tools/bi-prototype/preview/management-scenarios.js",
