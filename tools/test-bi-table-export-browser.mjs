@@ -67,6 +67,8 @@ try{
  assert.equal(await page.locator('#methods-content').isVisible(),false);for(const id of ['methods-csv','methods-manifest','methods-tables'])assert.equal(await page.locator('#'+id).isDisabled(),true);
  assert.equal(await page.evaluate(()=>sessionStorage.getItem('portfolio-phase2-connected-v1')),'{invalid checkpoint');
  check('Corrupt source clears every export; delayed prior completion cannot revive stale files or overwrite storage');
+ await page.evaluate(()=>sessionStorage.setItem('portfolio-phase2-connected-v1',''));await page.locator('#methods-refresh').click();assert.match(await page.locator('#methods-status').innerText(),/Source unavailable:/);assert.equal(await page.locator('#methods-content').isVisible(),false);for(const id of ['methods-download','methods-csv','methods-manifest','methods-tables'])assert.equal(await page.locator('#'+id).isDisabled(),true);assert.equal(await page.evaluate(()=>sessionStorage.getItem('portfolio-phase2-connected-v1')),'');
+ check('A saved empty string is damaged data, not an absent or valid empty journal; inspection and every export remain held');
  await page.evaluate(()=>{window.DataMethodsExport.prepare=window.originalTableExport;sessionStorage.removeItem('portfolio-phase2-connected-v1');});await page.locator('#methods-refresh').click();await ready(page);
  const empty=await bundle(page);assert(empty.manifest.tables.every(table=>table.rowCount===0));assert(empty.manifest.checks.every(row=>row.status==='empty'));
  await page.selectOption('#methods-table','documents');assert.equal((await download(page,'methods-csv')).bytes.toString('utf8').split('\r\n').length,2);

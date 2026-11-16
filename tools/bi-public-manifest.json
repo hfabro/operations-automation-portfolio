@@ -128,8 +128,8 @@
     {
       "source": "tools/bi-prototype/preview/business-report.js",
       "output": "business-intelligence/business-report.js",
-      "sourceSha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d",
-      "sha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d"
+      "sourceSha256": "8cb4bd879b412876679e7b0b4a465a6ab4edce599dcf6416110a2d131a4700c6",
+      "sha256": "8cb4bd879b412876679e7b0b4a465a6ab4edce599dcf6416110a2d131a4700c6"
     },
     {
       "source": "tools/bi-prototype/preview/business-time-data.js",
@@ -212,8 +212,8 @@
     {
       "source": "tools/bi-prototype/preview/data-and-methods.js",
       "output": "business-intelligence/data-and-methods.js",
-      "sourceSha256": "76fef335a97994ca328ef9de990725be5c9bd45808ebbf819e5e00f9bce9dcf3",
-      "sha256": "76fef335a97994ca328ef9de990725be5c9bd45808ebbf819e5e00f9bce9dcf3"
+      "sourceSha256": "a25febf0686c03b35af907cc5dd5ee5662e85e6128931dcf4b9ed9ea4686e7f3",
+      "sha256": "a25febf0686c03b35af907cc5dd5ee5662e85e6128931dcf4b9ed9ea4686e7f3"
     },
     {
       "source": "tools/bi-prototype/THIRD-PARTY-DATA.md",
