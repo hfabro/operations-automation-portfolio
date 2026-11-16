@@ -302,8 +302,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "fc91338389de1e2662a927464e329c31a17d3cb23de92fc47a8d9347a7e930e1",
-      "sha256": "1a6e9a5d77ca322ed80eca935b5773bfcaebe2133dd9119f6b9175db607bb516"
+      "sourceSha256": "02b5226239351a02628d0c596ed93496b765442329f1426c8d31e0fcf75e553c",
+      "sha256": "b588f8c9ea1d7945b9d006a8ee040524eebb846d7aefb334535464a73e95b88a"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -440,8 +440,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "bcb67e3b7c22ed905be2025791682f9db07dcc7aa72390754d66e70663a6221f",
-      "sha256": "bcb67e3b7c22ed905be2025791682f9db07dcc7aa72390754d66e70663a6221f"
+      "sourceSha256": "821b91a8360754d7c4115460992d167dae3787abf931c6badd242d7dc7be4670",
+      "sha256": "821b91a8360754d7c4115460992d167dae3787abf931c6badd242d7dc7be4670"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
