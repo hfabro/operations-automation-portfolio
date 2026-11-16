@@ -350,8 +350,8 @@
     {
       "source": "tools/bi-prototype/preview/workspace.css",
       "output": "business-intelligence/workspace.css",
-      "sourceSha256": "b199d40766de12de8da148c56423bc6b67a7b21220e45bc3c2840c12d8caf317",
-      "sha256": "b199d40766de12de8da148c56423bc6b67a7b21220e45bc3c2840c12d8caf317"
+      "sourceSha256": "f417b3cfe70abe435175f978f45056877a29cd8ad46c7786209a92caf8d01607",
+      "sha256": "f417b3cfe70abe435175f978f45056877a29cd8ad46c7786209a92caf8d01607"
     },
     {
       "source": "tools/bi-prototype/preview/workspace.js",

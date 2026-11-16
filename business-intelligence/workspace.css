@@ -2,3 +2,6 @@
 @media(max-width:760px){.analysis-grid{grid-template-columns:1fr}.section-title{align-items:stretch;flex-direction:column;gap:15px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric{padding:18px 12px!important;border-bottom:1px solid var(--line)}.metric:nth-child(2){border-right:0}.panel{padding:20px}.panel-top{flex-direction:column;gap:0}.timeline li{grid-template-columns:1fr;gap:4px}.source-strip a{margin-left:0}.intro{padding-top:40px}header{padding:16px 20px}.brand{gap:10px}.brand span{display:none}main{padding:0 20px}.stage{font-size:12px}}
 @media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#13231f;--paper:#1b302a;--ink:#edf4ee;--muted:#b4c8bd;--line:#476256;--accent:#8dd7b5;--soft:#243c33;--warm:#eaa88e}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Native menu-list contents can paint beyond their field in WebKit at narrow widths. */
+.field:has(>select),.filter:has(>select){overflow:hidden}select:focus-visible{outline-offset:-3px}
+:root{background:var(--bg);color:var(--ink)}
