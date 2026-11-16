@@ -1,0 +1,33 @@
+/* Document-level checks for a simulated invoice with multiple lines. No external system access. */
+(function(root,factory){const api=typeof module==='object'&&module.exports?factory(require('./erp-rules.js'),require('./invoice-rules.js')):factory(root.ERP,root.InvoiceIntake);if(typeof module==='object'&&module.exports)module.exports=api;else root.InvoiceDocuments=api;})(typeof window!=='undefined'?window:globalThis,function(E,I){
+ 'use strict';const copy=x=>JSON.parse(JSON.stringify(x)),norm=x=>String(x||'').trim().replace(/\s+/g,' ').toUpperCase();
+ const queues={ready:'Ready for AP review',data:'Invoice total / data review',identity:'Supplier identity review',reference:'PO reference review',duplicate:'Duplicate document review',receipt:'Receipt or acceptance review',price:'Price variance review',combined:'Combined quantity review',correction:'Correction approval'};
+ function validLines(lines){if(!Array.isArray(lines)||!lines.length||lines.length>20)throw Error('Use 1–20 invoice lines.');for(const l of lines)if(!l||Object.keys(l).some(k=>!['poLineId','quantity','priceCents'].includes(k))||typeof l.poLineId!=='string'||!l.poLineId||l.poLineId.length>80||!Number.isSafeInteger(l.quantity)||l.quantity<=0||!Number.isSafeInteger(l.priceCents)||l.priceCents<=0||!Number.isSafeInteger(l.quantity*l.priceCents))throw Error('Invoice lines require a PO reference, positive whole quantity and exact-cent price.');const total=lines.reduce((s,l)=>s+l.quantity*l.priceCents,0);if(!Number.isSafeInteger(total))throw Error('Invoice total exceeds exact-cent limits.');return total;}
+ function evaluate(s){const pending=s.documents.filter(d=>!d.postedInvoiceId&&d.status!=='Withdrawn'),snap=I.snapshot();
+ const results=pending.map(d=>{const reasons=[],lineResults=[],hold=(queue,owner,reason)=>reasons.push({queue,owner,reason});let total=0;
+  if(d.header.currency!=='USD'||!snap.suppliers.some(v=>v.id===d.header.supplierId&&v.approved))hold('identity','AP intake','Supplier or currency is not supported by the fictional invoice snapshot.');
+  for(const l of d.lines){const line=s.erp.lines.find(p=>p.id===l.poLineId),r={lineId:l.id,poLineId:l.poLineId,queue:'ready',reasons:[],coding:null};total+=l.quantity*l.priceCents;
+   if(!line||line.supplier!==d.header.supplierId){r.queue='reference';r.reasons.push('PO line is missing or belongs to another supplier.');}
+   else{try{E.validateLine(line);if(!snap.accounts.includes(line.account)||line.allocations.some(a=>snap.centers[a.costCenter]!==a.department))throw Error('Unapproved PO coding.');r.coding=copy({account:line.account,project:line.project,asset:line.asset,workOrder:line.workOrder,allocations:line.allocations,source:'Approved fictional PO '+line.id});const match=E.match(s.erp,line.id,{number:d.header.number,quantity:l.quantity,priceCents:l.priceCents});if(!match.eligible){r.reasons.push(...match.reasons);const posted=line.invoices.reduce((sum,i)=>sum+i.quantity,0);r.queue=match.reasons.some(v=>v.includes('already posted'))?'duplicate':l.quantity>line.quantity-posted?'reference':l.quantity>line.received-posted?'receipt':'price';}}
+    catch(error){r.queue='reference';r.coding=null;r.reasons.push(error.message);}}
+   if(r.queue!=='ready')hold(r.queue,r.queue==='receipt'?'Receiving / service owner':r.queue==='price'?'Buyer / AP':'AP / Purchasing','Line '+l.ordinal+': '+r.reasons.join(' '));lineResults.push(r);
+  }
+  if(total!==d.header.netCents)hold('data','AP document review','Declared invoice net does not equal the sum of its lines.');
+  // Line checks alone are insufficient when several lines use the same PO balance.
+  for(const id of new Set(d.lines.map(l=>l.poLineId))){const p=s.erp.lines.find(p=>p.id===id);if(!p)continue;const quantity=d.lines.filter(l=>l.poLineId===id).reduce((sum,l)=>sum+l.quantity,0),posted=p.invoices.reduce((sum,i)=>sum+i.quantity,0);if(quantity>Math.min(p.quantity,p.received)-posted)hold('receipt','Receiving / service owner','Combined lines for '+id+' exceed accepted uninvoiced quantity.');}
+  if(s.erp.lines.some(p=>p.supplier===d.header.supplierId&&p.invoices.some(i=>norm(i.number)===norm(d.header.number))))hold('duplicate','AP duplicate review','Supplier invoice reference is already present in posted records.');
+  if(d.pendingCorrection)hold('correction','Purchasing approver','A proposed supplier correction awaits review. Original invoice values remain in force.');
+  return {documentId:d.id,queue:d.pendingCorrection?'correction':reasons[0]?.queue||'ready',owner:d.pendingCorrection?'Purchasing approver':reasons[0]?.owner||'AP review',reasons:reasons.length?reasons.map(r=>r.reason):['All document and line checks passed. Posting and payment authorization remain separate.'],lines:lineResults,calculatedNetCents:total};
+ });
+ const groups=new Map();for(const d of pending){const key=d.header.supplierId+'|'+norm(d.header.number);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(d);}
+ for(const docs of groups.values())if(docs.length>1)for(const d of docs){const r=results.find(r=>r.documentId===d.id);r.queue='duplicate';r.owner='AP duplicate review';r.reasons.push('More than one document uses this supplier invoice reference. Multiple lines within one document are not duplicates.');}
+ const eligible=results.filter(r=>r.queue==='ready'),candidates=new Map();for(const r of eligible){const d=pending.find(d=>d.id===r.documentId);for(const l of d.lines){if(!candidates.has(l.poLineId))candidates.set(l.poLineId,[]);candidates.get(l.poLineId).push({r,quantity:l.quantity});}}
+ for(const [id,rows] of candidates){const p=s.erp.lines.find(p=>p.id===id),available=Math.min(p.quantity,p.received)-p.invoices.reduce((sum,i)=>sum+i.quantity,0);if(rows.reduce((sum,x)=>sum+x.quantity,0)>available)for(const r of new Set(rows.map(x=>x.r))){r.queue='combined';r.owner='AP / Receiving';r.reasons.push('Eligible documents jointly exceed available accepted quantity for '+id+'. All competing documents are held.');}}
+ return results;
+ }
+ function post(s,document){const result=evaluate(s).find(r=>r.documentId===document.id);if(!result||result.queue!=='ready')throw Error('Invoice is held: '+(result?.reasons.join(' ')||'Document is not eligible.'));
+  const erp=copy(s.erp),links=[];for(const line of document.lines){const po=erp.lines.find(p=>p.id===line.poLineId),id='SYN-INV-'+erp.nextInvoice++;po.invoices.push({id,documentId:document.id,documentLineId:line.id,number:document.header.number,quantity:line.quantity,priceCents:line.priceCents,netCents:line.quantity*line.priceCents,authorized:false,paidCents:0,postedBy:'AP'});links.push({invoiceId:id,poLineId:po.id,documentLineId:line.id});}
+  for(const p of erp.lines)E.validateLine(p);return {erp,links};
+ }
+ return {queues,validLines,evaluate,post};
+});

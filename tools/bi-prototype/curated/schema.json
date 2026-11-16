@@ -1,0 +1,27 @@
+{
+  "trace": {
+    "Spend area text": 251734,
+    "Company": 251734,
+    "Document Type": 251734,
+    "Sub spend area text": 251734,
+    "Purchasing Document": 251734,
+    "Purch. Doc. Category name": 251734,
+    "Vendor": 251734,
+    "Item Type": 251734,
+    "Item Category": 251734,
+    "Spend classification text": 251734,
+    "Source": 251734,
+    "Name": 251734,
+    "GR-Based Inv. Verif.": 251734,
+    "Item": 251734,
+    "concept:name": 251734,
+    "Goods Receipt": 251734
+  },
+  "event": {
+    "User": 1595923,
+    "org:resource": 1595923,
+    "concept:name": 1595923,
+    "Cumulative net worth (EUR)": 1595923,
+    "time:timestamp": 1595923
+  }
+}

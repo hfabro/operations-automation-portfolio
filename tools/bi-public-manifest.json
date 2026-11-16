@@ -1,0 +1,399 @@
+{
+  "version": 1,
+  "generator": "tools/build-bi-pages.mjs",
+  "normalization": "UTF-8 without BOM; LF line endings",
+  "pages": [
+    {
+      "source": "showcase.html",
+      "output": "index.html",
+      "label": "Business Intelligence",
+      "title": "Connected Business Intelligence"
+    },
+    {
+      "source": "machine-intelligence.html",
+      "output": "machine-intelligence.html",
+      "label": "Machine intelligence",
+      "title": "Machine intelligence — signal to business action"
+    },
+    {
+      "source": "connected-journey.html",
+      "output": "connected-journey.html",
+      "label": "Connected purchasing",
+      "title": "Connected purchasing — one coding trail"
+    },
+    {
+      "source": "business-report.html",
+      "output": "business-report.html",
+      "label": "Purchasing intelligence",
+      "title": "Purchasing intelligence — inspectable BI"
+    },
+    {
+      "source": "work-execution.html",
+      "output": "work-execution.html",
+      "label": "Work completion",
+      "title": "Work execution — completion and verification"
+    },
+    {
+      "source": "invoice-batch.html",
+      "output": "invoice-batch.html",
+      "label": "Connected invoice intake",
+      "title": "Connected invoice intake — multi-line batch"
+    },
+    {
+      "source": "data-and-methods.html",
+      "output": "data-and-methods.html",
+      "label": "Data and methods",
+      "title": "Data and methods — inspect the business model"
+    },
+    {
+      "source": "guided-entry.html",
+      "output": "guided-entry.html",
+      "label": "Governed coding",
+      "title": "Governed purchasing — consistent cost coding"
+    },
+    {
+      "source": "invoice-intake.html",
+      "output": "invoice-intake.html",
+      "label": "Invoice sorting",
+      "title": "Invoice sorting — owned review queues"
+    },
+    {
+      "source": "erp-controls.html",
+      "output": "erp-controls.html",
+      "label": "ERP cost controls",
+      "title": "ERP cost controls — allocations and approvals"
+    },
+    {
+      "source": "index.html",
+      "output": "historical-analysis.html",
+      "label": "Historical P2P research",
+      "title": "Historical purchasing analysis — BPI Challenge 2019"
+    }
+  ],
+  "files": [
+    {
+      "source": "tools/bi-prototype/preview/batch-rules.js",
+      "output": "business-intelligence/batch-rules.js",
+      "sourceSha256": "9f643240e27dac69121336cce7a2c4ff2fe375973c2f2c4a4b9ac05cba62ec97",
+      "sha256": "9f643240e27dac69121336cce7a2c4ff2fe375973c2f2c4a4b9ac05cba62ec97"
+    },
+    {
+      "source": "tools/bi-prototype/preview/batch-scenarios.js",
+      "output": "business-intelligence/batch-scenarios.js",
+      "sourceSha256": "8fcfad667a1fbfb681ecf3a2cba449e0e8217de26b7a40bd7fc507632a6a31f5",
+      "sha256": "8fcfad667a1fbfb681ecf3a2cba449e0e8217de26b7a40bd7fc507632a6a31f5"
+    },
+    {
+      "source": "tools/bi-shell.css",
+      "output": "business-intelligence/bi-shell.css",
+      "sourceSha256": "e69e85585ca071eeb8752e7dd09946c3929015e7bfe4e3ac15a75dbaacc297b8",
+      "sha256": "e69e85585ca071eeb8752e7dd09946c3929015e7bfe4e3ac15a75dbaacc297b8"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-report.css",
+      "output": "business-intelligence/business-report.css",
+      "sourceSha256": "02f6e93a21773ddd46871e34d116e1733fa68aab12819686fd0521de612956c1",
+      "sha256": "02f6e93a21773ddd46871e34d116e1733fa68aab12819686fd0521de612956c1"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-report.html",
+      "output": "business-intelligence/business-report.html",
+      "sourceSha256": "65de11982da9484208d63d373623c7115b8ad1b13560b7936a8a795a7680adac",
+      "sha256": "2dd21be49730ef3c84a398731a891b5e56b2337bdae718308425d9c03ca90e8b"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-report.js",
+      "output": "business-intelligence/business-report.js",
+      "sourceSha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d",
+      "sha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d"
+    },
+    {
+      "source": "tools/bi-prototype/preview/coding-rules.js",
+      "output": "business-intelligence/coding-rules.js",
+      "sourceSha256": "fd1a10ea78da123cd9b7c72d467c4c3f63440935bc0d7fce5af896ca77d0aa38",
+      "sha256": "fd1a10ea78da123cd9b7c72d467c4c3f63440935bc0d7fce5af896ca77d0aa38"
+    },
+    {
+      "source": "tools/bi-prototype/preview/connected-documents.js",
+      "output": "business-intelligence/connected-documents.js",
+      "sourceSha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69",
+      "sha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69"
+    },
+    {
+      "source": "tools/bi-prototype/preview/connected-journey.css",
+      "output": "business-intelligence/connected-journey.css",
+      "sourceSha256": "3ac589cf6e161eb3473b16891df3730dac2f31cb19e1f286abb8b8725cfe804c",
+      "sha256": "3ac589cf6e161eb3473b16891df3730dac2f31cb19e1f286abb8b8725cfe804c"
+    },
+    {
+      "source": "tools/bi-prototype/preview/connected-journey.html",
+      "output": "business-intelligence/connected-journey.html",
+      "sourceSha256": "04c966228b8380464b2ad6d60f348b6b64a2b1337ec888fed07356f5da4a4e35",
+      "sha256": "96a37f3a0e639a779c101b05396d0fed660c7e51e5fbe07b46e19b6827d61dff"
+    },
+    {
+      "source": "tools/bi-prototype/preview/connected-journey.js",
+      "output": "business-intelligence/connected-journey.js",
+      "sourceSha256": "09b45fab9b8ac3d55379ef07475dab4cafbb5cebf5ebc6eae96863725ca84678",
+      "sha256": "09b45fab9b8ac3d55379ef07475dab4cafbb5cebf5ebc6eae96863725ca84678"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-and-methods.css",
+      "output": "business-intelligence/data-and-methods.css",
+      "sourceSha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11",
+      "sha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-and-methods.html",
+      "output": "business-intelligence/data-and-methods.html",
+      "sourceSha256": "311270e91d67611136cb9195a7312c037be83d030082179198c9b2b2cdd2132f",
+      "sha256": "f146853373c857b3d72c120a975485db5c92b1a28416f8a4ea3b1eea7e9cbf6e"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-and-methods.js",
+      "output": "business-intelligence/data-and-methods.js",
+      "sourceSha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e",
+      "sha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e"
+    },
+    {
+      "source": "tools/bi-prototype/THIRD-PARTY-DATA.md",
+      "output": "business-intelligence/data-attribution.txt",
+      "sourceSha256": "dfb7bd65ba2a8cc537cbf483f986071417600aa4cc5cc38ff40dd434af9371c8",
+      "sha256": "2cb6d479f842c6275664d0f1ffd955a43a217945901f620eeb220f6c01809579"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-methods-model.js",
+      "output": "business-intelligence/data-methods-model.js",
+      "sourceSha256": "3efa8bafee4abc43069ff2d71880664d81fd86f0411b73a830578e09bd299f04",
+      "sha256": "3efa8bafee4abc43069ff2d71880664d81fd86f0411b73a830578e09bd299f04"
+    },
+    {
+      "source": "tools/bi-prototype/preview/document-rules.js",
+      "output": "business-intelligence/document-rules.js",
+      "sourceSha256": "b5065da7153155ae48ff32e5ba993c54b447816dc9b00fe456c9687d1d2ae7a8",
+      "sha256": "b5065da7153155ae48ff32e5ba993c54b447816dc9b00fe456c9687d1d2ae7a8"
+    },
+    {
+      "source": "tools/bi-prototype/preview/erp-controls.css",
+      "output": "business-intelligence/erp-controls.css",
+      "sourceSha256": "f005af0093d734ad1525eff29b9b394dad593fc9e6e2ad16caa260a036193d61",
+      "sha256": "f005af0093d734ad1525eff29b9b394dad593fc9e6e2ad16caa260a036193d61"
+    },
+    {
+      "source": "tools/bi-prototype/preview/erp-controls.html",
+      "output": "business-intelligence/erp-controls.html",
+      "sourceSha256": "853dc98649c542c9120dcb8ad602898f6a55148da93d2162a090e90828614b74",
+      "sha256": "b124eefde9f71327c7001d1162063f0c3583f4215c6c612e088bb9d2663413af"
+    },
+    {
+      "source": "tools/bi-prototype/preview/erp-controls.js",
+      "output": "business-intelligence/erp-controls.js",
+      "sourceSha256": "577dbdbeb1399baafe28917e6d2f0ffc5e8911c5adb668fc6de8f779584e91c3",
+      "sha256": "577dbdbeb1399baafe28917e6d2f0ffc5e8911c5adb668fc6de8f779584e91c3"
+    },
+    {
+      "source": "tools/bi-prototype/preview/erp-rules.js",
+      "output": "business-intelligence/erp-rules.js",
+      "sourceSha256": "563f969bcf242c94098bb61fb8fed4c13fc9b31f5029deb5aaf581d246ae9919",
+      "sha256": "563f969bcf242c94098bb61fb8fed4c13fc9b31f5029deb5aaf581d246ae9919"
+    },
+    {
+      "source": "tools/bi-prototype/preview/guided-entry.html",
+      "output": "business-intelligence/guided-entry.html",
+      "sourceSha256": "3f390dc034a071fa99c9f312315eb0f5248cf0c6acec428b0d54871332f06d87",
+      "sha256": "bd0d4074c2ae0457a9c555239aad08e9a39c67b714091cacc2002810f8ee15a4"
+    },
+    {
+      "source": "tools/bi-prototype/preview/guided-entry.js",
+      "output": "business-intelligence/guided-entry.js",
+      "sourceSha256": "f85e2f325cf8b3fb1673a2e87e7df6a8c69301692e0fc4cd8499bf0802a0007c",
+      "sha256": "f85e2f325cf8b3fb1673a2e87e7df6a8c69301692e0fc4cd8499bf0802a0007c"
+    },
+    {
+      "source": "tools/bi-prototype/preview/index.html",
+      "output": "business-intelligence/historical-analysis.html",
+      "sourceSha256": "91136c14002d503143b82125b3f9ebb657cd0e489b245f784e98a2607377dcb9",
+      "sha256": "ac3f1a6639b837605515d5400b05dffd9130d28632d2f868c798e64d057868bd"
+    },
+    {
+      "source": "tools/bi-prototype/preview/showcase.html",
+      "output": "business-intelligence/index.html",
+      "sourceSha256": "c393d7d221125b031fea748bbb6b94d8c1daf54fb0061e773261a28f2ea81855",
+      "sha256": "92c4917929f424b5e8b3f84bc242555112aaf2275d14b6976f03a75aa793389f"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-batch.css",
+      "output": "business-intelligence/invoice-batch.css",
+      "sourceSha256": "dc39c7ca6c7fe197d4fafb789e735efa850f36a3d867fc32f024141eed52cfc1",
+      "sha256": "dc39c7ca6c7fe197d4fafb789e735efa850f36a3d867fc32f024141eed52cfc1"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-batch.html",
+      "output": "business-intelligence/invoice-batch.html",
+      "sourceSha256": "9d77f68447c73d913864ad8f2cf468de4726c6eb481267306b3a80649803c39c",
+      "sha256": "c3b11e4fbe4e1876fc3bbb5acf32cd268db6098bcd715959f3fe8dab2e5a81a0"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-batch.js",
+      "output": "business-intelligence/invoice-batch.js",
+      "sourceSha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5",
+      "sha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-intake.css",
+      "output": "business-intelligence/invoice-intake.css",
+      "sourceSha256": "53bdd59e5edc59f64657b5d8efface4ab6cfb957a9fdc8daeba25875f63b61a9",
+      "sha256": "53bdd59e5edc59f64657b5d8efface4ab6cfb957a9fdc8daeba25875f63b61a9"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-intake.html",
+      "output": "business-intelligence/invoice-intake.html",
+      "sourceSha256": "ed6dabb8fbd059e4827bf7000b911feadfea9ced8e7d9b27dbd7d0eff8d3d5a0",
+      "sha256": "6009febede1eeb40f985c6acf8b044e747f293a95921a041bc2282a97c6609ad"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-intake.js",
+      "output": "business-intelligence/invoice-intake.js",
+      "sourceSha256": "36e11a7a6e614df39c81f61b633cff13965a890fbd90c2115f388aadaa2ef444",
+      "sha256": "36e11a7a6e614df39c81f61b633cff13965a890fbd90c2115f388aadaa2ef444"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-rules.js",
+      "output": "business-intelligence/invoice-rules.js",
+      "sourceSha256": "27bf30464a09dc0d0ab2cc3e19fc204ca883dde0f3e080e72f5fabb3ce1c44d1",
+      "sha256": "27bf30464a09dc0d0ab2cc3e19fc204ca883dde0f3e080e72f5fabb3ce1c44d1"
+    },
+    {
+      "source": "tools/bi-prototype/preview/invoice-sample.csv",
+      "output": "business-intelligence/invoice-sample.csv",
+      "sourceSha256": "efd0dff1c784175f4ab6cc88e6c00621dc05a5124d9c4cb79f456f7310ff6337",
+      "sha256": "efd0dff1c784175f4ab6cc88e6c00621dc05a5124d9c4cb79f456f7310ff6337"
+    },
+    {
+      "source": "tools/bi-prototype/preview/journey-rules.js",
+      "output": "business-intelligence/journey-rules.js",
+      "sourceSha256": "e128bfb49f04a285cefa9062ef1c6d33b2e87708f9f63dbf7a7d6c713cb7816c",
+      "sha256": "e128bfb49f04a285cefa9062ef1c6d33b2e87708f9f63dbf7a7d6c713cb7816c"
+    },
+    {
+      "source": "tools/bi-prototype/preview/machine-intelligence.css",
+      "output": "business-intelligence/machine-intelligence.css",
+      "sourceSha256": "4e26c3d4d3be4b67e2537bcfc5726e18bca30e0646c5626c40290f454cb16ae5",
+      "sha256": "4e26c3d4d3be4b67e2537bcfc5726e18bca30e0646c5626c40290f454cb16ae5"
+    },
+    {
+      "source": "tools/bi-prototype/preview/machine-intelligence.html",
+      "output": "business-intelligence/machine-intelligence.html",
+      "sourceSha256": "62a834b5727f8b1bece092bbae41d8ba22133fac7a05d86e7c5f056929580668",
+      "sha256": "973d25d9975b25b6451a970180d3dd16d5dd52397ed2507a1b012606552ec7ed"
+    },
+    {
+      "source": "tools/bi-prototype/preview/machine-intelligence.js",
+      "output": "business-intelligence/machine-intelligence.js",
+      "sourceSha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754",
+      "sha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754"
+    },
+    {
+      "source": "tools/bi-prototype/preview/machine-rules.js",
+      "output": "business-intelligence/machine-rules.js",
+      "sourceSha256": "1078023acfe7b4301de9fc2c7195810f00b4caf6e9236e4864ce5822ee40e6f2",
+      "sha256": "1078023acfe7b4301de9fc2c7195810f00b4caf6e9236e4864ce5822ee40e6f2"
+    },
+    {
+      "source": "tools/bi-prototype/preview/machine-samples.js",
+      "output": "business-intelligence/machine-samples.js",
+      "sourceSha256": "f8093c43cf66821a9b535dfbbe1b9ba3b671f52762a3f69061ec7165004b6aac",
+      "sha256": "f8093c43cf66821a9b535dfbbe1b9ba3b671f52762a3f69061ec7165004b6aac"
+    },
+    {
+      "source": "tools/bi-prototype/preview/p2p-data.js",
+      "output": "business-intelligence/p2p-data.js",
+      "sourceSha256": "03b0cfa7d85505afc0198e78aaf62ddd886b7a1a0c7202b85f1a02080af09301",
+      "sha256": "03b0cfa7d85505afc0198e78aaf62ddd886b7a1a0c7202b85f1a02080af09301"
+    },
+    {
+      "source": "tools/bi-prototype/preview/report-model.js",
+      "output": "business-intelligence/report-model.js",
+      "sourceSha256": "42e1b294ecc8d36a5d133d11cf066c37d173c5af05cb4046f5c4065e239714d3",
+      "sha256": "42e1b294ecc8d36a5d133d11cf066c37d173c5af05cb4046f5c4065e239714d3"
+    },
+    {
+      "source": "tools/bi-prototype/preview/report-scenarios.js",
+      "output": "business-intelligence/report-scenarios.js",
+      "sourceSha256": "8ffca7e6d38f31d1071e13c422f6d528d08c6d7964bc8fff460ea10e26f22c0d",
+      "sha256": "8ffca7e6d38f31d1071e13c422f6d528d08c6d7964bc8fff460ea10e26f22c0d"
+    },
+    {
+      "source": "tools/bi-prototype/preview/showcase.css",
+      "output": "business-intelligence/showcase.css",
+      "sourceSha256": "bcb67e3b7c22ed905be2025791682f9db07dcc7aa72390754d66e70663a6221f",
+      "sha256": "bcb67e3b7c22ed905be2025791682f9db07dcc7aa72390754d66e70663a6221f"
+    },
+    {
+      "source": "tools/bi-prototype/preview/showcase.js",
+      "output": "business-intelligence/showcase.js",
+      "sourceSha256": "17fafdf4f3d4305a8f75e77267cca04749657a3c9364f6a897d5c75dbd7bff6d",
+      "sha256": "17fafdf4f3d4305a8f75e77267cca04749657a3c9364f6a897d5c75dbd7bff6d"
+    },
+    {
+      "source": "tools/bi-prototype/preview/simulation-examples.js",
+      "output": "business-intelligence/simulation-examples.js",
+      "sourceSha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889",
+      "sha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-context.js",
+      "output": "business-intelligence/work-context.js",
+      "sourceSha256": "6250ef440b45e75db7812a902a96e8bf2fc557060b85b2871b0ce8474abe55b3",
+      "sha256": "6250ef440b45e75db7812a902a96e8bf2fc557060b85b2871b0ce8474abe55b3"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-execution.css",
+      "output": "business-intelligence/work-execution.css",
+      "sourceSha256": "34f2add1b547a92f25d58c681a0423e3b2336e6eccac131aba4c7c88d4ce1026",
+      "sha256": "34f2add1b547a92f25d58c681a0423e3b2336e6eccac131aba4c7c88d4ce1026"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-execution.html",
+      "output": "business-intelligence/work-execution.html",
+      "sourceSha256": "65b2ec3a84b7be0f0fecf3b29a359c4085df3260c3b1c30541d686510193fd41",
+      "sha256": "64e457f375100b3e3e97d58187b76ed251f160fcf37bcd83e60103e2570cd89d"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-execution.js",
+      "output": "business-intelligence/work-execution.js",
+      "sourceSha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790",
+      "sha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-rules.js",
+      "output": "business-intelligence/work-rules.js",
+      "sourceSha256": "01338162786dd742a87bbfde8873c679c5bb74bc701312529b7d15cf933a89ae",
+      "sha256": "01338162786dd742a87bbfde8873c679c5bb74bc701312529b7d15cf933a89ae"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-samples.js",
+      "output": "business-intelligence/work-samples.js",
+      "sourceSha256": "78b18890b440fd73c80780af7fd25514476baff0330dc0a9951ead8f9b429f11",
+      "sha256": "78b18890b440fd73c80780af7fd25514476baff0330dc0a9951ead8f9b429f11"
+    },
+    {
+      "source": "tools/bi-prototype/preview/work-scenarios.js",
+      "output": "business-intelligence/work-scenarios.js",
+      "sourceSha256": "af9e15ad641215542b73739f71357e4fb2b957622821982764314bf097e9911e",
+      "sha256": "af9e15ad641215542b73739f71357e4fb2b957622821982764314bf097e9911e"
+    },
+    {
+      "source": "tools/bi-prototype/preview/workspace.css",
+      "output": "business-intelligence/workspace.css",
+      "sourceSha256": "f417b3cfe70abe435175f978f45056877a29cd8ad46c7786209a92caf8d01607",
+      "sha256": "f417b3cfe70abe435175f978f45056877a29cd8ad46c7786209a92caf8d01607"
+    },
+    {
+      "source": "tools/bi-prototype/preview/workspace.js",
+      "output": "business-intelligence/workspace.js",
+      "sourceSha256": "9e243c4a526afbad36650f9bb9e5d874a34d85f11daa8f6b6b7e5027f642e740",
+      "sha256": "9e243c4a526afbad36650f9bb9e5d874a34d85f11daa8f6b6b7e5027f642e740"
+    }
+  ]
+}

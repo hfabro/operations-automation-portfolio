@@ -27,7 +27,7 @@ try {
       await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
     }
     await page.goto(base + '/');
-    assert.equal((await page.locator('.primary-nav a').allTextContents()).join('|'), 'Work|Demos|Smart Factory|About|Resume|Contact');
+    assert.equal((await page.locator('.primary-nav a').allTextContents()).join('|'), 'Work|Demos|Smart Factory|Business Intelligence|About|Resume|Contact');
     await page.getByRole('link', {name: 'Explore interactive demos'}).first().click();
     await page.waitForURL('**/demos/');
     await page.goBack();

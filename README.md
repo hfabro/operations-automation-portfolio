@@ -207,7 +207,7 @@ The site uses a hub-and-spoke information architecture:
 
 - the homepage provides a concise orientation, three selected cases, and paths to the complete work and systems libraries
 - global navigation stays consistent across all portfolio hubs and case studies
-- Work, Demos, Approach, Smart Factory, and About each have a dedicated URL
+- Work, Demos, Approach, Smart Factory, Business Intelligence, and About each have a dedicated URL
 - long hub and case-study pages include a contextual “On this page” navigation
 - individual case studies use breadcrumbs and previous/next paths
 - every demo includes a return path to its case, work context, or operating hub; the main series also provides previous/next navigation
@@ -233,7 +233,7 @@ The `/resume/` route links to `resume/david-h-fabro-resume.pdf`, a public-safe d
 
 ## Privacy and confidentiality
 
-All project descriptions are sanitized. All interface previews, lists, records, asset identifiers, dates, and charts are synthetic representations created for this portfolio. The site must never include employer credentials, internal URLs, proprietary documents, employee information, private asset identifiers, confidential data, or screenshots from real company systems.
+All project descriptions are sanitized. Company interface previews, records, asset identifiers, dates and outcomes are independently fictional. The separately labeled historical BPI Challenge 2019 analysis uses attributed, anonymized public research data under CC BY 4.0; it is not employer data. The site must never include employer credentials, internal URLs, proprietary documents, employee information, private asset identifiers, confidential data, or screenshots from real company systems.
 
 Interactive demonstrations must follow the same rule. Demo data should remain visibly synthetic, require no production credentials, and avoid camera, upload, or external-system permissions unless a future version has a documented and privacy-reviewed reason for them.
 
@@ -260,3 +260,12 @@ The current GitHub Pages response provides HTTPS and HSTS, while the project-con
 `assets/microsoft-surfaces.css` is the shared presentation-only layer, loaded after route CSS. It separates Canvas workflows, SharePoint pages, Forms questionnaires, and Power BI-style reports from portfolio branding. `scripts/operations-systems.js` sets `data-platform` when switching an operational view to a reporting snapshot. Preserve those markers when adding views. Public navigation says Systems; `/demos/` URLs stay stable. No Microsoft tenant shell, trademark logo, account profile, or live integration is simulated.
 
 Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/device-preview.css`, with internal vertical scrolling and local horizontal table scrolling. System mode remains a normal page. Facility Leak uses its own bounded Canvas surface in `microsoft-surfaces.css`. Connected Operations and Smart Factory are full workspaces, not simulated devices. Do not introduce large minimum heights or nested vertical form/gallery scrollers that expand the outer device. Test bottom actions and confirmations after changing content density.
+
+
+## Connected Business Intelligence
+
+The draft integration includes `/business-intelligence/` and nine related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
+
+Home, Demos, Work and Smart Factory provide native discovery cards, and shared navigation includes Business Intelligence. The existing Work library and demo URLs remain intact. Shared theme preferences and project-relative routes are verified by `node tools/test-bi-public.mjs` through the restricted loopback server, using an existing Playwright/axe installation configured through the documented environment variables.
+
+See [the projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md) for canonical files, project-path preview, metadata/license handling and test coverage. The prototype remains available for development; generated portfolio integration is a draft source change until separately approved and released.
