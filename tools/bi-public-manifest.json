@@ -422,8 +422,8 @@
     {
       "source": "tools/bi-prototype/preview/management-overview.js",
       "output": "business-intelligence/management-overview.js",
-      "sourceSha256": "ac87be24f8c5d0b04267b9eeeec06847d9f6ddfe2ed05e6dc7dff8708f8a5bcc",
-      "sha256": "ac87be24f8c5d0b04267b9eeeec06847d9f6ddfe2ed05e6dc7dff8708f8a5bcc"
+      "sourceSha256": "56068e3d612bd96d1abdcfd7ca0c7b2304735efda658e05a8e0a828551b66e9c",
+      "sha256": "56068e3d612bd96d1abdcfd7ca0c7b2304735efda658e05a8e0a828551b66e9c"
     },
     {
       "source": "tools/bi-prototype/preview/management-scenarios.js",
