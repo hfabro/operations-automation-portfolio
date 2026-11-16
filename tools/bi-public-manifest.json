@@ -314,8 +314,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "dffc1976e7be7d8fefde610a9d42481beb00f8da16a44a07be637f4c1ee27ff2",
-      "sha256": "64c58e9312bf5de06c5c51d906ae87df8daee4f1bfa6bd1b436a982c9c865b02"
+      "sourceSha256": "b598e7a950bf7a4c2a14cbc914f105946decd477bfa9688e2535f5c267d4f9ae",
+      "sha256": "c0c156851e53433b69204915968e822ee05e87e222b90d8f9c84500cc1803d6d"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -380,8 +380,8 @@
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.html",
       "output": "business-intelligence/machine-intelligence.html",
-      "sourceSha256": "62a834b5727f8b1bece092bbae41d8ba22133fac7a05d86e7c5f056929580668",
-      "sha256": "291f8cd80e347798544a0ed1a14c08880009f4048d69c83a1d63b10c19e754bc"
+      "sourceSha256": "7e016ee1f9c77af2157be61fd36d65e75748b6548c22eb4f5cddf3ea53c1fd30",
+      "sha256": "8653b2976b724080e9c51fd8579e89e64ba3d0bde57c7d6b1f74f3f6a84afa22"
     },
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.js",
@@ -476,8 +476,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "821b91a8360754d7c4115460992d167dae3787abf931c6badd242d7dc7be4670",
-      "sha256": "821b91a8360754d7c4115460992d167dae3787abf931c6badd242d7dc7be4670"
+      "sourceSha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc",
+      "sha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
