@@ -3,11 +3,11 @@ import {mkdtempSync,mkdirSync,copyFileSync,cpSync,readFileSync,writeFileSync,rmS
 import {tmpdir} from 'node:os';
 import {join,resolve,dirname,basename} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {buildPlan,writePlan,checkPlan,BI_PAGES} from './build-bi-pages.mjs';
+import {buildPlan,writePlan,checkPlan,BI_PAGES,BI_STORY} from './build-bi-pages.mjs';
 
 const root=fileURLToPath(new URL('../',import.meta.url)),expected=buildPlan(root);
 assert.deepEqual(checkPlan(root,expected),[],'Checked-in BI artifacts must match canonical source.');
-assert.equal(BI_PAGES.length,11);
+assert.equal(BI_PAGES.length,11);assert.equal(BI_STORY.length,4);
 const parent=resolve(tmpdir()),temporary=mkdtempSync(join(parent,'portfolio-bi-build-'));
 try{
  mkdirSync(join(temporary,'tools/bi-prototype'),{recursive:true});
@@ -16,6 +16,7 @@ try{
  copyFileSync(join(root,'tools/bi-shell.css'),join(temporary,'tools/bi-shell.css'));
  const plan=buildPlan(temporary);assert.deepEqual([...plan],[...expected]);writePlan(temporary,plan);assert.deepEqual(checkPlan(temporary,plan),[]);
  for(const page of BI_PAGES){const html=readFileSync(join(temporary,'business-intelligence',page.output),'utf8');assert.match(html,/name="robots" content="index, follow"/);assert.match(html,/rel="canonical"/);assert.match(html,/primary-nav/);assert.match(html,/connect-src 'none'/);assert.doesNotMatch(html,/(?:href|src)="[^\"]*tools\//);if(page.output!=='index.html')assert.match(html,/<noscript>/);}
+ for(const step of BI_STORY){const html=readFileSync(join(temporary,'business-intelligence',step.route.split('?')[0]),'utf8');assert.match(html,/aria-label="Connected story steps"/);assert.equal((html.match(/aria-current="step"/g)||[]).length,1);assert.match(html,/Step [1-4] of 4/);assert.match(html,/workflows?|workflow/i);assert.match(html,/business-report\.html\?source=current&amp;measure=paid|business-report\.html\?source=current&measure=paid/);}
  const historical=readFileSync(join(temporary,'business-intelligence/historical-analysis.html'),'utf8');assert.match(historical,/creativecommons\.org\/licenses\/by\/4\.0/);assert.match(historical,/Boudewijn van Dongen/);
  const hub=readFileSync(join(temporary,'business-intelligence/index.html'),'utf8');assert.match(hub,/href="historical-analysis\.html"/);assert.doesNotMatch(hub,/href="showcase\.html"/);assert(existsSync(join(temporary,'business-intelligence/invoice-sample.csv')));
  const output=join(temporary,'business-intelligence/journey-rules.js'),original=readFileSync(output,'utf8');writeFileSync(output,original+'\n// accidental output edit\n');assert(checkPlan(temporary,plan).includes('business-intelligence/journey-rules.js'));assert.match(readFileSync(output,'utf8'),/accidental output edit/,'Check mode must not silently overwrite edited output.');writePlan(temporary,plan);assert.equal(readFileSync(output,'utf8'),original);
