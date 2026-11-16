@@ -230,20 +230,20 @@
     {
       "source": "tools/bi-prototype/preview/document-inbox.css",
       "output": "business-intelligence/document-inbox.css",
-      "sourceSha256": "ea3310d07fda9c076958181b7f9827e437548595ec988587239c198c8640ed12",
-      "sha256": "ea3310d07fda9c076958181b7f9827e437548595ec988587239c198c8640ed12"
+      "sourceSha256": "dd5ff1d72c4d0bf228ae0a395e6dc2091874c1ca921fa7f753b14f32fb7b9803",
+      "sha256": "dd5ff1d72c4d0bf228ae0a395e6dc2091874c1ca921fa7f753b14f32fb7b9803"
     },
     {
       "source": "tools/bi-prototype/preview/document-inbox.html",
       "output": "business-intelligence/document-inbox.html",
-      "sourceSha256": "4251ab062f3460c455d1e7238151c8708834f256370dee2c5d141b11408bfe26",
-      "sha256": "6b7b023abb6dce6431ac98dfa0bbf82380292eb1217ccce1609be4d1b5f820eb"
+      "sourceSha256": "18b9d8ebc22a9ed94612fb5682bbd06b4094c33a2b9d6d32c830b0b56aa1a6d5",
+      "sha256": "d3b8062b3a121ea7cedc843f5c2ef742cc4e33cc55116610533e55fbf0a0af7d"
     },
     {
       "source": "tools/bi-prototype/preview/document-inbox.js",
       "output": "business-intelligence/document-inbox.js",
-      "sourceSha256": "c9774b8322d8004ade35fd2f7022a0a0ede23e2958eb717141a26664541680bc",
-      "sha256": "c9774b8322d8004ade35fd2f7022a0a0ede23e2958eb717141a26664541680bc"
+      "sourceSha256": "578c1dcaf8619b9b0c23faac268f80980c60dc2b8fe28a5f237f8543b55e0842",
+      "sha256": "578c1dcaf8619b9b0c23faac268f80980c60dc2b8fe28a5f237f8543b55e0842"
     },
     {
       "source": "tools/bi-prototype/preview/document-rules.js",
@@ -296,8 +296,8 @@
     {
       "source": "tools/bi-prototype/preview/inbox-rules.js",
       "output": "business-intelligence/inbox-rules.js",
-      "sourceSha256": "94f2c8ff21b30764daf47c05fbb93993ccb6790c0e5678ba1229b96497de1ea4",
-      "sha256": "94f2c8ff21b30764daf47c05fbb93993ccb6790c0e5678ba1229b96497de1ea4"
+      "sourceSha256": "e4ae85c39e140bc6f93bc0f62806759193781b5c3d4f2bb419f2f1ff394b55b0",
+      "sha256": "e4ae85c39e140bc6f93bc0f62806759193781b5c3d4f2bb419f2f1ff394b55b0"
     },
     {
       "source": "tools/bi-prototype/preview/inbox-samples.js",
@@ -308,8 +308,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "266460c95235ecf0af92cfe7bd45338be39559be4aa10547717ea1f1077b0fd5",
-      "sha256": "44be3dd62660d5ab78e035d889235e5d93a757065009640e878a0271e0acd7d4"
+      "sourceSha256": "dffc1976e7be7d8fefde610a9d42481beb00f8da16a44a07be637f4c1ee27ff2",
+      "sha256": "64c58e9312bf5de06c5c51d906ae87df8daee4f1bfa6bd1b436a982c9c865b02"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -484,6 +484,18 @@
       "output": "business-intelligence/simulation-examples.js",
       "sourceSha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889",
       "sha256": "d2ddcbd180dee515f77743b1440265f6741ec22038794157c3548931edcfe889"
+    },
+    {
+      "source": "tools/bi-prototype/preview/ubl-invoice-rules.js",
+      "output": "business-intelligence/ubl-invoice-rules.js",
+      "sourceSha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc",
+      "sha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc"
+    },
+    {
+      "source": "tools/bi-prototype/preview/ubl-invoice-samples.js",
+      "output": "business-intelligence/ubl-invoice-samples.js",
+      "sourceSha256": "5ced395619b35e80c610c8bb37d0a466754bc9c39a767b93ec7ccb3f7a01caed",
+      "sha256": "5ced395619b35e80c610c8bb37d0a466754bc9c39a767b93ec7ccb3f7a01caed"
     },
     {
       "source": "tools/bi-prototype/preview/work-context.js",

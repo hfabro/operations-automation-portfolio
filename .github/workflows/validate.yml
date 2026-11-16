@@ -156,7 +156,9 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           BROWSER_ENGINE: ${{ matrix.engine }}
-        run: node tools/test-bi-inbox-browser.mjs
+        run: |
+          node tools/test-bi-inbox-browser.mjs
+          node tools/test-bi-ubl-inbox.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
@@ -202,7 +204,9 @@ jobs:
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
-        run: node tools/test-bi-inbox-browser.mjs
+        run: |
+          node tools/test-bi-inbox-browser.mjs
+          node tools/test-bi-ubl-inbox.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright

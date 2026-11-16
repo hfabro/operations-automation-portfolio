@@ -1,10 +1,10 @@
 /* Supported invoice-text extraction and immutable source evidence over the existing invoice controls. */
 (function(root, factory) {
   const api = typeof module === 'object' && module.exports
-    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'))
-    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments);
+    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'), require('./ubl-invoice-rules.js'))
+    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments, root.UBLInvoice);
   if (typeof module === 'object' && module.exports) module.exports = api; else root.DocumentInbox = api;
-})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D) {
+})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D, UBL) {
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value)), encoder = new TextEncoder();
   const scenarioId = 'SYN-DOC-INBOX-1', companyId = 'SYN-CO-01';
@@ -34,8 +34,10 @@
     const digest = await globalThis.crypto.subtle.digest('SHA-256', data);
     return [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, '0')).join('');
   }
-  function parse(text) {
+  function parse(text, mediaType = 'text/plain') {
     bytes(text);
+    if (mediaType === 'application/xml') return UBL.parse(text);
+    if (mediaType !== 'text/plain') contract('Unsupported extraction media type.');
     const sourceLines = text.split(/\r\n|\n/), fields = [], issues = [], seen = new Map(), lineEntries = [];
     const issue = (code, field, message, sourceLines = [], owner = 'AP document review') => issues.push({code, field, message, sourceLines, owner});
     if (sourceLines[0].replace(/^\uFEFF/, '') !== 'SYN-INVOICE-TEXT/1') issue('UNSUPPORTED_FORMAT', 'format', 'Use the declared SYN-INVOICE-TEXT/1 first line.', [1]);
@@ -100,13 +102,13 @@
       closed(source, ['id', 'name', 'mediaType', 'content', 'receivedAt', 'receivedAtUnknownReason', 'order'], 'Source envelope');
       if (!/^[A-Z][A-Z0-9-]{0,39}$/.test(source.id) || ids.has(source.id)) contract('Source IDs must be unique canonical identities.');
       if (!Number.isSafeInteger(source.order) || source.order < 0 || orders.has(source.order)) contract('Source intake order must be unique and nonnegative.');
-      if (typeof source.name !== 'string' || !source.name.trim() || source.name.length > 160 || source.mediaType !== 'text/plain') contract('Use a bounded plain-text filename/media type.');
+      if (typeof source.name !== 'string' || !source.name.trim() || source.name.length > 160 || !['text/plain', 'application/xml'].includes(source.mediaType)) contract('Use a bounded filename and supported text/plain or application/xml media type.');
       if (source.receivedAt === null) {
         if (typeof source.receivedAtUnknownReason !== 'string' || !source.receivedAtUnknownReason.trim() || source.receivedAtUnknownReason.length > 200) contract('Unknown capture dates need an explicit reason.');
       } else if (typeof source.receivedAt !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(source.receivedAt) || !Number.isFinite(Date.parse(source.receivedAt)) || new Date(source.receivedAt).toISOString() !== source.receivedAt || source.receivedAtUnknownReason !== null) contract('Capture timestamps must be canonical UTC or explicitly unknown.');
       const size = bytes(source.content).length; totalBytes += size; if (totalBytes > 524288) contract('Inbox source content exceeds 512 KiB.');
       ids.add(source.id); orders.add(source.order);
-      records.push({...clone(source), key: key('source', source.id), byteLength: size, sha256: await fingerprint(source.content), extraction: parse(source.content),
+      records.push({...clone(source), key: key('source', source.id), byteLength: size, sha256: await fingerprint(source.content), extraction: parse(source.content, source.mediaType),
         disposition: null, owner: null, reasons: [], documentId: null, relatedSourceIds: []});
     }
     records.sort((a, b) => a.order - b.order);
@@ -133,13 +135,17 @@
       if (!roots.has(identity(n))) roots.set(identity(n), []); roots.get(identity(n)).push(row);
       journal = J.dispatch(journal, {id: 'INBOX-IMPORT:' + row.id, type: 'importDocument', actor: J.roles.importDocument,
         payload: {documentId: row.documentId, supplierId: n.supplierId, number: n.number, currency: n.currency,
-          declaredNetCents: n.declaredNetCents, lines: clone(n.lines), sourceLabel: 'Fictional text source ' + row.id}});
+          declaredNetCents: n.declaredNetCents, lines: clone(n.lines), sourceLabel: (row.mediaType === 'application/xml' ? 'Fictional UBL XML source ' : 'Fictional text source ') + row.id}});
     }
     const revisions = records.filter(row => !row.disposition && row.extraction.normalized?.revision === 2);
     for (const row of revisions) {
       const n = row.extraction.normalized, original = hashes.get(n.supersedes), siblings = revisions.filter(other => other.extraction.normalized.supersedes === n.supersedes);
       if (!original?.documentId || original.extraction.normalized?.revision !== 1 || identity(original.extraction.normalized) !== identity(n) || roots.get(identity(n))?.length !== 1 || siblings.length !== 1 || original.order >= row.order || original.receivedAt && row.receivedAt && original.receivedAt > row.receivedAt) {
         hold(row, 'Revision review', 'AP revision review', 'Original fingerprint/identity must identify one original invoice and one proposed revision.'); continue;
+      }
+      if (original.mediaType !== 'text/plain' || row.mediaType !== 'text/plain') {
+        row.relatedSourceIds = [original.id];
+        hold(row, 'Revision review', 'AP revision review', 'The correction adapter admits text-format original/revision pairs only. XML originals and cross-format revisions require separate review.'); continue;
       }
       const prior = original.extraction.normalized;
       row.relatedSourceIds = [original.id]; row.documentId = original.documentId;
@@ -176,7 +182,7 @@
         documents: documents.length, readyDocuments: documents.filter(document => document.status === 'Ready').length,
         heldDocuments: documents.filter(document => document.status === 'Held').length},
       sources: {baseline: JSON.parse(baseline), proposedCheckpoint: JSON.parse(J.serialize(journal))},
-      boundaries: {extraction: 'Executed fixed-format UTF-8 text parsing with source-line evidence; no PDF, image, email or OCR extraction.',
+      boundaries: {extraction: 'Executed fixed-format UTF-8 text parsing with source-line evidence and bounded net-only UBL 2.1 XML parsing with namespace-aware paths; no full XSD/Peppol validation, PDF, image, email or OCR extraction.',
         identity: 'Exact byte copies differ from supplier/invoice business duplicates. Source revisions require fingerprint/identity links and independent review.',
         simulation: 'Independent fictional inbox; no saved-journal writes, posting, payment, real ERP or production authorization. Capture times and intake order do not establish invoice aging.'}};
   }

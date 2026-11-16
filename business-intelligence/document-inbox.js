@@ -15,11 +15,12 @@
   function pair(list, label, value) {list.append(node('dt', label), node('dd', value));}
   function error(message) {$('inbox-error').textContent = message; $('inbox-error').hidden = false;}
   function options(id, values, first) {const prior = $(id).value; $(id).replaceChildren(new Option(first, 'all')); for (const value of values) $(id).add(new Option(value, value)); if (values.includes(prior)) $(id).value = prior;}
-  async function calculate(nextSources, nextReviews, message) {
+  async function calculate(nextSources, nextReviews, message, failureLabel = 'The attempted change was rejected: ') {
     if (busy) return;
     busy = true; $('inbox-error').hidden = true; $('inbox-results').hidden = true; $('inbox-results').setAttribute('aria-busy', 'true'); $('inbox-download').disabled = true;
     $('inbox-status').textContent = 'Hashing exact source bytes, extracting fields and replaying invoice controls…';
     try {
+      if (typeof nextSources === 'function') nextSources = await nextSources();
       const result = await Inbox.prepare(nextSources, S.journal(), nextReviews);
       if (nextSources !== sources) {
         selected = null; $('inbox-disposition').value = 'all'; $('inbox-owner').value = 'all'; $('inbox-document-state').value = 'all';
@@ -27,7 +28,7 @@
       sources = nextSources; reviews = nextReviews; model = result; render();
       $('inbox-status').textContent = message + ' ' + model.counts.sourceItems + ' source items; ' + model.counts.documents + ' distinct staged invoice documents. No financial posting or saved-journal change.';
     } catch (failure) {
-      error('The attempted change was rejected: ' + failure.message + (model ? ' The previous validated temporary inbox remains.' : ' No substitute figures are shown.'));
+      error(failureLabel + failure.message + (model ? ' The previous validated temporary inbox remains.' : ' No substitute figures are shown.'));
       $('inbox-status').textContent = model ? 'Showing the previous validated temporary inbox.' : 'Inbox unavailable.';
       if (model) render();
     } finally {busy = false; $('inbox-results').setAttribute('aria-busy', 'false'); $('inbox-download').disabled = !model; updateReview();}
@@ -83,9 +84,16 @@
     document.querySelectorAll('.inbox-source-line.is-selected').forEach(item => item.classList.remove('is-selected'));
     const item = $('inbox-source-line-' + line); if (item) {item.classList.add('is-selected'); item.focus(); item.scrollIntoView({block: 'nearest', inline: 'nearest'});}
   }
+  function locateXML(row, field) {
+    const source = window.UBLInvoice.sourceFragment(row.content, field.sourcePath);
+    $('inbox-xml-path').textContent = source.path + (field.sourceAttribute ? ' / @' + field.sourceAttribute : '');
+    $('inbox-xml-fragment').textContent = source.fragment;
+    $('inbox-xml-source').hidden = false; focus('inbox-xml-heading');
+  }
   function inspect(id, move = true) {
     const row = model.sourceItems.find(row => row.id === id); if (!row) return;
     selected = id; $('inbox-detail').hidden = false;
+    $('inbox-xml-source').hidden = true;
     $('inbox-detail-heading').textContent = 'Source ' + row.id + ' · ' + row.name;
     $('inbox-selected-summary').textContent = row.disposition + ' · ' + row.owner + '. ' + row.reasons.join(' ');
     const list = node('dl');
@@ -103,11 +111,15 @@
     $('inbox-source-lines').replaceChildren(...row.content.split(/\r\n|\n/).map((line, index) => {
       const item = node('span', String(index + 1).padStart(2, ' ') + '  ' + line, 'inbox-source-line'); item.id = 'inbox-source-line-' + (index + 1); item.tabIndex = -1; return item;
     }));
-    $('inbox-issues').replaceChildren(...row.extraction.issues.map(issue => node('p', issue.code + ' · ' + issue.field + ': ' + issue.message + ' Owner: ' + issue.owner + '.')));
+    $('inbox-issues').replaceChildren(...row.extraction.issues.map(issue => {
+      const item = node('div'); item.append(node('p', issue.code + ' · ' + issue.field + ': ' + issue.message + ' Owner: ' + issue.owner + '.'));
+      for (const [index, path] of (issue.sourcePaths || []).entries()) item.append(button('Locate XML occurrence ' + (index + 1) + ' · ' + issue.field, () => locateXML(row, {sourcePath: path})));
+      return item;
+    }));
     if (!row.extraction.issues.length) $('inbox-issues').append(node('p', 'Required fields extracted. Invoice matching and independent decisions remain separate.', 'muted'));
     rows($('inbox-fields'), row.extraction.fields, field => [
-      lines(field.sourceLine ? button(field.path, () => locate(field.sourceLine)) : node('span', field.path), field.sourceLine ? 'Source line ' + field.sourceLine : 'No source line: missing field'),
-      field.raw === null ? 'Missing' : field.raw,
+      lines(field.sourceLine ? button(field.path, () => locate(field.sourceLine)) : field.sourcePath ? button(field.path, () => locateXML(row, field)) : node('span', field.path), field.sourceLine ? 'Source line ' + field.sourceLine : field.sourcePath ? 'XML element path' + (field.sourceAttribute ? ' · @' + field.sourceAttribute : '') : field.explanation || 'No unique source location'),
+      field.raw === null ? field.status === 'derived' ? 'Adapter rule' : field.status === 'ambiguous' ? 'Ambiguous — inspect repeated elements' : 'Missing' : field.raw,
       lines(field.normalized === null ? 'Unknown / invalid' : String(field.normalized) + (field.path.includes('Cents') ? ' cents' : ''), field.status)
     ], 3);
     updateReview(); if (move) focus('inbox-detail-heading');
@@ -128,27 +140,31 @@
     const url = URL.createObjectURL(new Blob([content], {type})), link = node('a'); link.href = url; link.download = name;
     document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  $('inbox-example').addEventListener('click', async () => {if (busy) return; selected = null; await calculate(await S.sources(), [], 'Fictional inbox loaded.');});
+  $('inbox-example').addEventListener('click', () => calculate(() => S.sources(), [], 'Fictional inbox loaded.'));
+  $('inbox-ubl-example').addEventListener('click', () => calculate(() => window.UBLInvoiceSamples.sources(), [], 'Fictional UBL XML inbox loaded.'));
   $('inbox-extract').addEventListener('click', async () => {
     if (busy) return;
     try {
       const files = [...$('inbox-files').files];
-      if (!files.length || files.length > 20 || files.some(file => !/\.txt$/i.test(file.name) || file.type && file.type !== 'text/plain' || file.size < 1 || file.size > 32768) || files.reduce((sum, file) => sum + file.size, 0) > 524288)
-        throw Error('Choose 1–20 nonempty UTF-8 .txt files, at most 32 KiB each and 512 KiB total. PDF, image and email extraction is not supported.');
-      const next = [];
-      for (const [index, file] of files.entries()) next.push({id: 'UPLOAD-' + String(index + 1).padStart(3, '0'), name: file.name, mediaType: 'text/plain',
-        content: new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(await file.arrayBuffer()), receivedAt: null,
-        receivedAtUnknownReason: 'Local file has no admitted inbox capture timestamp.', order: index});
-      selected = null; await calculate(next, [], 'Supported local files extracted.');
+      const supported = file => /\.txt$/i.test(file.name) ? !file.type || file.type === 'text/plain' : /\.xml$/i.test(file.name) && (!file.type || ['application/xml', 'text/xml'].includes(file.type));
+      if (!files.length || files.length > 20 || files.some(file => !supported(file) || file.size < 1 || file.size > 32768) || files.reduce((sum, file) => sum + file.size, 0) > 524288)
+        throw Error('Choose 1–20 nonempty UTF-8 .txt or .xml files, at most 32 KiB each and 512 KiB total. PDF, image and email extraction is not supported.');
+      await calculate(async () => {
+        const next = [];
+        for (const [index, file] of files.entries()) next.push({id: 'UPLOAD-' + String(index + 1).padStart(3, '0'), name: file.name, mediaType: /\.xml$/i.test(file.name) ? 'application/xml' : 'text/plain',
+          content: new TextDecoder('utf-8', {fatal: true, ignoreBOM: true}).decode(await file.arrayBuffer()), receivedAt: null,
+          receivedAtUnknownReason: 'Local file has no admitted inbox capture timestamp.', order: index});
+        return next;
+      }, [], 'Supported local files extracted.', 'File selection rejected: ');
     } catch (failure) {error('File selection rejected: ' + failure.message + ' The existing temporary inbox remains.');}
   });
   for (const id of ['inbox-disposition', 'inbox-owner']) $(id).addEventListener('change', () => {selected = null; $('inbox-detail').hidden = true; renderQueue();});
   $('inbox-document-state').addEventListener('change', renderDocuments); $('inbox-role').addEventListener('change', updateReview);
   $('inbox-approve').addEventListener('click', () => decide('approve')); $('inbox-reject').addEventListener('click', () => decide('reject'));
-  $('inbox-source-download').addEventListener('click', () => {const row = model?.sourceItems.find(row => row.id === selected); if (row && !busy) save(row.content, row.name, 'text/plain;charset=utf-8');});
+  $('inbox-source-download').addEventListener('click', () => {const row = model?.sourceItems.find(row => row.id === selected); if (row && !busy) save(row.content, row.name, row.mediaType + ';charset=utf-8');});
   $('inbox-download').addEventListener('click', () => {
     if (!model || busy) return;
     save(JSON.stringify({...model, viewSelection: {sourceId: selected, sourceDisposition: $('inbox-disposition').value, owner: $('inbox-owner').value, documentState: $('inbox-document-state').value}}, null, 2) + '\n', 'fictional-document-inbox-evidence.json', 'application/json');
   });
-  (async () => {try {await calculate(await S.sources(), [], 'Fictional inbox loaded.');} catch (failure) {error('Inbox unavailable: ' + failure.message); $('inbox-status').textContent = 'No substitute figures are shown.';}})();
+  calculate(() => S.sources(), [], 'Fictional inbox loaded.');
 })();
