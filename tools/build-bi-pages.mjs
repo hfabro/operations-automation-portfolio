@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 
 export const BI_PAGES=[
  {source:'showcase.html',output:'index.html',label:'Business Intelligence',title:'Connected Business Intelligence'},
+ {source:'document-inbox.html',output:'document-inbox.html',label:'Document inbox',title:'Document inbox — invoice source to governed review'},
  {source:'business-trends.html',output:'business-trends.html',label:'Business trends',title:'Business trends — activity, aging and source evidence'},
  {source:'management-overview.html',output:'management-overview.html',label:'Management overview',title:'Management overview — position, ownership and evidence'},
  {source:'machine-intelligence.html',output:'machine-intelligence.html',label:'Machine intelligence',title:'Machine intelligence — signal to business action'},

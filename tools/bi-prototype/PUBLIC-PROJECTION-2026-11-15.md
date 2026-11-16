@@ -1,6 +1,6 @@
 # Portfolio BI projection
 
-The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; twelve related demonstrations include business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
+The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; thirteen related demonstrations include the source-document inbox, business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
 
 This is a source integration prepared for review. A draft branch and generated routes do not merge or publish themselves. The production site changes only through the separately authorized release workflow.
 
@@ -83,3 +83,8 @@ Management inspection state: unchanged source refreshes and full downloads prese
 Period posted/paid flows and unpaid roll-forward reconcile to cutoff source events. Calendar-month slices intersect the selected range; closing balances are snapshots. Held-document owner/receipt-age filters do not change financial totals. Unknown dates remain visible. Metric, document, allocation, work and dependency controls lead to their actual source evidence. Downloads preserve inspection selection and include only cutoff-included original events/model checkpoints; they do not mutate journals.
 
 	ools/test-bi-trends.mjs verifies actual generated project-path worker execution in the configured browser, both themes at five widths, expanded-source accessibility, monthly monetary goldens, unknown dates, earlier cutoffs, filtered downloads, invalid-query recovery, missing/invalid worker sources, explicit empty cohorts, untouched storage and native no-JavaScript discovery. Publication and deployed acceptance remain separate release steps.
+
+
+## Source-document invoice inbox
+
+`document-inbox.html` adds executed UTF-8 fixed-format invoice parsing, exact-byte SHA-256 identity, field-to-source line navigation, distinct file/document queues and source-bound independent price-revision decisions. Its only new public assets are its interface, `inbox-rules.js` and `inbox-samples.js`; original fictional source strings are owned by the latter. Local files use the same declared text grammar and remain in page memory. PDF/image/email OCR is explicitly unsupported. Existing coding, purchasing and invoice controls and journal schemas are unchanged; no extraction result posts, authorizes, pays or replaces saved journals. See the versioned document-inbox contract for source envelopes, encoding/size limits, duplicate/revision distinctions and verification.

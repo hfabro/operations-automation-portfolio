@@ -10,6 +10,12 @@
       "title": "Connected Business Intelligence"
     },
     {
+      "source": "document-inbox.html",
+      "output": "document-inbox.html",
+      "label": "Document inbox",
+      "title": "Document inbox — invoice source to governed review"
+    },
+    {
       "source": "business-trends.html",
       "output": "business-trends.html",
       "label": "Business trends",
@@ -216,6 +222,24 @@
       "sha256": "3efa8bafee4abc43069ff2d71880664d81fd86f0411b73a830578e09bd299f04"
     },
     {
+      "source": "tools/bi-prototype/preview/document-inbox.css",
+      "output": "business-intelligence/document-inbox.css",
+      "sourceSha256": "ea3310d07fda9c076958181b7f9827e437548595ec988587239c198c8640ed12",
+      "sha256": "ea3310d07fda9c076958181b7f9827e437548595ec988587239c198c8640ed12"
+    },
+    {
+      "source": "tools/bi-prototype/preview/document-inbox.html",
+      "output": "business-intelligence/document-inbox.html",
+      "sourceSha256": "4251ab062f3460c455d1e7238151c8708834f256370dee2c5d141b11408bfe26",
+      "sha256": "6b7b023abb6dce6431ac98dfa0bbf82380292eb1217ccce1609be4d1b5f820eb"
+    },
+    {
+      "source": "tools/bi-prototype/preview/document-inbox.js",
+      "output": "business-intelligence/document-inbox.js",
+      "sourceSha256": "c9774b8322d8004ade35fd2f7022a0a0ede23e2958eb717141a26664541680bc",
+      "sha256": "c9774b8322d8004ade35fd2f7022a0a0ede23e2958eb717141a26664541680bc"
+    },
+    {
       "source": "tools/bi-prototype/preview/document-rules.js",
       "output": "business-intelligence/document-rules.js",
       "sourceSha256": "b5065da7153155ae48ff32e5ba993c54b447816dc9b00fe456c9687d1d2ae7a8",
@@ -264,10 +288,22 @@
       "sha256": "58b1f10ee1a80d42f7edaccd8a69e228f1ff0c9c72c981a2faccc0abce1678b3"
     },
     {
+      "source": "tools/bi-prototype/preview/inbox-rules.js",
+      "output": "business-intelligence/inbox-rules.js",
+      "sourceSha256": "94f2c8ff21b30764daf47c05fbb93993ccb6790c0e5678ba1229b96497de1ea4",
+      "sha256": "94f2c8ff21b30764daf47c05fbb93993ccb6790c0e5678ba1229b96497de1ea4"
+    },
+    {
+      "source": "tools/bi-prototype/preview/inbox-samples.js",
+      "output": "business-intelligence/inbox-samples.js",
+      "sourceSha256": "8f468d56d101bb1a683d8da726228b672ac485249383e531dc1b6a1b78b9da33",
+      "sha256": "8f468d56d101bb1a683d8da726228b672ac485249383e531dc1b6a1b78b9da33"
+    },
+    {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "db35d7d2db2eac12aba735d027575c41adbdbf47a9a804cee1613ec9abbac417",
-      "sha256": "559d41fdba4a05f38e964e878ed817cee1287be6e0d2be531d679e0fccbdbbef"
+      "sourceSha256": "fc91338389de1e2662a927464e329c31a17d3cb23de92fc47a8d9347a7e930e1",
+      "sha256": "1a6e9a5d77ca322ed80eca935b5773bfcaebe2133dd9119f6b9175db607bb516"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",

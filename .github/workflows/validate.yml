@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, improve/executive-portfolio-quality, improve/workiq-evidence-enrichment]
+    branches: [main, phase3/business-time-foundation, improve/executive-portfolio-quality, improve/workiq-evidence-enrichment]
   workflow_dispatch:
 
 permissions:
@@ -44,6 +44,7 @@ jobs:
         run: |
           node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
           node tools/test-bi-business-time.cjs
+          node tools/test-bi-inbox.cjs
 
   browser:
     name: Responsive behavior and accessibility
@@ -149,6 +150,12 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           BROWSER_ENGINE: ${{ matrix.engine }}
         run: node tools/test-bi-trends.mjs
+      - name: Verify invoice source extraction, revisions and accessible inbox evidence
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+          BROWSER_ENGINE: ${{ matrix.engine }}
+        run: node tools/test-bi-inbox-browser.mjs
 
   bi:
     name: Connected BI contracts and purchasing journey
@@ -184,3 +191,8 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
         run: node tools/test-bi-trends.mjs
+      - name: Verify invoice source extraction, revisions and accessible inbox evidence
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
+        run: node tools/test-bi-inbox-browser.mjs
