@@ -206,8 +206,8 @@
     {
       "source": "tools/bi-prototype/preview/data-and-methods.html",
       "output": "business-intelligence/data-and-methods.html",
-      "sourceSha256": "74980dce6975e0abf697716283ec8f85ffb976b2568bc3579a2a86a810bde716",
-      "sha256": "19c8092743be9584f522dcb2d5fd5844fe868c55f0aa124130ecce01a29506c4"
+      "sourceSha256": "66a1417e171a5916cfb028be1b616b09cae423df77968a62585b545df625a7cb",
+      "sha256": "829ded751ce6c03f3682bc04ecd1cd0b715e4797a1a0f6672dd5a2885b881f33"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.js",

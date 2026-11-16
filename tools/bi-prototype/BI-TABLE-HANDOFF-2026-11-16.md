@@ -29,7 +29,7 @@ Use the manifest's parent keys and references. Its relationships describe this s
 
 These are full-state snapshots. Do not append them as new transactions, infer invoice aging from audit timestamps, combine different source modes without an explicit model, or treat a held/unposted invoice as cash spent. Empty means no records, not a successful test of nonexistent rows.
 
-Power BI Desktop import/render/refresh, tenant access and publication are not executed by this browser demonstration. No premium connector, installed authoring tool, production permission, scheduled refresh or enterprise certification is assumed. The deliverable is verified reusable source data and its semantics; native authoring remains a separate milestone.
+Power BI Desktop import/render/refresh, tenant access and publication are not executed by this browser demonstration. No premium connector, installed authoring tool, production permission, scheduled refresh or enterprise certification is assumed. The deliverable is the HTML/CSS/JavaScript simulation and its optional reusable source data. Native Power BI authoring is outside this portfolio scope.
 
 ## View lifecycle and verification
 
