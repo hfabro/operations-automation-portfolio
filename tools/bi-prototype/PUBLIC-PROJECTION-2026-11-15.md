@@ -1,12 +1,12 @@
 # Portfolio BI projection
 
-The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; eleven related demonstrations include the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
+The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; thirteen related demonstrations include the source-document inbox, business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
 
 This is a source integration prepared for review. A draft branch and generated routes do not merge or publish themselves. The production site changes only through the separately authorized release workflow.
 
 ## One source of business behavior
 
-`tools/bi-prototype/preview/` remains the canonical simulation source. `tools/build-bi-pages.mjs` produces the public projection: twelve HTML pages, explicitly referenced local scripts/styles/CSV, a portfolio framing stylesheet and the research-data license notice. It remaps the prototype hub to `index.html` and the historical research page to `historical-analysis.html`; their query strings and fragments remain intact. Public scripts retain the same rules, fixtures and journal keys.
+`tools/bi-prototype/preview/` remains the canonical simulation source. `tools/build-bi-pages.mjs` produces the public projection: fourteen HTML pages, explicitly referenced local scripts/styles/CSV, a portfolio framing stylesheet and the research-data license notice. It remaps the prototype hub to `index.html` and the historical research page to `historical-analysis.html`; their query strings and fragments remain intact. Public scripts retain the same rules, fixtures and journal keys.
 
 The generator precomputes the complete plan before writing. Asset admission is limited to declared basename scripts/styles and the fictional invoice sample CSV. It does not copy raw research, curated exports, tools, generated test evidence or unreferenced files. Source/output hashes and route metadata are retained in `tools/bi-public-manifest.json`. Generated text uses UTF-8 without BOM and LF line endings.
 
@@ -42,7 +42,7 @@ Open `http://127.0.0.1:4173/operations-automation-portfolio/business-intelligenc
 
 The mount preserves exclusions for tools, Git metadata, temporary files and private references. Only the approved fictional CSV download gains its required static MIME support; arbitrary JSON and research folders are not opened to the browser.
 
-`tools/test-bi-public.mjs` runs the real generated pages through this server. Full mode checks twelve routes at 320/375/768/1024/1440 pixels in both themes, with automated accessibility screening at narrow/desktop widths. Journey checks cover machine → request → purchasing/payment → BI → work verification, connected batch staging, source/license downloads, theme persistence, native keyboard/touch entry and all four discovery surfaces. It also verifies private-route exclusions.
+`tools/test-bi-public.mjs` runs the real generated pages through this server. Full mode checks fourteen routes at 320/375/768/1024/1440 pixels in both themes, with automated accessibility screening at narrow/desktop widths. Journey checks cover machine → request → purchasing/payment → BI → work verification, connected batch staging, source/license downloads, theme persistence, native keyboard/touch entry and all four discovery surfaces. It also verifies private-route exclusions.
 
 The existing BI CI job retains all 22 component rule/export/browser groups and adds the public acceptance. Firefox/WebKit jobs keep their route compatibility scans and add `--journeys-only` public BI checks. Source CI verifies deterministic generation, safe rebuild behavior and the financial dictionary/reconciliation contracts. The data-and-methods page inspects six tables from the selected validated purchasing checkpoint, with explicit ownership, grain, fields, relationships, actual rows, financial-stage definitions and 14 computed key/reference/reconciliation/currency checks. Empty checks are distinguished from passes; unresolved references, header mismatches and unsupported currencies remain visible holds. Current-journal deep entry, example isolation, download lineage and corrupt/absent-journal behavior run in public acceptance. This financial inspector does not imply a cross-journal certification of machine or work evidence. Hosted and local outcomes are recorded with the exact review head, outside generated public content. Automated accessibility screening does not establish comprehensive conformance.
 
@@ -74,3 +74,24 @@ Source checks run `tools/test-bi-management.cjs`; public acceptance adds exact-p
 
 
 Management inspection state: unchanged source refreshes and full downloads preserve the selected financial stage, invoice owner, allocation evidence and expanded coding holds. Source identity includes the complete validated source/checkpoint content and selected source mode; a changed command at the same revision does not preserve stale inspection. Changed sources reset source-specific selections. Full management exports include the inspected view selection alongside the complete model/checkpoints; they are not filtered financial totals. Native allocation buttons identify both PO line and cost center.
+
+
+## Business-time trends and aging
+
+usiness-trends.html queries the independent fictional 90-day cohort through usiness-trends-worker.js. The generator explicitly admits that worker, the unchanged usiness-time-rules.js, and usiness-time-data.js, a deterministic browser projection owned by uild_business_time_fixture.cjs. Only fictional source and pinned policy data are included. No raw research, private inputs, external service, new package or saved-journal schema is admitted. The page allows same-origin workers while retaining the existing restrictive script/style/connect policies.
+
+Period posted/paid flows and unpaid roll-forward reconcile to cutoff source events. Calendar-month slices intersect the selected range; closing balances are snapshots. Held-document owner/receipt-age filters do not change financial totals. Unknown dates remain visible. Metric, document, allocation, work and dependency controls lead to their actual source evidence. Downloads preserve inspection selection and include only cutoff-included original events/model checkpoints; they do not mutate journals.
+
+	ools/test-bi-trends.mjs verifies actual generated project-path worker execution in the configured browser, both themes at five widths, expanded-source accessibility, monthly monetary goldens, unknown dates, earlier cutoffs, filtered downloads, invalid-query recovery, missing/invalid worker sources, explicit empty cohorts, untouched storage and native no-JavaScript discovery. Publication and deployed acceptance remain separate release steps.
+
+
+## Source-document invoice inbox
+
+`document-inbox.html` adds executed UTF-8 fixed-format invoice parsing, exact-byte SHA-256 identity, field-to-source line navigation, distinct file/document queues and source-bound independent price-revision decisions. Its only new public assets are its interface, `inbox-rules.js` and `inbox-samples.js`; original fictional source strings are owned by the latter. Local files use the same declared text grammar and remain in page memory. PDF/image/email OCR is explicitly unsupported. Existing coding, purchasing and invoice controls and journal schemas are unchanged; no extraction result posts, authorizes, pays or replaces saved journals. See the versioned document-inbox contract for source envelopes, encoding/size limits, duplicate/revision distinctions and verification.
+
+
+## Combined visitor presentation
+
+The hub groups the management snapshot, dated trends and source-document inbox under one management-perspective entry point. Native full-card destinations remain unchanged. Visible copy distinguishes the guided/current snapshot, independent 90-day cohort and separate temporary inbox. The original connected-story path continues to share its saved journals; moving between other evidence modes does not join their records. The implementation summary includes the executed trends and supported-text extraction capabilities with their source and OCR boundaries.
+
+Local preview exclusions are not confidentiality controls for a public repository or legacy root GitHub Pages. Private inputs and generated QA evidence remain untracked. A release preflight checks the full changed source payload, repository/Pages identity, exact candidate, prior public bytes and recovery revision before requesting an explicit publication decision.

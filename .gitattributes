@@ -13,3 +13,6 @@
 # Generated BI projection has portable, checksum-stable text artifacts.
 business-intelligence/* text eol=lf
 tools/bi-public-manifest.json text eol=lf
+
+# Authored business-time fixture projection has stable portable text bytes.
+tools/bi-prototype/fixtures/*.json text eol=lf
