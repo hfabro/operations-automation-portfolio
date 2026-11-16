@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 
 export const BI_PAGES=[
  {source:'showcase.html',output:'index.html',label:'Business Intelligence',title:'Connected Business Intelligence'},
+ {source:'management-overview.html',output:'management-overview.html',label:'Management overview',title:'Management overview — position, ownership and evidence'},
  {source:'machine-intelligence.html',output:'machine-intelligence.html',label:'Machine intelligence',title:'Machine intelligence — signal to business action'},
  {source:'connected-journey.html',output:'connected-journey.html',label:'Connected purchasing',title:'Connected purchasing — one coding trail'},
  {source:'business-report.html',output:'business-report.html',label:'Purchasing intelligence',title:'Purchasing intelligence — inspectable BI'},
@@ -45,7 +46,7 @@ function header(page){return `<header class="site-header" data-header><div class
 <button class="nav-toggle" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation menu"><span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i></span><span class="nav-toggle-label" data-nav-label>Menu</span></button>
 <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-label">Theme</span></button>
 </div></header>`;}
-function footer(){return `<footer class="site-footer"><div class="container bi-footer"><a href="../">David H. Fabro · Portfolio</a><nav aria-label="Business intelligence footer"><a href="./">All BI demonstrations</a><a href="data-and-methods.html">Data model and methods</a><a href="historical-analysis.html#methods">Historical source and methods</a><a href="data-attribution.txt">Research data license</a></nav><p>Company records and outcomes are simulated. Historical research is separately attributed.</p><p>© 2026 David H. Fabro · Original portfolio material. Third-party data retain their own license.</p></div></footer>`;}
+function footer(){return `<footer class="site-footer"><div class="container bi-footer"><a href="../">David H. Fabro · Portfolio</a><nav aria-label="Business intelligence footer"><a href="./">All BI demonstrations</a><a href="management-overview.html">Management overview</a><a href="data-and-methods.html">Data model and methods</a><a href="historical-analysis.html#methods">Historical source and methods</a><a href="data-attribution.txt">Research data license</a></nav><p>Company records and outcomes are simulated. Historical research is separately attributed.</p><p>© 2026 David H. Fabro · Original portfolio material. Third-party data retain their own license.</p></div></footer>`;}
 
 export function buildPlan(root){
  const sourceRoot=resolve(root,'tools/bi-prototype/preview'),plan=new Map(),entries=[],assets=new Set();
