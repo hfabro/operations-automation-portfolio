@@ -264,7 +264,7 @@ Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/
 
 ## Connected Business Intelligence
 
-The draft integration includes `/business-intelligence/` and thirteen related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
+The draft integration includes `/business-intelligence/` and fourteen related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
 
 Home, Demos, Work and Smart Factory provide native discovery cards, and shared navigation includes Business Intelligence. The existing Work library and demo URLs remain intact. Shared theme preferences and project-relative routes are verified by `node tools/test-bi-public.mjs` through the restricted loopback server, using an existing Playwright/axe installation configured through the documented environment variables.
 
@@ -287,3 +287,5 @@ The generated BI route `business-intelligence/business-trends.html` queries this
 ## Source-document invoice inbox
 
 `business-intelligence/document-inbox.html` executes bounded plain-text invoice extraction and SHA-256 fingerprints in the browser, preserving source-line evidence and supplier revisions. Existing invoice rules supply matching, duplicate, receipt, total and coding holds. Independent price-revision decisions affect only this temporary fictional inbox; saved journals and finances are unchanged. This is not PDF/image/email OCR. See [the inbox contract](tools/bi-prototype/DOCUMENT-INBOX-CONTRACT-2026-11-16.md). Run `node tools/test-bi-inbox.cjs` for source/model checks and `node tools/test-bi-inbox-browser.mjs` with the established Playwright/axe environment for rendered acceptance.
+
+Finance policy review (`business-intelligence/policy-review.html`) is an independent additive mapping workbench. It uses the unchanged coding resolver and pinned baseline; separate proposer/reviewer identities, prospective effective dates, exact allocation shares, conflict checks and replayable decisions preserve original held requests. It does not edit saved ERP-style journals or release production master data. Run `node tools/test-bi-policy-review.cjs` and the established browser environment with `node tools/test-bi-policy-review.mjs`.

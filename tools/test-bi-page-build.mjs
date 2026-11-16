@@ -7,7 +7,7 @@ import {buildPlan,writePlan,checkPlan,BI_PAGES,BI_STORY} from './build-bi-pages.
 
 const root=fileURLToPath(new URL('../',import.meta.url)),expected=buildPlan(root);
 assert.deepEqual(checkPlan(root,expected),[],'Checked-in BI artifacts must match canonical source.');
-assert.equal(BI_PAGES.length,14);assert.equal(BI_STORY.length,4);
+assert.equal(BI_PAGES.length,15);assert.equal(BI_STORY.length,4);
 const parent=resolve(tmpdir()),temporary=mkdtempSync(join(parent,'portfolio-bi-build-'));
 try{
  mkdirSync(join(temporary,'tools/bi-prototype'),{recursive:true});

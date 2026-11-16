@@ -10,6 +10,12 @@
       "title": "Connected Business Intelligence"
     },
     {
+      "source": "policy-review.html",
+      "output": "policy-review.html",
+      "label": "Finance policy review",
+      "title": "Finance policy review — controlled coding changes"
+    },
+    {
       "source": "document-inbox.html",
       "output": "document-inbox.html",
       "label": "Document inbox",
@@ -272,8 +278,8 @@
     {
       "source": "tools/bi-prototype/preview/guided-entry.html",
       "output": "business-intelligence/guided-entry.html",
-      "sourceSha256": "3f390dc034a071fa99c9f312315eb0f5248cf0c6acec428b0d54871332f06d87",
-      "sha256": "1e9004a6a6aa7639d0c6b3f252708485778891ab7ce39d7acab339fc8204a188"
+      "sourceSha256": "65ec485094efa08d2a9e493560f30eb82e3d05f508fcbee2c3b454a397a3c8fc",
+      "sha256": "587fe11a2502ec3d0f4f69fc1fc7972f947483b1e808574c4e7cfe577e75dc5f"
     },
     {
       "source": "tools/bi-prototype/preview/guided-entry.js",
@@ -302,8 +308,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "02b5226239351a02628d0c596ed93496b765442329f1426c8d31e0fcf75e553c",
-      "sha256": "b588f8c9ea1d7945b9d006a8ee040524eebb846d7aefb334535464a73e95b88a"
+      "sourceSha256": "266460c95235ecf0af92cfe7bd45338be39559be4aa10547717ea1f1077b0fd5",
+      "sha256": "44be3dd62660d5ab78e035d889235e5d93a757065009640e878a0271e0acd7d4"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -424,6 +430,30 @@
       "output": "business-intelligence/p2p-data.js",
       "sourceSha256": "03b0cfa7d85505afc0198e78aaf62ddd886b7a1a0c7202b85f1a02080af09301",
       "sha256": "03b0cfa7d85505afc0198e78aaf62ddd886b7a1a0c7202b85f1a02080af09301"
+    },
+    {
+      "source": "tools/bi-prototype/preview/policy-review-rules.js",
+      "output": "business-intelligence/policy-review-rules.js",
+      "sourceSha256": "02cc471a27297b2b87b9dd815d9dd382a317e0f7ca7c052d8f6bffcb8e7c7d12",
+      "sha256": "02cc471a27297b2b87b9dd815d9dd382a317e0f7ca7c052d8f6bffcb8e7c7d12"
+    },
+    {
+      "source": "tools/bi-prototype/preview/policy-review.css",
+      "output": "business-intelligence/policy-review.css",
+      "sourceSha256": "63e9995553cfa0a4c89f3e30422c15a492bc904a864c8caa98f792e5dc0102e1",
+      "sha256": "63e9995553cfa0a4c89f3e30422c15a492bc904a864c8caa98f792e5dc0102e1"
+    },
+    {
+      "source": "tools/bi-prototype/preview/policy-review.html",
+      "output": "business-intelligence/policy-review.html",
+      "sourceSha256": "4e2d4d559a6091d6f4dc81e3d8fd7333edae69b722e0482a487f6f7dac641d89",
+      "sha256": "d3dece233207ef757a0c2ea61cf60a45202b5bc187031271f58d2149ea4b9296"
+    },
+    {
+      "source": "tools/bi-prototype/preview/policy-review.js",
+      "output": "business-intelligence/policy-review.js",
+      "sourceSha256": "1e03aacebef8e3e111f6e7387cfc87917dd0ce12c8befe3b119f593d92a6e8e7",
+      "sha256": "1e03aacebef8e3e111f6e7387cfc87917dd0ce12c8befe3b119f593d92a6e8e7"
     },
     {
       "source": "tools/bi-prototype/preview/report-model.js",
