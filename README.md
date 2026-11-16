@@ -269,3 +269,15 @@ The draft integration includes `/business-intelligence/` and nine related demons
 Home, Demos, Work and Smart Factory provide native discovery cards, and shared navigation includes Business Intelligence. The existing Work library and demo URLs remain intact. Shared theme preferences and project-relative routes are verified by `node tools/test-bi-public.mjs` through the restricted loopback server, using an existing Playwright/axe installation configured through the documented environment variables.
 
 See [the projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md) for canonical files, project-path preview, metadata/license handling and test coverage. The prototype remains available for development; generated portfolio integration is a draft source change until separately approved and released.
+
+
+## Business-time model foundation
+
+The independent fictional 90-day event cohort is documented in [the business-time contract](tools/bi-prototype/BUSINESS-TIME-CONTRACT-2026-11-16.md). Its authored builder, generated JSON and pure model prove period flows, cutoff balances, date availability, owned aging and source dependencies before a future trend route is added. Existing generated audit timestamps are not business history. No visitor-facing route or persisted journal format is changed by this source milestone.
+
+```powershell
+node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
+node tools/test-bi-business-time.cjs
+```
+
+With the existing Playwright environment, `node tools/test-bi-business-time-browser.mjs` compares complete browser/Node model results. These model checks supplement the established UI and workflow suites; they do not claim a new production integration or deployed trend dashboard.

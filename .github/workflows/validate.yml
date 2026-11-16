@@ -40,6 +40,10 @@ jobs:
         run: node ./tools/test-bi-work-context.cjs
       - name: Verify management measures, owners and unavailable sources
         run: node ./tools/test-bi-management.cjs
+      - name: Verify explicit business-time fixture and financial/date controls
+        run: |
+          node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
+          node tools/test-bi-business-time.cjs
 
   browser:
     name: Responsive behavior and accessibility
@@ -134,6 +138,11 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
           BROWSER_ENGINE: ${{ matrix.engine }}
         run: node tools/test-bi-public.mjs --journeys-only
+      - name: Verify pure business-time model parity
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          BROWSER_ENGINE: ${{ matrix.engine }}
+        run: node tools/test-bi-business-time-browser.mjs
 
   bi:
     name: Connected BI contracts and purchasing journey
@@ -160,3 +169,7 @@ jobs:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
         run: node tools/test-bi-public.mjs
+      - name: Verify pure business-time model parity
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+        run: node tools/test-bi-business-time-browser.mjs
