@@ -1,6 +1,6 @@
 # Portfolio BI projection
 
-The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; eleven related demonstrations include the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
+The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; twelve related demonstrations include business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
 
 This is a source integration prepared for review. A draft branch and generated routes do not merge or publish themselves. The production site changes only through the separately authorized release workflow.
 
@@ -74,3 +74,12 @@ Source checks run `tools/test-bi-management.cjs`; public acceptance adds exact-p
 
 
 Management inspection state: unchanged source refreshes and full downloads preserve the selected financial stage, invoice owner, allocation evidence and expanded coding holds. Source identity includes the complete validated source/checkpoint content and selected source mode; a changed command at the same revision does not preserve stale inspection. Changed sources reset source-specific selections. Full management exports include the inspected view selection alongside the complete model/checkpoints; they are not filtered financial totals. Native allocation buttons identify both PO line and cost center.
+
+
+## Business-time trends and aging
+
+usiness-trends.html queries the independent fictional 90-day cohort through usiness-trends-worker.js. The generator explicitly admits that worker, the unchanged usiness-time-rules.js, and usiness-time-data.js, a deterministic browser projection owned by uild_business_time_fixture.cjs. Only fictional source and pinned policy data are included. No raw research, private inputs, external service, new package or saved-journal schema is admitted. The page allows same-origin workers while retaining the existing restrictive script/style/connect policies.
+
+Period posted/paid flows and unpaid roll-forward reconcile to cutoff source events. Calendar-month slices intersect the selected range; closing balances are snapshots. Held-document owner/receipt-age filters do not change financial totals. Unknown dates remain visible. Metric, document, allocation, work and dependency controls lead to their actual source evidence. Downloads preserve inspection selection and include only cutoff-included original events/model checkpoints; they do not mutate journals.
+
+	ools/test-bi-trends.mjs verifies actual generated project-path worker execution in the configured browser, both themes at five widths, expanded-source accessibility, monthly monetary goldens, unknown dates, earlier cutoffs, filtered downloads, invalid-query recovery, missing/invalid worker sources, explicit empty cohorts, untouched storage and native no-JavaScript discovery. Publication and deployed acceptance remain separate release steps.

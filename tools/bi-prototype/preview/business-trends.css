@@ -1,0 +1,48 @@
+.trend-controls{padding:26px;background:var(--soft);border:1px solid var(--line);border-radius:6px}
+#trend-form{display:grid;grid-template-columns:1.3fr 1fr 1fr auto;gap:16px;align-items:end;margin:24px 0 16px}
+#trend-form button:last-child{grid-column:1/-1;justify-self:start}
+.trend-controls input{font:inherit;min-height:44px;min-width:0;width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:4px;color:var(--ink);background:var(--paper);color-scheme:light}
+html[data-theme=dark] .trend-controls input{color-scheme:dark}
+.trend-controls button,.trend-metric,.trend-period,.trend-due button,.trend-record{font:inherit;cursor:pointer;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:10px 14px;min-height:44px;text-align:left}
+.trend-controls button:hover,.trend-metric:hover,.trend-period:hover,.trend-due button:hover,.trend-record:hover{background:var(--soft);border-color:var(--accent)}
+.trend-controls button:disabled{cursor:wait;opacity:.65}
+#trend-error{padding:16px;border:2px solid var(--warm);background:var(--paper);color:var(--ink)}
+.trend-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0}
+.trend-metric{padding:22px;display:grid;gap:8px;align-content:start;border-top:3px solid var(--accent)}
+.trend-metric span{font-size:14px;color:var(--muted)}
+.trend-metric strong{font-size:clamp(1.7rem,3vw,2.5rem);font-variant-numeric:tabular-nums;letter-spacing:-.04em;line-height:1.2}
+.trend-metric small{font-size:12px;color:var(--muted)}
+.trend-columns{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:24px 0}
+.trend-reconciliation{display:grid;grid-template-columns:1fr auto;gap:12px;font-size:15px}
+.trend-reconciliation dt,.trend-reconciliation dd{margin:0;border-bottom:1px solid var(--line);padding:8px 0}
+.trend-reconciliation dd{font-variant-numeric:tabular-nums;font-weight:700}
+.trend-due{display:grid;gap:10px;margin:20px 0}
+.trend-due button{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.trend-due strong{font-variant-numeric:tabular-nums}
+.trend-chart{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:24px 0}
+.trend-month{padding:18px;background:var(--paper);border:1px solid var(--line);border-radius:6px;min-width:0}
+.trend-period{font-weight:650;width:100%;margin-bottom:16px}
+.trend-bar{margin:14px 0;font-size:13px}
+.trend-bar span{display:block;margin-bottom:6px}
+.trend-bar meter{display:block;width:100%;height:16px;accent-color:var(--accent)}
+.trend-bar.paid meter{accent-color:var(--warm)}
+.trend-filters{display:flex;gap:20px;flex-wrap:wrap;margin:22px 0}
+.trend-filters label{min-width:210px}
+.trend-record{padding:6px 10px;font-size:13px;min-height:44px;overflow-wrap:anywhere}
+.trend-detail{margin-top:24px;scroll-margin-top:100px}
+.trend-detail dl{display:grid;grid-template-columns:minmax(120px,1fr) minmax(0,2fr);gap:10px 20px;font-size:14px}
+.trend-detail dt{font-weight:650}
+.trend-detail dd{margin:0;overflow-wrap:anywhere}
+.trend-detail pre{max-height:420px;overflow:auto;padding:16px;background:var(--soft);font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere}
+#trend-results .table-wrap{margin:20px 0}
+#trend-results table{min-width:650px;width:100%;font-size:14px}
+#trend-results caption{text-align:left;color:var(--muted);margin-bottom:12px}
+#trend-results td{vertical-align:top;overflow-wrap:anywhere}
+#trend-results td:last-child{font-variant-numeric:tabular-nums}
+#trend-results td small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+#trend-evidence{scroll-margin-top:100px}
+#trend-work details,#trend-coding-holds details{font-size:14px;margin:12px 0}
+@media(max-width:1000px){#trend-form{grid-template-columns:repeat(2,minmax(0,1fr))}.trend-chart{grid-template-columns:repeat(2,minmax(0,1fr))}.trend-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.trend-columns{grid-template-columns:1fr}.trend-controls{padding:18px}.trend-controls .section-title{display:block}.trend-controls .section-title span{display:block;margin-top:12px}.trend-detail dl{grid-template-columns:1fr}.trend-detail dd{margin-bottom:8px}}
+@media(max-width:560px){.trend-metrics{grid-template-columns:1fr}}
+@media(max-width:400px){#trend-form,.trend-chart,.trend-metrics{grid-template-columns:1fr}.trend-metric{padding:18px}.trend-metric strong{font-size:1.9rem}.trend-filters label{min-width:0;width:100%}}

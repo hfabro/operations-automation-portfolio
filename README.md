@@ -264,7 +264,7 @@ Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/
 
 ## Connected Business Intelligence
 
-The draft integration includes `/business-intelligence/` and nine related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
+The draft integration includes `/business-intelligence/` and twelve related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
 
 Home, Demos, Work and Smart Factory provide native discovery cards, and shared navigation includes Business Intelligence. The existing Work library and demo URLs remain intact. Shared theme preferences and project-relative routes are verified by `node tools/test-bi-public.mjs` through the restricted loopback server, using an existing Playwright/axe installation configured through the documented environment variables.
 
@@ -273,7 +273,7 @@ See [the projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md
 
 ## Business-time model foundation
 
-The independent fictional 90-day event cohort is documented in [the business-time contract](tools/bi-prototype/BUSINESS-TIME-CONTRACT-2026-11-16.md). Its authored builder, generated JSON and pure model prove period flows, cutoff balances, date availability, owned aging and source dependencies before a future trend route is added. Existing generated audit timestamps are not business history. No visitor-facing route or persisted journal format is changed by this source milestone.
+The independent fictional 90-day event cohort is documented in [the business-time contract](tools/bi-prototype/BUSINESS-TIME-CONTRACT-2026-11-16.md). Its authored builder, generated JSON/browser projections and pure model define period flows, cutoff balances, date availability, owned aging and source dependencies for the trend route. Existing generated audit timestamps are not business history. Persisted journal formats remain unchanged.
 
 ```powershell
 node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
@@ -281,3 +281,5 @@ node tools/test-bi-business-time.cjs
 ```
 
 With the existing Playwright environment, `node tools/test-bi-business-time-browser.mjs` compares complete browser/Node model results. These model checks supplement the established UI and workflow suites; they do not claim a new production integration or deployed trend dashboard.
+
+The generated BI route `business-intelligence/business-trends.html` queries this separate fictional cohort through a local worker. It exposes selected-period posted/paid flows, cutoff balances, unknown due dates, owned held-document receipt ages and source-record evidence. `node tools/test-bi-trends.mjs` verifies the rendered project-path route using the same browser/auditor environment as `test-bi-public.mjs`.

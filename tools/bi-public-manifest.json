@@ -10,6 +10,12 @@
       "title": "Connected Business Intelligence"
     },
     {
+      "source": "business-trends.html",
+      "output": "business-trends.html",
+      "label": "Business trends",
+      "title": "Business trends — activity, aging and source evidence"
+    },
+    {
       "source": "management-overview.html",
       "output": "management-overview.html",
       "label": "Management overview",
@@ -112,6 +118,42 @@
       "output": "business-intelligence/business-report.js",
       "sourceSha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d",
       "sha256": "7aa4b5dac1c2d94117cbbff0b0d2b4a443ba09ea708815c067d6c323ab9d925d"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-time-data.js",
+      "output": "business-intelligence/business-time-data.js",
+      "sourceSha256": "5137b226989d96f866044020f10a3fa4707e7c591400e2c6c34b1586a3929f7b",
+      "sha256": "5137b226989d96f866044020f10a3fa4707e7c591400e2c6c34b1586a3929f7b"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-time-rules.js",
+      "output": "business-intelligence/business-time-rules.js",
+      "sourceSha256": "3a047b9a0cf6ff3609f368ea38de33cf2c19fa0c5b75bbb6ee095ab8ecd75ddd",
+      "sha256": "3a047b9a0cf6ff3609f368ea38de33cf2c19fa0c5b75bbb6ee095ab8ecd75ddd"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-trends-worker.js",
+      "output": "business-intelligence/business-trends-worker.js",
+      "sourceSha256": "e4f487bd6be84c7a5a13520884c347d5398cda9cc8fddcd0adf3335c03c102c3",
+      "sha256": "e4f487bd6be84c7a5a13520884c347d5398cda9cc8fddcd0adf3335c03c102c3"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-trends.css",
+      "output": "business-intelligence/business-trends.css",
+      "sourceSha256": "6e9f8ca54a590a5b275ab395eeef0671bb51f2ba3747e6765b8f6555808ee78f",
+      "sha256": "6e9f8ca54a590a5b275ab395eeef0671bb51f2ba3747e6765b8f6555808ee78f"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-trends.html",
+      "output": "business-intelligence/business-trends.html",
+      "sourceSha256": "c70160637bd32f06a0b578cf047866111a9d7789a093766fc763090dab47fdfd",
+      "sha256": "13cfa0454728ebc140fef2c77cf698bbf46518110609d243d726b33dc1911c64"
+    },
+    {
+      "source": "tools/bi-prototype/preview/business-trends.js",
+      "output": "business-intelligence/business-trends.js",
+      "sourceSha256": "c1e79dbbc876aeed56ebc5ca404d91554e5dd316b405955b62e138ac6d9f6071",
+      "sha256": "c1e79dbbc876aeed56ebc5ca404d91554e5dd316b405955b62e138ac6d9f6071"
     },
     {
       "source": "tools/bi-prototype/preview/coding-rules.js",
@@ -224,8 +266,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "26f6a7f0f4a9cca4ce5c8013919a3eee0932e1374b8130fa2768c3c040c55601",
-      "sha256": "83426214198b4630d1e08c1df7fb12ae27311f557566943c6ba25eba0c52026a"
+      "sourceSha256": "db35d7d2db2eac12aba735d027575c41adbdbf47a9a804cee1613ec9abbac417",
+      "sha256": "559d41fdba4a05f38e964e878ed817cee1287be6e0d2be531d679e0fccbdbbef"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -326,8 +368,8 @@
     {
       "source": "tools/bi-prototype/preview/management-overview.html",
       "output": "business-intelligence/management-overview.html",
-      "sourceSha256": "ca3273eb9c888bbca2746bc63838a98514f26e6f61ebf303b20191259267f97c",
-      "sha256": "a8e26adb6324450a4eb7cc170dc9c16d3f07300bd023024243e52f379b0a04c3"
+      "sourceSha256": "f2eb989dd95121117d184f7143264e03d481868911443d71728e9c695d4c55ad",
+      "sha256": "6862fde0ff1da7a717c69793058543054995d66a98eb8092376d83be3e650d52"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.js",

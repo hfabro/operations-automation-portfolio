@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="description" content="Explore a fictional 90-day business cohort: period invoice and payment flows, cutoff balances, owned invoice aging and the source decisions behind every figure.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'none'; connect-src 'none'; img-src 'self' data:; script-src 'self'; worker-src 'self'; style-src 'self'">
+<title>Business trends — activity, aging and source evidence</title>
+<link rel="stylesheet" href="workspace.css"><link rel="stylesheet" href="business-trends.css">
+<script src="business-trends.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header><a class="brand" href="showcase.html">DF <span>Connected Business Intelligence</span></a><span class="stage">Business trends</span></header>
+<main id="main">
+<section class="intro">
+<p class="eyebrow">Activity · Outstanding cost · Owned decisions</p>
+<h1>See what changed.<br>Follow what’s outstanding.</h1>
+<p class="lead">Move through a fictional quarter of purchasing decisions. See invoices become posted cost, payments reduce the balance, and unresolved documents stay with an accountable owner.</p>
+<div class="source-strip"><strong>Independent fictional cohort · Aug 18–Nov 15, 2026</strong><a href="management-overview.html">Management snapshot and saved journals →</a><a href="showcase.html">All BI demonstrations →</a></div>
+</section>
+<section class="trend-controls" aria-labelledby="period-heading">
+<div class="section-title"><h2 id="period-heading">Choose the period and cutoff.</h2><span class="muted">USD net · Calendar days · America/Chicago</span></div>
+<form id="trend-form">
+<label class="filter" for="trend-preset">Quick period<select id="trend-preset"><option value="all">Full 90-day cohort</option><option value="aug">August 18–31</option><option value="sep">September</option><option value="oct">October</option><option value="nov">November 1–15</option><option value="custom">Custom dates</option></select></label>
+<label class="filter" for="trend-from">Period start<input id="trend-from" name="from" type="date" min="2026-08-18" max="2026-11-15" value="2026-08-18" required></label>
+<label class="filter" for="trend-cutoff">Cutoff, inclusive<input id="trend-cutoff" name="asOf" type="date" min="2026-08-18" max="2026-11-15" value="2026-11-15" required></label>
+<button type="submit" id="trend-apply">Apply dates</button>
+<button type="button" id="trend-download" disabled>Download selected evidence</button>
+</form>
+<p id="trend-status" role="status" aria-live="polite">Preparing the fictional source model…</p>
+<p id="trend-error" role="alert" tabindex="-1" hidden></p>
+<p class="boundary">This dated cohort is separate from your saved workflow journals and historical P2P research. Browsing and downloads do not replace saved progress. No live ERP or SCADA connection is used.</p>
+<noscript><p>Enable JavaScript to calculate dates and inspect records. The definitions and simulation boundaries below remain readable.</p></noscript>
+</section>
+<div id="trend-results" hidden aria-busy="false">
+<section class="workspace" aria-labelledby="position-heading">
+<div class="section-title"><h2 id="position-heading">Activity and position.</h2><p id="trend-scope" class="muted"></p></div>
+<div id="trend-metrics" class="trend-metrics"></div>
+<div class="trend-columns">
+<section class="panel"><h3>Unpaid balance roll-forward</h3><p class="muted">Opening balance + posted activity − payments = closing balance. All amounts are net USD.</p><dl id="trend-rollforward" class="trend-reconciliation"></dl><p class="boundary">Open commitment and unpaid invoices describe different stages. Received-not-invoiced remains within open commitment. Do not add these stages together.</p></section>
+<section class="panel"><h3>What is due at the cutoff?</h3><p class="muted">Posted, unpaid documents only. A due date equal to the cutoff is not overdue.</p><div id="trend-due" class="trend-due"></div><p class="boundary">Unknown due dates remain in the unpaid balance. They are excluded from known overdue amounts, never treated as zero age.</p></section>
+</div>
+</section>
+<section class="workspace" aria-labelledby="activity-heading">
+<div class="section-title"><h2 id="activity-heading">Follow activity through the period.</h2><span class="muted">Select a month to inspect its dates.</span></div>
+<p class="muted">Bars compare posted and paid transaction flows within each calendar-month slice of the selected period. The closing unpaid column is a cutoff snapshot; balances must not be summed across months.</p>
+<div id="trend-chart" class="trend-chart"></div>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Monthly activity and closing balances"><table><caption id="trend-month-caption">Net USD by selected monthly slice.</caption><thead><tr><th scope="col">Business dates</th><th scope="col">Posted flow</th><th scope="col">Paid flow</th><th scope="col">Closing unpaid</th></tr></thead><tbody id="trend-months"></tbody></table></div>
+</section>
+<section class="workspace" aria-labelledby="aging-heading">
+<div class="section-title"><h2 id="aging-heading">Put invoice holds with an owner.</h2><p id="trend-held-summary" class="muted"></p></div>
+<p class="muted">One row per held document at the cutoff, regardless of how many reasons it has. Receipt age is measured from the original inbox date; a correction does not restart the clock.</p>
+<div class="trend-filters"><label class="filter" for="trend-owner">Primary owner<select id="trend-owner"><option value="all">All owners</option></select></label><label class="filter" for="trend-age">Receipt age<select id="trend-age"><option value="all">All ages</option><option value="0-7">0–7 days</option><option value="8-30">8–30 days</option><option value="31-60">31–60 days</option><option value="61+">61+ days</option><option value="unknown">Unknown receipt date</option></select></label></div>
+<p id="trend-held-filtered" class="muted"></p>
+<div class="table-wrap" tabindex="0" role="region" aria-label="Held documents by owner and receipt age"><table><thead><tr><th scope="col">Document / supplier</th><th scope="col">Primary owner / reasons</th><th scope="col">Receipt date / age</th><th scope="col">Declared net · source currency</th></tr></thead><tbody id="trend-held"></tbody></table></div>
+<p class="boundary">Unsupported currencies can appear in review queues. Their declared amounts are not converted or included in USD financial totals. An unposted hold is not an unpaid posted balance.</p>
+</section>
+<section class="workspace" aria-labelledby="governance-heading"><h2 id="governance-heading">Keep coding and work evidence in context.</h2><div class="trend-columns"><section class="panel"><h3>Policy-backed coding</h3><p id="trend-coding"></p><div id="trend-coding-holds"></div><p class="boundary">Approved PO lines are the coverage denominator. Held requisitions are separate; vendor identity alone never supplies the expense bucket.</p></section><section class="panel"><h3>Dated maintenance decisions</h3><p id="trend-work-summary"></p><div id="trend-work"></div><p class="boundary">The condition and verification observations remain on November 15. Recorded work versions are evidence, not a census of physical backlog or proof of avoided failures.</p></section></div></section>
+<section class="workspace" id="trend-evidence" aria-labelledby="trend-evidence-heading">
+<h2 id="trend-evidence-heading" tabindex="-1">Inspect the source evidence.</h2>
+<p id="trend-evidence-definition" class="muted"></p><div id="trend-evidence-table"></div>
+<section class="panel trend-detail" id="trend-detail" hidden aria-labelledby="trend-detail-heading"><h3 id="trend-detail-heading" tabindex="-1">Source record</h3><div id="trend-detail-content"></div></section>
+</section>
+</div>
+<section class="methods"><h2>Defined dates. Inspectable decisions.</h2>
+<details><summary>What the dates and financial measures mean</summary><p>The declared cohort is SYN-BUSINESS-TIME-1 / SYN-CO-01. Source events have explicit occurrence, recording and Chicago business dates. A cutoff includes that complete business date; period flows begin on the chosen start date. Opening balances include only earlier events. The complete source is validated even when later events are excluded from the chosen cutoff.</p><p>Financial activity uses event × PO line × cost-center allocations; document counts use distinct document IDs. USD amounts use integer cents. Original invoice dates and fictional Finance-owned calendar net-30/net-45 terms establish due dates where the source permits. Missing dates stay unknown. Generated core replay timestamps are diagnostic and do not determine business aging.</p></details>
+<details><summary>How this showcase is built and what it demonstrates</summary><p>HTML, CSS and JavaScript provide the interface. A local browser worker replays the same governed purchasing, invoice, machine and work rules used by the connected demonstrations. A deterministic authored fixture supplies the 90-day cohort. Date controls query that model; bars, tables and downloads expose its reconciled outputs. No external service, saved-journal replacement or production credentials are needed.</p><p>This is a browser BI demonstration, not a native Power BI report, OCR service or production authorization system. The first version excludes tax, credits, FX conversion, partial settlement, backdating, delayed-day capture and full GL/period close. Fictional patterns do not establish measured savings, OEE, operating improvement or avoided failures.</p></details>
+</section>
+</main>
+<footer>Connected Business Intelligence · Fictional business trends with source evidence</footer>
+</body></html>
