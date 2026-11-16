@@ -100,3 +100,7 @@ Local preview exclusions are not confidentiality controls for a public repositor
 ## Finance mapping review
 
 The Finance workbench adds an independent, closed, append-only proposal/decision journal over the unchanged coding resolver. Existing approved rules cannot be replaced. Pending/rejected mappings do not code requests, approvals require a different person and cannot backdate effectiveness, and half-open effective dates govern explicit new checks. The original captured hold and saved journals remain unchanged. The workbench is temporary; downloads retain baseline, commands, versions and both evaluations. Role/person selectors demonstrate controls rather than production authentication.
+
+## Reusable table handoff
+
+The existing Data and methods route adds `data-methods-export.js` and complete six-table CSV/schema exports. The projection uses the unchanged validated dictionary/model; original JSON inspection remains available. Snapshot/source and file hashes, explicit types/null/escaping rules, complete-versus-preview row counts, held/empty checks and delayed-source invalidation are part of the contract. See `BI-TABLE-HANDOFF-2026-11-16.md`. This adds no visitor route, core financial rule, persisted journal format or native Power BI claim.

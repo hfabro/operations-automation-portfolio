@@ -200,26 +200,32 @@
     {
       "source": "tools/bi-prototype/preview/data-and-methods.css",
       "output": "business-intelligence/data-and-methods.css",
-      "sourceSha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11",
-      "sha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11"
+      "sourceSha256": "892268aee1e9bd7a2d4ad2505048c6d6f1d7a24a0ac8d256a7e7c5209e87bb84",
+      "sha256": "892268aee1e9bd7a2d4ad2505048c6d6f1d7a24a0ac8d256a7e7c5209e87bb84"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.html",
       "output": "business-intelligence/data-and-methods.html",
-      "sourceSha256": "311270e91d67611136cb9195a7312c037be83d030082179198c9b2b2cdd2132f",
-      "sha256": "a5af1764379d368fbd3ec248d0c516cffaff109ac5df3beaccf7dad4a17e45d1"
+      "sourceSha256": "74980dce6975e0abf697716283ec8f85ffb976b2568bc3579a2a86a810bde716",
+      "sha256": "19c8092743be9584f522dcb2d5fd5844fe868c55f0aa124130ecce01a29506c4"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.js",
       "output": "business-intelligence/data-and-methods.js",
-      "sourceSha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e",
-      "sha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e"
+      "sourceSha256": "76fef335a97994ca328ef9de990725be5c9bd45808ebbf819e5e00f9bce9dcf3",
+      "sha256": "76fef335a97994ca328ef9de990725be5c9bd45808ebbf819e5e00f9bce9dcf3"
     },
     {
       "source": "tools/bi-prototype/THIRD-PARTY-DATA.md",
       "output": "business-intelligence/data-attribution.txt",
       "sourceSha256": "dfb7bd65ba2a8cc537cbf483f986071417600aa4cc5cc38ff40dd434af9371c8",
       "sha256": "2cb6d479f842c6275664d0f1ffd955a43a217945901f620eeb220f6c01809579"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-methods-export.js",
+      "output": "business-intelligence/data-methods-export.js",
+      "sourceSha256": "06d78e8f8f57e3f83f4c2afc7cddeff4a29326cb8acae06ad2f665d02ec05a59",
+      "sha256": "06d78e8f8f57e3f83f4c2afc7cddeff4a29326cb8acae06ad2f665d02ec05a59"
     },
     {
       "source": "tools/bi-prototype/preview/data-methods-model.js",
