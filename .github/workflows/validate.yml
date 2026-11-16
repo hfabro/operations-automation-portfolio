@@ -34,6 +34,8 @@ jobs:
         run: node ./tools/test-system-page-build.mjs
       - name: Verify canonical BI projection and rebuild safety
         run: node ./tools/test-bi-page-build.mjs
+      - name: Verify inspectable BI dictionary and reconciliation evidence
+        run: node ./tools/test-bi-data-methods.cjs
 
   browser:
     name: Responsive behavior and accessibility

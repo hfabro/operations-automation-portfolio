@@ -40,6 +40,12 @@
       "title": "Connected invoice intake — multi-line batch"
     },
     {
+      "source": "data-and-methods.html",
+      "output": "data-and-methods.html",
+      "label": "Data and methods",
+      "title": "Data and methods — inspect the business model"
+    },
+    {
       "source": "guided-entry.html",
       "output": "guided-entry.html",
       "label": "Governed coding",
@@ -92,8 +98,8 @@
     {
       "source": "tools/bi-prototype/preview/business-report.html",
       "output": "business-intelligence/business-report.html",
-      "sourceSha256": "7a0afa94d09608216b2ff8ecb182e29633cf3294d93f728b2dd18f137185ff83",
-      "sha256": "31c329f4e02f5fa5388bec24231fce5a342d067170d1ae038bc5b2aab139abf3"
+      "sourceSha256": "65de11982da9484208d63d373623c7115b8ad1b13560b7936a8a795a7680adac",
+      "sha256": "2d7be069935717e67fc770374eaea5daf5dab6265706f2eaebe3ba11764457c6"
     },
     {
       "source": "tools/bi-prototype/preview/business-report.js",
@@ -123,7 +129,7 @@
       "source": "tools/bi-prototype/preview/connected-journey.html",
       "output": "business-intelligence/connected-journey.html",
       "sourceSha256": "04c966228b8380464b2ad6d60f348b6b64a2b1337ec888fed07356f5da4a4e35",
-      "sha256": "a804f8bf3a13210c729446495c594ce9ff4d9fe4db5e284967ad7e7bae64c155"
+      "sha256": "c2cd65c99f1fbcaa4aea10ebf55aa3b1c1bba4a6cad6870477036d4ccdf12c89"
     },
     {
       "source": "tools/bi-prototype/preview/connected-journey.js",
@@ -132,10 +138,34 @@
       "sha256": "09b45fab9b8ac3d55379ef07475dab4cafbb5cebf5ebc6eae96863725ca84678"
     },
     {
+      "source": "tools/bi-prototype/preview/data-and-methods.css",
+      "output": "business-intelligence/data-and-methods.css",
+      "sourceSha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11",
+      "sha256": "19aa3b7e5282352fb2cbd8dce4d5082eaf4c8f1d8a268602d4f6d253a7ccfc11"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-and-methods.html",
+      "output": "business-intelligence/data-and-methods.html",
+      "sourceSha256": "311270e91d67611136cb9195a7312c037be83d030082179198c9b2b2cdd2132f",
+      "sha256": "f146853373c857b3d72c120a975485db5c92b1a28416f8a4ea3b1eea7e9cbf6e"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-and-methods.js",
+      "output": "business-intelligence/data-and-methods.js",
+      "sourceSha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e",
+      "sha256": "26ac6416b6a1ee66e7d12a6900fad677b4dca924d26bf6c92bd578b0a165a91e"
+    },
+    {
       "source": "tools/bi-prototype/THIRD-PARTY-DATA.md",
       "output": "business-intelligence/data-attribution.txt",
       "sourceSha256": "dfb7bd65ba2a8cc537cbf483f986071417600aa4cc5cc38ff40dd434af9371c8",
       "sha256": "2cb6d479f842c6275664d0f1ffd955a43a217945901f620eeb220f6c01809579"
+    },
+    {
+      "source": "tools/bi-prototype/preview/data-methods-model.js",
+      "output": "business-intelligence/data-methods-model.js",
+      "sourceSha256": "3efa8bafee4abc43069ff2d71880664d81fd86f0411b73a830578e09bd299f04",
+      "sha256": "3efa8bafee4abc43069ff2d71880664d81fd86f0411b73a830578e09bd299f04"
     },
     {
       "source": "tools/bi-prototype/preview/document-rules.js",
@@ -153,7 +183,7 @@
       "source": "tools/bi-prototype/preview/erp-controls.html",
       "output": "business-intelligence/erp-controls.html",
       "sourceSha256": "853dc98649c542c9120dcb8ad602898f6a55148da93d2162a090e90828614b74",
-      "sha256": "60bb3c41eae54e17a3abc76c9b0ce4324367c286c4eef01b3761666574a4d38b"
+      "sha256": "b124eefde9f71327c7001d1162063f0c3583f4215c6c612e088bb9d2663413af"
     },
     {
       "source": "tools/bi-prototype/preview/erp-controls.js",
@@ -171,7 +201,7 @@
       "source": "tools/bi-prototype/preview/guided-entry.html",
       "output": "business-intelligence/guided-entry.html",
       "sourceSha256": "3f390dc034a071fa99c9f312315eb0f5248cf0c6acec428b0d54871332f06d87",
-      "sha256": "c315068f804d0a0479daf915b779d5af998e73ef2a5e4f5338b5d72a8cdb1ffe"
+      "sha256": "bd0d4074c2ae0457a9c555239aad08e9a39c67b714091cacc2002810f8ee15a4"
     },
     {
       "source": "tools/bi-prototype/preview/guided-entry.js",
@@ -183,13 +213,13 @@
       "source": "tools/bi-prototype/preview/index.html",
       "output": "business-intelligence/historical-analysis.html",
       "sourceSha256": "91136c14002d503143b82125b3f9ebb657cd0e489b245f784e98a2607377dcb9",
-      "sha256": "367d0875a881a29e13e3392ebf8c841f37ded022de80c8a7d5ccff4dc1c48a1b"
+      "sha256": "ac3f1a6639b837605515d5400b05dffd9130d28632d2f868c798e64d057868bd"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "95ad972d583cab40db37f354a7f47d8e79962e6ca2296108e389ca6e4be80c84",
-      "sha256": "ff84d3130172bcb0c157ab9a5bb58a13e1c113c6c39ad6440e4c23b22260e814"
+      "sourceSha256": "19fa93ed8238b125335ef4166e636a2c3800ecb02631dc1a64182ac5fff792f2",
+      "sha256": "37d7ad8abe855476b66ea1f1cc6f80b59d0876ed7dea0006934d863255b20da0"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -201,7 +231,7 @@
       "source": "tools/bi-prototype/preview/invoice-batch.html",
       "output": "business-intelligence/invoice-batch.html",
       "sourceSha256": "9d77f68447c73d913864ad8f2cf468de4726c6eb481267306b3a80649803c39c",
-      "sha256": "cdc60d088b20742bf25828dbd8636711ee24a0a754f5a6826a1382cfc2522c07"
+      "sha256": "c3b11e4fbe4e1876fc3bbb5acf32cd268db6098bcd715959f3fe8dab2e5a81a0"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.js",
@@ -219,7 +249,7 @@
       "source": "tools/bi-prototype/preview/invoice-intake.html",
       "output": "business-intelligence/invoice-intake.html",
       "sourceSha256": "ed6dabb8fbd059e4827bf7000b911feadfea9ced8e7d9b27dbd7d0eff8d3d5a0",
-      "sha256": "d8a79e439bed46e14c07d59b9881d9e723c327c9fca4133f6583efd3b0880166"
+      "sha256": "6009febede1eeb40f985c6acf8b044e747f293a95921a041bc2282a97c6609ad"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-intake.js",
@@ -255,7 +285,7 @@
       "source": "tools/bi-prototype/preview/machine-intelligence.html",
       "output": "business-intelligence/machine-intelligence.html",
       "sourceSha256": "0e2252a1078ecfe61474100a51a62cd805231adca2fc341f7b8f33c29c7ebe5b",
-      "sha256": "b69b81c64e6fd4f0a82d7ad698b6cd026a821ed17dea84eb8e3a14546706e493"
+      "sha256": "cb7c12fcce481b62a6a339542d4ed513d1385272334aa112507b38c95402c99c"
     },
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.js",
@@ -321,7 +351,7 @@
       "source": "tools/bi-prototype/preview/work-execution.html",
       "output": "business-intelligence/work-execution.html",
       "sourceSha256": "4b64c23b642941dfaf9c89e0d60a0226098051b3a32ee87582310868ec2d7b4b",
-      "sha256": "a31c40021158105f41b948747306b2224729ea6c7870332ed1610092cdc6b0d4"
+      "sha256": "c313782f46109d97899f9a9e2179d3f1710c1b63e90c21015567f7c9888b459d"
     },
     {
       "source": "tools/bi-prototype/preview/work-execution.js",

@@ -11,6 +11,7 @@ export const BI_PAGES=[
  {source:'business-report.html',output:'business-report.html',label:'Purchasing intelligence',title:'Purchasing intelligence — inspectable BI'},
  {source:'work-execution.html',output:'work-execution.html',label:'Work completion',title:'Work execution — completion and verification'},
  {source:'invoice-batch.html',output:'invoice-batch.html',label:'Connected invoice intake',title:'Connected invoice intake — multi-line batch'},
+ {source:'data-and-methods.html',output:'data-and-methods.html',label:'Data and methods',title:'Data and methods — inspect the business model'},
  {source:'guided-entry.html',output:'guided-entry.html',label:'Governed coding',title:'Governed purchasing — consistent cost coding'},
  {source:'invoice-intake.html',output:'invoice-intake.html',label:'Invoice sorting',title:'Invoice sorting — owned review queues'},
  {source:'erp-controls.html',output:'erp-controls.html',label:'ERP cost controls',title:'ERP cost controls — allocations and approvals'},
@@ -29,7 +30,7 @@ function header(page){return `<header class="site-header" data-header><div class
 <button class="nav-toggle" type="button" data-nav-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation menu"><span class="nav-toggle-icon" aria-hidden="true"><i></i><i></i></span><span class="nav-toggle-label" data-nav-label>Menu</span></button>
 <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme" aria-pressed="false"><span aria-hidden="true">◐</span><span class="theme-label">Theme</span></button>
 </div></header>`;}
-function footer(){return `<footer class="site-footer"><div class="container bi-footer"><a href="../">David H. Fabro · Portfolio</a><nav aria-label="Business intelligence footer"><a href="./">All BI demonstrations</a><a href="historical-analysis.html#methods">Historical source and methods</a><a href="data-attribution.txt">Research data license</a></nav><p>Company records and outcomes are simulated. Historical research is separately attributed.</p><p>© 2026 David H. Fabro · Original portfolio material. Third-party data retain their own license.</p></div></footer>`;}
+function footer(){return `<footer class="site-footer"><div class="container bi-footer"><a href="../">David H. Fabro · Portfolio</a><nav aria-label="Business intelligence footer"><a href="./">All BI demonstrations</a><a href="data-and-methods.html">Data model and methods</a><a href="historical-analysis.html#methods">Historical source and methods</a><a href="data-attribution.txt">Research data license</a></nav><p>Company records and outcomes are simulated. Historical research is separately attributed.</p><p>© 2026 David H. Fabro · Original portfolio material. Third-party data retain their own license.</p></div></footer>`;}
 
 export function buildPlan(root){
  const sourceRoot=resolve(root,'tools/bi-prototype/preview'),plan=new Map(),entries=[],assets=new Set();

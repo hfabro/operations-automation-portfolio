@@ -1,0 +1,17 @@
+const assert=require('node:assert/strict');
+const J=require('./bi-prototype/preview/journey-rules.js'),R=require('./bi-prototype/preview/report-model.js'),S=require('./bi-prototype/preview/report-scenarios.js'),D=require('./bi-prototype/preview/data-methods-model.js');
+const scenarios=S.checkpoints();
+for(const [name,state]of Object.entries(scenarios)){
+ const before=J.serialize(state),result=D.inspect(state),model=R.compile(state),selection=R.select(model);
+ assert.equal(J.serialize(state),before,'Inspection must not mutate source.');assert.deepEqual(result.model,model);assert.deepEqual(result.totals,selection.totals);assert.equal(result.documentCount,1);assert.equal(result.tables.documents.length,1);assert.equal(result.tables.invoiceAllocations.length,3);assert.equal(result.tables.costRows.length,3);assert.equal(result.tables.poLines.length,2);
+ assert(result.checks.every(c=>c.status==='pass'||c.status==='empty'),name+' should reconcile: '+JSON.stringify(result.checks));
+ for(const contract of D.contracts){assert(result.tables[contract.id]);for(const row of result.tables[contract.id])for(const field of Object.keys(contract.fields))assert(Object.hasOwn(row,field),contract.id+'.'+field+' must exist in the projected model');assert(contract.fields[contract.key]);for(const relation of contract.relationships){assert(contract.fields[relation.field]);assert(D.contracts.find(c=>c.id===relation.target).fields[relation.targetField]);}}
+ assert.equal(result.totals.paid,name==='settled'?375000:0);assert.equal(result.totals.invoiced,result.totals.unpaid+result.totals.paid);assert.equal(result.heldDocumentCount,name==='held'?1:0);
+ assert.equal(result.tables.invoiceAllocations.reduce((sum,r)=>sum+r.netCents,0),name==='held'?385000:375000);
+}
+const empty=D.inspect(J.create());assert(empty.checks.every(c=>c.status==='empty'));assert.equal(empty.documentCount,0);assert.equal(empty.totals.paid,0);
+let held=J.create();held=J.dispatch(held,{id:'METHODS-UNMAPPED',type:'importDocument',actor:J.roles.importDocument,payload:{documentId:'UNMAPPED-1',supplierId:'SYN-SUP-01',number:'UNKNOWN-PO',currency:'EUR',declaredNetCents:10000,sourceLabel:'Fictional unresolved reference',lines:[{poLineId:'UNKNOWN-PO',quantity:1,priceCents:10000}]}});
+const unresolved=D.inspect(held);assert.equal(unresolved.totals.paid,0);assert.equal(unresolved.tables.invoiceAllocations[0].account,null);assert.equal(unresolved.checks.find(c=>c.name==='Invoice allocation → approved PO').status,'held');assert.equal(unresolved.checks.find(c=>c.name==='Supported document currency').status,'held');assert.equal(unresolved.checks.find(c=>c.name==='Cost allocation → approved PO').status,'empty');
+held=J.dispatch(held,{id:'METHODS-HEADER',type:'importDocument',actor:J.roles.importDocument,payload:{documentId:'HEADER-1',supplierId:'SYN-SUP-01',number:'HEADER-MISMATCH',currency:'USD',declaredNetCents:11000,sourceLabel:'Fictional header mismatch',lines:[{poLineId:'UNKNOWN-PO',quantity:1,priceCents:12000}]}});assert.equal(D.inspect(held).checks.find(c=>c.name==='Invoice lines reconcile to header').status,'held');
+const tampered=JSON.parse(JSON.stringify(scenarios.settled));tampered.revision+=1;assert.throws(()=>D.inspect(tampered),'Invalid journals must not be projected.');
+console.log('PASS: source-derived table grains, relationships, read-only checkpoints, distinct invoice counts, exact settlement reconciliation, empty checks and unresolved/currency holds.');
