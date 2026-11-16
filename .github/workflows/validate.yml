@@ -38,6 +38,8 @@ jobs:
         run: node ./tools/test-bi-data-methods.cjs
       - name: Verify work evidence against current journal ancestry
         run: node ./tools/test-bi-work-context.cjs
+      - name: Verify management measures, owners and unavailable sources
+        run: node ./tools/test-bi-management.cjs
 
   browser:
     name: Responsive behavior and accessibility
