@@ -16,6 +16,12 @@
       "title": "Finance policy review — controlled coding changes"
     },
     {
+      "source": "finance-resolution.html",
+      "output": "finance-resolution.html",
+      "label": "Resolve a coding hold",
+      "title": "Resolve a coding hold — reviewed mapping to purchasing"
+    },
+    {
       "source": "document-inbox.html",
       "output": "document-inbox.html",
       "label": "Document inbox",
@@ -122,14 +128,14 @@
     {
       "source": "tools/bi-prototype/preview/business-report.html",
       "output": "business-intelligence/business-report.html",
-      "sourceSha256": "133a89ce8030f9f8c62f31ebacdb208a71509b1d100243c38aa22ca32fdfdaf4",
-      "sha256": "3583d9defffaf900a84a00a66227c72fed5f07a372063d36c664668541b5466f"
+      "sourceSha256": "a0270be5edb262a90aed4db5e3e54ba853b1a52964c075393c7c699e02e7f34c",
+      "sha256": "a29076ab6ed16c5cc4bec9d2945364be519da8a1e50e3c48cddf6896d3bb8a04"
     },
     {
       "source": "tools/bi-prototype/preview/business-report.js",
       "output": "business-intelligence/business-report.js",
-      "sourceSha256": "8cb4bd879b412876679e7b0b4a465a6ab4edce599dcf6416110a2d131a4700c6",
-      "sha256": "8cb4bd879b412876679e7b0b4a465a6ab4edce599dcf6416110a2d131a4700c6"
+      "sourceSha256": "2d46c9e589f2b8a5111200865674c99d3b136bed9092c3adedc4dc09701b97a5",
+      "sha256": "2d46c9e589f2b8a5111200865674c99d3b136bed9092c3adedc4dc09701b97a5"
     },
     {
       "source": "tools/bi-prototype/preview/business-time-data.js",
@@ -176,8 +182,8 @@
     {
       "source": "tools/bi-prototype/preview/connected-documents.js",
       "output": "business-intelligence/connected-documents.js",
-      "sourceSha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69",
-      "sha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69"
+      "sourceSha256": "e3ee43c062de8b5128af7e76b210b6755213de8ce51752678eb1bcf1de6b2776",
+      "sha256": "e3ee43c062de8b5128af7e76b210b6755213de8ce51752678eb1bcf1de6b2776"
     },
     {
       "source": "tools/bi-prototype/preview/connected-journey.css",
@@ -188,14 +194,14 @@
     {
       "source": "tools/bi-prototype/preview/connected-journey.html",
       "output": "business-intelligence/connected-journey.html",
-      "sourceSha256": "04c966228b8380464b2ad6d60f348b6b64a2b1337ec888fed07356f5da4a4e35",
-      "sha256": "593fe353645fff24f355bd6ffa206af1ed9ea854e337b2d0260e8d1fe1e9caf9"
+      "sourceSha256": "282c4d7704bab0485bd06db71af7f214c418c215263e8e6081b9c589c4d1740b",
+      "sha256": "0e8b1358fb91c71d1a45f49e2ec91dacb735eb833a769fc1dd84567a6f20721e"
     },
     {
       "source": "tools/bi-prototype/preview/connected-journey.js",
       "output": "business-intelligence/connected-journey.js",
-      "sourceSha256": "09b45fab9b8ac3d55379ef07475dab4cafbb5cebf5ebc6eae96863725ca84678",
-      "sha256": "09b45fab9b8ac3d55379ef07475dab4cafbb5cebf5ebc6eae96863725ca84678"
+      "sourceSha256": "402bdaed4980cf45c2693cd5a49828e13d8d5189901dec58f632ad1cb3396686",
+      "sha256": "402bdaed4980cf45c2693cd5a49828e13d8d5189901dec58f632ad1cb3396686"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.css",
@@ -206,8 +212,8 @@
     {
       "source": "tools/bi-prototype/preview/data-and-methods.html",
       "output": "business-intelligence/data-and-methods.html",
-      "sourceSha256": "66a1417e171a5916cfb028be1b616b09cae423df77968a62585b545df625a7cb",
-      "sha256": "829ded751ce6c03f3682bc04ecd1cd0b715e4797a1a0f6672dd5a2885b881f33"
+      "sourceSha256": "a75f5096a6f59c957c0aac69f693c17d472aef25dfc9d911b2c09ccec3c654a6",
+      "sha256": "837038fb8c02a5de46c902d7361a7467731c70c2c9a7d783b74389399ea912fb"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.js",
@@ -242,8 +248,8 @@
     {
       "source": "tools/bi-prototype/preview/document-inbox.html",
       "output": "business-intelligence/document-inbox.html",
-      "sourceSha256": "18b9d8ebc22a9ed94612fb5682bbd06b4094c33a2b9d6d32c830b0b56aa1a6d5",
-      "sha256": "d3b8062b3a121ea7cedc843f5c2ef742cc4e33cc55116610533e55fbf0a0af7d"
+      "sourceSha256": "9654b9e0d9d25e9af72118fae65c47e0acce2dcefe80ce09f438bc698b2a6fb7",
+      "sha256": "9bb333056a9372a74599d4dedeba554437a0b9c480933062b286e4e01060f7b4"
     },
     {
       "source": "tools/bi-prototype/preview/document-inbox.js",
@@ -282,6 +288,30 @@
       "sha256": "563f969bcf242c94098bb61fb8fed4c13fc9b31f5029deb5aaf581d246ae9919"
     },
     {
+      "source": "tools/bi-prototype/preview/finance-resolution-rules.js",
+      "output": "business-intelligence/finance-resolution-rules.js",
+      "sourceSha256": "b893deb0fc537422a9628268e8100ff04cd7cd690d9033ade01c28c8fb574a3f",
+      "sha256": "b893deb0fc537422a9628268e8100ff04cd7cd690d9033ade01c28c8fb574a3f"
+    },
+    {
+      "source": "tools/bi-prototype/preview/finance-resolution.css",
+      "output": "business-intelligence/finance-resolution.css",
+      "sourceSha256": "161981c8e5eb641cbb28052c771f3395435661bdf764680d97a2ba4655ac5147",
+      "sha256": "161981c8e5eb641cbb28052c771f3395435661bdf764680d97a2ba4655ac5147"
+    },
+    {
+      "source": "tools/bi-prototype/preview/finance-resolution.html",
+      "output": "business-intelligence/finance-resolution.html",
+      "sourceSha256": "311bac9feb5924c60514a2960069af4bdaff4032ca225de59bfcb13bf1fb643e",
+      "sha256": "83186ddff64f616e65747644497b6baaea64cbd05fbf784f0204a0706ca1f9e0"
+    },
+    {
+      "source": "tools/bi-prototype/preview/finance-resolution.js",
+      "output": "business-intelligence/finance-resolution.js",
+      "sourceSha256": "0e7d7e1c1682ee7bcc245c957fc9d157202a2c821d0741bd0c0ade9e46863e50",
+      "sha256": "0e7d7e1c1682ee7bcc245c957fc9d157202a2c821d0741bd0c0ade9e46863e50"
+    },
+    {
       "source": "tools/bi-prototype/preview/guided-entry.html",
       "output": "business-intelligence/guided-entry.html",
       "sourceSha256": "65ec485094efa08d2a9e493560f30eb82e3d05f508fcbee2c3b454a397a3c8fc",
@@ -314,8 +344,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "b598e7a950bf7a4c2a14cbc914f105946decd477bfa9688e2535f5c267d4f9ae",
-      "sha256": "c0c156851e53433b69204915968e822ee05e87e222b90d8f9c84500cc1803d6d"
+      "sourceSha256": "98e0a80237ac7b9956b435bf7162c7884144d1f403df782bdb9bf9d1a2389873",
+      "sha256": "bd122080f289e47427c7b006d4bb02677a456881665f5b47eef111830ab27574"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -326,14 +356,14 @@
     {
       "source": "tools/bi-prototype/preview/invoice-batch.html",
       "output": "business-intelligence/invoice-batch.html",
-      "sourceSha256": "9d77f68447c73d913864ad8f2cf468de4726c6eb481267306b3a80649803c39c",
-      "sha256": "5bf1528dd6b7684728df55f923c56c635d09b39eafd71a51edb4c0ca41502282"
+      "sourceSha256": "153050fc97c2ea3ba956cf0f1192b0f415c1ed39e8c30600829a021e1830863e",
+      "sha256": "0b527c38cbf7dbd1ce1eabb6a00d67592f9b16cf862b2118bf6ed20fc456a0c6"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.js",
       "output": "business-intelligence/invoice-batch.js",
-      "sourceSha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5",
-      "sha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5"
+      "sourceSha256": "98278335a0936a3125d5f3bc4bde87e600b5a950c9cbc746a2117f938cdfd306",
+      "sha256": "98278335a0936a3125d5f3bc4bde87e600b5a950c9cbc746a2117f938cdfd306"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-intake.css",
@@ -368,8 +398,8 @@
     {
       "source": "tools/bi-prototype/preview/journey-rules.js",
       "output": "business-intelligence/journey-rules.js",
-      "sourceSha256": "e128bfb49f04a285cefa9062ef1c6d33b2e87708f9f63dbf7a7d6c713cb7816c",
-      "sha256": "e128bfb49f04a285cefa9062ef1c6d33b2e87708f9f63dbf7a7d6c713cb7816c"
+      "sourceSha256": "a737e8cff78d60c6e01872dc2462aa9e7ef3101e5889d67e6f99033b8b8d9566",
+      "sha256": "a737e8cff78d60c6e01872dc2462aa9e7ef3101e5889d67e6f99033b8b8d9566"
     },
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.css",
@@ -380,14 +410,14 @@
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.html",
       "output": "business-intelligence/machine-intelligence.html",
-      "sourceSha256": "7e016ee1f9c77af2157be61fd36d65e75748b6548c22eb4f5cddf3ea53c1fd30",
-      "sha256": "8653b2976b724080e9c51fd8579e89e64ba3d0bde57c7d6b1f74f3f6a84afa22"
+      "sourceSha256": "b14b9270e7f17c8c1a7d1e3696976bd88ae3456b1ac6ed1e046307b3ed2b54b7",
+      "sha256": "34d134ac7d4c7b9c13488c919b40b8db7433b97bbd049f7fa31ec6a6ed3964a2"
     },
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.js",
       "output": "business-intelligence/machine-intelligence.js",
-      "sourceSha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754",
-      "sha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754"
+      "sourceSha256": "e3a29657d015c46eee0f71382b240a84fc6c054808205c38f1f402d0e00e99d7",
+      "sha256": "e3a29657d015c46eee0f71382b240a84fc6c054808205c38f1f402d0e00e99d7"
     },
     {
       "source": "tools/bi-prototype/preview/machine-rules.js",
@@ -404,26 +434,26 @@
     {
       "source": "tools/bi-prototype/preview/management-model.js",
       "output": "business-intelligence/management-model.js",
-      "sourceSha256": "6f6d576f6c2bf55f9bccce4a75dd8d38327941ac6a67cc615f25560b99122483",
-      "sha256": "6f6d576f6c2bf55f9bccce4a75dd8d38327941ac6a67cc615f25560b99122483"
+      "sourceSha256": "b7949af7cc558ce721cddd6601f360c8f3f34c437c830fc4243acdb0d95bf0bc",
+      "sha256": "b7949af7cc558ce721cddd6601f360c8f3f34c437c830fc4243acdb0d95bf0bc"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.css",
       "output": "business-intelligence/management-overview.css",
-      "sourceSha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765",
-      "sha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765"
+      "sourceSha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e",
+      "sha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.html",
       "output": "business-intelligence/management-overview.html",
-      "sourceSha256": "4ae62a1c011cd1a07f1705a2bd387b683d91dbae0797face9556aaf923cea9f2",
-      "sha256": "7e54470f681f62f34fe0c79f2faed08b9a67976c5446b1cfb786071be678370f"
+      "sourceSha256": "a244e8208222e0cc614f94a6cb4643f29a1b3fe86b15fc56ab7e56f79883bcb4",
+      "sha256": "9e590d06c911a0f1f63f2ab8059c5bde7d4ae40ce93e2b76d0a897b3085755ab"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.js",
       "output": "business-intelligence/management-overview.js",
-      "sourceSha256": "56068e3d612bd96d1abdcfd7ca0c7b2304735efda658e05a8e0a828551b66e9c",
-      "sha256": "56068e3d612bd96d1abdcfd7ca0c7b2304735efda658e05a8e0a828551b66e9c"
+      "sourceSha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93",
+      "sha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93"
     },
     {
       "source": "tools/bi-prototype/preview/management-scenarios.js",
@@ -440,8 +470,8 @@
     {
       "source": "tools/bi-prototype/preview/policy-review-rules.js",
       "output": "business-intelligence/policy-review-rules.js",
-      "sourceSha256": "02cc471a27297b2b87b9dd815d9dd382a317e0f7ca7c052d8f6bffcb8e7c7d12",
-      "sha256": "02cc471a27297b2b87b9dd815d9dd382a317e0f7ca7c052d8f6bffcb8e7c7d12"
+      "sourceSha256": "adb5a5a54e55f0da24ecaf6ca65b8af8c6142c195a4d1e32c8a4728e4e0d2e71",
+      "sha256": "adb5a5a54e55f0da24ecaf6ca65b8af8c6142c195a4d1e32c8a4728e4e0d2e71"
     },
     {
       "source": "tools/bi-prototype/preview/policy-review.css",
@@ -476,8 +506,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc",
-      "sha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc"
+      "sourceSha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785",
+      "sha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
@@ -518,14 +548,14 @@
     {
       "source": "tools/bi-prototype/preview/work-execution.html",
       "output": "business-intelligence/work-execution.html",
-      "sourceSha256": "65b2ec3a84b7be0f0fecf3b29a359c4085df3260c3b1c30541d686510193fd41",
-      "sha256": "11fb91982b7718ea579f8034bf104ad6ae063072453b966d11f7fb357830a67d"
+      "sourceSha256": "339a8f62e13911f1cc6873ed66cfdd07862bb023c8fa5b898c38f2b8ae5a0dab",
+      "sha256": "ee8c7800a71cf38050d7a227d0f15f8396b1bcc50b2786ff75cc200941727eb8"
     },
     {
       "source": "tools/bi-prototype/preview/work-execution.js",
       "output": "business-intelligence/work-execution.js",
-      "sourceSha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790",
-      "sha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790"
+      "sourceSha256": "a93b6655727a91256b4657a1cf423cda936e81f4ecc727e6a2e62f917bf51058",
+      "sha256": "a93b6655727a91256b4657a1cf423cda936e81f4ecc727e6a2e62f917bf51058"
     },
     {
       "source": "tools/bi-prototype/preview/work-rules.js",

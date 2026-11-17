@@ -73,6 +73,12 @@
    proposals: clone(view.proposals), appliedProposalIds: approved.filter(proposal => proposal.rule.effectiveFrom <= on && on < proposal.rule.effectiveToExclusive).map(proposal => proposal.id),
    journal: clone(state), boundaries: 'Independent fictional additive policy review. Original held request, ERP master and saved journals remain unchanged. New evaluations are requisition drafts, not POs or posting. No production authentication or accounting-policy determination.'};
  }
+ function evaluateRequest(state, on, input) {
+  closed(input, ['itemId', 'purposeId', 'quantity'], 'Request input');
+  const evaluation = evaluate(state, on), result = C.resolve(clone(input), evaluation.testedPolicy);
+  const matching = evaluation.proposals.filter(proposal => proposal.status === 'Approved' && proposal.review.businessDate <= on && proposal.rule.itemId === input.itemId && proposal.rule.purposeId === input.purposeId && proposal.rule.effectiveFrom <= on && on < proposal.rule.effectiveToExclusive);
+  return {on, request: clone(input), result, testedPolicy: evaluation.testedPolicy, appliedProposalIds: matching.map(proposal => proposal.id)};
+ }
  function serialize(state) {project(state); return JSON.stringify(state);}
  function restore(text) {const state = JSON.parse(text); project(state); return clone(state);}
  function impact(state, on) {
@@ -100,5 +106,5 @@
   if (!same(rebuilt, data)) fail('Evidence differs from its replayed sources and calculations.');
   return {state, on: data.on, viewSelection: clone(data.viewSelection)};
  }
- return {create, project, dispatch, evaluate, impact, evidence, restoreEvidence, serialize, restore, roles: clone(roles)};
+ return {create, project, dispatch, evaluate, evaluateRequest, impact, evidence, restoreEvidence, serialize, restore, roles: clone(roles)};
 });

@@ -3,7 +3,7 @@
  const B=window.InvoiceBatch,X=window.BatchScenarios,J=window.Journey,D=window.InvoiceDocuments,$=s=>document.querySelector(s),node=(tag,text)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;return e;},key='portfolio-phase2-connected-v1',example=X.example();
  let source='example',preview=B.prepare(example.journey,example.csv,example.batchId),dirty=false,filter='all';$('#batch-csv').value=example.csv;
  const message=text=>{$('#batch-status').textContent=text;};
- function current(){const text=sessionStorage.getItem(key);return text?J.restore(text):J.create();}
+ function current(text=sessionStorage.getItem(key)){if(text===null)return J.create();try{return J.restore(text);}catch(e){throw Error('Saved purchasing journal unavailable. Open the purchasing workflow to restore a validated checkpoint or explicitly restart. '+e.message);}}
  const sourceJournal=()=>source==='example'?example.journey:current();
  function render(){
   $('#batch-example').setAttribute('aria-pressed',String(source==='example'));$('#batch-current').setAttribute('aria-pressed',String(source==='current'));
@@ -27,10 +27,10 @@
  $('#batch-example').onclick=()=>perform(()=>{source='example';$('#batch-csv').value=example.csv;$('#batch-reference').value=example.batchId;$('#batch-file').value='';prepare();});
  $('#batch-current').onclick=()=>perform(()=>{current();source='current';prepare();});
  $('#stage-batch').onclick=()=>perform(()=>{
-  if(dirty||$('#batch-role').value!=='AP')throw Error('Use AP with a current complete preview.');let base=current();
+  if(dirty||$('#batch-role').value!=='AP')throw Error('Use AP with a current complete preview.');const captured=sessionStorage.getItem(key);let base=current(captured);
   const matches=J.serialize(base)===preview.sourceCheckpoint,already=preview.commands.every(c=>base.commands.some(x=>x.id===c.id));
   if(source==='example'&&!matches&&!already){if(base.revision&&!confirm('Stage the guided batch by replacing the current fictional purchasing journal with its example context? Maintenance/work checkpoints remain as they are and may refer to prior purchasing records. Download checkpoints you want to keep first.'))return;base=example.journey;}
-  const result=B.stage(preview,base),nextPreview=B.prepare(result,$('#batch-csv').value,$('#batch-reference').value);sessionStorage.setItem(key,J.serialize(result));source='current';preview=nextPreview;dirty=false;filter='all';$('#batch-document-detail').replaceChildren();message(already?'Batch already staged. Stable action IDs prevented duplicate documents.':'Complete batch staged atomically. Review holds and post eligible documents separately in purchasing.');render();
+  const result=B.stage(preview,base),nextPreview=B.prepare(result,$('#batch-csv').value,$('#batch-reference').value);if(sessionStorage.getItem(key)!==captured)throw Error('Saved purchasing journal changed during staging. Preview the batch again before replacing saved progress.');sessionStorage.setItem(key,J.serialize(result));source='current';preview=nextPreview;dirty=false;filter='all';$('#batch-document-detail').replaceChildren();message(already?'Batch already staged. Stable action IDs prevented duplicate documents.':'Complete batch staged atomically. Review holds and post eligible documents separately in purchasing.');render();
  });
  $('#batch-file').onchange=async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>262144)throw Error('CSV exceeds 256 KiB.');const text=new TextDecoder('utf-8',{fatal:true}).decode(await file.arrayBuffer()),next=B.prepare(sourceJournal(),text,$('#batch-reference').value);$('#batch-csv').value=text;preview=next;dirty=false;filter='all';$('#batch-document-detail').replaceChildren();message('Structured file previewed. Saved purchasing records are unchanged.');render();}catch(e){message('File rejected; previous valid preview and saved journal preserved. '+e.message);}};
  function download(name,data,type){const url=URL.createObjectURL(new Blob([data],{type})),a=node('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}

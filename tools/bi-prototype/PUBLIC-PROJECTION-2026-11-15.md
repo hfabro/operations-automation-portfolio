@@ -1,12 +1,12 @@
 # Portfolio BI projection
 
-The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; fourteen related demonstrations include Finance policy review, the source-document inbox, business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
+The projection contains generated portfolio pages at `/business-intelligence/`. The visitor hub is `/business-intelligence/`; fifteen related demonstrations include connected Finance resolution, Finance policy review, the source-document inbox, business trends, the management overview, machine intelligence, connected purchasing, browser BI, work execution, connected batch intake, governed coding, focused invoice sorting, ERP controls, inspectable data/methods and historical purchasing research.
 
 This is a source integration prepared for review. A draft branch and generated routes do not merge or publish themselves. The production site changes only through the separately authorized release workflow.
 
 ## One source of business behavior
 
-`tools/bi-prototype/preview/` remains the canonical simulation source. `tools/build-bi-pages.mjs` produces the public projection: fifteen HTML pages, explicitly referenced local scripts/styles/CSV, a portfolio framing stylesheet and the research-data license notice. It remaps the prototype hub to `index.html` and the historical research page to `historical-analysis.html`; their query strings and fragments remain intact. Public scripts retain the same rules, fixtures and journal keys.
+`tools/bi-prototype/preview/` remains the canonical simulation source. `tools/build-bi-pages.mjs` produces the public projection: sixteen HTML pages, explicitly referenced local scripts/styles/CSV, a portfolio framing stylesheet and the research-data license notice. It remaps the prototype hub to `index.html` and the historical research page to `historical-analysis.html`; their query strings and fragments remain intact. Public scripts retain the same rules, fixtures and journal keys.
 
 The generator precomputes the complete plan before writing. Asset admission is limited to declared basename scripts/styles and the fictional invoice sample CSV. It does not copy raw research, curated exports, tools, generated test evidence or unreferenced files. Source/output hashes and route metadata are retained in `tools/bi-public-manifest.json`. Generated text uses UTF-8 without BOM and LF line endings.
 
@@ -108,3 +108,20 @@ The existing Data and methods route adds `data-methods-export.js` and complete s
 Management coding holds retain the captured request quantity, decision and policy identity. A focused JSON download contains that unchanged request and its validated purchasing checkpoint. The separate fixed Finance example is linked with an explicit scope boundary; it does not resolve the captured management hold, approve a rule, recode purchases or write journals.
 
 Saved-source absence is identified only by a missing storage key (`null`). A retained empty string is malformed evidence and cannot become a zero-value report or table export. The report hides unavailable figures and disables its exports; an explicitly imported valid checkpoint, valid current journal or guided example restores inspection. Damaged saved copies remain unchanged.
+
+## Connected resolution of an actual coding hold
+
+`finance-resolution.html` captures a specific missing-mapping request from the explicit current journal, the guided management snapshot or replay-validated coding-hold evidence. Management links bind the request to the full serialized purchasing checkpoint with SHA-256. Changed content, including at the same revision, cannot silently become another source. The independent fixed Finance example remains available and unchanged.
+
+Finance proposal/review reuse the existing policy journal and baseline. The additive `evaluateRequest` API evaluates the captured item/work purpose and quantity against a dated approved snapshot; the legacy evaluation/evidence API retains its prior results. `stagePolicyRequest` embeds the reviewed Finance journal in a new purchasing command and derives a Coded replacement draft from the original held input. The original request object and existing PO snapshots remain unchanged. A baseline metadata version still describes the journal baseline; individual PO rows carry their own captured Finance rule, version and evaluation date.
+
+Purchasing uses the new request only after separate approval. Receipt, invoice, posting, authorization and settlement controls are reused. Management separates retained original holds with replacement drafts from actionable missing mappings. The detailed report links the original hold to its reviewed request and policy. No global master rollout, retroactive recoding or production authentication is claimed.
+
+The workbench remains temporary until an explicit guarded purchasing handoff. A saved-current source must still match completely; missing/damaged sources block writes. A separate guided/imported context requires explicit confirmation before replacing a different valid saved journal, with an existing-checkpoint download and a final stale-source guard. Evidence restores by replay; an approved policy alone does not record a draft-creation event. See `FINANCE-RESOLUTION-CONTRACT-2026-11-16.md`. The one-time legacy fixture is pinned to published revision `9a18049` and must not be regenerated by tests.
+
+
+## Short visitor business review
+
+The hub's native review entry opens `management-overview.html?review=1#management-review-guide`, which expands a four-stop navigation disclosure. Financial position, invoice ownership, coding governance and maintenance evidence remain within the single selected management context. No new dataset, workflow command, transaction, journal write or model calculation is introduced. The underlying Finance/purchasing journey remains separately available.
+
+The guide names the current source mode. Switching to saved journals retains absent/damaged source states rather than substituting example figures. Its fragment links focus existing financial, invoice, coding and work headings; they do not select metrics, filter owners, clear inspected allocations or imply completed work. The disclosure and links remain native controls without JavaScript, with the existing explicit simulation fallback. Expanded guide states are screened in the existing cross-browser integrated acceptance suite at narrow/desktop widths in both themes; non-default measure/owner/allocation selections and all three journal values remain preserved.
