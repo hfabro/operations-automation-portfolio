@@ -166,6 +166,7 @@ jobs:
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
           node tools/test-bi-finance-resolution-browser.mjs
+          node tools/test-bi-purchasing-recovery.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
@@ -217,6 +218,7 @@ jobs:
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
           node tools/test-bi-finance-resolution-browser.mjs
+          node tools/test-bi-purchasing-recovery.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright

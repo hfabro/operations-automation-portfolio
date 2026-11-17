@@ -1,0 +1,12 @@
+# Purchasing editor save and recovery contract
+
+The connected purchasing page is a fictional browser-only demonstration. This change protects its session checkpoint; it does not introduce authenticated enterprise storage, a server, or shared-user concurrency.
+
+- A missing saved key starts an empty journal. An empty string or malformed checkpoint is an unavailable source: transaction figures and audit history stay hidden, commands and example replacement are blocked, and the retained value remains downloadable.
+- A loaded editor owns the exact saved text it read. Every command, example replacement, reset and validated checkpoint import compares that text with the current saved value before writing. Different command content at the same revision, deleted values and formatting changes all require reloading. A blocked write preserves both the saved value and the editor's in-memory journal.
+- Checkpoint imports recheck after asynchronous file decoding and after replacement confirmation. Reset and example replacement also check after their confirmation. Imports still replay the existing commands and enforce the existing size, UTF-8, schema, policy and transition rules.
+- Replacing damaged data requires an explicit restart or validated-import confirmation. Downloading the saved value preserves its exact text, including an empty string; that file is not represented as validated evidence. The separate in-memory checkpoint download remains validated journal serialization.
+- If storage is unavailable on entry, the page explicitly runs in memory. A failed write also switches this view to memory-only mode. That view never silently takes write ownership later: download a checkpoint before leaving and reload to establish a new saved source. If storage becomes unreadable after a successful load, commands block because the source cannot be checked.
+- Purchasing rules, fictional masters, checkpoint schema, Finance journal replay, financial calculations, roles, and PO/receipt/invoice/payment authorization steps are unchanged.
+
+Verification: `node tools/test-bi-purchasing-recovery.mjs` exercises source integrity, recovery, confirmation/async drift, storage failures and eight responsive automated accessibility screens. Run under Chromium, Firefox and WebKit using the repository browser selector. Existing purchasing, supplier-correction, integrated BI and Finance handoff suites cover the preserved end-to-end workflows.

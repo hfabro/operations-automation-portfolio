@@ -182,8 +182,8 @@
     {
       "source": "tools/bi-prototype/preview/connected-documents.js",
       "output": "business-intelligence/connected-documents.js",
-      "sourceSha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69",
-      "sha256": "12ee6d7c60eddef9f91b1ca3ed813902a98666f508d166fda95bce560731ae69"
+      "sourceSha256": "e3ee43c062de8b5128af7e76b210b6755213de8ce51752678eb1bcf1de6b2776",
+      "sha256": "e3ee43c062de8b5128af7e76b210b6755213de8ce51752678eb1bcf1de6b2776"
     },
     {
       "source": "tools/bi-prototype/preview/connected-journey.css",
@@ -194,14 +194,14 @@
     {
       "source": "tools/bi-prototype/preview/connected-journey.html",
       "output": "business-intelligence/connected-journey.html",
-      "sourceSha256": "054abf9c403be63cb7457131dab6e67c54ec1cd689e9220d5e762c2ed7679eec",
-      "sha256": "50db483c1553ebe09881f61a3fa794ec1af1f56203be3e3300aa171cfacb5630"
+      "sourceSha256": "282c4d7704bab0485bd06db71af7f214c418c215263e8e6081b9c589c4d1740b",
+      "sha256": "0e8b1358fb91c71d1a45f49e2ec91dacb735eb833a769fc1dd84567a6f20721e"
     },
     {
       "source": "tools/bi-prototype/preview/connected-journey.js",
       "output": "business-intelligence/connected-journey.js",
-      "sourceSha256": "01ade627274ae3ea192609c688ab664e1d01678277e2f2c48ccd0feac72bdbf8",
-      "sha256": "01ade627274ae3ea192609c688ab664e1d01678277e2f2c48ccd0feac72bdbf8"
+      "sourceSha256": "402bdaed4980cf45c2693cd5a49828e13d8d5189901dec58f632ad1cb3396686",
+      "sha256": "402bdaed4980cf45c2693cd5a49828e13d8d5189901dec58f632ad1cb3396686"
     },
     {
       "source": "tools/bi-prototype/preview/data-and-methods.css",
