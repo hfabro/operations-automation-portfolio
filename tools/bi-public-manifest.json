@@ -416,8 +416,8 @@
     {
       "source": "tools/bi-prototype/preview/machine-intelligence.js",
       "output": "business-intelligence/machine-intelligence.js",
-      "sourceSha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754",
-      "sha256": "4ed066505d5b8a277af9a403b3b7d1d68f56e99c68969cad33ab1db7b1a08754"
+      "sourceSha256": "e3a29657d015c46eee0f71382b240a84fc6c054808205c38f1f402d0e00e99d7",
+      "sha256": "e3a29657d015c46eee0f71382b240a84fc6c054808205c38f1f402d0e00e99d7"
     },
     {
       "source": "tools/bi-prototype/preview/machine-rules.js",
@@ -554,8 +554,8 @@
     {
       "source": "tools/bi-prototype/preview/work-execution.js",
       "output": "business-intelligence/work-execution.js",
-      "sourceSha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790",
-      "sha256": "6c633c881fdb0e5756856a1e1eea8b84e3925d5a3ee9a0bfe362125fc4155790"
+      "sourceSha256": "a93b6655727a91256b4657a1cf423cda936e81f4ecc727e6a2e62f917bf51058",
+      "sha256": "a93b6655727a91256b4657a1cf423cda936e81f4ecc727e6a2e62f917bf51058"
     },
     {
       "source": "tools/bi-prototype/preview/work-rules.js",
