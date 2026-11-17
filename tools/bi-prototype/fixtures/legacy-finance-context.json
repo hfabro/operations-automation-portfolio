@@ -1,0 +1,1644 @@
+{
+  "sourceRevision": "9a1804955068f8b435de03c7229430174c1217da",
+  "purchasingCheckpoint": {
+    "format": "SYN-P2P-JOURNEY",
+    "schemaVersion": 1,
+    "policySnapshot": {
+      "version": "SYN-MASTER-1",
+      "evaluationDate": "2026-11-15",
+      "owner": "Finance policy owner",
+      "sites": [
+        "Lakeside"
+      ],
+      "assets": {
+        "PUMP-04": "Lakeside",
+        "AHU-02": "Lakeside",
+        "LINE-03": "Lakeside",
+        "PUMP-05": "Lakeside"
+      },
+      "accounts": [
+        "1600 · Equipment",
+        "6105 · Equipment repairs",
+        "6100 · Maintenance supplies",
+        "1620 · Project engineering"
+      ],
+      "centers": {
+        "FAC-100": "Facilities",
+        "PROD-200": "Production",
+        "ENG-300": "Engineering"
+      },
+      "projects": {
+        "CAP-026": {
+          "status": "Approved",
+          "site": "Lakeside"
+        },
+        "CAP-027": {
+          "status": "Closed",
+          "site": "Lakeside"
+        }
+      },
+      "suppliers": {
+        "SYN-SUP-01": "Approved",
+        "SYN-SUP-02": "Approved",
+        "SYN-SUP-03": "Approved"
+      },
+      "items": [
+        {
+          "id": "ITEM-PUMP",
+          "name": "Cooling pump assembly",
+          "category": "Equipment",
+          "supplier": "SYN-SUP-01",
+          "priceCents": 125000,
+          "unit": "EA"
+        },
+        {
+          "id": "ITEM-FILTER",
+          "name": "Air filter kit",
+          "category": "MRO consumables",
+          "supplier": "SYN-SUP-02",
+          "priceCents": 5000,
+          "unit": "EA"
+        },
+        {
+          "id": "ITEM-ENGINEERING",
+          "name": "Controls engineering service",
+          "category": "Engineering services",
+          "supplier": "SYN-SUP-03",
+          "priceCents": 200000,
+          "unit": "Service milestone"
+        }
+      ],
+      "purposes": [
+        {
+          "id": "WORK-CAP",
+          "name": "WO-410 · Approved cooling upgrade",
+          "site": "Lakeside",
+          "asset": "PUMP-04",
+          "workOrder": "WO-410",
+          "project": "CAP-026"
+        },
+        {
+          "id": "WORK-REPAIR",
+          "name": "WO-413 · Routine pump repair",
+          "site": "Lakeside",
+          "asset": "PUMP-04",
+          "workOrder": "WO-413",
+          "project": ""
+        },
+        {
+          "id": "WORK-FILTER",
+          "name": "WO-411 · Scheduled air-handler service",
+          "site": "Lakeside",
+          "asset": "AHU-02",
+          "workOrder": "WO-411",
+          "project": ""
+        },
+        {
+          "id": "WORK-CONTROLS",
+          "name": "WO-412 · Approved controls upgrade",
+          "site": "Lakeside",
+          "asset": "LINE-03",
+          "workOrder": "WO-412",
+          "project": "CAP-026"
+        },
+        {
+          "id": "WORK-CLOSED",
+          "name": "WO-414 · Closed project example",
+          "site": "Lakeside",
+          "asset": "PUMP-05",
+          "workOrder": "WO-414",
+          "project": "CAP-027"
+        }
+      ],
+      "rules": [
+        {
+          "id": "CODE-001",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-CAP",
+          "account": "1600 · Equipment",
+          "treatment": "Approved capital-project scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 7000
+            },
+            {
+              "costCenter": "PROD-200",
+              "department": "Production",
+              "basisPoints": 3000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-002",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-REPAIR",
+          "account": "6105 · Equipment repairs",
+          "treatment": "Routine operating-cost scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-003",
+          "version": 1,
+          "itemId": "ITEM-FILTER",
+          "purposeId": "WORK-FILTER",
+          "account": "6100 · Maintenance supplies",
+          "treatment": "Routine operating-cost scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-004",
+          "version": 1,
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-CONTROLS",
+          "account": "1620 · Project engineering",
+          "treatment": "Approved capital-project scenario",
+          "allocations": [
+            {
+              "costCenter": "ENG-300",
+              "department": "Engineering",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-005",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-CLOSED",
+          "account": "1600 · Equipment",
+          "treatment": "Closed-project example",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "id": "MACHINE-STAGE-COND-PUMP-04-VIB-20261115",
+        "type": "stage",
+        "actor": "Requester",
+        "payload": {
+          "requestId": "REQ-COND-PUMP-04-VIB-20261115",
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-REPAIR",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "WORK-EXAMPLE-approve",
+        "type": "approve",
+        "actor": "Purchasing approver",
+        "payload": {
+          "requestId": "REQ-COND-PUMP-04-VIB-20261115",
+          "reason": "Fictional purchasing approval for the reviewed repair"
+        }
+      },
+      {
+        "id": "WORK-EXAMPLE-ACCEPT",
+        "type": "receive",
+        "actor": "Receiving",
+        "payload": {
+          "poLineId": "SYN-PO-0001/001",
+          "receiptReference": "WORK-MATERIAL-ACCEPT",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "MGMT-4",
+        "type": "import",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-PUMP",
+          "poLineId": "SYN-PO-0001/001",
+          "supplierId": "SYN-SUP-01",
+          "number": "MGMT-PUMP",
+          "quantity": 1,
+          "priceCents": 125000,
+          "currency": "USD"
+        }
+      },
+      {
+        "id": "MGMT-5",
+        "type": "post",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-PUMP"
+        }
+      },
+      {
+        "id": "MGMT-6",
+        "type": "authorize",
+        "actor": "Payment approver",
+        "payload": {
+          "documentId": "MGMT-PUMP"
+        }
+      },
+      {
+        "id": "MGMT-7",
+        "type": "pay",
+        "actor": "Treasury",
+        "payload": {
+          "documentId": "MGMT-PUMP"
+        }
+      },
+      {
+        "id": "MGMT-8",
+        "type": "stage",
+        "actor": "Requester",
+        "payload": {
+          "requestId": "MGMT-CAPITAL",
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-CAP",
+          "quantity": 2
+        }
+      },
+      {
+        "id": "MGMT-9",
+        "type": "approve",
+        "actor": "Purchasing approver",
+        "payload": {
+          "requestId": "MGMT-CAPITAL",
+          "reason": "Fictional approved cooling upgrade"
+        }
+      },
+      {
+        "id": "MGMT-10",
+        "type": "receive",
+        "actor": "Receiving",
+        "payload": {
+          "poLineId": "SYN-PO-0002/001",
+          "receiptReference": "MGMT-CAPITAL-PART-1",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "MGMT-11",
+        "type": "import",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-CAPITAL-INVOICE",
+          "poLineId": "SYN-PO-0002/001",
+          "supplierId": "SYN-SUP-01",
+          "number": "MGMT-CAPITAL-INVOICE",
+          "quantity": 2,
+          "priceCents": 125000,
+          "currency": "USD"
+        }
+      },
+      {
+        "id": "MGMT-12",
+        "type": "stage",
+        "actor": "Requester",
+        "payload": {
+          "requestId": "MGMT-FILTERS",
+          "itemId": "ITEM-FILTER",
+          "purposeId": "WORK-FILTER",
+          "quantity": 4
+        }
+      },
+      {
+        "id": "MGMT-13",
+        "type": "approve",
+        "actor": "Purchasing approver",
+        "payload": {
+          "requestId": "MGMT-FILTERS",
+          "reason": "Fictional scheduled air-handler service"
+        }
+      },
+      {
+        "id": "MGMT-14",
+        "type": "receive",
+        "actor": "Receiving",
+        "payload": {
+          "poLineId": "SYN-PO-0003/001",
+          "receiptReference": "MGMT-FILTER-ACCEPT",
+          "quantity": 4
+        }
+      },
+      {
+        "id": "MGMT-15",
+        "type": "import",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-FILTER-PRICE",
+          "poLineId": "SYN-PO-0003/001",
+          "supplierId": "SYN-SUP-02",
+          "number": "MGMT-FILTER-PRICE",
+          "quantity": 2,
+          "priceCents": 6000,
+          "currency": "USD"
+        }
+      },
+      {
+        "id": "MGMT-16",
+        "type": "import",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-FILTER-POSTED",
+          "poLineId": "SYN-PO-0003/001",
+          "supplierId": "SYN-SUP-02",
+          "number": "MGMT-FILTER-POSTED",
+          "quantity": 1,
+          "priceCents": 5000,
+          "currency": "USD"
+        }
+      },
+      {
+        "id": "MGMT-17",
+        "type": "post",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-FILTER-POSTED"
+        }
+      },
+      {
+        "id": "MGMT-18",
+        "type": "stage",
+        "actor": "Requester",
+        "payload": {
+          "requestId": "MGMT-CONTROLS",
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-CONTROLS",
+          "quantity": 1
+        }
+      },
+      {
+        "id": "MGMT-19",
+        "type": "approve",
+        "actor": "Purchasing approver",
+        "payload": {
+          "requestId": "MGMT-CONTROLS",
+          "reason": "Fictional approved controls project"
+        }
+      },
+      {
+        "id": "MGMT-20",
+        "type": "import",
+        "actor": "AP",
+        "payload": {
+          "documentId": "MGMT-SERVICE-INVOICE",
+          "poLineId": "SYN-PO-0004/001",
+          "supplierId": "SYN-SUP-03",
+          "number": "MGMT-SERVICE-INVOICE",
+          "quantity": 1,
+          "priceCents": 200000,
+          "currency": "USD"
+        }
+      },
+      {
+        "id": "MGMT-21",
+        "type": "stage",
+        "actor": "Requester",
+        "payload": {
+          "requestId": "MGMT-CODING-HOLD",
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-FILTER",
+          "quantity": 1
+        }
+      }
+    ]
+  },
+  "purchasingStateSha256": "6af4491ed0e96453697f4571fedeacd99b4725b47ffd08e8194d0410f1f075ae",
+  "financialTotals": {
+    "ordered": 595000,
+    "openCommitment": 465000,
+    "receivedUninvoiced": 140000,
+    "invoiced": 130000,
+    "unpaid": 5000,
+    "paid": 125000
+  },
+  "financeEvidence": {
+    "format": "SIMULATED-FINANCE-POLICY-RESULT",
+    "version": 1,
+    "fictional": true,
+    "scenarioId": "SYN-POLICY-REVIEW-1",
+    "on": "2026-11-18",
+    "request": {
+      "itemId": "ITEM-ENGINEERING",
+      "purposeId": "WORK-REPAIR",
+      "quantity": 1
+    },
+    "result": {
+      "status": "ready",
+      "owner": "Finance policy owner",
+      "masterVersion": "SYN-MASTER-1+FIN-MAP-001",
+      "ruleId": "FIN-MAP-001",
+      "ruleVersion": 1,
+      "evaluatedOn": "2026-11-18",
+      "effectiveFrom": "2026-11-17",
+      "effectiveToExclusive": "2027-01-01",
+      "coding": {
+        "itemId": "ITEM-ENGINEERING",
+        "description": "Controls engineering service",
+        "supplier": "SYN-SUP-03",
+        "quantity": 1,
+        "unit": "Service milestone",
+        "unitPriceCents": 200000,
+        "netCents": 200000,
+        "currency": "USD",
+        "site": "Lakeside",
+        "category": "Engineering services",
+        "account": "6105 · Equipment repairs",
+        "treatment": "Independently reviewed fictional Finance mapping",
+        "project": "",
+        "asset": "PUMP-04",
+        "workOrder": "WO-413",
+        "allocations": [
+          {
+            "costCenter": "FAC-100",
+            "basisPoints": 10000,
+            "department": "Facilities"
+          }
+        ]
+      },
+      "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+    },
+    "testedPolicy": {
+      "version": "SYN-MASTER-1+FIN-MAP-001",
+      "evaluationDate": "2026-11-18",
+      "owner": "Finance policy owner",
+      "sites": [
+        "Lakeside"
+      ],
+      "assets": {
+        "PUMP-04": "Lakeside",
+        "AHU-02": "Lakeside",
+        "LINE-03": "Lakeside",
+        "PUMP-05": "Lakeside"
+      },
+      "accounts": [
+        "1600 · Equipment",
+        "6105 · Equipment repairs",
+        "6100 · Maintenance supplies",
+        "1620 · Project engineering"
+      ],
+      "centers": {
+        "FAC-100": "Facilities",
+        "PROD-200": "Production",
+        "ENG-300": "Engineering"
+      },
+      "projects": {
+        "CAP-026": {
+          "status": "Approved",
+          "site": "Lakeside"
+        },
+        "CAP-027": {
+          "status": "Closed",
+          "site": "Lakeside"
+        }
+      },
+      "suppliers": {
+        "SYN-SUP-01": "Approved",
+        "SYN-SUP-02": "Approved",
+        "SYN-SUP-03": "Approved"
+      },
+      "items": [
+        {
+          "id": "ITEM-PUMP",
+          "name": "Cooling pump assembly",
+          "category": "Equipment",
+          "supplier": "SYN-SUP-01",
+          "priceCents": 125000,
+          "unit": "EA"
+        },
+        {
+          "id": "ITEM-FILTER",
+          "name": "Air filter kit",
+          "category": "MRO consumables",
+          "supplier": "SYN-SUP-02",
+          "priceCents": 5000,
+          "unit": "EA"
+        },
+        {
+          "id": "ITEM-ENGINEERING",
+          "name": "Controls engineering service",
+          "category": "Engineering services",
+          "supplier": "SYN-SUP-03",
+          "priceCents": 200000,
+          "unit": "Service milestone"
+        }
+      ],
+      "purposes": [
+        {
+          "id": "WORK-CAP",
+          "name": "WO-410 · Approved cooling upgrade",
+          "site": "Lakeside",
+          "asset": "PUMP-04",
+          "workOrder": "WO-410",
+          "project": "CAP-026"
+        },
+        {
+          "id": "WORK-REPAIR",
+          "name": "WO-413 · Routine pump repair",
+          "site": "Lakeside",
+          "asset": "PUMP-04",
+          "workOrder": "WO-413",
+          "project": ""
+        },
+        {
+          "id": "WORK-FILTER",
+          "name": "WO-411 · Scheduled air-handler service",
+          "site": "Lakeside",
+          "asset": "AHU-02",
+          "workOrder": "WO-411",
+          "project": ""
+        },
+        {
+          "id": "WORK-CONTROLS",
+          "name": "WO-412 · Approved controls upgrade",
+          "site": "Lakeside",
+          "asset": "LINE-03",
+          "workOrder": "WO-412",
+          "project": "CAP-026"
+        },
+        {
+          "id": "WORK-CLOSED",
+          "name": "WO-414 · Closed project example",
+          "site": "Lakeside",
+          "asset": "PUMP-05",
+          "workOrder": "WO-414",
+          "project": "CAP-027"
+        }
+      ],
+      "rules": [
+        {
+          "id": "CODE-001",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-CAP",
+          "account": "1600 · Equipment",
+          "treatment": "Approved capital-project scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 7000
+            },
+            {
+              "costCenter": "PROD-200",
+              "department": "Production",
+              "basisPoints": 3000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-002",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-REPAIR",
+          "account": "6105 · Equipment repairs",
+          "treatment": "Routine operating-cost scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-003",
+          "version": 1,
+          "itemId": "ITEM-FILTER",
+          "purposeId": "WORK-FILTER",
+          "account": "6100 · Maintenance supplies",
+          "treatment": "Routine operating-cost scenario",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-004",
+          "version": 1,
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-CONTROLS",
+          "account": "1620 · Project engineering",
+          "treatment": "Approved capital-project scenario",
+          "allocations": [
+            {
+              "costCenter": "ENG-300",
+              "department": "Engineering",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "CODE-005",
+          "version": 1,
+          "itemId": "ITEM-PUMP",
+          "purposeId": "WORK-CLOSED",
+          "account": "1600 · Equipment",
+          "treatment": "Closed-project example",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "department": "Facilities",
+              "basisPoints": 10000
+            }
+          ],
+          "status": "Approved",
+          "effectiveFrom": "2026-01-01",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        {
+          "id": "FIN-MAP-001",
+          "version": 1,
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-REPAIR",
+          "account": "6105 · Equipment repairs",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "basisPoints": 10000,
+              "department": "Facilities"
+            }
+          ],
+          "treatment": "Independently reviewed fictional Finance mapping",
+          "status": "Approved",
+          "effectiveFrom": "2026-11-17",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        }
+      ]
+    },
+    "capturedBeforeChange": {
+      "on": "2026-11-15",
+      "request": {
+        "itemId": "ITEM-ENGINEERING",
+        "purposeId": "WORK-REPAIR",
+        "quantity": 1
+      },
+      "result": {
+        "status": "held",
+        "code": "NO_APPROVED_MAPPING",
+        "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+        "owner": "Finance policy owner",
+        "masterVersion": "SYN-MASTER-1"
+      }
+    },
+    "proposals": [
+      {
+        "id": "MAP-001",
+        "rule": {
+          "id": "FIN-MAP-001",
+          "version": 1,
+          "itemId": "ITEM-ENGINEERING",
+          "purposeId": "WORK-REPAIR",
+          "account": "6105 · Equipment repairs",
+          "allocations": [
+            {
+              "costCenter": "FAC-100",
+              "basisPoints": 10000,
+              "department": "Facilities"
+            }
+          ],
+          "treatment": "Independently reviewed fictional Finance mapping",
+          "status": "Approved",
+          "effectiveFrom": "2026-11-17",
+          "effectiveToExclusive": "2027-01-01",
+          "owner": "Finance policy owner"
+        },
+        "status": "Approved",
+        "proposedBy": {
+          "role": "Finance analyst",
+          "personId": "PERSON-A"
+        },
+        "proposedOn": "2026-11-16",
+        "proposalCommandId": "GOLDEN-PROPOSE",
+        "reason": "Fictional legacy approved mapping",
+        "review": {
+          "commandId": "GOLDEN-APPROVE",
+          "actor": {
+            "role": "Finance approver",
+            "personId": "PERSON-B"
+          },
+          "businessDate": "2026-11-16",
+          "reason": "Independent fictional legacy review"
+        }
+      }
+    ],
+    "appliedProposalIds": [
+      "MAP-001"
+    ],
+    "journal": {
+      "format": "SIMULATED-FINANCE-POLICY",
+      "version": 1,
+      "baseline": {
+        "version": "SYN-MASTER-1",
+        "evaluationDate": "2026-11-15",
+        "owner": "Finance policy owner",
+        "sites": [
+          "Lakeside"
+        ],
+        "assets": {
+          "PUMP-04": "Lakeside",
+          "AHU-02": "Lakeside",
+          "LINE-03": "Lakeside",
+          "PUMP-05": "Lakeside"
+        },
+        "accounts": [
+          "1600 · Equipment",
+          "6105 · Equipment repairs",
+          "6100 · Maintenance supplies",
+          "1620 · Project engineering"
+        ],
+        "centers": {
+          "FAC-100": "Facilities",
+          "PROD-200": "Production",
+          "ENG-300": "Engineering"
+        },
+        "projects": {
+          "CAP-026": {
+            "status": "Approved",
+            "site": "Lakeside"
+          },
+          "CAP-027": {
+            "status": "Closed",
+            "site": "Lakeside"
+          }
+        },
+        "suppliers": {
+          "SYN-SUP-01": "Approved",
+          "SYN-SUP-02": "Approved",
+          "SYN-SUP-03": "Approved"
+        },
+        "items": [
+          {
+            "id": "ITEM-PUMP",
+            "name": "Cooling pump assembly",
+            "category": "Equipment",
+            "supplier": "SYN-SUP-01",
+            "priceCents": 125000,
+            "unit": "EA"
+          },
+          {
+            "id": "ITEM-FILTER",
+            "name": "Air filter kit",
+            "category": "MRO consumables",
+            "supplier": "SYN-SUP-02",
+            "priceCents": 5000,
+            "unit": "EA"
+          },
+          {
+            "id": "ITEM-ENGINEERING",
+            "name": "Controls engineering service",
+            "category": "Engineering services",
+            "supplier": "SYN-SUP-03",
+            "priceCents": 200000,
+            "unit": "Service milestone"
+          }
+        ],
+        "purposes": [
+          {
+            "id": "WORK-CAP",
+            "name": "WO-410 · Approved cooling upgrade",
+            "site": "Lakeside",
+            "asset": "PUMP-04",
+            "workOrder": "WO-410",
+            "project": "CAP-026"
+          },
+          {
+            "id": "WORK-REPAIR",
+            "name": "WO-413 · Routine pump repair",
+            "site": "Lakeside",
+            "asset": "PUMP-04",
+            "workOrder": "WO-413",
+            "project": ""
+          },
+          {
+            "id": "WORK-FILTER",
+            "name": "WO-411 · Scheduled air-handler service",
+            "site": "Lakeside",
+            "asset": "AHU-02",
+            "workOrder": "WO-411",
+            "project": ""
+          },
+          {
+            "id": "WORK-CONTROLS",
+            "name": "WO-412 · Approved controls upgrade",
+            "site": "Lakeside",
+            "asset": "LINE-03",
+            "workOrder": "WO-412",
+            "project": "CAP-026"
+          },
+          {
+            "id": "WORK-CLOSED",
+            "name": "WO-414 · Closed project example",
+            "site": "Lakeside",
+            "asset": "PUMP-05",
+            "workOrder": "WO-414",
+            "project": "CAP-027"
+          }
+        ],
+        "rules": [
+          {
+            "id": "CODE-001",
+            "version": 1,
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-CAP",
+            "account": "1600 · Equipment",
+            "treatment": "Approved capital-project scenario",
+            "allocations": [
+              {
+                "costCenter": "FAC-100",
+                "department": "Facilities",
+                "basisPoints": 7000
+              },
+              {
+                "costCenter": "PROD-200",
+                "department": "Production",
+                "basisPoints": 3000
+              }
+            ],
+            "status": "Approved",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "owner": "Finance policy owner"
+          },
+          {
+            "id": "CODE-002",
+            "version": 1,
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-REPAIR",
+            "account": "6105 · Equipment repairs",
+            "treatment": "Routine operating-cost scenario",
+            "allocations": [
+              {
+                "costCenter": "FAC-100",
+                "department": "Facilities",
+                "basisPoints": 10000
+              }
+            ],
+            "status": "Approved",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "owner": "Finance policy owner"
+          },
+          {
+            "id": "CODE-003",
+            "version": 1,
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-FILTER",
+            "account": "6100 · Maintenance supplies",
+            "treatment": "Routine operating-cost scenario",
+            "allocations": [
+              {
+                "costCenter": "FAC-100",
+                "department": "Facilities",
+                "basisPoints": 10000
+              }
+            ],
+            "status": "Approved",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "owner": "Finance policy owner"
+          },
+          {
+            "id": "CODE-004",
+            "version": 1,
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-CONTROLS",
+            "account": "1620 · Project engineering",
+            "treatment": "Approved capital-project scenario",
+            "allocations": [
+              {
+                "costCenter": "ENG-300",
+                "department": "Engineering",
+                "basisPoints": 10000
+              }
+            ],
+            "status": "Approved",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "owner": "Finance policy owner"
+          },
+          {
+            "id": "CODE-005",
+            "version": 1,
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-CLOSED",
+            "account": "1600 · Equipment",
+            "treatment": "Closed-project example",
+            "allocations": [
+              {
+                "costCenter": "FAC-100",
+                "department": "Facilities",
+                "basisPoints": 10000
+              }
+            ],
+            "status": "Approved",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "owner": "Finance policy owner"
+          }
+        ]
+      },
+      "commands": [
+        {
+          "id": "GOLDEN-PROPOSE",
+          "type": "propose",
+          "actor": {
+            "role": "Finance analyst",
+            "personId": "PERSON-A"
+          },
+          "businessDate": "2026-11-16",
+          "payload": {
+            "proposalId": "MAP-001",
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-REPAIR",
+            "account": "6105 · Equipment repairs",
+            "allocations": [
+              {
+                "costCenter": "FAC-100",
+                "basisPoints": 10000
+              }
+            ],
+            "effectiveFrom": "2026-11-17",
+            "effectiveToExclusive": "2027-01-01",
+            "reason": "Fictional legacy approved mapping"
+          }
+        },
+        {
+          "id": "GOLDEN-APPROVE",
+          "type": "approve",
+          "actor": {
+            "role": "Finance approver",
+            "personId": "PERSON-B"
+          },
+          "businessDate": "2026-11-16",
+          "payload": {
+            "proposalId": "MAP-001",
+            "reason": "Independent fictional legacy review"
+          }
+        }
+      ]
+    },
+    "boundaries": "Independent fictional additive policy review. Original held request, ERP master and saved journals remain unchanged. New evaluations are requisition drafts, not POs or posting. No production authentication or accounting-policy determination.",
+    "impact": {
+      "hypothetical": false,
+      "proposalId": "MAP-001",
+      "referenceContexts": 15,
+      "changedContexts": 1,
+      "rows": [
+        {
+          "input": {
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-CAP",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1",
+            "ruleId": "CODE-001",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-PUMP",
+              "description": "Cooling pump assembly",
+              "supplier": "SYN-SUP-01",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 125000,
+              "netCents": 125000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Equipment",
+              "account": "1600 · Equipment",
+              "treatment": "Approved capital-project scenario",
+              "project": "CAP-026",
+              "asset": "PUMP-04",
+              "workOrder": "WO-410",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 7000
+                },
+                {
+                  "costCenter": "PROD-200",
+                  "department": "Production",
+                  "basisPoints": 3000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "proposed": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001",
+            "ruleId": "CODE-001",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-PUMP",
+              "description": "Cooling pump assembly",
+              "supplier": "SYN-SUP-01",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 125000,
+              "netCents": 125000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Equipment",
+              "account": "1600 · Equipment",
+              "treatment": "Approved capital-project scenario",
+              "project": "CAP-026",
+              "asset": "PUMP-04",
+              "workOrder": "WO-410",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 7000
+                },
+                {
+                  "costCenter": "PROD-200",
+                  "department": "Production",
+                  "basisPoints": 3000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-REPAIR",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1",
+            "ruleId": "CODE-002",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-PUMP",
+              "description": "Cooling pump assembly",
+              "supplier": "SYN-SUP-01",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 125000,
+              "netCents": 125000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Equipment",
+              "account": "6105 · Equipment repairs",
+              "treatment": "Routine operating-cost scenario",
+              "project": "",
+              "asset": "PUMP-04",
+              "workOrder": "WO-413",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "proposed": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001",
+            "ruleId": "CODE-002",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-PUMP",
+              "description": "Cooling pump assembly",
+              "supplier": "SYN-SUP-01",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 125000,
+              "netCents": 125000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Equipment",
+              "account": "6105 · Equipment repairs",
+              "treatment": "Routine operating-cost scenario",
+              "project": "",
+              "asset": "PUMP-04",
+              "workOrder": "WO-413",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-FILTER",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-CONTROLS",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-PUMP",
+            "purposeId": "WORK-CLOSED",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-CAP",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-REPAIR",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-FILTER",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1",
+            "ruleId": "CODE-003",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-FILTER",
+              "description": "Air filter kit",
+              "supplier": "SYN-SUP-02",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 5000,
+              "netCents": 5000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "MRO consumables",
+              "account": "6100 · Maintenance supplies",
+              "treatment": "Routine operating-cost scenario",
+              "project": "",
+              "asset": "AHU-02",
+              "workOrder": "WO-411",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "proposed": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001",
+            "ruleId": "CODE-003",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-FILTER",
+              "description": "Air filter kit",
+              "supplier": "SYN-SUP-02",
+              "quantity": 1,
+              "unit": "EA",
+              "unitPriceCents": 5000,
+              "netCents": 5000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "MRO consumables",
+              "account": "6100 · Maintenance supplies",
+              "treatment": "Routine operating-cost scenario",
+              "project": "",
+              "asset": "AHU-02",
+              "workOrder": "WO-411",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "department": "Facilities",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-CONTROLS",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-FILTER",
+            "purposeId": "WORK-CLOSED",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-CAP",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-REPAIR",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001",
+            "ruleId": "FIN-MAP-001",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-11-17",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-ENGINEERING",
+              "description": "Controls engineering service",
+              "supplier": "SYN-SUP-03",
+              "quantity": 1,
+              "unit": "Service milestone",
+              "unitPriceCents": 200000,
+              "netCents": 200000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Engineering services",
+              "account": "6105 · Equipment repairs",
+              "treatment": "Independently reviewed fictional Finance mapping",
+              "project": "",
+              "asset": "PUMP-04",
+              "workOrder": "WO-413",
+              "allocations": [
+                {
+                  "costCenter": "FAC-100",
+                  "basisPoints": 10000,
+                  "department": "Facilities"
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "changed": true
+        },
+        {
+          "input": {
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-FILTER",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "NO_APPROVED_MAPPING",
+            "reason": "No effective approved coding rule covers this item and work request. Finance must add or approve a mapping.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-CONTROLS",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1",
+            "ruleId": "CODE-004",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-ENGINEERING",
+              "description": "Controls engineering service",
+              "supplier": "SYN-SUP-03",
+              "quantity": 1,
+              "unit": "Service milestone",
+              "unitPriceCents": 200000,
+              "netCents": 200000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Engineering services",
+              "account": "1620 · Project engineering",
+              "treatment": "Approved capital-project scenario",
+              "project": "CAP-026",
+              "asset": "LINE-03",
+              "workOrder": "WO-412",
+              "allocations": [
+                {
+                  "costCenter": "ENG-300",
+                  "department": "Engineering",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "proposed": {
+            "status": "ready",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001",
+            "ruleId": "CODE-004",
+            "ruleVersion": 1,
+            "evaluatedOn": "2026-11-18",
+            "effectiveFrom": "2026-01-01",
+            "effectiveToExclusive": "2027-01-01",
+            "coding": {
+              "itemId": "ITEM-ENGINEERING",
+              "description": "Controls engineering service",
+              "supplier": "SYN-SUP-03",
+              "quantity": 1,
+              "unit": "Service milestone",
+              "unitPriceCents": 200000,
+              "netCents": 200000,
+              "currency": "USD",
+              "site": "Lakeside",
+              "category": "Engineering services",
+              "account": "1620 · Project engineering",
+              "treatment": "Approved capital-project scenario",
+              "project": "CAP-026",
+              "asset": "LINE-03",
+              "workOrder": "WO-412",
+              "allocations": [
+                {
+                  "costCenter": "ENG-300",
+                  "department": "Engineering",
+                  "basisPoints": 10000
+                }
+              ]
+            },
+            "explanation": "Catalog supplies item, supplier, category, and price. Approved work request supplies site, asset, project, and work order. Finance policy supplies account, treatment, and cost distributions."
+          },
+          "changed": false
+        },
+        {
+          "input": {
+            "itemId": "ITEM-ENGINEERING",
+            "purposeId": "WORK-CLOSED",
+            "quantity": 1
+          },
+          "prior": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1"
+          },
+          "proposed": {
+            "status": "held",
+            "code": "PROJECT_NOT_APPROVED",
+            "reason": "The project must be approved and belong to the work-request site.",
+            "owner": "Finance policy owner",
+            "masterVersion": "SYN-MASTER-1+PREVIEW-MAP-001"
+          },
+          "changed": false
+        }
+      ]
+    },
+    "viewSelection": {
+      "role": "Finance approver",
+      "personId": "PERSON-B"
+    }
+  }
+}

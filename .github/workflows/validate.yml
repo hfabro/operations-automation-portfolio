@@ -40,6 +40,8 @@ jobs:
           node tools/test-bi-table-export.cjs
       - name: Verify work evidence against current journal ancestry
         run: node ./tools/test-bi-work-context.cjs
+      - name: Verify connected Finance resolution and legacy checkpoint parity
+        run: node ./tools/test-bi-finance-resolution.cjs
       - name: Verify management measures, owners and unavailable sources
         run: node ./tools/test-bi-management.cjs
       - name: Verify explicit business-time fixture and financial/date controls
@@ -163,6 +165,7 @@ jobs:
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
+          node tools/test-bi-finance-resolution-browser.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
@@ -213,6 +216,7 @@ jobs:
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
+          node tools/test-bi-finance-resolution-browser.mjs
       - name: Verify independent Finance mapping decisions and original evidence
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright

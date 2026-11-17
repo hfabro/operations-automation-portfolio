@@ -293,3 +293,10 @@ Finance policy review (`business-intelligence/policy-review.html`) is an indepen
 ## Reusable BI table handoff
 
 The Data and methods view also exports complete CSV tables, a typed schema/source manifest and a self-contained CSV-content JSON bundle. Full checkpoint and per-file hashes tie every table to its source; row grain, currency, nulls, reversible transport escaping and quality checks remain explicit. The site and all demonstrations run in HTML, CSS and JavaScript; file reuse in external tools is optional. See [the table-handoff contract](tools/bi-prototype/BI-TABLE-HANDOFF-2026-11-16.md). Run `node tools/test-bi-table-export.cjs` and the established browser environment with `node tools/test-bi-table-export-browser.mjs`.
+
+
+## Connected Finance resolution
+
+The browser-only [Finance resolution](business-intelligence/finance-resolution.html) workbench connects a specific captured coding hold to independent proposal/review, a dated recheck and a new purchasing draft. Source fingerprints and replay bind the original request; existing holds and PO coding remain inspectable. Guarded handoff preserves changed/damaged saved sources and requires explicit confirmation before replacing a different guided/imported context. The normal PO, receipt, invoice and payment controls continue separately. This is targeted application of an approved simulated rule, not global master-data release or recoding of existing purchases.
+
+Run `node tools/test-bi-finance-resolution.cjs` for legacy parity and source/approval/financial invariants. With the established Playwright/axe environment, `node tools/test-bi-finance-resolution-browser.mjs` verifies the actual management-to-Finance-to-purchasing-to-BI path, responsive accessibility, evidence recovery and replacement guards in the selected browser engine. See [the resolution contract](tools/bi-prototype/FINANCE-RESOLUTION-CONTRACT-2026-11-16.md).
