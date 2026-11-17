@@ -23,3 +23,7 @@ Purchasing explains the original hold and replacement relationship. Approved PO 
 ## Acceptance
 
 Prove legacy checkpoint/model parity; correct request quantities and target identity; independent approval, effective-date and conflict gates; no guessed/vendor-only coding; original request/PO immutability; exact source-content changes at the same revision; absent/damaged storage; replay/tamper rejection; idempotency and duplicate replacements; stale Finance/workflow handoffs; reviewed PO-to-invoice-to-paid allocations with posted = unpaid + paid. Verify keyboard/touch, responsive light/dark layouts, inert text and restrictive CSP in the established three-engine CI workflow. Every declared result is simulated; no native application, live ERP, backend or paid service is required.
+
+## Teaching-clock causality
+
+Legacy journals retain their exact generated timestamps. A reviewed-draft command advances the illustrative purchasing clock to at least its explicit policy evaluation date; subsequent commands advance monotonically. A reviewed PO therefore cannot appear to predate its Finance decision merely because the legacy teaching clock starts on November 15. These remain fictional event timestamps, not elapsed-time or performance measurements.
