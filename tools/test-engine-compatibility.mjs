@@ -9,17 +9,20 @@ const require=createRequire(import.meta.url),selection=selectBrowser(require(pro
 const root=fileURLToPath(new URL('../',import.meta.url)),port=process.env.TEST_PORT||'4220',base=`http://127.0.0.1:${port}`;
 const workflowsOnly=process.argv.includes('--workflows-only');
 const output=join(root,'tmp','engine-compatibility',selection.name+(workflowsOnly?'-workflows':''));await mkdir(output,{recursive:true});
-const report={engine:selection.name,browser:'',workflowsOnly,pages:[],checks:[],errors:[],passed:false};let browser,server;
+const report={engine:selection.name,browser:'',workflowsOnly,layoutContextIsolation:'one viewport and theme per context',pages:[],checks:[],errors:[],passed:false};let browser,server;
 async function files(dir){const out=[];for(const e of await readdir(dir,{withFileTypes:true})){if(['.git','.github','tmp','tools','references-private'].includes(e.name))continue;const p=join(dir,e.name);if(e.isDirectory())out.push(...await files(p));else if(e.name.endsWith('.html'))out.push(p);}return out;}
 const routes=(await files(root)).map(p=>'/'+relative(root,p).replaceAll('\\','/').replace(/index\.html$/,''));
 try{
   server=spawn(process.execPath,[join(root,'tools/serve.mjs')],{cwd:root,env:{...process.env,PORT:port},stdio:['ignore','pipe','pipe']});await new Promise((yes,no)=>{server.stdout.once('data',yes);server.once('error',no);server.once('exit',c=>no(Error('Preview exited '+c)));});
   browser=await selection.type.launch(selection.options);report.browser=browser.version();
+  // Layout states are independent; bound each context to one viewport/theme batch.
   if(!workflowsOnly)for(const theme of ['light','dark']){
-    const context=await browser.newContext({locale:'en-US',colorScheme:theme,reducedMotion:'reduce'});await context.addInitScript(t=>localStorage.setItem('portfolio-theme',t),theme);
+    for(const width of [320,375,768,1440]){
+    const context=await browser.newContext({locale:'en-US',colorScheme:theme,reducedMotion:'reduce',viewport:{width,height:900}});await context.addInitScript(t=>localStorage.setItem('portfolio-theme',t),theme);
     const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));page.on('response',r=>{if(r.status()>=400)report.errors.push(r.url()+': '+r.status());});
-    for(const width of [320,375,768,1440]){await page.setViewportSize({width,height:900});for(const route of routes){const r=await page.goto(base+route);assert.equal(r.status(),200);const state=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,h1:document.querySelectorAll('h1').length,main:document.querySelectorAll('main').length}));report.pages.push({route,width,theme,...state});if(state.overflow){const overflow=await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>getComputedStyle(el).display!=='none'&&el.scrollWidth>el.clientWidth+1&&!el.closest('.table-wrap')).slice(0,20).map(el=>({tag:el.tagName,id:el.id,class:el.className,clientWidth:el.clientWidth,scrollWidth:el.scrollWidth,right:el.getBoundingClientRect().right,overflow:getComputedStyle(el).overflow})));console.error(JSON.stringify({route,width,theme,overflow}));}assert.equal(state.overflow,false,`${route} ${width} ${theme}`);assert.equal(state.h1,1,route);assert.equal(state.main,1,route);}}
+    for(const route of routes){const r=await page.goto(base+route);assert.equal(r.status(),200);const state=await page.evaluate(()=>({overflow:document.documentElement.scrollWidth>innerWidth+1,h1:document.querySelectorAll('h1').length,main:document.querySelectorAll('main').length}));report.pages.push({route,width,theme,...state});if(state.overflow){const overflow=await page.evaluate(()=>[...document.querySelectorAll('body *')].filter(el=>getComputedStyle(el).display!=='none'&&el.scrollWidth>el.clientWidth+1&&!el.closest('.table-wrap')).slice(0,20).map(el=>({tag:el.tagName,id:el.id,class:el.className,clientWidth:el.clientWidth,scrollWidth:el.scrollWidth,right:el.getBoundingClientRect().right,overflow:getComputedStyle(el).overflow})));console.error(JSON.stringify({route,width,theme,overflow}));}assert.equal(state.overflow,false,`${route} ${width} ${theme}`);assert.equal(state.h1,1,route);assert.equal(state.main,1,route);}
     await context.close();
+    }
   }
   for(const width of [375,1440]){
     const context=await browser.newContext({viewport:{width,height:900},locale:'en-US',reducedMotion:'reduce'});const page=await context.newPage();page.on('pageerror',e=>report.errors.push(e.message));
