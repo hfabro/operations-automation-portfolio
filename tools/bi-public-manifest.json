@@ -134,8 +134,8 @@
     {
       "source": "tools/bi-prototype/preview/business-report.js",
       "output": "business-intelligence/business-report.js",
-      "sourceSha256": "bb0b0132e4950c00e79f629d0a382624d81529de4a04689d2189541fac40df5f",
-      "sha256": "bb0b0132e4950c00e79f629d0a382624d81529de4a04689d2189541fac40df5f"
+      "sourceSha256": "2d46c9e589f2b8a5111200865674c99d3b136bed9092c3adedc4dc09701b97a5",
+      "sha256": "2d46c9e589f2b8a5111200865674c99d3b136bed9092c3adedc4dc09701b97a5"
     },
     {
       "source": "tools/bi-prototype/preview/business-time-data.js",
