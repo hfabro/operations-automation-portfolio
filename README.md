@@ -264,11 +264,11 @@ Phone/tablet modes use a bounded, keyboard-focusable main scrollport in `assets/
 
 ## Connected Business Intelligence
 
-The draft integration includes `/business-intelligence/` and fourteen related demonstrations. Public pages are generated from the validated canonical simulation source by `node tools/build-bi-pages.mjs`; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
+The published Business Intelligence collection has sixteen generated routes: the `/business-intelligence/` landing page and fifteen related views. `BI_PAGES` in `tools/build-bi-pages.mjs` is the authoritative route catalog; the generated `tools/bi-public-manifest.json` records its projection. Public pages are generated from the validated canonical simulation source; do not maintain a separate copy of their business rules. `node tools/test-bi-page-build.mjs` verifies output/source consistency and safe rebuild behavior.
 
 Home, Demos, Work and Smart Factory provide native discovery cards, and shared navigation includes Business Intelligence. The existing Work library and demo URLs remain intact. Shared theme preferences and project-relative routes are verified by `node tools/test-bi-public.mjs` through the restricted loopback server, using an existing Playwright/axe installation configured through the documented environment variables.
 
-See [the projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md) for canonical files, project-path preview, metadata/license handling and test coverage. The prototype remains available for development; generated portfolio integration is a draft source change until separately approved and released.
+See [the projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md) for canonical files, project-path preview, metadata/license handling and test coverage. The canonical preview remains available for development; visitors use the published generated pages. Future changes follow [Release and recovery](RELEASE.md), including exact-revision checks and deployed acceptance.
 
 
 ## Business-time model foundation
@@ -280,7 +280,7 @@ node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
 node tools/test-bi-business-time.cjs
 ```
 
-With the existing Playwright environment, `node tools/test-bi-business-time-browser.mjs` compares complete browser/Node model results. These model checks supplement the established UI and workflow suites; they do not claim a new production integration or deployed trend dashboard.
+With the existing Playwright environment, `node tools/test-bi-business-time-browser.mjs` compares complete browser/Node model results. These model checks supplement the established UI and workflow suites. The deployed trends view uses the independent fictional cohort with the dates, grains and interpretation limits declared in its contract.
 
 The generated BI route `business-intelligence/business-trends.html` queries this separate fictional cohort through a local worker. It exposes selected-period posted/paid flows, cutoff balances, unknown due dates, owned held-document receipt ages and source-record evidence. `node tools/test-bi-trends.mjs` verifies the rendered project-path route using the same browser/auditor environment as `test-bi-public.mjs`.
 
@@ -303,3 +303,16 @@ Run `node tools/test-bi-finance-resolution.cjs` for legacy parity and source/app
 
 
 The BI hub also offers a short four-stop business review of the existing management context. It leads visitors through financial position, invoice ownership, coding governance and maintenance evidence before they try the full working journeys. Native navigation preserves selected figures/filters and saved progress; the independent dated cohort, document inbox and historical research remain explicitly separate evidence modes.
+
+## Saved-journal ownership and recovery
+
+The browser demonstrations retain explicit ownership of their saved source. Purchasing, invoice-batch, maintenance/work and report handoffs check the appropriate captured saved values before writing, including after asynchronous imports or replacement confirmation where applicable. Successful saves advance the relevant baseline. Blocked stale writes leave newer saved progress untouched. Each contract defines storage-failure handling and the available checkpoint/recovery path. Current-journal report resume navigates without rewriting the checkpoint.
+
+| Area | Contract | Focused browser check |
+| --- | --- | --- |
+| Purchasing editor | [Checkpoint ownership and recovery](tools/bi-prototype/PURCHASING-RECOVERY-CONTRACT-2026-11-16.md) | `node tools/test-bi-purchasing-recovery.mjs` |
+| Invoice batches | [Saved-source staging](tools/bi-prototype/BATCH-SOURCE-CONTRACT-2026-11-16.md) | `node tools/test-bi-batch-source.mjs` |
+| Maintenance and work | [Decisions, imports and grouped replacement](tools/bi-prototype/MAINTENANCE-WORK-SOURCE-CONTRACT-2026-11-17.md) | `node tools/test-bi-maintenance-work-source.mjs` |
+| Business report | [Read-only resume and explicit replacement](tools/bi-prototype/REPORT-HANDOFF-CONTRACT-2026-11-17.md) | `node tools/test-bi-report-handoff.mjs` |
+
+These checks use the existing Playwright/axe environment and browser-engine selector. Journal formats, financial calculations and the separate posting/payment controls remain authoritative. The contracts describe browser-local simulation behavior; authenticated production storage and multi-user authorization require a separately designed implementation.
