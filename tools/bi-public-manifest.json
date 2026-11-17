@@ -362,8 +362,8 @@
     {
       "source": "tools/bi-prototype/preview/invoice-batch.js",
       "output": "business-intelligence/invoice-batch.js",
-      "sourceSha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5",
-      "sha256": "f6c228774c95f94c5a1886b1aa8f8f5f61906a8f1a2aee42acb4ad29df4c65a5"
+      "sourceSha256": "98278335a0936a3125d5f3bc4bde87e600b5a950c9cbc746a2117f938cdfd306",
+      "sha256": "98278335a0936a3125d5f3bc4bde87e600b5a950c9cbc746a2117f938cdfd306"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-intake.css",
