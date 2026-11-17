@@ -344,8 +344,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "8262b25135e266cd5437ad6da50c5bb90a755d4175debd85e37211e3e20ffa14",
-      "sha256": "6af6a1270d0af054b1738ecb0028da8f9cd141deff94b4143a85885b1e47db09"
+      "sourceSha256": "98e0a80237ac7b9956b435bf7162c7884144d1f403df782bdb9bf9d1a2389873",
+      "sha256": "bd122080f289e47427c7b006d4bb02677a456881665f5b47eef111830ab27574"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -440,20 +440,20 @@
     {
       "source": "tools/bi-prototype/preview/management-overview.css",
       "output": "business-intelligence/management-overview.css",
-      "sourceSha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765",
-      "sha256": "40e0f8236ed05242fd0c9c206b3533d0bbf13433432846d07299aea71f488765"
+      "sourceSha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e",
+      "sha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.html",
       "output": "business-intelligence/management-overview.html",
-      "sourceSha256": "abd24157c3e2772287d5b50896b78c324752132f3d158c12dfea0a8c53f15e7c",
-      "sha256": "e3fde95b4e205a362274798a677c86298117430a5f72b82738ea9ee15217873f"
+      "sourceSha256": "a244e8208222e0cc614f94a6cb4643f29a1b3fe86b15fc56ab7e56f79883bcb4",
+      "sha256": "9e590d06c911a0f1f63f2ab8059c5bde7d4ae40ce93e2b76d0a897b3085755ab"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.js",
       "output": "business-intelligence/management-overview.js",
-      "sourceSha256": "5261ae39aa93e54a32a91633e926a4e3dcff62395806e742b96aa460517dbbf6",
-      "sha256": "5261ae39aa93e54a32a91633e926a4e3dcff62395806e742b96aa460517dbbf6"
+      "sourceSha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93",
+      "sha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93"
     },
     {
       "source": "tools/bi-prototype/preview/management-scenarios.js",
@@ -506,8 +506,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc",
-      "sha256": "53a52ac598490598feb8f84ac4d2071d48ca9172ffee329361343e28aacc17cc"
+      "sourceSha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785",
+      "sha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
