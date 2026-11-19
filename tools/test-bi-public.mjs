@@ -75,7 +75,30 @@ const journalBeforeMethods=await page.evaluate(()=>sessionStorage.getItem('portf
   await context.close();
  }
  const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:900},isMobile:selection.name==='chromium',hasTouch:true}),page=await nojs.newPage();await page.goto(prefix);const card=page.locator('.journey-card').nth(1);await card.scrollIntoViewIfNeeded();const box=await card.boundingBox();await page.touchscreen.tap(box.x+15,box.y+box.height-15);await page.waitForURL('**/business-intelligence/connected-journey.html');assert.match(await page.locator('.bi-noscript').innerText(),/JavaScript is needed/);assert.equal(await page.locator('h1').count(),1);report.checks.push({theme:'no JavaScript',name:'native touch cards and an explicit simulation fallback survive without scripting'});
- await page.goto(prefix);const nativeReviewSaved=await page.evaluate(()=>['portfolio-phase2-connected-v1','portfolio-phase2-machines-v1','portfolio-phase2-work-v1'].map(key=>sessionStorage.getItem(key))),reviewEntry=page.locator('.review-entry');await reviewEntry.scrollIntoViewIfNeeded();const reviewBounds=await reviewEntry.boundingBox();await page.touchscreen.tap(reviewBounds.x+10,reviewBounds.y+reviewBounds.height-10);await page.waitForURL('**/management-overview.html?review=1#management-review-guide');if(await page.locator('#management-review-guide').getAttribute('open')===null){await page.locator('#management-review-guide summary').focus();await page.keyboard.press('Enter');}assert.equal(await page.locator('#management-review-guide').getAttribute('open'),'');
+ await page.goto(prefix);const nativeReviewSaved=await page.evaluate(()=>['portfolio-phase2-connected-v1','portfolio-phase2-machines-v1','portfolio-phase2-work-v1'].map(key=>sessionStorage.getItem(key))),reviewEntry=page.locator('.review-entry');await reviewEntry.scrollIntoViewIfNeeded();const reviewBounds=await reviewEntry.boundingBox();await page.touchscreen.tap(reviewBounds.x+10,reviewBounds.y+reviewBounds.height-10);await page.waitForURL('**/management-overview.html?review=1#management-review-guide');
+ report.nativeReview={phase:'entered',url:page.url()};
+ try{
+  report.nativeReview.initialOpen=await page.locator('#management-review-guide').getAttribute('open');
+  if(report.nativeReview.initialOpen===null){
+   await page.locator('#management-review-guide summary').focus();
+   report.nativeReview.activation='Enter';await page.keyboard.press('Enter');
+  }
+  report.nativeReview.observedOpen=await page.locator('#management-review-guide').getAttribute('open');
+  assert.equal(report.nativeReview.observedOpen,'');
+  report.nativeReview.phase='verified';
+ }catch(failure){
+  report.nativeReview.phase='failed';
+  try{report.nativeReview.snapshot=await page.evaluate(()=>{
+   const guide=document.getElementById('management-review-guide'),summary=guide?.querySelector('summary'),active=document.activeElement,rect=summary?.getBoundingClientRect(),style=summary?getComputedStyle(summary):null;
+   return {url:location.href,readyState:document.readyState,documentHasFocus:document.hasFocus(),activeElement:active?{tag:active.tagName,id:active.id,role:active.getAttribute('role'),tabIndex:active.tabIndex}:null,
+    guide:guide?{open:guide.open,hidden:guide.hidden,inert:guide.inert,connected:guide.isConnected}:null,
+    summary:summary?{focused:summary===active,tabIndex:summary.tabIndex,hidden:summary.hidden,inert:summary.inert,display:style.display,visibility:style.visibility,rect:{x:rect.x,y:rect.y,width:rect.width,height:rect.height}}:null,
+    viewport:{width:innerWidth,height:innerHeight,scrollX,scrollY,visualScale:visualViewport?.scale??null}};
+  });}catch(captureFailure){report.nativeReview.captureError=String(captureFailure);}
+  console.error('Native no-JavaScript management review diagnostics: '+JSON.stringify(report.nativeReview));
+  throw failure;
+ }
+
  for(const target of ['finance-heading','management-invoice-review-heading','management-coding-heading','work-heading']){await page.locator('.management-review-stops a[href="#'+target+'"]').focus();await page.keyboard.press('Enter');await page.waitForURL(value=>value.hash==='#'+target);assert.equal(await page.evaluate(()=>document.activeElement.id),target);}
  assert.deepEqual(await page.evaluate(()=>['portfolio-phase2-connected-v1','portfolio-phase2-machines-v1','portfolio-phase2-work-v1'].map(key=>sessionStorage.getItem(key))),nativeReviewSaved);assert.match(await page.locator('.bi-noscript').innerText(),/JavaScript is needed/);report.checks.push({theme:'no JavaScript',name:'native touch entry, expandable review guide and all four focus destinations work without scripting or storage writes'});
  const narrativeTargets=['machine-intelligence.html#replay-heading','machine-intelligence.html#condition-review','connected-journey.html#journey-heading','business-report.html?source=current&measure=paid#financial-heading'];
