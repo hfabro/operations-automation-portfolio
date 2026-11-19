@@ -109,6 +109,13 @@
     $('inbox-stage-button').disabled = busy || !!committed || blocked || $('inbox-stage-role').value !== 'AP' || !(model?.documents.length || model?.counts.alreadyStagedSources);
     $('inbox-stage-summary').textContent = committed ? (committed.alreadyStaged ? 'Existing imports verified; no new write was needed.' : committed.newDocuments + ' original invoices saved into purchasing.') + ' The pre-stage preview remains below. Capture again for another selection; download evidence to retain original bytes.'
       : model ? model.counts.documents + ' new originals: ' + model.counts.readyDocuments + ' ready for AP review; ' + model.counts.heldDocuments + ' held. ' + (model.counts.alreadyStagedSources || 0) + ' source items already staged.' + (blocked ? ' Extraction or revision-review items block this selection.' : ' Staging preserves these outcomes and does not post or pay.') : '';
+    const handoffs = $('inbox-invoice-handoffs'); handoffs.replaceChildren(); handoffs.hidden = !committed;
+    if (committed) for (const receipt of committed.receipts) {
+      const item = node('div'), purchasing = node('a', 'Follow this invoice in purchasing →'), report = node('a', 'Open this invoice in the BI report →');
+      purchasing.href = 'connected-journey.html?invoice=' + encodeURIComponent(receipt.documentId) + '#invoice-trail';
+      report.href = 'business-report.html?source=current&invoice=' + encodeURIComponent(receipt.documentId) + '#report-document-detail';
+      item.append(node('strong', receipt.originalImport.supplierId + ' / ' + receipt.originalImport.number), node('p', 'Fingerprint retained · ' + receipt.currentStatus + '. Dashboard totals retain their wider purchasing scope.'), purchasing, report); handoffs.append(item);
+    }
   }
   async function stageCurrent() {
     if (busy || !model || mode !== 'current' || committed) return;
