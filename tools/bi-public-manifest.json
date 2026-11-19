@@ -591,7 +591,7 @@
       "source": "tools/bi-prototype/preview/work-execution.html",
       "output": "business-intelligence/work-execution.html",
       "sourceSha256": "339a8f62e13911f1cc6873ed66cfdd07862bb023c8fa5b898c38f2b8ae5a0dab",
-      "sha256": "ee8c7800a71cf38050d7a227d0f15f8396b1bcc50b2786ff75cc200941727eb8"
+      "sha256": "3d32981178d8d50e5120cdd361d581aa7d3731c2418d865aa2bf6911a7a42e94"
     },
     {
       "source": "tools/bi-prototype/preview/work-execution.js",
