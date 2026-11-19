@@ -76,13 +76,13 @@ try {
     checked(theme + ': explicit context, existing duplicate effects, separate grains and Node/browser parity');
     for (const width of [320, 768, 1440]) {
       await page.setViewportSize({width, height: 1000});
-      await page.locator('#inbox-captured summary').click();
+      await page.getByText('Inspect captured purchasing evidence', {exact: true}).click();
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, 'No page overflow at ' + width);
       await page.evaluate(axe);
       const violations = await page.evaluate(async () => (await axe.run(document, {runOnly: {type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa']}})).violations.map(row => ({id: row.id, nodes: row.nodes.map(node => node.target)})));
       assert.deepEqual(violations, [], theme + ' ' + width);
       await page.screenshot({path: resolve(output, theme + '-' + width + '.png'), fullPage: true});
-      await page.locator('#inbox-captured summary').click(); report.layouts.push({theme, width});
+      await page.getByText('Inspect captured purchasing evidence', {exact: true}).click(); report.layouts.push({theme, width});
     }
     await page.locator('#inbox-example').focus(); await page.keyboard.press('Enter'); await idle(page);
     assert.equal((await evidence(page)).format, 'SIMULATED-DOCUMENT-INBOX'); assert.equal(await page.locator('#inbox-captured').isVisible(), false);

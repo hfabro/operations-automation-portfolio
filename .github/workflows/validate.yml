@@ -50,6 +50,7 @@ jobs:
           node tools/test-bi-business-time.cjs
           node tools/test-bi-inbox.cjs
           node tools/test-bi-inbox-context.cjs
+          node tools/test-bi-inbox-staging.cjs
           node tools/test-bi-policy-review.cjs
 
   browser:
@@ -164,6 +165,7 @@ jobs:
         run: |
           node tools/test-bi-inbox-browser.mjs
           node tools/test-bi-inbox-context-browser.mjs
+          node tools/test-bi-inbox-staging-browser.mjs
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
@@ -220,6 +222,7 @@ jobs:
         run: |
           node tools/test-bi-inbox-browser.mjs
           node tools/test-bi-inbox-context-browser.mjs
+          node tools/test-bi-inbox-staging-browser.mjs
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
