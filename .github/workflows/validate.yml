@@ -49,6 +49,7 @@ jobs:
           node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
           node tools/test-bi-business-time.cjs
           node tools/test-bi-inbox.cjs
+          node tools/test-bi-inbox-context.cjs
           node tools/test-bi-policy-review.cjs
 
   browser:
@@ -162,6 +163,7 @@ jobs:
           BROWSER_ENGINE: ${{ matrix.engine }}
         run: |
           node tools/test-bi-inbox-browser.mjs
+          node tools/test-bi-inbox-context-browser.mjs
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
@@ -217,6 +219,7 @@ jobs:
           AXE_CORE_PATH: ${{ runner.temp }}/portfolio-qa/node_modules/axe-core/axe.min.js
         run: |
           node tools/test-bi-inbox-browser.mjs
+          node tools/test-bi-inbox-context-browser.mjs
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs

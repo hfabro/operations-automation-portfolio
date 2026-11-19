@@ -118,7 +118,7 @@ try {
     assert.equal(exported.documents.find(doc => doc.id === 'INBOX-SRC-PRICE').evaluation.queue, 'price');
     checked(theme + ': rejection retains original price/source and owned price hold');
     // Exercise actual File/UTF-8 decoding and download bytes, not a prefilled normalized payload.
-    await page.locator('.inbox-controls details summary').click();
+    await page.getByText('Try supported local text or XML files', {exact: true}).click();
     const uploadedBytes = Buffer.from('\uFEFF' + S.invoice({number: 'UPLOAD-EXAMPLE'}).replaceAll('\n', '\r\n'), 'utf8');
     await page.locator('#inbox-files').setInputFiles({name: 'uploaded-invoice.txt', mimeType: 'text/plain', buffer: uploadedBytes});
     await page.locator('#inbox-extract').click(); await ready(page); exported = await evidence(page);

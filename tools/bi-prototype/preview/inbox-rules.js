@@ -1,10 +1,10 @@
 /* Supported invoice-text extraction and immutable source evidence over the existing invoice controls. */
 (function(root, factory) {
   const api = typeof module === 'object' && module.exports
-    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'), require('./ubl-invoice-rules.js'))
-    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments, root.UBLInvoice);
+    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'), require('./ubl-invoice-rules.js'), require('./inbox-context.js'))
+    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments, root.UBLInvoice, root.InboxContext);
   if (typeof module === 'object' && module.exports) module.exports = api; else root.DocumentInbox = api;
-})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D, UBL) {
+})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D, UBL, Context) {
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value)), encoder = new TextEncoder();
   const scenarioId = 'SYN-DOC-INBOX-1', companyId = 'SYN-CO-01';
@@ -93,10 +93,19 @@
     return {format: 'SUPPORTED-INVOICE-TEXT', version: 1, fields, issues, normalized, sourceLineCount: sourceLines.length};
   }
   async function prepare(sources, sourceJournal, reviews = []) {
+    return prepareCore(sources, sourceJournal, reviews);
+  }
+  async function prepareCurrent(sources, savedRaw) {
+    const context = await Context.capture(savedRaw);
+    if (!context.approvedPOLines.length) contract('Captured purchasing has no approved PO lines. Approve a request before previewing source invoices.');
+    return prepareCore(sources, J.restore(context.checkpoint), [], context);
+  }
+  async function prepareCore(sources, sourceJournal, reviews, context = null) {
     if (!Array.isArray(sources) || sources.length > 20) contract('Use an explicit array of at most 20 source items.');
     if (!Array.isArray(reviews) || reviews.length > 20) contract('Use a bounded review array.');
     let journal = J.restore(J.serialize(sourceJournal));
-    if (journal.documents.length) contract('The independent inbox requires an unmodified baseline without invoices.');
+    if (!context && journal.documents.length) contract('The independent inbox requires an unmodified baseline without invoices.');
+    const baselineDocuments = clone(journal.documents), qualify = context ? (kind, id) => JSON.stringify([context.checkpointSha256, kind, id]) : key;
     const baseline = J.serialize(journal), records = [], ids = new Set(), orders = new Set(); let totalBytes = 0;
     for (const source of sources) {
       closed(source, ['id', 'name', 'mediaType', 'content', 'receivedAt', 'receivedAtUnknownReason', 'order'], 'Source envelope');
@@ -108,7 +117,7 @@
       } else if (typeof source.receivedAt !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(source.receivedAt) || !Number.isFinite(Date.parse(source.receivedAt)) || new Date(source.receivedAt).toISOString() !== source.receivedAt || source.receivedAtUnknownReason !== null) contract('Capture timestamps must be canonical UTC or explicitly unknown.');
       const size = bytes(source.content).length; totalBytes += size; if (totalBytes > 524288) contract('Inbox source content exceeds 512 KiB.');
       ids.add(source.id); orders.add(source.order);
-      records.push({...clone(source), key: key('source', source.id), byteLength: size, sha256: await fingerprint(source.content), extraction: parse(source.content, source.mediaType),
+      records.push({...clone(source), key: qualify('source', source.id), byteLength: size, sha256: await fingerprint(source.content), extraction: parse(source.content, source.mediaType),
         disposition: null, owner: null, reasons: [], documentId: null, relatedSourceIds: []});
     }
     records.sort((a, b) => a.order - b.order);
@@ -120,7 +129,9 @@
       reviewBySource.set(review.sourceId, clone(review));
     }
     const hold = (row, disposition, owner, reason) => { row.disposition = disposition; row.owner = owner; row.reasons.push(reason); };
-    for (const row of records) {
+    // Current-context imports use a canonical hash order; UI intake order remains evidence only.
+    const imports = context ? [...records].sort((a, b) => a.sha256.localeCompare(b.sha256) || a.order - b.order) : records;
+    for (const row of imports) {
       if (hashes.has(row.sha256)) {
         row.relatedSourceIds = [hashes.get(row.sha256).id];
         hold(row, 'Exact copy', 'AP duplicate review', 'Exact UTF-8 bytes already exist in this inbox. Filename does not establish a new invoice.'); continue;
@@ -131,14 +142,17 @@
       }
       const n = row.extraction.normalized;
       if (n.revision !== 1) continue;
-      row.documentId = 'INBOX-' + row.id;
+      if (context && journal.commands.length >= 1000) contract('The captured journal cannot fit another invoice within the version-1 checkpoint command limit.');
+      const importHash = context ? (await Context.hash(context.checkpointSha256 + ':' + row.sha256)).toUpperCase() : null;
+      row.documentId = context ? 'CTXDOC-' + importHash : 'INBOX-' + row.id;
       if (!roots.has(identity(n))) roots.set(identity(n), []); roots.get(identity(n)).push(row);
-      journal = J.dispatch(journal, {id: 'INBOX-IMPORT:' + row.id, type: 'importDocument', actor: J.roles.importDocument,
+      journal = J.dispatch(journal, {id: context ? 'CTX-IMPORT:' + importHash : 'INBOX-IMPORT:' + row.id, type: 'importDocument', actor: J.roles.importDocument,
         payload: {documentId: row.documentId, supplierId: n.supplierId, number: n.number, currency: n.currency,
-          declaredNetCents: n.declaredNetCents, lines: clone(n.lines), sourceLabel: (row.mediaType === 'application/xml' ? 'Fictional UBL XML source ' : 'Fictional text source ') + row.id}});
+          declaredNetCents: n.declaredNetCents, lines: clone(n.lines), sourceLabel: context ? 'Source SHA256 ' + row.sha256 : (row.mediaType === 'application/xml' ? 'Fictional UBL XML source ' : 'Fictional text source ') + row.id}});
     }
     const revisions = records.filter(row => !row.disposition && row.extraction.normalized?.revision === 2);
     for (const row of revisions) {
+      if (context) {hold(row, 'Revision review', 'AP revision review', 'Captured purchasing previews admit original invoices only. Supplier revisions remain in the separate guided review workflow.'); continue;}
       const n = row.extraction.normalized, original = hashes.get(n.supersedes), siblings = revisions.filter(other => other.extraction.normalized.supersedes === n.supersedes);
       if (!original?.documentId || original.extraction.normalized?.revision !== 1 || identity(original.extraction.normalized) !== identity(n) || roots.get(identity(n))?.length !== 1 || siblings.length !== 1 || original.order >= row.order || original.receivedAt && row.receivedAt && original.receivedAt > row.receivedAt) {
         hold(row, 'Revision review', 'AP revision review', 'Original fingerprint/identity must identify one original invoice and one proposed revision.'); continue;
@@ -170,10 +184,10 @@
       if (!document || !evaluation) contract('Source has no retained document evaluation.');
       hold(row, document.status === 'Ready' ? 'Ready for AP review' : 'Invoice held', evaluation.owner, evaluation.reasons.join(' '));
     }
-    const documents = journal.documents.map(document => ({...clone(document), key: key('document', document.id),
+    const documents = journal.documents.filter(document => !context || !context.existingDocumentIds.includes(document.id)).map(document => ({...clone(document), key: qualify('document', document.id),
       sourceIds: records.filter(row => row.documentId === document.id).map(row => row.id),
       evaluation: clone(evaluations.find(row => row.documentId === document.id))}));
-    return {format: 'SIMULATED-DOCUMENT-INBOX', version: 1, fictional: true, scenarioId, companyId,
+    const result = {format: 'SIMULATED-DOCUMENT-INBOX', version: 1, fictional: true, scenarioId, companyId,
       sourceItems: records, documents, reviews: clone(reviews),
       counts: {sourceItems: records.length, exactCopies: records.filter(row => row.disposition === 'Exact copy').length,
         extractionReviews: records.filter(row => row.disposition === 'Extraction review').length,
@@ -185,6 +199,21 @@
       boundaries: {extraction: 'Executed fixed-format UTF-8 text parsing with source-line evidence and bounded net-only UBL 2.1 XML parsing with namespace-aware paths; no full XSD/Peppol validation, PDF, image, email or OCR extraction.',
         identity: 'Exact byte copies differ from supplier/invoice business duplicates. Source revisions require fingerprint/identity links and independent review.',
         simulation: 'Independent fictional inbox; no saved-journal writes, posting, payment, real ERP or production authorization. Capture times and intake order do not establish invoice aging.'}};
+    if (context) {
+      if (J.serialize(journal).length > 1048576) contract('The hypothetical checkpoint exceeds the version-1 size limit.');
+      result.format = 'SIMULATED-CAPTURED-INBOX-PREVIEW'; result.scenarioId = context.checkpointSha256; result.companyId = null;
+      result.context = context;
+      const position = document => ({status: document.status, queue: document.evaluations.at(-1)?.queue || null,
+        owner: document.evaluations.at(-1)?.owner || null, reasons: clone(document.evaluations.at(-1)?.reasons || [])});
+      result.baselineDocuments = baselineDocuments.map(document => ({documentId: document.id, ...position(document)}));
+      result.affectedExisting = baselineDocuments.flatMap(document => {
+        const before = position(document), after = position(journal.documents.find(row => row.id === document.id));
+        return JSON.stringify(before) === JSON.stringify(after) ? [] : [{documentId: document.id, before, after}];
+      });
+      result.boundaries.identity = 'Snapshot-qualified identities; exact copies are detected within this selection. Existing journal invoices participate in business-duplicate and quantity matching; their original file hashes are unavailable. The fictional source company label does not verify a legal entity.';
+      result.boundaries.simulation = 'Read-only preview against captured saved purchasing, including existing invoices. Counts describe new hypothetical documents only; baseline effects are separate. No shared-journal writes, staging, posting or payment. Original invoices only; capture order is not aging.';
+    }
+    return result;
   }
-  return {parse, fingerprint, prepare};
+  return {parse, fingerprint, prepare, prepareCurrent};
 });

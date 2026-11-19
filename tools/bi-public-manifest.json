@@ -242,20 +242,20 @@
     {
       "source": "tools/bi-prototype/preview/document-inbox.css",
       "output": "business-intelligence/document-inbox.css",
-      "sourceSha256": "dd5ff1d72c4d0bf228ae0a395e6dc2091874c1ca921fa7f753b14f32fb7b9803",
-      "sha256": "dd5ff1d72c4d0bf228ae0a395e6dc2091874c1ca921fa7f753b14f32fb7b9803"
+      "sourceSha256": "bf21388a7c2faca97732ae70e0eee9062daecb6cfe34e00cc4e04d68d0f0bf04",
+      "sha256": "bf21388a7c2faca97732ae70e0eee9062daecb6cfe34e00cc4e04d68d0f0bf04"
     },
     {
       "source": "tools/bi-prototype/preview/document-inbox.html",
       "output": "business-intelligence/document-inbox.html",
-      "sourceSha256": "9654b9e0d9d25e9af72118fae65c47e0acce2dcefe80ce09f438bc698b2a6fb7",
-      "sha256": "9bb333056a9372a74599d4dedeba554437a0b9c480933062b286e4e01060f7b4"
+      "sourceSha256": "d77e829f2e46a9b35f0710324edea3df408781063d756540856b66dc650682d0",
+      "sha256": "d804ea0ea66f738d048f2b3d8e4a9bc8364c541b42e2263a3c591a3dc102b9f7"
     },
     {
       "source": "tools/bi-prototype/preview/document-inbox.js",
       "output": "business-intelligence/document-inbox.js",
-      "sourceSha256": "578c1dcaf8619b9b0c23faac268f80980c60dc2b8fe28a5f237f8543b55e0842",
-      "sha256": "578c1dcaf8619b9b0c23faac268f80980c60dc2b8fe28a5f237f8543b55e0842"
+      "sourceSha256": "1bf9c05ea5f4655bc7b767cc2f6fbe9b364060d6832efd29009e12483313f6f7",
+      "sha256": "1bf9c05ea5f4655bc7b767cc2f6fbe9b364060d6832efd29009e12483313f6f7"
     },
     {
       "source": "tools/bi-prototype/preview/document-rules.js",
@@ -330,10 +330,16 @@
       "sha256": "58b1f10ee1a80d42f7edaccd8a69e228f1ff0c9c72c981a2faccc0abce1678b3"
     },
     {
+      "source": "tools/bi-prototype/preview/inbox-context.js",
+      "output": "business-intelligence/inbox-context.js",
+      "sourceSha256": "fd12a52fe9decd268d2c99dd8fab708a22e7168c57edf702caa5a283e3dd358e",
+      "sha256": "fd12a52fe9decd268d2c99dd8fab708a22e7168c57edf702caa5a283e3dd358e"
+    },
+    {
       "source": "tools/bi-prototype/preview/inbox-rules.js",
       "output": "business-intelligence/inbox-rules.js",
-      "sourceSha256": "e4ae85c39e140bc6f93bc0f62806759193781b5c3d4f2bb419f2f1ff394b55b0",
-      "sha256": "e4ae85c39e140bc6f93bc0f62806759193781b5c3d4f2bb419f2f1ff394b55b0"
+      "sourceSha256": "d8a0d05f4ca234b8fbdaf89b0af4d991868ca2b1f4ef64afa2721443699a3bf0",
+      "sha256": "d8a0d05f4ca234b8fbdaf89b0af4d991868ca2b1f4ef64afa2721443699a3bf0"
     },
     {
       "source": "tools/bi-prototype/preview/inbox-samples.js",
@@ -344,8 +350,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "98e0a80237ac7b9956b435bf7162c7884144d1f403df782bdb9bf9d1a2389873",
-      "sha256": "bd122080f289e47427c7b006d4bb02677a456881665f5b47eef111830ab27574"
+      "sourceSha256": "ec0b97b3e234321e442fe4b84971d3aea95e5f4f7652db706711311eb339c4f1",
+      "sha256": "44af0ae7846ef184e0eda9b77f1976c870678d814a1a807219f1d5e03c0a5a2c"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",

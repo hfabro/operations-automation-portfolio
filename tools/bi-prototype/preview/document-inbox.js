@@ -2,6 +2,8 @@
   'use strict';
   const $ = id => document.getElementById(id), Inbox = window.DocumentInbox, S = window.InboxSamples;
   let sources = [], reviews = [], model = null, selected = null, busy = false;
+  const purchasingKey = 'portfolio-phase2-connected-v1';
+  let mode = 'guided', captured = null, epoch = 0;
   const node = (tag, text, className) => {const item = document.createElement(tag); if (text !== undefined) item.textContent = text; if (className) item.className = className; return item;};
   const money = (value, currency) => new Intl.NumberFormat('en-US', {style: 'currency', currency, currencyDisplay: 'code'}).format(value / 100);
   function button(label, action, className = 'inbox-record') {const item = node('button', label, className); item.type = 'button'; item.addEventListener('click', () => {if (!busy) action();}); return item;}
@@ -15,23 +17,75 @@
   function pair(list, label, value) {list.append(node('dt', label), node('dd', value));}
   function error(message) {$('inbox-error').textContent = message; $('inbox-error').hidden = false;}
   function options(id, values, first) {const prior = $(id).value; $(id).replaceChildren(new Option(first, 'all')); for (const value of values) $(id).add(new Option(value, value)); if (values.includes(prior)) $(id).value = prior;}
+  function assertOwned(context = captured) {
+    if (mode === 'current' && (!context || sessionStorage.getItem(purchasingKey) !== context.savedRaw)) throw Error('Saved purchasing changed, was removed or is unavailable. Capture it again before previewing or downloading evidence.');
+  }
+  function clearTemporary() {
+    epoch++; busy = false; model = null; sources = []; reviews = []; selected = null;
+    $('inbox-results').hidden = true; $('inbox-detail').hidden = true; $('inbox-download').disabled = true;
+    $('inbox-files').value = ''; $('inbox-results').setAttribute('aria-busy', 'false');
+    for (const id of ['inbox-disposition', 'inbox-owner', 'inbox-document-state']) $(id).value = 'all';
+    updateReview();
+  }
+  function invalidateCurrent(message) {
+    clearTemporary(); captured = null; $('inbox-captured').hidden = true;
+    $('inbox-context-status').textContent = message; $('inbox-status').textContent = 'Capture saved purchasing again to continue.';
+    $('inbox-extract').disabled = true;
+  }
+  function checkCurrent() {
+    if (mode !== 'current' || !captured) return;
+    try {assertOwned();} catch (failure) {invalidateCurrent(failure.message); error(failure.message);}
+  }
+  function guided(load, message) {
+    clearTemporary(); mode = 'guided'; captured = null; $('inbox-captured').hidden = true; $('inbox-extract').disabled = false;
+    $('inbox-context-status').textContent = 'Using the independent guided inbox. No saved purchasing source has been selected.';
+    $('inbox-mode-boundary').textContent = 'Independent fictional inbox · SYN-DOC-INBOX-1 / SYN-CO-01. Explicit correction decisions remain separate from posting and payment. No saved-journal changes.';
+    calculate(load, [], message);
+  }
+  async function capturePurchasing() {
+    clearTemporary(); mode = 'current'; captured = null; $('inbox-captured').hidden = true; $('inbox-extract').disabled = true;
+    $('inbox-error').hidden = true; const ticket = epoch;
+    $('inbox-context-status').textContent = 'Validating and fingerprinting saved purchasing…';
+    $('inbox-mode-boundary').textContent = 'Captured purchasing preview · original invoices only. No staging, saved-journal writes, posting or payment. Guided review decisions and files are cleared when switching contexts.';
+    try {
+      const raw = sessionStorage.getItem(purchasingKey), context = await window.InboxContext.capture(raw);
+      if (ticket !== epoch) return;
+      assertOwned(context); captured = context;
+      const list = node('dl');
+      for (const [label, value] of [['Revision', context.revision], ['Exact saved-value SHA-256', context.savedValueSha256], ['Canonical checkpoint SHA-256', context.checkpointSha256], ['Policy snapshot SHA-256', context.policySnapshotSha256], ['Existing invoice documents', context.existingDocumentIds.join(', ') || 'None'], ['Company identity', 'Not established; SYN-CO-01 is a fictional extraction-profile label.']]) pair(list, label, String(value));
+      $('inbox-context-meta').replaceChildren(list);
+      rows($('inbox-context-pos'), context.approvedPOLines, line => [lines(line.poLineId, line.sourceRequestId), lines(line.supplierId, line.workOrder + ' · ' + line.description), lines(line.account, line.allocations.map(row => row.costCenter + ' ' + row.basisPoints + ' bp').join(', ')), line.quantity + ' / ' + line.received], 4);
+      $('inbox-context-po').replaceChildren(...context.approvedPOLines.map(line => new Option(line.poLineId + ' · ' + line.description, line.poLineId)));
+      $('inbox-captured').hidden = false; $('inbox-context-example').disabled = !context.approvedPOLines.length;
+      $('inbox-extract').disabled = !context.approvedPOLines.length;
+      $('inbox-context-status').textContent = 'Captured revision ' + context.revision + ': ' + context.approvedPOLines.length + ' approved PO lines; ' + context.existingDocumentIds.length + ' existing invoice documents. Read-only snapshot.';
+      $('inbox-status').textContent = context.approvedPOLines.length ? 'Choose a PO sample or supported local files to preview against this captured context.' : 'No approved PO lines. Approve a request in connected purchasing, then capture again. No substitute example is used.';
+    } catch (failure) {if (ticket === epoch) {invalidateCurrent('Purchasing capture unavailable. ' + failure.message); error(failure.message);}}
+  }
   async function calculate(nextSources, nextReviews, message, failureLabel = 'The attempted change was rejected: ') {
     if (busy) return;
+    const ticket = epoch, sourceMode = mode, context = captured;
     busy = true; $('inbox-error').hidden = true; $('inbox-results').hidden = true; $('inbox-results').setAttribute('aria-busy', 'true'); $('inbox-download').disabled = true;
     $('inbox-status').textContent = 'Hashing exact source bytes, extracting fields and replaying invoice controls…';
     try {
       if (typeof nextSources === 'function') nextSources = await nextSources();
-      const result = await Inbox.prepare(nextSources, S.journal(), nextReviews);
+      if (ticket !== epoch) return;
+      assertOwned(context);
+      const result = sourceMode === 'current' ? await Inbox.prepareCurrent(nextSources, context.savedRaw) : await Inbox.prepare(nextSources, S.journal(), nextReviews);
+      if (ticket !== epoch) return;
+      assertOwned(context);
       if (nextSources !== sources) {
         selected = null; $('inbox-disposition').value = 'all'; $('inbox-owner').value = 'all'; $('inbox-document-state').value = 'all';
       }
       sources = nextSources; reviews = nextReviews; model = result; render();
-      $('inbox-status').textContent = message + ' ' + model.counts.sourceItems + ' source items; ' + model.counts.documents + ' distinct staged invoice documents. No financial posting or saved-journal change.';
+      $('inbox-status').textContent = message + ' ' + model.counts.sourceItems + ' source items; ' + model.counts.documents + (sourceMode === 'current' ? ' new hypothetical invoice documents.' : ' distinct staged invoice documents.') + ' No financial posting or saved-journal change.';
     } catch (failure) {
+      if (ticket !== epoch) return;
+      if (sourceMode === 'current') {try {assertOwned(context);} catch (ownership) {invalidateCurrent(ownership.message); error(ownership.message); return;}}
       error(failureLabel + failure.message + (model ? ' The previous validated temporary inbox remains.' : ' No substitute figures are shown.'));
       $('inbox-status').textContent = model ? 'Showing the previous validated temporary inbox.' : 'Inbox unavailable.';
       if (model) render();
-    } finally {busy = false; $('inbox-results').setAttribute('aria-busy', 'false'); $('inbox-download').disabled = !model; updateReview();}
+    } finally {if (ticket === epoch) {busy = false; $('inbox-results').setAttribute('aria-busy', 'false'); $('inbox-download').disabled = !model; updateReview();}}
   }
   function sourceFilter(disposition) {
     $('inbox-owner').value = 'all'; $('inbox-disposition').value = disposition; selected = null; renderQueue();
@@ -43,11 +97,16 @@
   }
   function render() {
     const c = model.counts;
+    $('inbox-existing').hidden = mode !== 'current';
+    if (mode === 'current') {
+      $('inbox-existing-summary').textContent = model.baselineDocuments.length + ' existing documents retained in matching; ' + model.affectedExisting.length + ' would change status, queue, owner or reasons. New hypothetical documents: ' + c.documents + '.';
+      rows($('inbox-existing-effects'), model.affectedExisting, row => [row.documentId, lines(row.before.status, row.before.owner || 'No pending owner'), lines(row.after.status, row.after.owner || 'No pending owner'), row.after.reasons.join(' ')], 4);
+    }
     $('inbox-metrics').replaceChildren(
       metric('sources', 'Source file items', c.sourceItems, 'Files, including revisions and copies', () => sourceFilter('all')),
       metric('extraction', 'Extraction review', c.extractionReviews, 'Missing, invalid or ambiguous fields', () => sourceFilter('Extraction review')),
       metric('copies', 'Exact byte copies', c.exactCopies, 'No second invoice created', () => sourceFilter('Exact copy')),
-      metric('documents', 'Distinct invoice documents', c.documents, 'Original invoices, independent of file count', () => { $('inbox-document-state').value = 'all'; renderDocuments(); focus('inbox-documents-heading'); }),
+      metric('documents', mode === 'current' ? 'New hypothetical invoices' : 'Distinct invoice documents', c.documents, 'Original invoices, independent of file count', () => { $('inbox-document-state').value = 'all'; renderDocuments(); focus('inbox-documents-heading'); }),
       metric('ready', 'Ready for AP review', c.readyDocuments, 'Matching passed; unposted documents', () => { $('inbox-document-state').value = 'Ready'; renderDocuments(); focus('inbox-documents-heading'); }),
       metric('corrections', 'Corrections awaiting approval', c.pendingCorrections, 'Original values still active', () => sourceFilter('Correction pending'))
     );
@@ -126,7 +185,7 @@
   }
   function updateReview() {
     const row = model?.sourceItems.find(row => row.id === selected), pending = row?.disposition === 'Correction pending';
-    $('inbox-review-context').textContent = pending ? 'Proposal ' + row.id + ' is bound to SHA-256 ' + row.sha256 + '. ' + row.reasons.join(' ') : 'Select a source item with Correction pending to inspect and independently approve or reject its proposed prices. Decisions already made remain in the evidence download.';
+    $('inbox-review-context').textContent = mode === 'current' ? 'Captured purchasing previews admit original invoices only. Supplier revisions require separate review; this preview cannot change existing invoice versions.' : pending ? 'Proposal ' + row.id + ' is bound to SHA-256 ' + row.sha256 + '. ' + row.reasons.join(' ') : 'Select a source item with Correction pending to inspect and independently approve or reject its proposed prices. Decisions already made remain in the evidence download.';
     $('inbox-approve').disabled = $('inbox-reject').disabled = busy || !pending || $('inbox-role').value !== 'Purchasing approver';
   }
   async function decide(decision) {
@@ -140,8 +199,13 @@
     const url = URL.createObjectURL(new Blob([content], {type})), link = node('a'); link.href = url; link.download = name;
     document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
-  $('inbox-example').addEventListener('click', () => calculate(() => S.sources(), [], 'Fictional inbox loaded.'));
-  $('inbox-ubl-example').addEventListener('click', () => calculate(() => window.UBLInvoiceSamples.sources(), [], 'Fictional UBL XML inbox loaded.'));
+  $('inbox-example').addEventListener('click', () => guided(() => S.sources(), 'Fictional inbox loaded.'));
+  $('inbox-ubl-example').addEventListener('click', () => guided(() => window.UBLInvoiceSamples.sources(), 'Fictional UBL XML inbox loaded.'));
+  $('inbox-capture').addEventListener('click', capturePurchasing);
+  $('inbox-context-example').addEventListener('click', () => calculate(() => window.InboxContext.example(captured, $('inbox-context-po').value), [], 'Captured PO sample previewed.'));
+  window.addEventListener('focus', checkCurrent);
+  window.addEventListener('storage', event => {if (event.storageArea === sessionStorage && (event.key === purchasingKey || event.key === null)) checkCurrent();});
+  document.addEventListener('visibilitychange', () => {if (!document.hidden) checkCurrent();});
   $('inbox-extract').addEventListener('click', async () => {
     if (busy) return;
     try {
@@ -161,9 +225,10 @@
   for (const id of ['inbox-disposition', 'inbox-owner']) $(id).addEventListener('change', () => {selected = null; $('inbox-detail').hidden = true; renderQueue();});
   $('inbox-document-state').addEventListener('change', renderDocuments); $('inbox-role').addEventListener('change', updateReview);
   $('inbox-approve').addEventListener('click', () => decide('approve')); $('inbox-reject').addEventListener('click', () => decide('reject'));
-  $('inbox-source-download').addEventListener('click', () => {const row = model?.sourceItems.find(row => row.id === selected); if (row && !busy) save(row.content, row.name, row.mediaType + ';charset=utf-8');});
+  $('inbox-source-download').addEventListener('click', () => {try {assertOwned(); const row = model?.sourceItems.find(row => row.id === selected); if (row && !busy) save(row.content, row.name, row.mediaType + ';charset=utf-8');} catch (failure) {invalidateCurrent(failure.message); error(failure.message);}});
   $('inbox-download').addEventListener('click', () => {
     if (!model || busy) return;
+    try {assertOwned();} catch (failure) {invalidateCurrent(failure.message); error(failure.message); return;}
     save(JSON.stringify({...model, viewSelection: {sourceId: selected, sourceDisposition: $('inbox-disposition').value, owner: $('inbox-owner').value, documentState: $('inbox-document-state').value}}, null, 2) + '\n', 'fictional-document-inbox-evidence.json', 'application/json');
   });
   calculate(() => S.sources(), [], 'Fictional inbox loaded.');
