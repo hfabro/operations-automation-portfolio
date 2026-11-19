@@ -51,6 +51,7 @@ try {
  checked('Nine-source XML batch, exact copies, six documents and independently verified financial/control parity');
  const base = U.invoice();
  const accepted = [
+  ['decoded UTF-8 BOM', '\uFEFF' + base],
   ['prefix-independent', base.replace(/xmlns:cac=/g, 'xmlns:a=').replace(/xmlns:cbc=/g, 'xmlns:b=').replace(/(<\/?)(cac:)/g, '$1a:').replace(/(<\/?)(cbc:)/g, '$1b:')],
   ['alternate default namespace', base.replace('<Invoice ', '<u:Invoice xmlns:u="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" ').replace('</Invoice>', '</u:Invoice>')],
   ['whole decimal quantity', base.replace('>1</cbc:InvoicedQuantity>', '>1.000</cbc:InvoicedQuantity>')],
@@ -153,7 +154,7 @@ try {
  await page.locator('#inbox-extract').click(); await ready(page);
  const upload = await evidence(page), item = upload.sourceItems[0];
  assert.equal(item.sha256, sha(raw)); assert.equal(item.byteLength, raw.length); assert.equal(item.receivedAt, null);
- assert.deepEqual(item.extraction.normalized, parsed.normalized);
+ assert.deepEqual(item.extraction.normalized, parsed.normalized, JSON.stringify(item.extraction.issues));
  await page.getByRole('button', {name: 'bom-crlf.xml', exact: true}).click();
  assert.deepEqual(await download(page, 'inbox-source-download'), raw);
  checked('Real XML File upload preserves BOM/CRLF SHA-256, byte length and exact source download; capture time remains unknown');

@@ -24,7 +24,10 @@
   if (/<\?(?!xml(?:\s|\?>))/i.test(text)) return {error: 'XML processing instructions are outside the admitted profile.'};
   const encoding = text.match(/^\uFEFF?\s*<\?xml\s[^?]*encoding\s*=\s*['"]([^'"]+)['"]/i)?.[1];
   if (encoding && !/^utf-8$/i.test(encoding)) return {error: 'The source must declare UTF-8 or omit an encoding declaration.'};
-  const doc = new DOMParser().parseFromString(text, 'application/xml');
+  // Some native XML parsers reject a decoded UTF-8 BOM before an XML declaration.
+  // Normalize only the parser copy; fingerprints and source downloads retain text unchanged.
+  const parserText = text.charCodeAt(0) === 0xFEFF ? text.slice(1) : text;
+  const doc = new DOMParser().parseFromString(parserText, 'application/xml');
   if (!doc.documentElement || doc.getElementsByTagNameNS('*', 'parsererror').length || doc.doctype) return {error: 'XML is not well formed or contains an unsupported declaration.'};
   const root = doc.documentElement;
   if (root.namespaceURI !== NS.invoice || root.localName !== 'Invoice') return {error: 'Expected the UBL Invoice-2 namespace and Invoice root.'};

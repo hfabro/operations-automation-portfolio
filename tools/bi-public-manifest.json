@@ -470,26 +470,38 @@
     {
       "source": "tools/bi-prototype/preview/management-overview.css",
       "output": "business-intelligence/management-overview.css",
-      "sourceSha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e",
-      "sha256": "445e0a093ca0a3af91735891a09f3d8f5f83b31f879138beb038d14fb7bc752e"
+      "sourceSha256": "1f8b61bd06558f0e6e8df6dbec05ec2a7e6e5abb202f400e6a60b4edd11853f0",
+      "sha256": "1f8b61bd06558f0e6e8df6dbec05ec2a7e6e5abb202f400e6a60b4edd11853f0"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.html",
       "output": "business-intelligence/management-overview.html",
-      "sourceSha256": "a244e8208222e0cc614f94a6cb4643f29a1b3fe86b15fc56ab7e56f79883bcb4",
-      "sha256": "9e590d06c911a0f1f63f2ab8059c5bde7d4ae40ce93e2b76d0a897b3085755ab"
+      "sourceSha256": "bd44d5bbd62a6cf5614e32d1387558b55387f7ca7208b87ea075325ff8b4bd96",
+      "sha256": "2bac94da18bbd2e744feb073770f90ff134b755a8bd988bb4c62ee6402bd7ee8"
     },
     {
       "source": "tools/bi-prototype/preview/management-overview.js",
       "output": "business-intelligence/management-overview.js",
-      "sourceSha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93",
-      "sha256": "c73672bbeaad67fc55cac57ae63fd5b45df083d962fb28061eb1a01e1fb56b93"
+      "sourceSha256": "d2b59afea8ba36a35ea588fafc19d215c3f913dea404788d95a1ac78b274e866",
+      "sha256": "d2b59afea8ba36a35ea588fafc19d215c3f913dea404788d95a1ac78b274e866"
     },
     {
       "source": "tools/bi-prototype/preview/management-scenarios.js",
       "output": "business-intelligence/management-scenarios.js",
       "sourceSha256": "9ae02bdf6a42eb28a152b573653ebb427d0a2a36600ee2096d37b59df3a2356b",
       "sha256": "9ae02bdf6a42eb28a152b573653ebb427d0a2a36600ee2096d37b59df3a2356b"
+    },
+    {
+      "source": "tools/bi-prototype/preview/management-source-invoices-rules.js",
+      "output": "business-intelligence/management-source-invoices-rules.js",
+      "sourceSha256": "d3ffd7e7336c6e205285e8cabaeeca8e2da8774f5722e701a0418562ee649ff3",
+      "sha256": "d3ffd7e7336c6e205285e8cabaeeca8e2da8774f5722e701a0418562ee649ff3"
+    },
+    {
+      "source": "tools/bi-prototype/preview/management-source-invoices.js",
+      "output": "business-intelligence/management-source-invoices.js",
+      "sourceSha256": "6bc35eeab9d0196e2dbd4d009d1934004c56f321af6bbc874f20eff0c73929fb",
+      "sha256": "6bc35eeab9d0196e2dbd4d009d1934004c56f321af6bbc874f20eff0c73929fb"
     },
     {
       "source": "tools/bi-prototype/preview/p2p-data.js",
@@ -554,8 +566,8 @@
     {
       "source": "tools/bi-prototype/preview/ubl-invoice-rules.js",
       "output": "business-intelligence/ubl-invoice-rules.js",
-      "sourceSha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc",
-      "sha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc"
+      "sourceSha256": "107c9dd32d14a1c65a09f96c207716f7d4b16466cf1602093bf9262e6fe688b0",
+      "sha256": "107c9dd32d14a1c65a09f96c207716f7d4b16466cf1602093bf9262e6fe688b0"
     },
     {
       "source": "tools/bi-prototype/preview/ubl-invoice-samples.js",
