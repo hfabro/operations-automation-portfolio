@@ -43,7 +43,9 @@ jobs:
       - name: Verify connected Finance resolution and legacy checkpoint parity
         run: node ./tools/test-bi-finance-resolution.cjs
       - name: Verify management measures, owners and unavailable sources
-        run: node ./tools/test-bi-management.cjs
+        run: |
+          node tools/test-bi-management.cjs
+          node tools/test-bi-management-source-invoices.cjs
       - name: Verify explicit business-time fixture and financial/date controls
         run: |
           node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
@@ -171,6 +173,7 @@ jobs:
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
+          node tools/test-bi-management-source-invoices-browser.mjs
           node tools/test-bi-finance-resolution-browser.mjs
           node tools/test-bi-purchasing-recovery.mjs
           node tools/test-bi-batch-source.mjs
@@ -229,6 +232,7 @@ jobs:
           node tools/test-bi-ubl-inbox.mjs
           node tools/test-bi-table-export-browser.mjs
           node tools/test-bi-management-invoices.mjs
+          node tools/test-bi-management-source-invoices-browser.mjs
           node tools/test-bi-finance-resolution-browser.mjs
           node tools/test-bi-purchasing-recovery.mjs
           node tools/test-bi-batch-source.mjs
