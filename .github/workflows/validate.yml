@@ -118,6 +118,9 @@ jobs:
     name: Compatibility (${{ matrix.engine }})
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    container:
+      image: mcr.microsoft.com/playwright:v1.62.1-noble@sha256:dcc5531e97840b9b5e794f2814476b21571c5124a3fca2267d73041f56e7580e
+      options: --init
     strategy:
       fail-fast: false
       matrix:
@@ -129,9 +132,12 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
       - name: Prepare pinned engine and accessibility tools
+        env:
+          PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright
+          BROWSER_ENGINE: ${{ matrix.engine }}
         run: |
           npm install --prefix "$RUNNER_TEMP/portfolio-qa" --no-save --package-lock=false --ignore-scripts playwright@1.62.1 axe-core@4.14.0
-          "$RUNNER_TEMP/portfolio-qa/node_modules/.bin/playwright" install --with-deps "${{ matrix.engine }}"
+          node -e "const fs=require('node:fs'),path=process.env.PLAYWRIGHT_MODULE,p=require(path);if(require(path+'/package.json').version!=='1.62.1')throw Error('Playwright package/image version mismatch');const executable=p[process.env.BROWSER_ENGINE].executablePath();if(!fs.existsSync(executable))throw Error('Pinned image browser missing: '+executable);console.log('Pinned browser ready: '+executable);"
       - name: Verify route layouts and representative workflows
         env:
           PLAYWRIGHT_MODULE: ${{ runner.temp }}/portfolio-qa/node_modules/playwright

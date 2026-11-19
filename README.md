@@ -322,3 +322,5 @@ The browser demonstrations retain explicit ownership of their saved source. Purc
 | Business report | [Read-only resume and explicit replacement](tools/bi-prototype/REPORT-HANDOFF-CONTRACT-2026-11-17.md) | `node tools/test-bi-report-handoff.mjs` |
 
 These checks use the existing Playwright/axe environment and browser-engine selector. Journal formats, financial calculations and the separate posting/payment controls remain authoritative. The contracts describe browser-local simulation behavior; authenticated production storage and multi-user authorization require a separately designed implementation.
+
+The Firefox/WebKit compatibility matrix uses the official Playwright `v1.62.1-noble` image pinned by digest, paired with `playwright@1.62.1`. Browsers and system dependencies come from the image; all existing suites and timeouts remain. Update the package and image together, and retain the executable/version admission check. See [the compatibility environment notes](tools/bi-prototype/MANAGEMENT-SOURCE-INVOICES-CONTRACT-2026-11-19.md#reproducible-compatibility-environment).
