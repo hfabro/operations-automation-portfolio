@@ -1,10 +1,10 @@
 /* Supported invoice-text extraction and immutable source evidence over the existing invoice controls. */
 (function(root, factory) {
   const api = typeof module === 'object' && module.exports
-    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'), require('./ubl-invoice-rules.js'), require('./inbox-context.js'))
-    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments, root.UBLInvoice, root.InboxContext);
+    ? factory(require('./invoice-rules.js'), require('./journey-rules.js'), require('./document-rules.js'), require('./ubl-invoice-rules.js'), require('./inbox-context.js'), require('./inbox-receipts.js'))
+    : factory(root.InvoiceIntake, root.Journey, root.InvoiceDocuments, root.UBLInvoice, root.InboxContext, root.InboxReceipts);
   if (typeof module === 'object' && module.exports) module.exports = api; else root.DocumentInbox = api;
-})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D, UBL, Context) {
+})(typeof window !== 'undefined' ? window : globalThis, function(I, J, D, UBL, Context, Receipts) {
   'use strict';
   const clone = value => JSON.parse(JSON.stringify(value)), encoder = new TextEncoder();
   const scenarioId = 'SYN-DOC-INBOX-1', companyId = 'SYN-CO-01';
@@ -98,9 +98,9 @@
   async function prepareCurrent(sources, savedRaw) {
     const context = await Context.capture(savedRaw);
     if (!context.approvedPOLines.length) contract('Captured purchasing has no approved PO lines. Approve a request before previewing source invoices.');
-    return prepareCore(sources, J.restore(context.checkpoint), [], context);
+    return prepareCore(sources, J.restore(context.checkpoint), [], context, await Receipts.inspect(savedRaw));
   }
-  async function prepareCore(sources, sourceJournal, reviews, context = null) {
+  async function prepareCore(sources, sourceJournal, reviews, context = null, receipts = []) {
     if (!Array.isArray(sources) || sources.length > 20) contract('Use an explicit array of at most 20 source items.');
     if (!Array.isArray(reviews) || reviews.length > 20) contract('Use a bounded review array.');
     let journal = J.restore(J.serialize(sourceJournal));
@@ -142,6 +142,13 @@
       }
       const n = row.extraction.normalized;
       if (n.revision !== 1) continue;
+      const receipt = receipts.find(receipt => receipt.sourceSha256 === row.sha256);
+      if (receipt) {
+        const p = receipt.originalImport;
+        if (p.supplierId !== n.supplierId || p.number !== n.number || p.currency !== n.currency || p.declaredNetCents !== n.declaredNetCents || JSON.stringify(p.lines) !== JSON.stringify(n.lines)) contract('Retained fingerprint receipt disagrees with the reattached original fields.');
+        row.documentId = receipt.documentId;
+        hold(row, 'Already staged', 'No new import', 'Exact source bytes and extracted fields match the retained fingerprint receipt. Existing document status: ' + receipt.currentStatus + '. No second invoice is created.'); continue;
+      }
       if (context && journal.commands.length >= 1000) contract('The captured journal cannot fit another invoice within the version-1 checkpoint command limit.');
       const importHash = context ? (await Context.hash(context.checkpointSha256 + ':' + row.sha256)).toUpperCase() : null;
       row.documentId = context ? 'CTXDOC-' + importHash : 'INBOX-' + row.id;
@@ -203,6 +210,8 @@
       if (J.serialize(journal).length > 1048576) contract('The hypothetical checkpoint exceeds the version-1 size limit.');
       result.format = 'SIMULATED-CAPTURED-INBOX-PREVIEW'; result.scenarioId = context.checkpointSha256; result.companyId = null;
       result.context = context;
+      result.sourceReceipts = receipts;
+      result.counts.alreadyStagedSources = records.filter(row => row.disposition === 'Already staged').length;
       const position = document => ({status: document.status, queue: document.evaluations.at(-1)?.queue || null,
         owner: document.evaluations.at(-1)?.owner || null, reasons: clone(document.evaluations.at(-1)?.reasons || [])});
       result.baselineDocuments = baselineDocuments.map(document => ({documentId: document.id, ...position(document)}));
@@ -210,10 +219,36 @@
         const before = position(document), after = position(journal.documents.find(row => row.id === document.id));
         return JSON.stringify(before) === JSON.stringify(after) ? [] : [{documentId: document.id, before, after}];
       });
-      result.boundaries.identity = 'Snapshot-qualified identities; exact copies are detected within this selection. Existing journal invoices participate in business-duplicate and quantity matching; their original file hashes are unavailable. The fictional source company label does not verify a legal entity.';
+      result.boundaries.identity = 'Snapshot-qualified identities; exact copies are detected within this selection and verified fingerprint receipts prevent reimport after reload. Other existing invoices use business-duplicate and quantity matching. Purchasing retains fingerprints and normalized imports; original file bytes stay in the inbox evidence download. The fictional source company label does not verify a legal entity.';
       result.boundaries.simulation = 'Read-only preview against captured saved purchasing, including existing invoices. Counts describe new hypothetical documents only; baseline effects are separate. No shared-journal writes, staging, posting or payment. Original invoices only; capture order is not aging.';
     }
     return result;
   }
-  return {parse, fingerprint, prepare, prepareCurrent};
+  async function stage(preview, currentRaw, actor) {
+    if (actor !== J.roles.importDocument) contract('AP must explicitly stage source invoices.');
+    if (preview?.format !== 'SIMULATED-CAPTURED-INBOX-PREVIEW' || preview.version !== 1) contract('Create a captured purchasing preview first.');
+    const envelopes = preview.sourceItems.map(row => Object.fromEntries(['id', 'name', 'mediaType', 'content', 'receivedAt', 'receivedAtUnknownReason', 'order'].map(field => [field, row[field]])));
+    const rebuilt = await prepareCurrent(envelopes, preview.context.savedRaw);
+    if (JSON.stringify(rebuilt) !== JSON.stringify(preview)) contract('Preview differs from its source files, captured context or calculations.');
+    if (rebuilt.sourceItems.some(row => !['Ready for AP review', 'Invoice held', 'Exact copy', 'Already staged'].includes(row.disposition))) contract('Resolve extraction and revision-review items before staging this selection.');
+    if (!rebuilt.documents.length && !rebuilt.counts.alreadyStagedSources) contract('No original invoices are available to stage.');
+    const baseline = rebuilt.sources.baseline, planned = rebuilt.sources.proposedCheckpoint.commands.slice(baseline.commands.length).map(command => {
+      const source = rebuilt.sourceItems.find(row => row.documentId === command.payload.documentId);
+      return {...clone(command), id: Receipts.commandId(rebuilt.context.checkpointSha256, source.sha256)};
+    });
+    let current = J.restore(currentRaw);
+    const currentCommands = JSON.parse(J.serialize(current)).commands;
+    const expectedPrefix = [...baseline.commands, ...planned];
+    const already = planned.length > 0 && currentCommands.length >= expectedPrefix.length && JSON.stringify(currentCommands.slice(0, expectedPrefix.length)) === JSON.stringify(expectedPrefix);
+    if (currentRaw !== rebuilt.context.savedRaw && !already) contract('Purchasing changed after preview. Capture it again before staging; no newer journal is replaced.');
+    if (!already) for (const command of planned) current = J.dispatch(current, command);
+    const checkpoint = already || !planned.length ? currentRaw : J.serialize(current);
+    if (checkpoint.length > 1048576) contract('Staging exceeds the version-1 checkpoint size limit.');
+    const receipts = await Receipts.inspect(checkpoint), documentIds = [...new Set(rebuilt.sourceItems.map(row => row.documentId).filter(Boolean))];
+    return {format: 'SIMULATED-SOURCE-INBOX-STAGE', version: 1, fictional: true, checkpoint,
+      documentIds, receipts: receipts.filter(row => documentIds.includes(row.documentId)), journalReceipts: receipts,
+      alreadyStaged: already || !planned.length, newDocuments: already ? 0 : planned.length,
+      boundary: 'Original invoices staged only. AP posting, independent payment authorization and Treasury settlement remain separate. Original bytes remain in this tab/evidence download, not the purchasing journal.'};
+  }
+  return {parse, fingerprint, prepare, prepareCurrent, stage, receipts: Receipts.inspect};
 });

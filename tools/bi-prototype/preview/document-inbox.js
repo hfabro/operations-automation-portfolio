@@ -4,6 +4,7 @@
   let sources = [], reviews = [], model = null, selected = null, busy = false;
   const purchasingKey = 'portfolio-phase2-connected-v1';
   let mode = 'guided', captured = null, epoch = 0;
+  let ownedRaw = null, committed = null, capturedReceipts = [];
   const node = (tag, text, className) => {const item = document.createElement(tag); if (text !== undefined) item.textContent = text; if (className) item.className = className; return item;};
   const money = (value, currency) => new Intl.NumberFormat('en-US', {style: 'currency', currency, currencyDisplay: 'code'}).format(value / 100);
   function button(label, action, className = 'inbox-record') {const item = node('button', label, className); item.type = 'button'; item.addEventListener('click', () => {if (!busy) action();}); return item;}
@@ -18,14 +19,15 @@
   function error(message) {$('inbox-error').textContent = message; $('inbox-error').hidden = false;}
   function options(id, values, first) {const prior = $(id).value; $(id).replaceChildren(new Option(first, 'all')); for (const value of values) $(id).add(new Option(value, value)); if (values.includes(prior)) $(id).value = prior;}
   function assertOwned(context = captured) {
-    if (mode === 'current' && (!context || sessionStorage.getItem(purchasingKey) !== context.savedRaw)) throw Error('Saved purchasing changed, was removed or is unavailable. Capture it again before previewing or downloading evidence.');
+    const expected = context === captured ? ownedRaw : context?.savedRaw;
+    if (mode === 'current' && (!context || sessionStorage.getItem(purchasingKey) !== expected)) throw Error('Saved purchasing changed, was removed or is unavailable. Capture it again before previewing, staging or downloading evidence.');
   }
   function clearTemporary() {
-    epoch++; busy = false; model = null; sources = []; reviews = []; selected = null;
+    epoch++; busy = false; model = null; sources = []; reviews = []; selected = null; ownedRaw = null; committed = null; capturedReceipts = [];
     $('inbox-results').hidden = true; $('inbox-detail').hidden = true; $('inbox-download').disabled = true;
     $('inbox-files').value = ''; $('inbox-results').setAttribute('aria-busy', 'false');
     for (const id of ['inbox-disposition', 'inbox-owner', 'inbox-document-state']) $(id).value = 'all';
-    updateReview();
+    updateReview(); updateStage();
   }
   function invalidateCurrent(message) {
     clearTemporary(); captured = null; $('inbox-captured').hidden = true;
@@ -46,11 +48,11 @@
     clearTemporary(); mode = 'current'; captured = null; $('inbox-captured').hidden = true; $('inbox-extract').disabled = true;
     $('inbox-error').hidden = true; const ticket = epoch;
     $('inbox-context-status').textContent = 'Validating and fingerprinting saved purchasing…';
-    $('inbox-mode-boundary').textContent = 'Captured purchasing preview · original invoices only. No staging, saved-journal writes, posting or payment. Guided review decisions and files are cleared when switching contexts.';
+    $('inbox-mode-boundary').textContent = 'Captured purchasing · extraction is read-only. AP can explicitly stage validated originals into the same still-owned journal. Posting and payment remain separate. Switching contexts clears temporary files and review decisions.';
     try {
-      const raw = sessionStorage.getItem(purchasingKey), context = await window.InboxContext.capture(raw);
+      const raw = sessionStorage.getItem(purchasingKey), context = await window.InboxContext.capture(raw), receipts = await Inbox.receipts(raw);
       if (ticket !== epoch) return;
-      assertOwned(context); captured = context;
+      assertOwned(context); captured = context; ownedRaw = raw; capturedReceipts = receipts; renderReceipts();
       const list = node('dl');
       for (const [label, value] of [['Revision', context.revision], ['Exact saved-value SHA-256', context.savedValueSha256], ['Canonical checkpoint SHA-256', context.checkpointSha256], ['Policy snapshot SHA-256', context.policySnapshotSha256], ['Existing invoice documents', context.existingDocumentIds.join(', ') || 'None'], ['Company identity', 'Not established; SYN-CO-01 is a fictional extraction-profile label.']]) pair(list, label, String(value));
       $('inbox-context-meta').replaceChildren(list);
@@ -64,6 +66,7 @@
   }
   async function calculate(nextSources, nextReviews, message, failureLabel = 'The attempted change was rejected: ') {
     if (busy) return;
+    if (committed) {error('Capture purchasing again before creating another preview. Download evidence to retain the original files.'); return;}
     const ticket = epoch, sourceMode = mode, context = captured;
     busy = true; $('inbox-error').hidden = true; $('inbox-results').hidden = true; $('inbox-results').setAttribute('aria-busy', 'true'); $('inbox-download').disabled = true;
     $('inbox-status').textContent = 'Hashing exact source bytes, extracting fields and replaying invoice controls…';
@@ -85,7 +88,48 @@
       error(failureLabel + failure.message + (model ? ' The previous validated temporary inbox remains.' : ' No substitute figures are shown.'));
       $('inbox-status').textContent = model ? 'Showing the previous validated temporary inbox.' : 'Inbox unavailable.';
       if (model) render();
-    } finally {if (ticket === epoch) {busy = false; $('inbox-results').setAttribute('aria-busy', 'false'); $('inbox-download').disabled = !model; updateReview();}}
+    } finally {if (ticket === epoch) {busy = false; $('inbox-results').setAttribute('aria-busy', 'false'); $('inbox-download').disabled = !model; updateReview(); updateStage();}}
+  }
+  function renderReceipts() {
+    $('inbox-receipt-detail').hidden = true;
+    $('inbox-receipts-summary').textContent = capturedReceipts.length + ' fingerprint receipts retained in purchasing. Reattach an original file to verify its bytes and extracted fields.';
+    $('inbox-receipts-download').disabled = !capturedReceipts.length;
+    rows($('inbox-receipts'), capturedReceipts, receipt => [button(receipt.originalImport.number, () => {
+      const list = node('dl');
+      for (const [label, value] of [['Document', receipt.documentId], ['Current status', receipt.currentStatus], ['Exact source SHA-256', receipt.sourceSha256], ['Origin checkpoint SHA-256', receipt.contextSha256], ['Imported revision', receipt.importedRevision], ['Retention boundary', receipt.retention]]) pair(list, label, String(value));
+      $('inbox-receipt-detail').replaceChildren(node('h3', 'Retained fingerprint receipt'), list, node('pre', JSON.stringify(receipt.originalImport, null, 2)));
+      $('inbox-receipt-detail').hidden = false; focus('inbox-receipt-detail');
+    }), lines(receipt.currentStatus, receipt.originalImport.supplierId), receipt.sourceSha256.slice(0, 16) + '…'], 3);
+  }
+  function updateStage() {
+    $('inbox-stage').hidden = mode !== 'current' || !model;
+    $('inbox-existing-heading').textContent = committed ? 'Retained preview before staging.' : 'Separate the baseline from the preview.';
+    $('inbox-existing-boundary').textContent = committed ? 'This section retains the pre-stage replay. The explicit AP stage saved its original invoices; capture purchasing again for a refreshed view. Counts below describe the original preview, excluding its existing baseline documents.' : 'These effects exist only in this page’s replay. The saved journal is unchanged. Counts below cover new hypothetical documents; existing documents are excluded.';
+    const blocked = !model || model.sourceItems.some(row => !['Ready for AP review', 'Invoice held', 'Exact copy', 'Already staged'].includes(row.disposition));
+    $('inbox-stage-button').disabled = busy || !!committed || blocked || $('inbox-stage-role').value !== 'AP' || !(model?.documents.length || model?.counts.alreadyStagedSources);
+    $('inbox-stage-summary').textContent = committed ? (committed.alreadyStaged ? 'Existing imports verified; no new write was needed.' : committed.newDocuments + ' original invoices saved into purchasing.') + ' The pre-stage preview remains below. Capture again for another selection; download evidence to retain original bytes.'
+      : model ? model.counts.documents + ' new originals: ' + model.counts.readyDocuments + ' ready for AP review; ' + model.counts.heldDocuments + ' held. ' + (model.counts.alreadyStagedSources || 0) + ' source items already staged.' + (blocked ? ' Extraction or revision-review items block this selection.' : ' Staging preserves these outcomes and does not post or pay.') : '';
+  }
+  async function stageCurrent() {
+    if (busy || !model || mode !== 'current' || committed) return;
+    const ticket = epoch; let wrote = false;
+    try {
+      assertOwned(); busy = true; updateStage(); $('inbox-error').hidden = true; $('inbox-download').disabled = true;
+      const result = await Inbox.stage(model, ownedRaw, $('inbox-stage-role').value);
+      if (ticket !== epoch) return;
+      assertOwned();
+      if (!result.alreadyStaged) {sessionStorage.setItem(purchasingKey, result.checkpoint); wrote = true;}
+      if (sessionStorage.getItem(purchasingKey) !== result.checkpoint) throw Error('Saved purchasing could not be verified after staging. Inspect purchasing before retrying.');
+      ownedRaw = result.checkpoint; committed = result; capturedReceipts = result.journalReceipts; renderReceipts();
+      $('inbox-context-example').disabled = $('inbox-extract').disabled = true;
+      $('inbox-context-status').textContent = 'Saved purchasing verified at revision ' + window.Journey.restore(result.checkpoint).revision + '. Captured pre-stage evidence remains inspectable; capture again to refresh.';
+      $('inbox-status').textContent = result.alreadyStaged ? 'Fingerprint receipts verified. No duplicate import or journal write.' : result.newDocuments + ' original invoices staged and saved. Review holds and post eligible documents separately in connected purchasing. No payment was made.';
+    } catch (failure) {
+      if (ticket !== epoch) return;
+      if (wrote) invalidateCurrent('Save verification is incomplete. Inspect purchasing before retrying.');
+      else {try {assertOwned();} catch (ownership) {invalidateCurrent(ownership.message);}}
+      error('Staging held: ' + failure.message + (wrote ? ' A write occurred; its final state was not confirmed.' : ' No successful save was confirmed.'));
+    } finally {if (ticket === epoch) {busy = false; $('inbox-download').disabled = !model; updateStage();}}
   }
   function sourceFilter(disposition) {
     $('inbox-owner').value = 'all'; $('inbox-disposition').value = disposition; selected = null; renderQueue();
@@ -110,9 +154,9 @@
       metric('ready', 'Ready for AP review', c.readyDocuments, 'Matching passed; unposted documents', () => { $('inbox-document-state').value = 'Ready'; renderDocuments(); focus('inbox-documents-heading'); }),
       metric('corrections', 'Corrections awaiting approval', c.pendingCorrections, 'Original values still active', () => sourceFilter('Correction pending'))
     );
-    options('inbox-disposition', ['Ready for AP review', 'Invoice held', 'Exact copy', 'Extraction review', 'Revision review', 'Correction pending', 'Approved revision', 'Rejected revision'], 'All dispositions');
+    options('inbox-disposition', ['Ready for AP review', 'Invoice held', 'Already staged', 'Exact copy', 'Extraction review', 'Revision review', 'Correction pending', 'Approved revision', 'Rejected revision'], 'All dispositions');
     options('inbox-owner', [...new Set(model.sourceItems.map(row => row.owner))].sort(), 'All owners');
-    renderQueue(); renderDocuments(); $('inbox-results').hidden = false;
+    renderQueue(); renderDocuments(); $('inbox-results').hidden = false; updateStage();
     if (selected && model.sourceItems.some(row => row.id === selected)) inspect(selected, false); else {$('inbox-detail').hidden = true; selected = null;}
   }
   function renderQueue() {
@@ -203,6 +247,9 @@
   $('inbox-ubl-example').addEventListener('click', () => guided(() => window.UBLInvoiceSamples.sources(), 'Fictional UBL XML inbox loaded.'));
   $('inbox-capture').addEventListener('click', capturePurchasing);
   $('inbox-context-example').addEventListener('click', () => calculate(() => window.InboxContext.example(captured, $('inbox-context-po').value), [], 'Captured PO sample previewed.'));
+  $('inbox-stage-button').addEventListener('click', stageCurrent);
+  $('inbox-stage-role').addEventListener('change', updateStage);
+  $('inbox-receipts-download').addEventListener('click', () => {try {assertOwned(); if (!busy) save(JSON.stringify({format: 'SIMULATED-INBOX-FINGERPRINT-RECEIPTS', version: 1, receipts: capturedReceipts}, null, 2) + '\n', 'fictional-invoice-fingerprint-receipts.json', 'application/json');} catch (failure) {invalidateCurrent(failure.message); error(failure.message);}});
   window.addEventListener('focus', checkCurrent);
   window.addEventListener('storage', event => {if (event.storageArea === sessionStorage && (event.key === purchasingKey || event.key === null)) checkCurrent();});
   document.addEventListener('visibilitychange', () => {if (!document.hidden) checkCurrent();});
@@ -229,7 +276,7 @@
   $('inbox-download').addEventListener('click', () => {
     if (!model || busy) return;
     try {assertOwned();} catch (failure) {invalidateCurrent(failure.message); error(failure.message); return;}
-    save(JSON.stringify({...model, viewSelection: {sourceId: selected, sourceDisposition: $('inbox-disposition').value, owner: $('inbox-owner').value, documentState: $('inbox-document-state').value}}, null, 2) + '\n', 'fictional-document-inbox-evidence.json', 'application/json');
+    save(JSON.stringify({...model, ...(committed ? {staging: committed} : {}), viewSelection: {sourceId: selected, sourceDisposition: $('inbox-disposition').value, owner: $('inbox-owner').value, documentState: $('inbox-document-state').value}}, null, 2) + '\n', 'fictional-document-inbox-evidence.json', 'application/json');
   });
   calculate(() => S.sources(), [], 'Fictional inbox loaded.');
 })();
