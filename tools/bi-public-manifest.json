@@ -116,8 +116,8 @@
     {
       "source": "tools/bi-shell.css",
       "output": "business-intelligence/bi-shell.css",
-      "sourceSha256": "e69e85585ca071eeb8752e7dd09946c3929015e7bfe4e3ac15a75dbaacc297b8",
-      "sha256": "e69e85585ca071eeb8752e7dd09946c3929015e7bfe4e3ac15a75dbaacc297b8"
+      "sourceSha256": "a35d85448d9638297d298a867259adde2e88a0d475aebc19becd1ba0fa14406c",
+      "sha256": "a35d85448d9638297d298a867259adde2e88a0d475aebc19becd1ba0fa14406c"
     },
     {
       "source": "tools/bi-prototype/preview/business-report.css",
@@ -129,7 +129,7 @@
       "source": "tools/bi-prototype/preview/business-report.html",
       "output": "business-intelligence/business-report.html",
       "sourceSha256": "502e0e3b493a208a9002721ea1f670b6f76ce67c36adb83889f90a5938e166f1",
-      "sha256": "76873c99949d0dee45eedaedaf7c5918978127e4368419761ce2f3d190746fe7"
+      "sha256": "4995785b79e25ff10c56ddb8d820d911092633f4ff13aa1b31bf12fa9ff0276a"
     },
     {
       "source": "tools/bi-prototype/preview/business-report.js",
