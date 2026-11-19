@@ -41,3 +41,5 @@
 #inbox-receipt-detail dt{font-weight:650}#inbox-receipt-detail dd{margin:0;overflow-wrap:anywhere}
 #inbox-receipt-detail pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}
 @media(max-width:650px){#inbox-receipt-detail dl{grid-template-columns:1fr}#inbox-receipt-detail dd{margin-bottom:10px}}
+
+.inbox-start-guide{margin:20px 0}.inbox-start-guide ol{padding-inline-start:1.5rem}.inbox-start-guide li+li{margin-top:16px}.inbox-start-guide p{margin:16px 0}
