@@ -566,8 +566,8 @@
     {
       "source": "tools/bi-prototype/preview/ubl-invoice-rules.js",
       "output": "business-intelligence/ubl-invoice-rules.js",
-      "sourceSha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc",
-      "sha256": "41e5ba899fe02e04b2f86777d1150b5ea4a92bc4da2e919ea49a7495885787dc"
+      "sourceSha256": "107c9dd32d14a1c65a09f96c207716f7d4b16466cf1602093bf9262e6fe688b0",
+      "sha256": "107c9dd32d14a1c65a09f96c207716f7d4b16466cf1602093bf9262e6fe688b0"
     },
     {
       "source": "tools/bi-prototype/preview/ubl-invoice-samples.js",
