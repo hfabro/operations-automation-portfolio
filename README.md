@@ -1,5 +1,30 @@
 # David H. Fabro — Operations Automation Portfolio
 
+## Start here
+
+The portfolio is a working, browser-only presentation. Company scenarios use fictional records; historical public-data research has its own attribution and measurement boundaries. The connected workflows, financial rules and evidence checks execute in HTML, CSS and JavaScript.
+
+| Review goal | Public entry point |
+| --- | --- |
+| Inspect a business position and its decision owners | [Four-stop management review](https://hfabro.github.io/operations-automation-portfolio/business-intelligence/management-overview.html?review=1#management-review-guide) |
+| Follow a machine condition through the connected workflow | [Machine intelligence](https://hfabro.github.io/operations-automation-portfolio/business-intelligence/machine-intelligence.html) |
+| Inspect invoice extraction, matching and source evidence | [Source-document inbox](https://hfabro.github.io/operations-automation-portfolio/business-intelligence/document-inbox.html) |
+| Understand the tables, relationships and measures | [Data model and methods](https://hfabro.github.io/operations-automation-portfolio/business-intelligence/data-and-methods.html) |
+| Explore the original systems and case studies | [Work library](https://hfabro.github.io/operations-automation-portfolio/work/) |
+
+### Source and maintenance map
+
+| Responsibility | Authoritative source or procedure |
+| --- | --- |
+| Shared portfolio navigation, theme and interactions | [scripts/app.js](scripts/app.js), [styles.css](styles.css) and the page-specific assets described below |
+| Seven generated system pages | [tools/build-system-pages.mjs](tools/build-system-pages.mjs); preserve each system's application logic when regenerating its framing |
+| BI interfaces, rules and scenario fixtures | [tools/bi-prototype/preview/](tools/bi-prototype/preview/); [tools/build-bi-pages.mjs](tools/build-bi-pages.mjs) generates the public BI pages |
+| BI source/output boundaries and route catalog | [Projection contract](tools/bi-prototype/PUBLIC-PROJECTION-2026-11-15.md), the generator's `BI_PAGES`, and generated [manifest](tools/bi-public-manifest.json) |
+| Validation and workflow coverage | [Browser quality checks](#browser-quality-checks), [workflow regression runner](tools/run-regressions.mjs) and [CI definition](.github/workflows/validate.yml) |
+| Publication, deployed acceptance and recovery | [Release and recovery](RELEASE.md) |
+
+Edit canonical sources before regenerating public output. Keep independent guided examples, saved journals, dated cohorts and historical research explicitly identified; sharing a page or an identifier does not join their records. The [connected BI](#connected-business-intelligence) and [saved-journal recovery](#saved-journal-ownership-and-recovery) sections describe the implemented controls. Automated results and manual assistive-technology or physical-device acceptance are distinct evidence; see the validation limits below.
+
 ## Project purpose
 
 This is the public-facing proof-of-work portfolio for David H. Fabro. Its primary function is to showcase operational systems, case-study thinking, Smart Factory strategy, architecture, controls, maturity, and outcomes—not to reproduce an online résumé. Experience and credentials remain secondary evidence behind the work.
@@ -45,7 +70,7 @@ The preview binds only to loopback and denies private inputs, Git metadata, temp
 
 ## Build instructions
 
-There is no compilation or bundling step. The source files are the production files. A production check consists of serving the folder and verifying that all local routes and assets return successfully.
+The production runtime is static HTML, CSS and JavaScript, with no bundler or runtime package installation. Some public pages are generated from canonical sources; use the maintenance map above instead of editing those outputs directly. Release validation includes source/output consistency, links, rule and workflow checks, and appropriate rendered acceptance.
 
 When Node.js is available, run the included no-dependency validation command before publishing:
 
@@ -53,6 +78,7 @@ When Node.js is available, run the included no-dependency validation command bef
 node .\tools\validate-site.mjs
 node .\tools\test-system-data.mjs
 node .\tools\test-system-page-build.mjs
+node .\tools\test-bi-page-build.mjs
 ```
 
 It checks local links and fragments, duplicate IDs, required launch artifacts, demo security and sharing metadata, shared demo navigation, common leakage indicators, and JavaScript syntax. The same validator runs automatically on pushes and pull requests through a least-privilege GitHub Actions workflow whose checkout dependency is pinned to an immutable commit.
@@ -61,7 +87,7 @@ Seven system pages are assembled from `tools/build-system-pages.mjs`. Edit that 
 
 ## Browser quality checks
 
-The pull-request workflow also runs Playwright 1.62.1 and axe-core 4.14.0 in a temporary CI tools directory. These are development-only auditors; nothing is added to the published site's runtime. The workflow checks all 30 pages at desktop/mobile sizes in both themes, exercises discovery and keyboard navigation, protects Ladder identity and device-mode behavior, and screens 14 portfolio shell pages for WCAG 2.2 AA violations.
+The pull-request workflow also runs Playwright 1.62.1 and axe-core 4.14.0 in a temporary CI tools directory. These are development-only auditors; nothing is added to the published site's runtime. The workflow checks discovered public routes at desktop/mobile sizes in both themes, exercises discovery and keyboard navigation, protects Ladder identity and device-mode behavior, and screens portfolio-shell, demo and BI states for WCAG 2.2 AA rule violations. The scripts and CI definition identify each check's actual scope; passing a check does not establish coverage of every possible interaction.
 
 To reuse an existing local installation, set `PLAYWRIGHT_MODULE` to its module directory and `AXE_CORE_PATH` to its `axe.min.js` file. Set `BROWSER_CHANNEL=msedge` to use installed Edge, or leave it unset for Playwright Chromium. Then run:
 
@@ -75,7 +101,7 @@ node tools/audit-demo-accessibility.mjs
 
 Every demo shares a task-specific help disclosure and a confirmed full-session restart. Its existing application controls remain specific to the workflow.
 
-`tools/test-engine-compatibility.mjs` checks all 30 routes at four widths in both theme preferences, then exercises representative navigation and workflow paths. `tools/audit-demo-accessibility.mjs` screens all 15 demo entries and their expanded help disclosures. Both default to Chromium; set `BROWSER_ENGINE=firefox` or `BROWSER_ENGINE=webkit` to use a matching installed Playwright test browser. `BROWSER_CHANNEL` applies only to Chromium. CI runs the Firefox and WebKit checks as separate jobs using the same pinned development tools. Use `--workflows-only` with the compatibility runner for focused workflow diagnostics. The WebKit test build does not replace physical Safari/iOS acceptance. Follow the [Playwright browser installation instructions](https://playwright.dev/docs/browsers) when setting up these optional development browsers.
+`tools/test-engine-compatibility.mjs` discovers the public HTML routes and checks them at four widths in both theme preferences, then exercises representative navigation and workflow paths. `tools/audit-demo-accessibility.mjs` screens all 15 demo entries and their expanded help disclosures. Both default to Chromium; set `BROWSER_ENGINE=firefox` or `BROWSER_ENGINE=webkit` to use a matching installed Playwright test browser. `BROWSER_CHANNEL` applies only to Chromium. CI runs the Firefox and WebKit checks as separate jobs using the same pinned development tools. Use `--workflows-only` with the compatibility runner for focused workflow diagnostics. The WebKit test build does not replace physical Safari/iOS acceptance. Follow the [Playwright browser installation instructions](https://playwright.dev/docs/browsers) when setting up these optional development browsers.
 
 The maintained workflow runner lists the focused tests in `tools/run-regressions.mjs`; individual scripts can be run separately to investigate a failure. CI uses the same runner, including notification draft/cancel/submit/reset behavior, identity, record locking, guided controls, report filters, and evidence handling.
 
