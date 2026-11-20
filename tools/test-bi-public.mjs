@@ -12,6 +12,32 @@ const root=fileURLToPath(new URL('../',import.meta.url)),port=process.env.TEST_P
 const journeysOnly=process.argv.includes('--journeys-only');
 const report={passed:false,engine:selection.name,mount,journeysOnly,layouts:[],checks:[],errors:[],policyViolations:[],toolPolicyViolations:[]};
 await mkdir(output,{recursive:true});const axe=await readFile(process.env.AXE_CORE_PATH||require.resolve('axe-core/axe.min.js'),'utf8');
+async function verifyEvidenceSources(browser,prefix,report){
+ const context=await browser.newContext({acceptDownloads:true}),page=await context.newPage(),names=['purchasing','maintenance','work'],keys=['portfolio-phase2-connected-v1','portfolio-phase2-machines-v1','portfolio-phase2-work-v1'];
+ const checked=name=>report.checks.push({name:'evidence source provenance: '+name}),readSaved=()=>page.evaluate(keys=>keys.map(key=>sessionStorage.getItem(key)),keys);
+ page.on('pageerror',error=>report.errors.push({url:page.url(),message:error.message}));
+ try{
+  await page.goto(prefix);
+  async function download(){
+   const before=await readSaved(),[file]=await Promise.all([page.waitForEvent('download'),page.locator('#download-showcase-bundle').click()]),bundle=JSON.parse(await readFile(await file.path(),'utf8'));
+   assert.deepEqual(await readSaved(),before,'Evidence download must preserve exact saved values');assert.equal(bundle.format,'SIMULATED-CONNECTED-BUSINESS-EVIDENCE');assert.equal(bundle.version,1);assert.equal(bundle.fictional,true);return bundle;
+  }
+  function expectSource(bundle,name,saved,revision){assert.deepEqual(bundle.journalSources[name],{availability:saved?'saved':'absent',savedRevision:revision,snapshotOrigin:saved?'validated-saved-journal':'unsaved-empty-default'});}
+  const absent=await download();for(const name of names)expectSource(absent,name,false,null);checked('all missing journals are explicit absent sources with unsaved defaults');
+  const emptyWork='\n'+JSON.stringify(absent.work.checkpoint,null,2)+'\n';await page.evaluate(({key,value})=>sessionStorage.setItem(key,value),{key:keys[2],value:emptyWork});await page.locator('#showcase-refresh').click();const workOnly=await download();expectSource(workOnly,'work',true,0);expectSource(workOnly,'purchasing',false,null);expectSource(workOnly,'maintenance',false,null);
+  const legacy=bundle=>{const {journalSources,...existing}=bundle;return existing;};assert.deepEqual(legacy(workOnly),legacy(absent),'Existing checkpoints and model blocks must stay unchanged when only empty-work provenance differs');assert.notDeepEqual(workOnly,absent);checked('saved empty work differs from absence while every existing snapshot block is preserved');
+  await page.evaluate(({keys,names,bundle})=>{for(let i=0;i<keys.length;i++)sessionStorage.setItem(keys[i],JSON.stringify(bundle[names[i]].checkpoint,null,2));},{keys,names,bundle:absent});await page.locator('#showcase-refresh').click();const empty=await download();for(const name of names)expectSource(empty,name,true,0);checked('three saved empty journals retain saved revision zero');
+  await page.goto(prefix+'machine-intelligence.html');await page.locator('#release-maintenance').click();await page.goto(prefix);const progressed=await download();assert.equal(progressed.journalSources.maintenance.availability,'saved');assert(progressed.journalSources.maintenance.savedRevision>0);
+  const restored=await page.evaluate(bundle=>({purchasing:window.Journey.restore(JSON.stringify(bundle.purchasing.checkpoint)).revision,maintenance:window.Machines.restore(JSON.stringify(bundle.maintenance.checkpoint)).revision,work:window.WorkExecution.restore(JSON.stringify(bundle.work.checkpoint)).revision}),progressed);
+  for(const name of names)expectSource(progressed,name,true,restored[name]);checked('saved progress revisions match their validated exported checkpoints');
+  await page.evaluate(key=>sessionStorage.removeItem(key),keys[0]);await page.locator('#showcase-refresh').click();const mixed=await download();expectSource(mixed,'purchasing',false,null);expectSource(mixed,'maintenance',true,restored.maintenance);expectSource(mixed,'work',true,0);checked('mixed sources retain independent provenance without substituting another journal');
+  const stable=await readSaved();for(let i=0;i<keys.length;i++){
+   await page.evaluate(key=>sessionStorage.setItem(key,'damaged'),keys[i]);await page.locator('#showcase-refresh').click();assert.equal(await page.locator('#download-showcase-bundle').isDisabled(),true);assert.match(await page.locator('#showcase-status').innerText(),/unavailable/i);const expected=[...stable];expected[i]='damaged';assert.deepEqual(await readSaved(),expected);
+   await page.evaluate(({key,value})=>value===null?sessionStorage.removeItem(key):sessionStorage.setItem(key,value),{key:keys[i],value:stable[i]});
+  }checked('each damaged journal holds evidence download and preserves every saved value');
+  await page.evaluate(key=>{window.__evidenceNativeGet=Storage.prototype.getItem;Storage.prototype.getItem=function(name){if(this===sessionStorage&&name===key)throw Error('Simulated source read unavailable');return window.__evidenceNativeGet.call(this,name);};},keys[2]);await page.locator('#showcase-refresh').click();assert.equal(await page.locator('#download-showcase-bundle').isDisabled(),true);assert.match(await page.locator('#showcase-status').innerText(),/unavailable/i);assert.deepEqual(await page.evaluate(keys=>keys.map(key=>window.__evidenceNativeGet.call(sessionStorage,key)),keys),stable);checked('unreadable storage holds export without converting the source to an empty journal');
+ }finally{await context.close();}
+}
 let browser,server;
 try{
  server=spawn(process.execPath,[resolve(root,'tools/serve.mjs')],{cwd:root,env:{...process.env,PORT:port,BASE_PATH:mount},stdio:['ignore','pipe','pipe']});await new Promise((yes,no)=>{server.stdout.once('data',yes);server.once('error',no);server.once('exit',c=>no(Error('Preview exited '+c)));});
@@ -74,6 +100,7 @@ const journalBeforeMethods=await page.evaluate(()=>sessionStorage.getItem('portf
   if(theme==='light'){await page.evaluate(()=>window.__biToolPhase='screenshot');await page.locator('[data-theme-toggle]').click();await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:resolve(output,'hub-desktop.png'),fullPage:true});await page.setViewportSize({width:375,height:1000});await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:resolve(output,'hub-mobile.png'),fullPage:true});await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(()=>{window.__biToolPhase='runtime';resolve();}))));}
   await context.close();
  }
+ await verifyEvidenceSources(browser,prefix,report);
  const nojs=await browser.newContext({javaScriptEnabled:false,viewport:{width:375,height:900},isMobile:selection.name==='chromium',hasTouch:true}),page=await nojs.newPage();await page.goto(prefix);const card=page.locator('.journey-card').nth(1);await card.scrollIntoViewIfNeeded();const box=await card.boundingBox();await page.touchscreen.tap(box.x+15,box.y+box.height-15);await page.waitForURL('**/business-intelligence/connected-journey.html');assert.match(await page.locator('.bi-noscript').innerText(),/JavaScript is needed/);assert.equal(await page.locator('h1').count(),1);report.checks.push({theme:'no JavaScript',name:'native touch cards and an explicit simulation fallback survive without scripting'});
  await page.goto(prefix);const nativeReviewSaved=await page.evaluate(()=>['portfolio-phase2-connected-v1','portfolio-phase2-machines-v1','portfolio-phase2-work-v1'].map(key=>sessionStorage.getItem(key))),reviewEntry=page.locator('.review-entry');await reviewEntry.scrollIntoViewIfNeeded();const reviewBounds=await reviewEntry.boundingBox();await page.touchscreen.tap(reviewBounds.x+10,reviewBounds.y+reviewBounds.height-10);await page.waitForURL('**/management-overview.html?review=1#management-review-guide');
  report.nativeReview={phase:'entered',url:page.url()};
