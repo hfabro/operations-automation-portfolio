@@ -10,3 +10,5 @@
 
 /* A native entry to one read-only business context, separate from the working journey. */
 .review-entry,.bi-public-page .review-entry{display:grid;gap:12px;max-width:900px;margin-top:26px;padding:23px 25px;border:1px solid var(--accent);border-radius:6px;background:var(--paper);color:var(--ink);text-decoration:none}.review-entry .eyebrow{margin:0;font-size:10px}.review-entry strong{font-size:23px;line-height:1.25}.review-entry>span:last-child{font-size:14px;color:var(--muted);max-width:760px}.review-entry:hover{background:var(--soft)}.review-entry:focus-visible{outline:3px solid var(--accent);outline-offset:4px}@media(max-width:550px){.review-entry{padding:20px}.review-entry strong{font-size:21px}}
+
+.showcase-source-state{font-size:14px;line-height:1.5;font-weight:600;color:var(--muted)}

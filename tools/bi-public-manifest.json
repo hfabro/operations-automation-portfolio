@@ -548,14 +548,14 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785",
-      "sha256": "d9dd89f010c80176cce5aef0f18f2991b6927371de919c4ed60c3f96151ff785"
+      "sourceSha256": "46aaf9a3e9c71b0a74839c3dcd56fc8d5b5de85dda8974fb9ecc8135eff10985",
+      "sha256": "46aaf9a3e9c71b0a74839c3dcd56fc8d5b5de85dda8974fb9ecc8135eff10985"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
       "output": "business-intelligence/showcase.js",
-      "sourceSha256": "6bdafd6ec74b4c28bcdd525ea8638eac547fdb4a6fb6887471c1dd13f7ba75d5",
-      "sha256": "6bdafd6ec74b4c28bcdd525ea8638eac547fdb4a6fb6887471c1dd13f7ba75d5"
+      "sourceSha256": "452768940e73ef43c343a29ce23134b8b383016c8c854a4b775e4e79aca38dee",
+      "sha256": "452768940e73ef43c343a29ce23134b8b383016c8c854a4b775e4e79aca38dee"
     },
     {
       "source": "tools/bi-prototype/preview/simulation-examples.js",
