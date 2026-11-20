@@ -46,6 +46,7 @@ jobs:
         run: |
           node tools/test-bi-management.cjs
           node tools/test-bi-management-source-invoices.cjs
+          node tools/test-bi-evidence-review.cjs
       - name: Verify explicit business-time fixture and financial/date controls
         run: |
           node tools/bi-prototype/tools/build_business_time_fixture.cjs --check
