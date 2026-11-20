@@ -288,6 +288,18 @@
       "sha256": "563f969bcf242c94098bb61fb8fed4c13fc9b31f5029deb5aaf581d246ae9919"
     },
     {
+      "source": "tools/bi-prototype/preview/evidence-review-rules.js",
+      "output": "business-intelligence/evidence-review-rules.js",
+      "sourceSha256": "0d5c5f5625c0ff4c92c65d1ac520f95d04f8f9331c07bc3a070e8cefd7bfa877",
+      "sha256": "0d5c5f5625c0ff4c92c65d1ac520f95d04f8f9331c07bc3a070e8cefd7bfa877"
+    },
+    {
+      "source": "tools/bi-prototype/preview/evidence-review.js",
+      "output": "business-intelligence/evidence-review.js",
+      "sourceSha256": "5418e0e29828ba25799fa30428a99a7981061942fa7f27ae79695e362348a38d",
+      "sha256": "5418e0e29828ba25799fa30428a99a7981061942fa7f27ae79695e362348a38d"
+    },
+    {
       "source": "tools/bi-prototype/preview/finance-resolution-rules.js",
       "output": "business-intelligence/finance-resolution-rules.js",
       "sourceSha256": "b893deb0fc537422a9628268e8100ff04cd7cd690d9033ade01c28c8fb574a3f",
@@ -356,8 +368,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.html",
       "output": "business-intelligence/index.html",
-      "sourceSha256": "3c4ceae2ff9da0f339972fa57da22a21f74a9c491a2b84c0e5a4842a285c29ab",
-      "sha256": "ca2d36545822e4c67429eb2f802fa4cb6c23e7cae15c0e3e1aad15ec1fa4da35"
+      "sourceSha256": "9653c5d736873cc61ec4a442244a2ff04bde3f498c74a4e1b22ecd74972d6fc9",
+      "sha256": "d9601eaeedb5029cf8ff1009a49b2d978656524e5950fd03dde6b98762c5a305"
     },
     {
       "source": "tools/bi-prototype/preview/invoice-batch.css",
@@ -548,8 +560,8 @@
     {
       "source": "tools/bi-prototype/preview/showcase.css",
       "output": "business-intelligence/showcase.css",
-      "sourceSha256": "46aaf9a3e9c71b0a74839c3dcd56fc8d5b5de85dda8974fb9ecc8135eff10985",
-      "sha256": "46aaf9a3e9c71b0a74839c3dcd56fc8d5b5de85dda8974fb9ecc8135eff10985"
+      "sourceSha256": "ed98e156d9dfa9503d918b6c3bc4a7c4a6f57f5299b9b749c58a8a97172ee0ae",
+      "sha256": "ed98e156d9dfa9503d918b6c3bc4a7c4a6f57f5299b9b749c58a8a97172ee0ae"
     },
     {
       "source": "tools/bi-prototype/preview/showcase.js",
